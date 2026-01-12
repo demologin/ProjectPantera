@@ -1,6 +1,6 @@
-package com.javarush.khmelov.cmd;
+package com.javarush.goncharovv.cmd;
 
-import com.javarush.khmelov.util.Go;
+import com.javarush.goncharovv.util.Go;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 

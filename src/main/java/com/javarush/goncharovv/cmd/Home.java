@@ -1,4 +1,4 @@
-package com.javarush.khmelov.cmd;
+package com.javarush.goncharovv.cmd;
 
 @SuppressWarnings("unused")
 public class Home implements Command {

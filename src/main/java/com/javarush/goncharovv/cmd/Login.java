@@ -1,9 +1,9 @@
-package com.javarush.khmelov.cmd;
+package com.javarush.goncharovv.cmd;
 
-import com.javarush.khmelov.entity.User;
-import com.javarush.khmelov.service.UserService;
-import com.javarush.khmelov.util.Go;
-import com.javarush.khmelov.util.Key;
+import com.javarush.goncharovv.entity.User;
+import com.javarush.goncharovv.service.UserService;
+import com.javarush.goncharovv.util.Go;
+import com.javarush.goncharovv.util.Key;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;

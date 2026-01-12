@@ -1,7 +1,7 @@
-package com.javarush.khmelov.cmd;
+package com.javarush.goncharovv.cmd;
 
-import com.javarush.khmelov.entity.User;
-import com.javarush.khmelov.service.UserService;
+import com.javarush.goncharovv.entity.User;
+import com.javarush.goncharovv.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
 

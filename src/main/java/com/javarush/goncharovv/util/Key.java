@@ -1,4 +1,4 @@
-package com.javarush.khmelov.util;
+package com.javarush.goncharovv.util;
 
 @SuppressWarnings("unused")
 public class Key {

@@ -1,7 +1,7 @@
-package com.javarush.khmelov.controller;
+package com.javarush.goncharovv.controller;
 
-import com.javarush.khmelov.cmd.Command;
-import com.javarush.khmelov.config.Winter;
+import com.javarush.goncharovv.cmd.Command;
+import com.javarush.goncharovv.config.Winter;
 import jakarta.servlet.http.HttpServletRequest;
 
 public class HttpResolver {
