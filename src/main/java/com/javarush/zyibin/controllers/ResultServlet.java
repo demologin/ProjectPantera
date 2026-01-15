@@ -1,5 +1,7 @@
 package com.javarush.zyibin.controllers;
 
+import com.javarush.zyibin.session.SessionUtils;
+import com.javarush.zyibin.state.InterviewState;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -17,25 +19,24 @@ public class ResultServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession(false);
 
-        if (session == null) {
+        if (!SessionUtils.hasInterview(session)) {
             resp.sendRedirect(req.getContextPath() + "/start");
-            return;
         }
-        Integer score = (Integer) session.getAttribute("score");
-        Object questionsObj = session.getAttribute("questions");
+        InterviewState state = SessionUtils.getInterviewState(session);
 
-        if (questionsObj == null || score == null) {
-            resp.sendRedirect(req.getContextPath() + "/start");
+        if (!state.isFinished()) {
+            resp.sendRedirect(req.getContextPath() + "/question");
             return;
         }
-        int totalQuestions = ((List<?>) questionsObj).size();
-        boolean passed = score >= totalQuestions / 2;
+        int score = state.getScore();
+        int totalQuestions = state.getTotalQuestions();
+        boolean passed = score >= totalQuestions / 2.0;
 
         req.setAttribute("score", score);
         req.setAttribute("totalQuestions", totalQuestions);
         req.setAttribute("passed", passed);
 
-        session.invalidate();
+        SessionUtils.clearInterview(session);
         req.getRequestDispatcher("/WEB-INF/jsp/result.jsp").forward(req, resp);
     }
 }

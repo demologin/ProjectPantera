@@ -1,36 +1,26 @@
 package com.javarush.zyibin.session;
 
 import com.javarush.zyibin.model.Question;
+import com.javarush.zyibin.state.InterviewState;
 import jakarta.servlet.http.HttpSession;
 
 import java.util.List;
 
 public class SessionUtils {
 
-    public static boolean isInterviewInitialized(HttpSession session) {
-        if (session == null) {
-            return false;
-        }
-        return session.getAttribute(SessionKeys.QUESTIONS) != null &&
-                session.getAttribute(SessionKeys.CURRENT_INDEX) != null &&
-                session.getAttribute(SessionKeys.SCORE) != null;
+    public static final String INTERVIEW_STATE = "interviewState";
+
+    public static boolean hasInterview(HttpSession session) {
+        return session != null && session.getAttribute(INTERVIEW_STATE) != null;
+    }
+    public static InterviewState getInterviewState(HttpSession session) {
+        return  (InterviewState) session.getAttribute(INTERVIEW_STATE);
     }
 
-    @SuppressWarnings("unchecked")
-    public static List<Question> getQuestions(HttpSession session) {
-        return (List<Question>)  session.getAttribute(SessionKeys.QUESTIONS);
+    public static void setInterviewState(HttpSession session, InterviewState state) {
+        session.setAttribute(INTERVIEW_STATE, state);
     }
-
-    public static int getCurrentIndex(HttpSession session) {
-        return  (Integer) session.getAttribute(SessionKeys.CURRENT_INDEX);
-    }
-    public static  int getScore(HttpSession session) {
-        return (Integer) session.getAttribute(SessionKeys.SCORE);
-    }
-    public static void setCurrentIndex(HttpSession session, int index) {
-        session.setAttribute(SessionKeys.CURRENT_INDEX, index);
-    }
-    public static void setScore(HttpSession session, int score) {
-        session.setAttribute(SessionKeys.SCORE, score);
+    public static void clearInterview(HttpSession session) {
+        session.removeAttribute(INTERVIEW_STATE);
     }
 }

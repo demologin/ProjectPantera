@@ -1,7 +1,7 @@
 package com.javarush.zyibin.controllers;
 
-import com.javarush.zyibin.model.Question;
 import com.javarush.zyibin.session.SessionUtils;
+import com.javarush.zyibin.state.InterviewState;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -10,7 +10,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
-import java.util.List;
 
 @WebServlet("/question")
 public class QuestionServlet extends HttpServlet {
@@ -19,22 +18,21 @@ public class QuestionServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession(false);
 
-        if (!SessionUtils.isInterviewInitialized(session)) {
+        if (!SessionUtils.hasInterview(session)) {
             resp.sendRedirect(req.getContextPath() + "/start");
             return;
         }
-        List<Question> questions = SessionUtils.getQuestions(session);
-        int currentIndex = SessionUtils.getCurrentIndex(session);
+        InterviewState state = SessionUtils.getInterviewState(session);
 
-        if (currentIndex >= questions.size()) {
+        if (state.isFinished()) {
             resp.sendRedirect(req.getContextPath() + "/result");
             return;
         }
 
-        Question currentQuestion = questions.get(currentIndex);
-        req.setAttribute("question", currentQuestion);
-        req.setAttribute("questionNumber", currentIndex + 1);
-        req.setAttribute("totalQuestions", questions.size());
+        req.setAttribute("question", state.getCurrentQuestion());
+        req.setAttribute("questionNumber", state.getCurrentIndex() + 1);
+        req.setAttribute("totalQuestions", state.getTotalQuestions());
+
         req.getRequestDispatcher("/WEB-INF/jsp/question.jsp").forward(req, resp);
 
     }
@@ -43,26 +41,24 @@ public class QuestionServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession(false);
 
-        if (!SessionUtils.isInterviewInitialized(session)) {
+        if (!SessionUtils.hasInterview(session)) {
             resp.sendRedirect(req.getContextPath() + "/start");
             return;
         }
         String answerIndexParam = req.getParameter("answerIndex");
+
         if (answerIndexParam == null) {
             resp.sendRedirect(req.getContextPath() + "/question");
             return;
         }
-        int selectedAnswerIndex = Integer.parseInt(answerIndexParam);
-        List<Question> questions = SessionUtils.getQuestions(session);
-        int currentIndex = SessionUtils.getCurrentIndex(session);
-        int score = SessionUtils.getScore(session);
+        int selectedIndex = Integer.parseInt(answerIndexParam);
+        InterviewState state = SessionUtils.getInterviewState(session);
 
-        Question currentQuestion = questions.get(currentIndex);
-        if (selectedAnswerIndex == currentQuestion.getCorrectAnswerIndex()) {
-            score++;
+        if (selectedIndex == state.getCurrentQuestion().getCorrectAnswerIndex()) {
+            state.incrementScore();
         }
-        SessionUtils.setScore(session, score);
-        SessionUtils.setCurrentIndex(session, currentIndex + 1);
+
+        state.moveToNextQuestion();
 
         resp.sendRedirect(req.getContextPath() + "/question");
 

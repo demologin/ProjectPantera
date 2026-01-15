@@ -2,6 +2,8 @@ package com.javarush.zyibin.controllers;
 
 import com.javarush.zyibin.model.Question;
 import com.javarush.zyibin.repository.QuestionRepository;
+import com.javarush.zyibin.session.SessionUtils;
+import com.javarush.zyibin.state.InterviewState;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -28,9 +30,8 @@ public class StartServlet extends HttpServlet {
         HttpSession session = req.getSession(true);
         List<Question> questions = QuestionRepository.createQuestions();
 
-        session.setAttribute("questions", questions);
-        session.setAttribute("currentIndex", 0);
-        session.setAttribute("score", 0);
+        InterviewState interviewState = new InterviewState(questions);
+        SessionUtils.setInterviewState(session, interviewState);
 
         resp.sendRedirect(req.getContextPath() + "/question");
     }
