@@ -28,7 +28,7 @@ public class StartServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession(true);
-        List<Question> questions = QuestionRepository.createQuestions();
+        List<Question> questions = QuestionRepository.getQuestions();
 
         InterviewState interviewState = new InterviewState(questions);
         SessionUtils.setInterviewState(session, interviewState);

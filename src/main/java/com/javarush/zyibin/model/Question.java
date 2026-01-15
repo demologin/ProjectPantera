@@ -1,5 +1,8 @@
 package com.javarush.zyibin.model;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.List;
 
 public class Question {
@@ -8,7 +11,10 @@ public class Question {
     private final List<String> answers;
     private final int correctAnswerIndex;
 
-    public Question(String questionText, List<String> answers, int correctAnswerIndex) {
+    @JsonCreator
+    public Question(@JsonProperty("questionText") String questionText,
+                    @JsonProperty("answers") List<String> answers,
+                    @JsonProperty("correctAnswerIndex") int correctAnswerIndex) {
         this.questionText = questionText;
         this.answers = answers;
         this.correctAnswerIndex = correctAnswerIndex;
