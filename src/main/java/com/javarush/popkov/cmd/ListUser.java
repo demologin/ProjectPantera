@@ -1,7 +1,7 @@
-package com.javarush.khmelov.cmd;
+package com.javarush.popkov.cmd;
 
-import com.javarush.khmelov.entity.User;
-import com.javarush.khmelov.service.UserService;
+import com.javarush.popkov.entity.User;
+import com.javarush.popkov.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 
 import java.util.Collection;

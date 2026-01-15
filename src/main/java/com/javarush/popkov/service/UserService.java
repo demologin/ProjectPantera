@@ -1,7 +1,7 @@
-package com.javarush.khmelov.service;
+package com.javarush.popkov.service;
 
-import com.javarush.khmelov.entity.User;
-import com.javarush.khmelov.repository.UserRepository;
+import com.javarush.popkov.entity.User;
+import com.javarush.popkov.repository.UserRepository;
 
 import java.util.Collection;
 import java.util.Optional;

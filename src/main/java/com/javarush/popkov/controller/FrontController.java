@@ -1,8 +1,8 @@
-package com.javarush.khmelov.controller;
+package com.javarush.popkov.controller;
 
-import com.javarush.khmelov.cmd.Command;
-import com.javarush.khmelov.config.Winter;
-import com.javarush.khmelov.entity.Role;
+import com.javarush.popkov.cmd.Command;
+import com.javarush.popkov.config.Winter;
+import com.javarush.popkov.entity.Role;
 import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
