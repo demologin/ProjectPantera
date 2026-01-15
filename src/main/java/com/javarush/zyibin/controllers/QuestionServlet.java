@@ -1,6 +1,7 @@
 package com.javarush.zyibin.controllers;
 
 import com.javarush.zyibin.model.Question;
+import com.javarush.zyibin.session.SessionUtils;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -18,40 +19,31 @@ public class QuestionServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession(false);
 
-        if (session == null) {
+        if (!SessionUtils.isInterviewInitialized(session)) {
             resp.sendRedirect(req.getContextPath() + "/start");
             return;
         }
-        List<Question> questions = (List<Question>) session.getAttribute("questions");
-        Integer currentIndex = (Integer) session.getAttribute("currentIndex");
+        List<Question> questions = SessionUtils.getQuestions(session);
+        int currentIndex = SessionUtils.getCurrentIndex(session);
 
-        if (questions == null || currentIndex == null) {
-            resp.sendRedirect(req.getContextPath() + "/start");
-            return;
-        }
         if (currentIndex >= questions.size()) {
             resp.sendRedirect(req.getContextPath() + "/result");
             return;
         }
+
         Question currentQuestion = questions.get(currentIndex);
         req.setAttribute("question", currentQuestion);
         req.setAttribute("questionNumber", currentIndex + 1);
         req.setAttribute("totalQuestions", questions.size());
         req.getRequestDispatcher("/WEB-INF/jsp/question.jsp").forward(req, resp);
+
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession(false);
 
-        if (session == null) {
-            resp.sendRedirect(req.getContextPath() + "/start");
-            return;
-        }
-        List<Question> questions = (List<Question>) session.getAttribute("questions");
-        Integer currentIndex = (Integer) session.getAttribute("currentIndex");
-        Integer score = (Integer) session.getAttribute("score");
-        if (questions == null || currentIndex == null || score == null) {
+        if (!SessionUtils.isInterviewInitialized(session)) {
             resp.sendRedirect(req.getContextPath() + "/start");
             return;
         }
@@ -61,15 +53,16 @@ public class QuestionServlet extends HttpServlet {
             return;
         }
         int selectedAnswerIndex = Integer.parseInt(answerIndexParam);
-        Question currentQuestion = questions.get(currentIndex);
+        List<Question> questions = SessionUtils.getQuestions(session);
+        int currentIndex = SessionUtils.getCurrentIndex(session);
+        int score = SessionUtils.getScore(session);
 
+        Question currentQuestion = questions.get(currentIndex);
         if (selectedAnswerIndex == currentQuestion.getCorrectAnswerIndex()) {
             score++;
         }
-        currentIndex++;
-
-        session.setAttribute("currentIndex", currentIndex);
-        session.setAttribute("score", score);
+        SessionUtils.setScore(session, score);
+        SessionUtils.setCurrentIndex(session, currentIndex + 1);
 
         resp.sendRedirect(req.getContextPath() + "/question");
 
