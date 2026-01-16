@@ -1,8 +1,8 @@
-package com.javarush.khmelov.controller;
+package com.javarush.vasileva.controller;
 
-import com.javarush.khmelov.cmd.Command;
-import com.javarush.khmelov.config.Winter;
-import com.javarush.khmelov.entity.Role;
+import com.javarush.vasileva.cmd.Command;
+import com.javarush.vasileva.config.Winter;
+import com.javarush.vasileva.entity.Role;
 import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -35,7 +35,7 @@ public class FrontController extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         Command command = httpResolver.resolve(req);
         String redirect = command.doPost(req);
         resp.sendRedirect(redirect);

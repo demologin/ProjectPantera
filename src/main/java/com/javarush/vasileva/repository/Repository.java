@@ -1,6 +1,6 @@
-package com.javarush.khmelov.repository;
+package com.javarush.vasileva.repository;
 
-import com.javarush.khmelov.entity.User;
+import com.javarush.vasileva.entity.User;
 
 import java.util.Collection;
 import java.util.Optional;

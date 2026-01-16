@@ -1,4 +1,4 @@
-package com.javarush.khmelov.cmd;
+package com.javarush.vasileva.cmd;
 
 @SuppressWarnings("unused")
 public class StartPage implements Command {
