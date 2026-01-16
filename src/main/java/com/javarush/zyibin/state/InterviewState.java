@@ -1,15 +1,18 @@
 package com.javarush.zyibin.state;
 
 import com.javarush.zyibin.model.Question;
+import com.javarush.zyibin.model.Topic;
 
 import java.util.List;
 
 public class InterviewState {
+    private final Topic topic;
     private final List<Question> questions;
     private int currentIndex;
     private int score;
 
-    public InterviewState(List<Question> questions) {
+    public InterviewState(Topic topic, List<Question> questions) {
+        this.topic = topic;
         this.questions = questions;
         this.currentIndex = 0;
         this.score = 0;
@@ -29,6 +32,10 @@ public class InterviewState {
 
     public void incrementScore() {
         score++;
+    }
+
+    public Topic getTopic() {
+        return  topic;
     }
 
     public int getTotalQuestions() {

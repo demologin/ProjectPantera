@@ -15,6 +15,7 @@
 </head>
 <body>
     <h2>Результат интервью</h2>
+    <h3>Тема теста: ${topic.displayName}</h3>
     <p>Правильных ответов: ${score} из ${totalQuestions}</p>
     <c:choose>
         <c:when test="${passed}">

@@ -14,6 +14,7 @@
     <title>Вопрос</title>
 </head>
 <body>
+    <h3>Тема: ${topic.displayName}</h3>
     <h2>Вопрос ${questionNumber} из ${totalQuestions}</h2>
     <p>${question.questionText}</p>
     <form method="post" action="${pageContext.request.contextPath}/question">

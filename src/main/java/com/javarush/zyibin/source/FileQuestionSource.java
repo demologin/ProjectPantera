@@ -3,6 +3,7 @@ package com.javarush.zyibin.source;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.javarush.zyibin.model.Question;
+import com.javarush.zyibin.model.Topic;
 import com.javarush.zyibin.validation.QuestionValidator;
 
 import java.io.InputStream;
@@ -12,16 +13,18 @@ public class FileQuestionSource implements QuestionSource{
 
     private final ObjectMapper objectMapper = new ObjectMapper();
 
-    private static final String QUESTIONS_FILE = "/questions.json";
+    private static final String QUESTIONS_FOLDER = "questions/";
 
 
     @Override
-    public List<Question> loadQuestions() {
+    public List<Question> loadQuestions(Topic topic) {
+        String fileName = QUESTIONS_FOLDER + topic.getCode() + ".json";
+
         ClassLoader classLoader = getClass().getClassLoader();
-        InputStream inputStream = classLoader.getResourceAsStream(QUESTIONS_FILE.substring(1));
+        InputStream inputStream = classLoader.getResourceAsStream(fileName);
 
         if (inputStream == null) {
-            throw new IllegalStateException("File questions.json not found in resources");
+            throw new IllegalStateException("File not found in resources: " + fileName);
         }
 
         try {
@@ -33,7 +36,7 @@ public class FileQuestionSource implements QuestionSource{
             QuestionValidator.validate(questions);
             return questions;
         } catch (Exception e) {
-            throw new IllegalStateException("Error reading questions.json", e);
+            throw new IllegalStateException("Error reading: " + fileName, e);
         }
     }
 }

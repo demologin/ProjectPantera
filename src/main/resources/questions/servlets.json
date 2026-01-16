@@ -1,0 +1,857 @@
+[
+  {
+    "questionText": "Какой интерфейс должен реализовывать базовый сервлет?",
+    "answers": [
+      "javax.servlet.Servlet",
+      "javax.servlet.http.HttpServlet",
+      "java.net.Servlet"
+    ],
+    "correctAnswerIndex": 0
+  },
+  {
+    "questionText": "Какой класс обычно наследуется при создании HTTP-сервлета?",
+    "answers": [
+      "GenericServlet",
+      "HttpServlet",
+      "ServletBase"
+    ],
+    "correctAnswerIndex": 1
+  },
+  {
+    "questionText": "Какой метод вызывается один раз при инициализации сервлета?",
+    "answers": [
+      "init()",
+      "start()",
+      "configure()"
+    ],
+    "correctAnswerIndex": 0
+  },
+  {
+    "questionText": "Какой метод вызывается при каждом HTTP-запросе?",
+    "answers": [
+      "execute()",
+      "service()",
+      "handleRequest()"
+    ],
+    "correctAnswerIndex": 1
+  },
+  {
+    "questionText": "Какой метод HttpServlet обрабатывает GET-запросы?",
+    "answers": [
+      "doGet()",
+      "get()",
+      "handleGet()"
+    ],
+    "correctAnswerIndex": 0
+  },
+  {
+    "questionText": "Какой метод HttpServlet обрабатывает POST-запросы?",
+    "answers": [
+      "doPost()",
+      "post()",
+      "handlePost()"
+    ],
+    "correctAnswerIndex": 0
+  },
+  {
+    "questionText": "Какой объект используется для получения параметров запроса?",
+    "answers": [
+      "HttpServletResponse",
+      "HttpServletRequest",
+      "ServletContext"
+    ],
+    "correctAnswerIndex": 1
+  },
+  {
+    "questionText": "Как получить значение параметра 'name' из запроса?",
+    "answers": [
+      "request.getParameter(\"name\")",
+      "request.getQuery(\"name\")",
+      "request.getAttribute(\"name\")"
+    ],
+    "correctAnswerIndex": 0
+  },
+  {
+    "questionText": "Что возвращает метод getParameter() при отсутствии параметра?",
+    "answers": [
+      "пустую строку",
+      "null",
+      "исключение"
+    ],
+    "correctAnswerIndex": 1
+  },
+  {
+    "questionText": "Какой объект используется для отправки ответа клиенту?",
+    "answers": [
+      "HttpServletRequest",
+      "HttpServletResponse",
+      "ServletOutputStream"
+    ],
+    "correctAnswerIndex": 1
+  },
+  {
+    "questionText": "Как установить статус ответа 404?",
+    "answers": [
+      "response.setStatus(404)",
+      "response.setErrorCode(404)",
+      "response.sendError(404)"
+    ],
+    "correctAnswerIndex": 0
+  },
+  {
+    "questionText": "Как отправить ошибку 500 клиенту?",
+    "answers": [
+      "response.setStatus(500)",
+      "response.sendError(500)",
+      "throw new ServletException()"
+    ],
+    "correctAnswerIndex": 1
+  },
+  {
+    "questionText": "Какой метод используется для перенаправления клиента на другой URL?",
+    "answers": [
+      "response.sendRedirect(\"/other\")",
+      "request.forward(\"/other\")",
+      "response.redirect(\"/other\")"
+    ],
+    "correctAnswerIndex": 0
+  },
+  {
+    "questionText": "Какой метод используется для внутреннего перенаправления (forward) внутри сервера?",
+    "answers": [
+      "response.forward()",
+      "request.getRequestDispatcher().forward()",
+      "context.forward()"
+    ],
+    "correctAnswerIndex": 1
+  },
+  {
+    "questionText": "Где хранится информация о сессии между запросами?",
+    "answers": [
+      "В куках (Cookie) или URL-переписывании",
+      "В теле HTTP-запроса",
+      "В заголовке User-Agent"
+    ],
+    "correctAnswerIndex": 0
+  },
+  {
+    "questionText": "Как получить объект сессии?",
+    "answers": [
+      "request.getSession()",
+      "response.getSession()",
+      "context.getSession()"
+    ],
+    "correctAnswerIndex": 0
+  },
+  {
+    "questionText": "Какой метод уничтожает сессию?",
+    "answers": [
+      "session.invalidate()",
+      "session.destroy()",
+      "session.close()"
+    ],
+    "correctAnswerIndex": 0
+  },
+  {
+    "questionText": "Как установить атрибут в сессии?",
+    "answers": [
+      "session.setAttribute(\"key\", value)",
+      "session.put(\"key\", value)",
+      "session.add(\"key\", value)"
+    ],
+    "correctAnswerIndex": 0
+  },
+  {
+    "questionText": "Какой интерфейс используется для создания фильтров?",
+    "answers": [
+      "javax.servlet.Filter",
+      "javax.servlet.http.Filter",
+      "java.web.Filter"
+    ],
+    "correctAnswerIndex": 0
+  },
+  {
+    "questionText": "Какой метод фильтра вызывается перед обработкой запроса сервлетом?",
+    "answers": [
+      "doFilter()",
+      "preProcess()",
+      "intercept()"
+    ],
+    "correctAnswerIndex": 0
+  },
+  {
+    "questionText": "Как продолжить цепочку фильтров после обработки?",
+    "answers": [
+      "filterChain.next()",
+      "filterChain.doFilter(request, response)",
+      "chain.proceed()"
+    ],
+    "correctAnswerIndex": 1
+  },
+  {
+    "questionText": "Какой файл используется для конфигурации веб-приложения (до Servlet 3.0)?",
+    "answers": [
+      "web.xml",
+      "application.xml",
+      "servlet-config.xml"
+    ],
+    "correctAnswerIndex": 0
+  },
+  {
+    "questionText": "Как зарегистрировать сервлет с помощью аннотации?",
+    "answers": [
+      "@WebServlet(\"/hello\")",
+      "@ServletMapping(\"/hello\")",
+      "@RequestMapping(\"/hello\")"
+    ],
+    "correctAnswerIndex": 0
+  },
+  {
+    "questionText": "Какой элемент web.xml определяет маппинг сервлета?",
+    "answers": [
+      "<servlet-mapping>",
+      "<url-pattern>",
+      "<route>"
+    ],
+    "correctAnswerIndex": 0
+  },
+  {
+    "questionText": "Какой объект предоставляет доступ к параметрам контекста приложения?",
+    "answers": [
+      "ServletContext",
+      "ServletConfig",
+      "ApplicationContext"
+    ],
+    "correctAnswerIndex": 0
+  },
+  {
+    "questionText": "Как получить параметр контекста из web.xml?",
+    "answers": [
+      "context.getInitParameter(\"name\")",
+      "context.getAttribute(\"name\")",
+      "config.getContextParam(\"name\")"
+    ],
+    "correctAnswerIndex": 0
+  },
+  {
+    "questionText": "Какой метод вызывается при уничтожении сервлета?",
+    "answers": [
+      "destroy()",
+      "finalize()",
+      "close()"
+    ],
+    "correctAnswerIndex": 0
+  },
+  {
+    "questionText": "Сколько экземпляров сервлета создаётся по умолчанию на одно приложение?",
+    "answers": [
+      "Один",
+      "Один на каждый запрос",
+      "Один на каждую сессию"
+    ],
+    "correctAnswerIndex": 0
+  },
+  {
+    "questionText": "Почему сервлеты должны быть потокобезопасными?",
+    "answers": [
+      "Потому что один экземпляр обрабатывает несколько запросов одновременно",
+      "Потому что они запускаются в отдельных потоках",
+      "Потому что JVM требует этого"
+    ],
+    "correctAnswerIndex": 0
+  },
+  {
+    "questionText": "Какой метод используется для установки Content-Type ответа?",
+    "answers": [
+      "response.setContentType(\"text/html\")",
+      "response.setHeader(\"Content-Type\", \"text/html\")",
+      "Оба варианта верны"
+    ],
+    "correctAnswerIndex": 2
+  },
+  {
+    "questionText": "Как установить кодировку ответа в UTF-8?",
+    "answers": [
+      "response.setCharacterEncoding(\"UTF-8\")",
+      "response.setEncoding(\"UTF-8\")",
+      "response.setHeader(\"charset\", \"UTF-8\")"
+    ],
+    "correctAnswerIndex": 0
+  },
+  {
+    "questionText": "Как получить PrintWriter для записи текстового ответа?",
+    "answers": [
+      "response.getWriter()",
+      "response.getPrintStream()",
+      "response.getOutputStream()"
+    ],
+    "correctAnswerIndex": 0
+  },
+  {
+    "questionText": "Как получить OutputStream для записи бинарного ответа?",
+    "answers": [
+      "response.getOutputStream()",
+      "response.getBinaryWriter()",
+      "response.getWriter().asStream()"
+    ],
+    "correctAnswerIndex": 0
+  },
+  {
+    "questionText": "Можно ли использовать одновременно getWriter() и getOutputStream()?",
+    "answers": [
+      "Да, без ограничений",
+      "Нет, будет исключение IllegalStateException",
+      "Только если вызвать flush() между ними"
+    ],
+    "correctAnswerIndex": 1
+  },
+  {
+    "questionText": "Какой интерфейс реализуется для обработки событий жизненного цикла контекста?",
+    "answers": [
+      "ServletContextListener",
+      "ContextEventListener",
+      "ApplicationListener"
+    ],
+    "correctAnswerIndex": 0
+  },
+  {
+    "questionText": "Какой метод вызывается при старте веб-приложения?",
+    "answers": [
+      "contextInitialized()",
+      "applicationStarted()",
+      "onStartup()"
+    ],
+    "correctAnswerIndex": 0
+  },
+  {
+    "questionText": "Какой метод вызывается при завершении работы веб-приложения?",
+    "answers": [
+      "contextDestroyed()",
+      "applicationStopped()",
+      "onShutdown()"
+    ],
+    "correctAnswerIndex": 0
+  },
+  {
+    "questionText": "Какой интерфейс используется для отслеживания создания/уничтожения сессий?",
+    "answers": [
+      "HttpSessionListener",
+      "SessionMonitor",
+      "SessionEventListener"
+    ],
+    "correctAnswerIndex": 0
+  },
+  {
+    "questionText": "Какой заголовок HTTP используется для куков?",
+    "answers": [
+      "Set-Cookie",
+      "Cookie",
+      "Оба варианта верны"
+    ],
+    "correctAnswerIndex": 2
+  },
+  {
+    "questionText": "Как создать куку в ответе?",
+    "answers": [
+      "response.addCookie(new Cookie(\"name\", \"value\"))",
+      "request.setCookie(\"name\", \"value\")",
+      "response.setHeader(\"Cookie\", \"name=value\")"
+    ],
+    "correctAnswerIndex": 0
+  },
+  {
+    "questionText": "Как получить все куки из запроса?",
+    "answers": [
+      "request.getCookies()",
+      "request.getHeaders(\"Cookie\")",
+      "response.getCookies()"
+    ],
+    "correctAnswerIndex": 0
+  },
+  {
+    "questionText": "Какой метод HttpServletRequest возвращает URI запроса?",
+    "answers": [
+      "getRequestURI()",
+      "getURL()",
+      "getPath()"
+    ],
+    "correctAnswerIndex": 0
+  },
+  {
+    "questionText": "Какой метод возвращает полный URL запроса?",
+    "answers": [
+      "request.getRequestURL().toString()",
+      "request.getFullURL()",
+      "request.getURL()"
+    ],
+    "correctAnswerIndex": 0
+  },
+  {
+    "questionText": "Какой метод используется для проверки, является ли запрос AJAX-запросом?",
+    "answers": [
+      "request.isAjax()",
+      "Нет стандартного метода; проверяют заголовок X-Requested-With",
+      "response.isAjaxRequest()"
+    ],
+    "correctAnswerIndex": 1
+  },
+  {
+    "questionText": "Какой метод используется для асинхронной обработки запроса (Servlet 3.0+)?",
+    "answers": [
+      "request.startAsync()",
+      "response.enableAsync()",
+      "asyncContext = request.newAsync()"
+    ],
+    "correctAnswerIndex": 0
+  },
+  {
+    "questionText": "Какой метод завершает асинхронную операцию?",
+    "answers": [
+      "asyncContext.complete()",
+      "response.finishAsync()",
+      "request.endAsync()"
+    ],
+    "correctAnswerIndex": 0
+  },
+  {
+    "questionText": "Какой элемент web.xml включает асинхронную поддержку для сервлета?",
+    "answers": [
+      "<async-supported>true</async-supported>",
+      "<enable-async/>",
+      "Асинхронность включена по умолчанию"
+    ],
+    "correctAnswerIndex": 0
+  },
+  {
+    "questionText": "Какой метод используется для установки времени жизни сессии (в секундах)?",
+    "answers": [
+      "session.setMaxInactiveInterval(1800)",
+      "session.setTimeout(1800)",
+      "context.setSessionTimeout(1800)"
+    ],
+    "correctAnswerIndex": 0
+  },
+  {
+    "questionText": "Какой метод возвращает ID сессии?",
+    "answers": [
+      "session.getId()",
+      "session.getSessionId()",
+      "request.getSessionId()"
+    ],
+    "correctAnswerIndex": 0
+  },
+  {
+    "questionText": "Какой метод используется для проверки, новая ли сессия?",
+    "answers": [
+      "session.isNew()",
+      "session.isCreated()",
+      "request.isNewSession()"
+    ],
+    "correctAnswerIndex": 0
+  },
+  {
+    "questionText": "Какой интерфейс используется для инициализации сервлета с параметрами?",
+    "answers": [
+      "ServletConfig",
+      "ServletContext",
+      "WebInitParam"
+    ],
+    "correctAnswerIndex": 0
+  },
+  {
+    "questionText": "Как получить параметр инициализации сервлета?",
+    "answers": [
+      "getServletConfig().getInitParameter(\"name\")",
+      "getServletContext().getInitParameter(\"name\")",
+      "request.getInitParam(\"name\")"
+    ],
+    "correctAnswerIndex": 0
+  },
+  {
+    "questionText": "Какой метод используется для отправки JSON-ответа?",
+    "answers": [
+      "response.setContentType(\"application/json\"); writer.print(json)",
+      "response.sendJSON(json)",
+      "response.json(json)"
+    ],
+    "correctAnswerIndex": 0
+  },
+  {
+    "questionText": "Какой HTTP-статус означает 'Not Modified'?",
+    "answers": [
+      "200",
+      "304",
+      "403"
+    ],
+    "correctAnswerIndex": 1
+  },
+  {
+    "questionText": "Какой HTTP-метод идемпотентен?",
+    "answers": [
+      "POST",
+      "GET",
+      "PUT"
+    ],
+    "correctAnswerIndex": 1
+  },
+  {
+    "questionText": "Какой HTTP-метод НЕ идемпотентен?",
+    "answers": [
+      "GET",
+      "PUT",
+      "POST"
+    ],
+    "correctAnswerIndex": 2
+  },
+  {
+    "questionText": "Какой метод используется для получения MIME-типа файла?",
+    "answers": [
+      "getServletContext().getMimeType(filename)",
+      "response.getMimeType(filename)",
+      "request.detectMimeType(filename)"
+    ],
+    "correctAnswerIndex": 0
+  },
+  {
+    "questionText": "Как прочитать содержимое ресурса из веб-приложения?",
+    "answers": [
+      "getServletContext().getResourceAsStream(\"/file.txt\")",
+      "new FileInputStream(\"/file.txt\")",
+      "ClassLoader.getResourceAsStream(\"file.txt\")"
+    ],
+    "correctAnswerIndex": 0
+  },
+  {
+    "questionText": "Какой метод возвращает реальный путь к файлу в веб-приложении?",
+    "answers": [
+      "getServletContext().getRealPath(\"/file.txt\")",
+      "request.getRealPath(\"/file.txt\")",
+      "System.getProperty(\"webapp.root\") + \"/file.txt\""
+    ],
+    "correctAnswerIndex": 0
+  },
+  {
+    "questionText": "Какой интерфейс используется для обработки исключений в сервлетах?",
+    "answers": [
+      "Нет специального интерфейса; исключения обрабатываются try-catch",
+      "ExceptionHandler",
+      "ServletErrorHandler"
+    ],
+    "correctAnswerIndex": 0
+  },
+  {
+    "questionText": "Как настроить страницу ошибки в web.xml?",
+    "answers": [
+      "<error-page><error-code>404</error-code><location>/error.html</location></error-page>",
+      "<exception-handler code=\"404\" page=\"/error.html\" />",
+      "Нельзя; только программно"
+    ],
+    "correctAnswerIndex": 0
+  },
+  {
+    "questionText": "Какой метод используется для проверки роли пользователя?",
+    "answers": [
+      "request.isUserInRole(\"admin\")",
+      "session.hasRole(\"admin\")",
+      "context.isUserInRole(\"admin\")"
+    ],
+    "correctAnswerIndex": 0
+  },
+  {
+    "questionText": "Как получить имя аутентифицированного пользователя?",
+    "answers": [
+      "request.getRemoteUser()",
+      "request.getUserPrincipal().getName()",
+      "Оба варианта верны"
+    ],
+    "correctAnswerIndex": 2
+  },
+  {
+    "questionText": "Какой метод проверяет, аутентифицирован ли пользователь?",
+    "answers": [
+      "request.isAuthenticated()",
+      "request.getRemoteUser() != null",
+      "Оба варианта верны"
+    ],
+    "correctAnswerIndex": 2
+  },
+  {
+    "questionText": "Какой элемент web.xml определяет безопасность (security constraint)?",
+    "answers": [
+      "<security-constraint>",
+      "<auth-config>",
+      "<login-config>"
+    ],
+    "correctAnswerIndex": 0
+  },
+  {
+    "questionText": "Какой тип аутентификации использует форму входа?",
+    "answers": [
+      "FORM",
+      "BASIC",
+      "DIGEST"
+    ],
+    "correctAnswerIndex": 0
+  },
+  {
+    "questionText": "Какой метод используется для программной аутентификации (Servlet 3.0+)?",
+    "answers": [
+      "request.login(username, password)",
+      "session.authenticate(username, password)",
+      "response.authenticateUser(username, password)"
+    ],
+    "correctAnswerIndex": 0
+  },
+  {
+    "questionText": "Как завершить сеанс аутентификации?",
+    "answers": [
+      "request.logout()",
+      "session.invalidate()",
+      "Оба метода корректны"
+    ],
+    "correctAnswerIndex": 2
+  },
+  {
+    "questionText": "Какой заголовок используется для CORS?",
+    "answers": [
+      "Access-Control-Allow-Origin",
+      "X-CORS-Origin",
+      "Origin-Allow"
+    ],
+    "correctAnswerIndex": 0
+  },
+  {
+    "questionText": "Как разрешить CORS в сервлете?",
+    "answers": [
+      "response.setHeader(\"Access-Control-Allow-Origin\", \"*\")",
+      "request.enableCORS()",
+      "Невозможно; только на уровне сервера"
+    ],
+    "correctAnswerIndex": 0
+  },
+  {
+    "questionText": "Какой метод HttpServletRequest возвращает IP-адрес клиента?",
+    "answers": [
+      "getRemoteAddr()",
+      "getClientIP()",
+      "getHeader(\"X-Forwarded-For\")"
+    ],
+    "correctAnswerIndex": 0
+  },
+  {
+    "questionText": "Какой метод используется для получения метода запроса (GET, POST и т.д.)?",
+    "answers": [
+      "request.getMethod()",
+      "request.getHttpMethod()",
+      "request.getRequestType()"
+    ],
+    "correctAnswerIndex": 0
+  },
+  {
+    "questionText": "Какой метод используется для получения заголовка запроса?",
+    "answers": [
+      "request.getHeader(\"User-Agent\")",
+      "request.getHeaders().get(\"User-Agent\")",
+      "response.getHeader(\"User-Agent\")"
+    ],
+    "correctAnswerIndex": 0
+  },
+  {
+    "questionText": "Какой метод используется для получения всех имён заголовков?",
+    "answers": [
+      "request.getHeaderNames()",
+      "request.getHeaders()",
+      "request.getAllHeaders()"
+    ],
+    "correctAnswerIndex": 0
+  },
+  {
+    "questionText": "Какой метод используется для установки заголовка ответа?",
+    "answers": [
+      "response.setHeader(\"Cache-Control\", \"no-cache\")",
+      "response.addHeader(\"Cache-Control\", \"no-cache\")",
+      "Оба метода, но setHeader заменяет, addHeader — добавляет"
+    ],
+    "correctAnswerIndex": 2
+  },
+  {
+    "questionText": "Какой метод используется для добавления куки с флагом HttpOnly?",
+    "answers": [
+      "cookie.setHttpOnly(true)",
+      "response.setHttpOnlyCookie(cookie)",
+      "Невозможно в Java Servlet API"
+    ],
+    "correctAnswerIndex": 0
+  },
+  {
+    "questionText": "Какой метод используется для установки флага Secure у куки?",
+    "answers": [
+      "cookie.setSecure(true)",
+      "response.setSecureCookie(cookie)",
+      "cookie.secure = true"
+    ],
+    "correctAnswerIndex": 0
+  },
+  {
+    "questionText": "Какой метод используется для получения контекстного пути приложения?",
+    "answers": [
+      "request.getContextPath()",
+      "getServletContext().getContextPath()",
+      "request.getServletPath()"
+    ],
+    "correctAnswerIndex": 0
+  },
+  {
+    "questionText": "Какой метод возвращает путь к сервлету?",
+    "answers": [
+      "request.getServletPath()",
+      "request.getPathInfo()",
+      "request.getUri()"
+    ],
+    "correctAnswerIndex": 0
+  },
+  {
+    "questionText": "Какой метод возвращает дополнительную часть URL после сервлета?",
+    "answers": [
+      "request.getPathInfo()",
+      "request.getExtraPath()",
+      "request.getSubPath()"
+    ],
+    "correctAnswerIndex": 0
+  },
+  {
+    "questionText": "Какой интерфейс используется для обработки событий атрибутов сессии?",
+    "answers": [
+      "HttpSessionAttributeListener",
+      "SessionAttributeListener",
+      "AttributeEventListener"
+    ],
+    "correctAnswerIndex": 0
+  },
+  {
+    "questionText": "Какой метод вызывается при добавлении атрибута в сессию?",
+    "answers": [
+      "attributeAdded()",
+      "onAttributeSet()",
+      "session.setAttribute() вызывает напрямую"
+    ],
+    "correctAnswerIndex": 0
+  },
+  {
+    "questionText": "Какой метод используется для получения диспетчера запросов?",
+    "answers": [
+      "request.getRequestDispatcher(\"/other\")",
+      "context.getRequestDispatcher(\"/other\")",
+      "response.createDispatcher(\"/other\")"
+    ],
+    "correctAnswerIndex": 0
+  },
+  {
+    "questionText": "Можно ли использовать forward после отправки части ответа?",
+    "answers": [
+      "Да, всегда",
+      "Нет, будет исключение IllegalStateException",
+      "Только если не вызван getWriter()"
+    ],
+    "correctAnswerIndex": 1
+  },
+  {
+    "questionText": "Какой метод используется для проверки, был ли отправлен ответ?",
+    "answers": [
+      "response.isCommitted()",
+      "response.isSent()",
+      "request.isResponseReady()"
+    ],
+    "correctAnswerIndex": 0
+  },
+  {
+    "questionText": "Какой метод используется для сброса буфера ответа?",
+    "answers": [
+      "response.resetBuffer()",
+      "response.clear()",
+      "Нельзя после коммита"
+    ],
+    "correctAnswerIndex": 0
+  },
+  {
+    "questionText": "Какой метод используется для установки размера буфера ответа?",
+    "answers": [
+      "response.setBufferSize(8192)",
+      "response.setBuffer(8192)",
+      "writer.setBufferSize(8192)"
+    ],
+    "correctAnswerIndex": 0
+  },
+  {
+    "questionText": "Какой метод используется для получения имени сервера?",
+    "answers": [
+      "request.getServerName()",
+      "context.getServerName()",
+      "response.getServerName()"
+    ],
+    "correctAnswerIndex": 0
+  },
+  {
+    "questionText": "Какой метод используется для получения порта сервера?",
+    "answers": [
+      "request.getServerPort()",
+      "context.getServerPort()",
+      "System.getProperty(\"server.port\")"
+    ],
+    "correctAnswerIndex": 0
+  },
+  {
+    "questionText": "Какой метод используется для получения протокола запроса?",
+    "answers": [
+      "request.getProtocol()",
+      "request.getScheme()",
+      "request.getHttpVersion()"
+    ],
+    "correctAnswerIndex": 0
+  },
+  {
+    "questionText": "Какой метод используется для проверки HTTPS-соединения?",
+    "answers": [
+      "request.isSecure()",
+      "request.getScheme().equals(\"https\")",
+      "Оба вариан TSA верны"
+    ],
+    "correctAnswerIndex": 2
+  },
+  {
+    "questionText": "Какой метод используется для получения локали клиента?",
+    "answers": [
+      "request.getLocale()",
+      "request.getLanguage()",
+      "response.getLocale()"
+    ],
+    "correctAnswerIndex": 0
+  },
+  {
+    "questionText": "Какой метод используется для установки локали ответа?",
+    "answers": [
+      "response.setLocale(Locale.ENGLISH)",
+      "request.setLocale(Locale.ENGLISH)",
+      "context.setLocale(Locale.ENGLISH)"
+    ],
+    "correctAnswerIndex": 0
+  },
+  {
+    "questionText": "Какой метод используется для получения всех параметров запроса как Map?",
+    "answers": [
+      "request.getParameterMap()",
+      "request.getParameters()",
+      "request.getAllParameters()"
+    ],
+    "correctAnswerIndex": 0
+  },
+  {
+    "questionText": "Какой метод используется для получения всех значений параметра (если их несколько)?",
+    "answers": [
+      "request.getParameterValues(\"name\")",
+      "request.getParameters(\"name\")",
+      "request.getParameterList(\"name\")"
+    ],
+    "correctAnswerIndex": 0
+  }
+]
