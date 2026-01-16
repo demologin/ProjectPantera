@@ -15,11 +15,19 @@ public class FrontController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         // Прямое перенаправление на JSP страницу
         req.getRequestDispatcher("/WEB-INF/home.jsp").forward(req, resp);
+
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doPost(req, resp);
+        String choiceQuest =req.getParameter("quest");
+        String message = "";
+
+        if (choiceQuest.equals("the way of the dragon rider")) {
+            message = "Вы выбрали квест путь всадника дракона";
+        }
+        req.setAttribute("message", message);
+        req.getRequestDispatcher("/WEB-INF/home.jsp").forward(req, resp);
     }
 
     @Override
@@ -27,4 +35,5 @@ public class FrontController extends HttpServlet {
         super.init();
     }
 }
+
 
