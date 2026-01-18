@@ -14,37 +14,38 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @WebServlet("/start")
 public class StartServlet extends HttpServlet {
 
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.setAttribute("topics", Topic.values());
-        RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/jsp/start.jsp");
-        dispatcher.forward(req, resp);
-
-    }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession(true);
-        String topicParam = req.getParameter("topic");
-        Topic topic = Topic.valueOf(topicParam);
+        String[] topicParams = req.getParameterValues("topics");
+        if (topicParams == null || topicParams.length == 0) {
+            throw new IllegalArgumentException("No topics selected");
+        }
+        Set<Topic> selectedTopics = Arrays.stream(topicParams)
+                .map(Topic::valueOf)
+                .collect(Collectors.toSet());
 
-        List<Question> allQuestions = QuestionRepository.getQuestions(topic);
-        if (allQuestions.size() < 20) {
-            throw new IllegalStateException("Not enough questions for the topic " + topic);
+        int questionCount = Integer.parseInt(req.getParameter("questionCount"));
+
+        List<Question> allQuestions = new ArrayList<>();
+        for (Topic topic : selectedTopics) {
+            allQuestions.addAll(QuestionRepository.getQuestions(topic));
+        }
+        if (allQuestions.size() < questionCount) {
+            throw new IllegalStateException("Not enough questions for the topic ");
         }
 
-        List<Question> shuffled = new ArrayList<>(allQuestions);
-        Collections.shuffle(shuffled);
-        List<Question> selectedQuestions = shuffled.subList(0, 20);
+        Collections.shuffle(allQuestions);
+        List<Question> selectedQuestions = allQuestions.subList(0, questionCount);
 
-        InterviewState interviewState = new InterviewState(topic, selectedQuestions);
+        InterviewState interviewState = new InterviewState(selectedTopics, selectedQuestions);
         SessionUtils.setInterviewState(session, interviewState);
 
         resp.sendRedirect(req.getContextPath() + "/question");

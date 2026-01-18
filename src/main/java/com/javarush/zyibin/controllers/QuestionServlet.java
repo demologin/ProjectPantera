@@ -28,7 +28,7 @@ public class QuestionServlet extends HttpServlet {
             resp.sendRedirect(req.getContextPath() + "/result");
             return;
         }
-        req.setAttribute("topic", state.getTopic());
+        req.setAttribute("topics", state.getTopics());
         req.setAttribute("question", state.getCurrentQuestion());
         req.setAttribute("questionNumber", state.getCurrentIndex() + 1);
         req.setAttribute("totalQuestions", state.getTotalQuestions());

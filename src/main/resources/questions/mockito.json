@@ -4,7 +4,7 @@
     "answers": [
       "Mockito.mock(MyClass.class)",
       "Mockito.createMock(MyClass.class)",
-      "new Mock<>(MyClass.class)"
+      "new Mock&lt;&gt;(MyClass.class)"
     ],
     "correctAnswerIndex": 0
   },
@@ -128,8 +128,8 @@
   {
     "questionText": "Как создать ArgumentCaptor для типа String?",
     "answers": [
-      "ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class)",
-      "ArgumentCaptor<String> captor = new ArgumentCaptor<String>()",
+      "ArgumentCaptor&lt;String&gt; captor = ArgumentCaptor.forClass(String.class)",
+      "ArgumentCaptor&lt;String&gt; captor = new ArgumentCaptor&lt;String&gt;()",
       "ArgumentCaptor.of(String.class)"
     ],
     "correctAnswerIndex": 0
@@ -137,7 +137,7 @@
   {
     "questionText": "Как использовать ArgumentCaptor для проверки аргумента?",
     "answers": [
-      "verify(mock).method(captor.capture()); assertEquals(\"value\", captor.getValue())",
+      "verify(mock).method(captor.capture()); assertEquals(&quot;value&quot;, captor.getValue())",
       "captor.capture(mock.method()); ...",
       "mock.method(captor.get()); ..."
     ],
@@ -236,7 +236,7 @@
   {
     "questionText": "Как настроить ответ, который вычисляется динамически на основе аргументов?",
     "answers": [
-      "when(mock.method(any())).thenAnswer(invocation -> { ... })",
+      "when(mock.method(any())).thenAnswer(invocation -&gt; { ... })",
       "doAnswer(...).when(mock).method()",
       "Оба варианта верны"
     ],
@@ -264,7 +264,7 @@
     "questionText": "Как мокировать статический метод в Mockito?",
     "answers": [
       "Нельзя — только через PowerMock",
-      "Можно с Mockito 3.4.0+ и mockito-inline: try (MockedStatic<MyClass> mocked = mockStatic(MyClass.class))",
+      "Можно с Mockito 3.4.0+ и mockito-inline: try (MockedStatic&lt;MyClass&gt; mocked = mockStatic(MyClass.class))",
       "Статические методы всегда вызываются реально"
     ],
     "correctAnswerIndex": 1
@@ -308,9 +308,9 @@
   {
     "questionText": "Какой matcher используется для проверки по условию?",
     "answers": [
-      "argThat(argument -> argument > 0)",
-      "matchCondition(arg -> arg > 0)",
-      "filter(arg -> arg > 0)"
+      "argThat(argument -&gt; argument &gt; 0)",
+      "matchCondition(arg -&gt; arg &gt; 0)",
+      "filter(arg -&gt; arg &gt; 0)"
     ],
     "correctAnswerIndex": 0
   },
@@ -326,8 +326,8 @@
   {
     "questionText": "Как правильно смешать конкретное значение и matcher?",
     "answers": [
-      "when(mock.method(eq(\"value\"), anyInt()))",
-      "when(mock.method(\"value\", anyInt()))",
+      "when(mock.method(eq(&quot;value&quot;), anyInt()))",
+      "when(mock.method(&quot;value&quot;, anyInt()))",
       "Нельзя — только все matchers"
     ],
     "correctAnswerIndex": 0
@@ -405,7 +405,7 @@
     "correctAnswerIndex": 0
   },
   {
-    "questionText": "Какой метод используется для проверки, что мок вызывался в определённом порядке с другими моками?",
+    "questionText": "Какой метод используется для проверки вызова приватного метода?",
     "answers": [
       "InOrder.verify()",
       "verify(mock, inOrder(otherMock)).method()",

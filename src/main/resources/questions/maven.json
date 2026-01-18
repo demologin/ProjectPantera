@@ -101,9 +101,9 @@
   {
     "questionText": "Какой элемент в pom.xml определяет уникальный идентификатор проекта?",
     "answers": [
-      "<artifactId>",
-      "<groupId>",
-      "Комбинация <groupId>, <artifactId> и <version>"
+      "&lt;artifactId&gt;",
+      "&lt;groupId&gt;",
+      "Комбинация &lt;groupId&gt;, &lt;artifactId&gt; и &lt;version&gt;"
     ],
     "correctAnswerIndex": 2
   },
@@ -119,9 +119,9 @@
   {
     "questionText": "Какой элемент pom.xml задаёт версию Java для компиляции?",
     "answers": [
-      "<java.version>",
+      "&lt;java.version&gt;",
       "Свойства maven.compiler.source и maven.compiler.target",
-      "<sourceVersion>"
+      "&lt;sourceVersion&gt;"
     ],
     "correctAnswerIndex": 1
   },
@@ -155,25 +155,25 @@
   {
     "questionText": "Как указать основной класс (mainClass) в maven-jar-plugin?",
     "answers": [
-      "Через <Main-Class> в <manifest>",
-      "Через <mainClass> в конфигурации плагина",
+      "Через &lt;Main-Class&gt; в &lt;manifest&gt;",
+      "Через &lt;mainClass&gt; в конфигурации плагина",
       "Оба способа возможны в разных плагинах"
     ],
     "correctAnswerIndex": 2
   },
   {
-    "questionText": "Какой элемент используется для наследования конфигурации от родительского POM?",
+    "questionText": "Какой элемент pom.xml используется для наследования конфигурации от родительского POM?",
     "answers": [
-      "<parent>",
-      "<extends>",
-      "<superPom>"
+      "&lt;parent&gt;",
+      "&lt;extends&gt;",
+      "&lt;superPom&gt;"
     ],
     "correctAnswerIndex": 0
   },
   {
     "questionText": "Как создать multi-module проект?",
     "answers": [
-      "Добавить <modules> с перечислением подмодулей в родительский pom.xml",
+      "Добавить &lt;modules&gt; с перечислением подмодулей в родительский pom.xml",
       "Создать папки и указать их в .mvn/modules.txt",
       "Использовать mvn module:create"
     ],
@@ -209,18 +209,18 @@
   {
     "questionText": "Какой элемент pom.xml позволяет управлять версиями зависимостей централизованно?",
     "answers": [
-      "<dependencyManagement>",
-      "<dependencies>",
-      "<versionControl>"
+      "&lt;dependencyManagement&gt;",
+      "&lt;dependencies&gt;",
+      "&lt;versionControl&gt;"
     ],
     "correctAnswerIndex": 0
   },
   {
-    "questionText": "Чем отличается <dependencyManagement> от <dependencies>?",
+    "questionText": "Чем отличается &lt;dependencyManagement&gt; от &lt;dependencies&gt;?",
     "answers": [
-      "<dependencyManagement> задаёт версии, но не добавляет зависимости; <dependencies> — добавляет",
+      "&lt;dependencyManagement&gt; задаёт версии, но не добавляет зависимости; &lt;dependencies&gt; — добавляет",
       "Нет разницы — это синонимы",
-      "<dependencies> только для тестов, <dependencyManagement> — для основного кода"
+      "&lt;dependencies&gt; только для тестов, &lt;dependencyManagement&gt; — для основного кода"
     ],
     "correctAnswerIndex": 0
   },
@@ -272,9 +272,9 @@
   {
     "questionText": "Какой элемент pom.xml задаёт тип артефакта (jar, war, pom)?",
     "answers": [
-      "<packaging>",
-      "<type>",
-      "<artifactType>"
+      "&lt;packaging&gt;",
+      "&lt;type&gt;",
+      "&lt;artifactType&gt;"
     ],
     "correctAnswerIndex": 0
   },
@@ -291,8 +291,8 @@
     "questionText": "Как указать собственный репозиторий для зависимости?",
     "answers": [
       "Нельзя — только через settings.xml или mirror",
-      "Через <repository> в pom.xml",
-      "Через <url> внутри <dependency>"
+      "Через &lt;repository&gt; в pom.xml",
+      "Через &lt;url&gt; внутри &lt;dependency&gt;"
     ],
     "correctAnswerIndex": 1
   },
@@ -317,18 +317,18 @@
   {
     "questionText": "Как исключить транзитивную зависимость?",
     "answers": [
-      "Через <exclusions> внутри <dependency>",
+      "Через &lt;exclusions&gt; внутри &lt;dependency&gt;",
       "Удалить её из локального репозитория",
       "Использовать scope 'none'"
     ],
     "correctAnswerIndex": 0
   },
   {
-    "questionText": "Какой элемент используется для задания свойств (properties) в pom.xml?",
+    "questionText": "Какой элемент pom.xml используется для задания свойств (properties)?",
     "answers": [
-      "<properties>",
-      "<vars>",
-      "<config>"
+      "&lt;properties&gt;",
+      "&lt;vars&gt;",
+      "&lt;config&gt;"
     ],
     "correctAnswerIndex": 0
   },
@@ -354,7 +354,7 @@
     "questionText": "Как указать аргументы JVM при запуске через exec:java?",
     "answers": [
       "Нельзя — только через системные свойства",
-      "Через <arguments> в конфигурации",
+      "Через &lt;arguments&gt; в конфигурации",
       "Через системное свойство MAVEN_OPTS"
     ],
     "correctAnswerIndex": 2
@@ -362,18 +362,18 @@
   {
     "questionText": "Какой элемент pom.xml позволяет задать описание проекта?",
     "answers": [
-      "<description>",
-      "<info>",
-      "<summary>"
+      "&lt;description&gt;",
+      "&lt;info&gt;",
+      "&lt;summary&gt;"
     ],
     "correctAnswerIndex": 0
   },
   {
     "questionText": "Какой элемент указывает URL домашней страницы проекта?",
     "answers": [
-      "<url>",
-      "<homepage>",
-      "<projectUrl>"
+      "&lt;url&gt;",
+      "&lt;homepage&gt;",
+      "&lt;projectUrl&gt;"
     ],
     "correctAnswerIndex": 0
   },
@@ -389,8 +389,8 @@
   {
     "questionText": "Как задать зеркало (mirror) для центрального репозитория?",
     "answers": [
-      "В settings.xml через <mirrors>",
-      "В pom.xml через <mirrorRepository>",
+      "В settings.xml через &lt;mirrors&gt;",
+      "В pom.xml через &lt;mirrorRepository&gt;",
       "Через системную переменную MIRROR_URL"
     ],
     "correctAnswerIndex": 0
@@ -443,18 +443,18 @@
   {
     "questionText": "Какой элемент pom.xml используется для указания лицензии проекта?",
     "answers": [
-      "<license>",
-      "<licenses>",
-      "<legal>"
+      "&lt;license&gt;",
+      "&lt;licenses&gt;",
+      "&lt;legal&gt;"
     ],
     "correctAnswerIndex": 1
   },
   {
     "questionText": "Как указать список разработчиков в pom.xml?",
     "answers": [
-      "<developers>",
-      "<team>",
-      "<contributors>"
+      "&lt;developers&gt;",
+      "&lt;team&gt;",
+      "&lt;contributors&gt;"
     ],
     "correctAnswerIndex": 0
   },
@@ -480,7 +480,7 @@
     "questionText": "Как игнорировать файлы в Maven-сборке (аналог .gitignore)?",
     "answers": [
       "Maven не имеет такого механизма — используйте .gitignore",
-      "Через <excludes> в плагинах (например, assembly)",
+      "Через &lt;excludes&gt; в плагинах (например, assembly)",
       "Файл .mvnignore"
     ],
     "correctAnswerIndex": 1
@@ -488,9 +488,9 @@
   {
     "questionText": "Какой элемент pom.xml задаёт версию проекта?",
     "answers": [
-      "<version>",
-      "<projectVersion>",
-      "<release>"
+      "&lt;version&gt;",
+      "&lt;projectVersion&gt;",
+      "&lt;release&gt;"
     ],
     "correctAnswerIndex": 0
   },
@@ -524,18 +524,18 @@
   {
     "questionText": "Какой элемент pom.xml позволяет задать информацию о системе контроля версий?",
     "answers": [
-      "<scm>",
-      "<vcs>",
-      "<repository>"
+      "&lt;scm&gt;",
+      "&lt;vcs&gt;",
+      "&lt;repository&gt;"
     ],
     "correctAnswerIndex": 0
   },
   {
     "questionText": "Какой элемент используется для настройки distributionManagement (например, для deploy)?",
     "answers": [
-      "<distributionManagement>",
-      "<deployment>",
-      "<publishing>"
+      "&lt;distributionManagement&gt;",
+      "&lt;deployment&gt;",
+      "&lt;publishing&gt;"
     ],
     "correctAnswerIndex": 0
   }

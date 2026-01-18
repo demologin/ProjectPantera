@@ -119,7 +119,7 @@
   {
     "questionText": "Как проверить, что метод выбрасывает конкретное исключение?",
     "answers": [
-      "assertThrows(IOException.class, () -> method())",
+      "assertThrows(IOException.class, () -&gt; method())",
       "expectThrows(IOException.class, method())",
       "assertException(IOException.class, method())"
     ],
@@ -137,8 +137,8 @@
   {
     "questionText": "Как добавить поясняющее сообщение к утверждению?",
     "answers": [
-      "assertEquals(expected, actual, \"Values must be equal\")",
-      "assertEquals(\"Values must be equal\", expected, actual)",
+      "assertEquals(expected, actual, &quot;Values must be equal&quot;)",
+      "assertEquals(&quot;Values must be equal&quot;, expected, actual)",
       "Оба способа допустимы"
     ],
     "correctAnswerIndex": 0
@@ -146,7 +146,7 @@
   {
     "questionText": "Как выполнить несколько утверждений, даже если одно из них падает?",
     "answers": [
-      "assertAll(() -> assertEquals(...), () -> assertTrue(...))",
+      "assertAll(() -&gt; assertEquals(...), () -&gt; assertTrue(...))",
       "groupedAsserts(...)",
       "softAssertions(...)"
     ],
@@ -173,9 +173,9 @@
   {
     "questionText": "Как протестировать метод со строковыми аргументами через @ValueSource?",
     "answers": [
-      "@ValueSource(strings = {\"a\", \"b\"})",
-      "@ValueSource(values = {\"a\", \"b\"})",
-      "@StringSource({\"a\", \"b\"})"
+      "@ValueSource(strings = {&quot;a&quot;, &quot;b&quot;})",
+      "@ValueSource(values = {&quot;a&quot;, &quot;b&quot;})",
+      "@StringSource({&quot;a&quot;, &quot;b&quot;})"
     ],
     "correctAnswerIndex": 0
   },
@@ -192,7 +192,7 @@
     "questionText": "Какой тип аргумента может принимать метод с @MethodSource?",
     "answers": [
       "Stream, Iterable, Iterator или Object[]",
-      "Только List<String>",
+      "Только List&lt;String&gt;",
       "Только статические массивы"
     ],
     "correctAnswerIndex": 0
@@ -200,7 +200,7 @@
   {
     "questionText": "Какой аннотацией можно задать имя теста в параметризованном тесте?",
     "answers": [
-      "name = \"{0} => {1}\" в @ParameterizedTest",
+      "name = &quot;{0} =&gt; {1}&quot; в @ParameterizedTest",
       "@DisplayName",
       "Нельзя — имя генерируется автоматически"
     ],
@@ -353,9 +353,9 @@
   {
     "questionText": "Какой метод используется для проверки, что исключение не выбрасывается?",
     "answers": [
-      "assertDoesNotThrow(() -> method())",
-      "assertNoException(() -> method())",
-      "verifySafe(() -> method())"
+      "assertDoesNotThrow(() -&gt; method())",
+      "assertNoException(() -&gt; method())",
+      "verifySafe(() -&gt; method())"
     ],
     "correctAnswerIndex": 0
   },
@@ -452,8 +452,8 @@
   {
     "questionText": "Какой метод используется для проверки, что строка содержит подстроку?",
     "answers": [
-      "assertTrue(str.contains(\"sub\"))",
-      "assertThat(str).contains(\"sub\")",
+      "assertTrue(str.contains(&quot;sub&quot;))",
+      "assertThat(str).contains(&quot;sub&quot;)",
       "Нет встроенного метода — только через assertTrue"
     ],
     "correctAnswerIndex": 2

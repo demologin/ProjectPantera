@@ -684,7 +684,7 @@
     "correctAnswerIndex": 0
   },
   {
-    "questionText": "Какой из следующих методов ExecutorService возвращает Future<Void>?",
+    "questionText": "Какой из следующих методов ExecutorService возвращает Future&lt;Void&gt;?",
     "answers": [
       "submit(Runnable)",
       "submit(Callable)",

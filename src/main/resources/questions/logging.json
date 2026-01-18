@@ -38,9 +38,9 @@
   {
     "questionText": "Как правильно записать параметризованное сообщение в SLF4J?",
     "answers": [
-      "logger.info(\"User {} logged in\", username)",
-      "logger.info(\"User \" + username + \" logged in\")",
-      "logger.info(\"User %s logged in\", username)"
+      "logger.info(&quot;User {} logged in&quot;, username)",
+      "logger.info(&quot;User &quot; + username + &quot; logged in&quot;)",
+      "logger.info(&quot;User %s logged in&quot;, username)"
     ],
     "correctAnswerIndex": 0
   },
@@ -137,9 +137,9 @@
   {
     "questionText": "Как добавить значение в MDC?",
     "answers": [
-      "MDC.put(\"userId\", userId)",
-      "logger.setContext(\"userId\", userId)",
-      "ThreadLocal.set(\"userId\", userId)"
+      "MDC.put(&quot;userId&quot;, userId)",
+      "logger.setContext(&quot;userId&quot;, userId)",
+      "ThreadLocal.set(&quot;userId&quot;, userId)"
     ],
     "correctAnswerIndex": 0
   },
@@ -227,26 +227,26 @@
   {
     "questionText": "Как задать уровень логирования для конкретного пакета в logback.xml?",
     "answers": [
-      "<logger name=\"com.example\" level=\"DEBUG\"/>",
-      "<package name=\"com.example\" level=\"DEBUG\"/>",
-      "<level package=\"com.example\" value=\"DEBUG\"/>"
+      "&lt;logger name=&quot;com.example&quot; level=&quot;DEBUG&quot;/&gt;",
+      "&lt;package name=&quot;com.example&quot; level=&quot;DEBUG&quot;/&gt;",
+      "&lt;level package=&quot;com.example&quot; value=&quot;DEBUG&quot;/&gt;"
     ],
     "correctAnswerIndex": 0
   },
   {
     "questionText": "Какой элемент в logback.xml определяет вывод в консоль?",
     "answers": [
-      "<ConsoleAppender>",
-      "<StdOutAppender>",
-      "<TerminalAppender>"
+      "&lt;ConsoleAppender&gt;",
+      "&lt;StdOutAppender&gt;",
+      "&lt;TerminalAppender&gt;"
     ],
     "correctAnswerIndex": 0
   },
   {
     "questionText": "Какой элемент в log4j2.xml определяет вывод в файл?",
     "answers": [
-      "<File>",
-      "<RollingFile>",
+      "&lt;File&gt;",
+      "&lt;RollingFile&gt;",
       "Оба варианта верны"
     ],
     "correctAnswerIndex": 2
@@ -354,7 +354,7 @@
     "questionText": "Какой механизм позволяет динамически менять уровень логирования без перезапуска приложения?",
     "answers": [
       "JMX",
-      "Logback scan=\"true\" в корневом элементе",
+      "Logback scan=&quot;true&quot; в корневом элементе",
       "Оба варианта верны"
     ],
     "correctAnswerIndex": 2
@@ -362,8 +362,8 @@
   {
     "questionText": "Какой элемент в logback.xml включает сканирование изменений конфигурации?",
     "answers": [
-      "<configuration scan=\"true\">",
-      "<scan enabled=\"true\"/>",
+      "&lt;configuration scan=&quot;true&quot;&gt;",
+      "&lt;scan enabled=&quot;true&quot;/&gt;",
       "Нельзя — только перезапуск"
     ],
     "correctAnswerIndex": 0
@@ -398,7 +398,7 @@
   {
     "questionText": "Какой метод используется для логирования исключения в SLF4J?",
     "answers": [
-      "logger.error(\"Message\", exception)",
+      "logger.error(&quot;Message&quot;, exception)",
       "logger.log(exception)",
       "logger.exception(exception)"
     ],
@@ -452,9 +452,9 @@
   {
     "questionText": "Какой элемент в log4j2.xml задаёт политику ротации?",
     "answers": [
-      "<Policies>",
-      "<Rotation>",
-      "<TriggeringPolicy>"
+      "&lt;Policies&gt;",
+      "&lt;Rotation&gt;",
+      "&lt;TriggeringPolicy&gt;"
     ],
     "correctAnswerIndex": 0
   },

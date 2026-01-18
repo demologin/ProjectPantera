@@ -4,15 +4,16 @@ import com.javarush.zyibin.model.Question;
 import com.javarush.zyibin.model.Topic;
 
 import java.util.List;
+import java.util.Set;
 
 public class InterviewState {
-    private final Topic topic;
+    private final Set<Topic> topics;
     private final List<Question> questions;
     private int currentIndex;
     private int score;
 
-    public InterviewState(Topic topic, List<Question> questions) {
-        this.topic = topic;
+    public InterviewState(Set<Topic> topics, List<Question> questions) {
+        this.topics = topics;
         this.questions = questions;
         this.currentIndex = 0;
         this.score = 0;
@@ -34,8 +35,8 @@ public class InterviewState {
         score++;
     }
 
-    public Topic getTopic() {
-        return  topic;
+    public Set<Topic> getTopics() {
+        return  topics;
     }
 
     public int getTotalQuestions() {

@@ -14,21 +14,25 @@
     <title>Результат интервью</title>
 </head>
 <body>
-    <h2>Результат интервью</h2>
-    <h3>Тема теста: ${topic.displayName}</h3>
-    <p>Правильных ответов: ${score} из ${totalQuestions}</p>
-    <c:choose>
-        <c:when test="${passed}">
-            <h3>Поздравляем! Вы успешно прошли интервью 🎉</h3>
-            <p>Оффер отправлен на вашу почту</p>
-        </c:when>
-        <c:otherwise>
-            <h3>К сожалению, интервью не пройдено</h3>
-            <p>Мы вам перезвоним... когда-нибудь... но это не точно</p>
-        </c:otherwise>
-    </c:choose>
-<a href="${pageContext.request.contextPath}/start">
-    Начать заново
+<h2>Результат интервью</h2>
+<h3>Тема теста: ${topic.displayName}</h3>
+<p>Правильных ответов: ${score} из ${totalQuestions}</p>
+<c:choose>
+    <c:when test="${passed}">
+        <h3>Поздравляем! Вы успешно прошли интервью 🎉</h3>
+        <p>Оффер отправлен на вашу почту</p>
+    </c:when>
+    <c:otherwise>
+        <h3>К сожалению, интервью не пройдено</h3>
+        <p>Мы вам перезвоним... когда-нибудь... но это не точно</p>
+    </c:otherwise>
+</c:choose>
+<a href="${pageContext.request.contextPath}/home">
+    На главную страницу
+</a>
+<br><br>
+<a href="${pageContext.request.contextPath}/test/settings">
+    Настроить новый тест
 </a>
 </body>
 </html>

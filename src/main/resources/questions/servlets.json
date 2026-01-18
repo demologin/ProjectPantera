@@ -65,9 +65,9 @@
   {
     "questionText": "Как получить значение параметра 'name' из запроса?",
     "answers": [
-      "request.getParameter(\"name\")",
-      "request.getQuery(\"name\")",
-      "request.getAttribute(\"name\")"
+      "request.getParameter(&quot;name&quot;)",
+      "request.getQuery(&quot;name&quot;)",
+      "request.getAttribute(&quot;name&quot;)"
     ],
     "correctAnswerIndex": 0
   },
@@ -110,9 +110,9 @@
   {
     "questionText": "Какой метод используется для перенаправления клиента на другой URL?",
     "answers": [
-      "response.sendRedirect(\"/other\")",
-      "request.forward(\"/other\")",
-      "response.redirect(\"/other\")"
+      "response.sendRedirect(&quot;/other&quot;)",
+      "request.forward(&quot;/other&quot;)",
+      "response.redirect(&quot;/other&quot;)"
     ],
     "correctAnswerIndex": 0
   },
@@ -155,9 +155,9 @@
   {
     "questionText": "Как установить атрибут в сессии?",
     "answers": [
-      "session.setAttribute(\"key\", value)",
-      "session.put(\"key\", value)",
-      "session.add(\"key\", value)"
+      "session.setAttribute(&quot;key&quot;, value)",
+      "session.put(&quot;key&quot;, value)",
+      "session.add(&quot;key&quot;, value)"
     ],
     "correctAnswerIndex": 0
   },
@@ -200,18 +200,18 @@
   {
     "questionText": "Как зарегистрировать сервлет с помощью аннотации?",
     "answers": [
-      "@WebServlet(\"/hello\")",
-      "@ServletMapping(\"/hello\")",
-      "@RequestMapping(\"/hello\")"
+      "@WebServlet(&quot;/hello&quot;)",
+      "@ServletMapping(&quot;/hello&quot;)",
+      "@RequestMapping(&quot;/hello&quot;)"
     ],
     "correctAnswerIndex": 0
   },
   {
     "questionText": "Какой элемент web.xml определяет маппинг сервлета?",
     "answers": [
-      "<servlet-mapping>",
-      "<url-pattern>",
-      "<route>"
+      "&lt;servlet-mapping&gt;",
+      "&lt;url-pattern&gt;",
+      "&lt;route&gt;"
     ],
     "correctAnswerIndex": 0
   },
@@ -227,9 +227,9 @@
   {
     "questionText": "Как получить параметр контекста из web.xml?",
     "answers": [
-      "context.getInitParameter(\"name\")",
-      "context.getAttribute(\"name\")",
-      "config.getContextParam(\"name\")"
+      "context.getInitParameter(&quot;name&quot;)",
+      "context.getAttribute(&quot;name&quot;)",
+      "config.getContextParam(&quot;name&quot;)"
     ],
     "correctAnswerIndex": 0
   },
@@ -263,8 +263,8 @@
   {
     "questionText": "Какой метод используется для установки Content-Type ответа?",
     "answers": [
-      "response.setContentType(\"text/html\")",
-      "response.setHeader(\"Content-Type\", \"text/html\")",
+      "response.setContentType(&quot;text/html&quot;)",
+      "response.setHeader(&quot;Content-Type&quot;, &quot;text/html&quot;)",
       "Оба варианта верны"
     ],
     "correctAnswerIndex": 2
@@ -272,9 +272,9 @@
   {
     "questionText": "Как установить кодировку ответа в UTF-8?",
     "answers": [
-      "response.setCharacterEncoding(\"UTF-8\")",
-      "response.setEncoding(\"UTF-8\")",
-      "response.setHeader(\"charset\", \"UTF-8\")"
+      "response.setCharacterEncoding(&quot;UTF-8&quot;)",
+      "response.setEncoding(&quot;UTF-8&quot;)",
+      "response.setHeader(&quot;charset&quot;, &quot;UTF-8&quot;)"
     ],
     "correctAnswerIndex": 0
   },
@@ -353,9 +353,9 @@
   {
     "questionText": "Как создать куку в ответе?",
     "answers": [
-      "response.addCookie(new Cookie(\"name\", \"value\"))",
-      "request.setCookie(\"name\", \"value\")",
-      "response.setHeader(\"Cookie\", \"name=value\")"
+      "response.addCookie(new Cookie(&quot;name&quot;, &quot;value&quot;))",
+      "request.setCookie(&quot;name&quot;, &quot;value&quot;)",
+      "response.setHeader(&quot;Cookie&quot;, &quot;name=value&quot;)"
     ],
     "correctAnswerIndex": 0
   },
@@ -363,7 +363,7 @@
     "questionText": "Как получить все куки из запроса?",
     "answers": [
       "request.getCookies()",
-      "request.getHeaders(\"Cookie\")",
+      "request.getHeaders(&quot;Cookie&quot;)",
       "response.getCookies()"
     ],
     "correctAnswerIndex": 0
@@ -416,8 +416,8 @@
   {
     "questionText": "Какой элемент web.xml включает асинхронную поддержку для сервлета?",
     "answers": [
-      "<async-supported>true</async-supported>",
-      "<enable-async/>",
+      "&lt;async-supported&gt;true&lt;/async-supported&gt;",
+      "&lt;enable-async/&gt;",
       "Асинхронность включена по умолчанию"
     ],
     "correctAnswerIndex": 0
@@ -461,16 +461,16 @@
   {
     "questionText": "Как получить параметр инициализации сервлета?",
     "answers": [
-      "getServletConfig().getInitParameter(\"name\")",
-      "getServletContext().getInitParameter(\"name\")",
-      "request.getInitParam(\"name\")"
+      "getServletConfig().getInitParameter(&quot;name&quot;)",
+      "getServletContext().getInitParameter(&quot;name&quot;)",
+      "request.getInitParam(&quot;name&quot;)"
     ],
     "correctAnswerIndex": 0
   },
   {
     "questionText": "Какой метод используется для отправки JSON-ответа?",
     "answers": [
-      "response.setContentType(\"application/json\"); writer.print(json)",
+      "response.setContentType(&quot;application/json&quot;); writer.print(json)",
       "response.sendJSON(json)",
       "response.json(json)"
     ],
@@ -515,18 +515,18 @@
   {
     "questionText": "Как прочитать содержимое ресурса из веб-приложения?",
     "answers": [
-      "getServletContext().getResourceAsStream(\"/file.txt\")",
-      "new FileInputStream(\"/file.txt\")",
-      "ClassLoader.getResourceAsStream(\"file.txt\")"
+      "getServletContext().getResourceAsStream(&quot;/file.txt&quot;)",
+      "new FileInputStream(&quot;/file.txt&quot;)",
+      "ClassLoader.getResourceAsStream(&quot;file.txt&quot;)"
     ],
     "correctAnswerIndex": 0
   },
   {
     "questionText": "Какой метод возвращает реальный путь к файлу в веб-приложении?",
     "answers": [
-      "getServletContext().getRealPath(\"/file.txt\")",
-      "request.getRealPath(\"/file.txt\")",
-      "System.getProperty(\"webapp.root\") + \"/file.txt\""
+      "getServletContext().getRealPath(&quot;/file.txt&quot;)",
+      "request.getRealPath(&quot;/file.txt&quot;)",
+      "System.getProperty(&quot;webapp.root&quot;) + &quot;/file.txt&quot;"
     ],
     "correctAnswerIndex": 0
   },
@@ -542,8 +542,8 @@
   {
     "questionText": "Как настроить страницу ошибки в web.xml?",
     "answers": [
-      "<error-page><error-code>404</error-code><location>/error.html</location></error-page>",
-      "<exception-handler code=\"404\" page=\"/error.html\" />",
+      "&lt;error-page&gt;&lt;error-code&gt;404&lt;/error-code&gt;&lt;location&gt;/error.html&lt;/location&gt;&lt;/error-page&gt;",
+      "&lt;exception-handler code=&quot;404&quot; page=&quot;/error.html&quot; /&gt;",
       "Нельзя; только программно"
     ],
     "correctAnswerIndex": 0
@@ -551,9 +551,9 @@
   {
     "questionText": "Какой метод используется для проверки роли пользователя?",
     "answers": [
-      "request.isUserInRole(\"admin\")",
-      "session.hasRole(\"admin\")",
-      "context.isUserInRole(\"admin\")"
+      "request.isUserInRole(&quot;admin&quot;)",
+      "session.hasRole(&quot;admin&quot;)",
+      "context.isUserInRole(&quot;admin&quot;)"
     ],
     "correctAnswerIndex": 0
   },
@@ -578,9 +578,9 @@
   {
     "questionText": "Какой элемент web.xml определяет безопасность (security constraint)?",
     "answers": [
-      "<security-constraint>",
-      "<auth-config>",
-      "<login-config>"
+      "&lt;security-constraint&gt;",
+      "&lt;auth-config&gt;",
+      "&lt;login-config&gt;"
     ],
     "correctAnswerIndex": 0
   },
@@ -623,7 +623,7 @@
   {
     "questionText": "Как разрешить CORS в сервлете?",
     "answers": [
-      "response.setHeader(\"Access-Control-Allow-Origin\", \"*\")",
+      "response.setHeader(&quot;Access-Control-Allow-Origin&quot;, &quot;*&quot;)",
       "request.enableCORS()",
       "Невозможно; только на уровне сервера"
     ],
@@ -634,7 +634,7 @@
     "answers": [
       "getRemoteAddr()",
       "getClientIP()",
-      "getHeader(\"X-Forwarded-For\")"
+      "getHeader(&quot;X-Forwarded-For&quot;)"
     ],
     "correctAnswerIndex": 0
   },
@@ -650,9 +650,9 @@
   {
     "questionText": "Какой метод используется для получения заголовка запроса?",
     "answers": [
-      "request.getHeader(\"User-Agent\")",
-      "request.getHeaders().get(\"User-Agent\")",
-      "response.getHeader(\"User-Agent\")"
+      "request.getHeader(&quot;User-Agent&quot;)",
+      "request.getHeaders().get(&quot;User-Agent&quot;)",
+      "response.getHeader(&quot;User-Agent&quot;)"
     ],
     "correctAnswerIndex": 0
   },
@@ -668,8 +668,8 @@
   {
     "questionText": "Какой метод используется для установки заголовка ответа?",
     "answers": [
-      "response.setHeader(\"Cache-Control\", \"no-cache\")",
-      "response.addHeader(\"Cache-Control\", \"no-cache\")",
+      "response.setHeader(&quot;Cache-Control&quot;, &quot;no-cache&quot;)",
+      "response.addHeader(&quot;Cache-Control&quot;, &quot;no-cache&quot;)",
       "Оба метода, но setHeader заменяет, addHeader — добавляет"
     ],
     "correctAnswerIndex": 2
@@ -740,9 +740,9 @@
   {
     "questionText": "Какой метод используется для получения диспетчера запросов?",
     "answers": [
-      "request.getRequestDispatcher(\"/other\")",
-      "context.getRequestDispatcher(\"/other\")",
-      "response.createDispatcher(\"/other\")"
+      "request.getRequestDispatcher(&quot;/other&quot;)",
+      "context.getRequestDispatcher(&quot;/other&quot;)",
+      "response.createDispatcher(&quot;/other&quot;)"
     ],
     "correctAnswerIndex": 0
   },
@@ -796,7 +796,7 @@
     "answers": [
       "request.getServerPort()",
       "context.getServerPort()",
-      "System.getProperty(\"server.port\")"
+      "System.getProperty(&quot;server.port&quot;)"
     ],
     "correctAnswerIndex": 0
   },
@@ -813,8 +813,8 @@
     "questionText": "Какой метод используется для проверки HTTPS-соединения?",
     "answers": [
       "request.isSecure()",
-      "request.getScheme().equals(\"https\")",
-      "Оба вариан TSA верны"
+      "request.getScheme().equals(&quot;https&quot;)",
+      "Оба варианта верны"
     ],
     "correctAnswerIndex": 2
   },
@@ -848,9 +848,9 @@
   {
     "questionText": "Какой метод используется для получения всех значений параметра (если их несколько)?",
     "answers": [
-      "request.getParameterValues(\"name\")",
-      "request.getParameters(\"name\")",
-      "request.getParameterList(\"name\")"
+      "request.getParameterValues(&quot;name&quot;)",
+      "request.getParameters(&quot;name&quot;)",
+      "request.getParameterList(&quot;name&quot;)"
     ],
     "correctAnswerIndex": 0
   }

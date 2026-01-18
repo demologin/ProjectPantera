@@ -14,7 +14,12 @@
     <title>Вопрос</title>
 </head>
 <body>
-    <h3>Тема: ${topic.displayName}</h3>
+    <h3>Темы теста:</h3>
+    <ul>
+        <c:forEach var="topic" items="${topics}">
+            <li>${topic.displayName}</li>
+        </c:forEach>
+    </ul>
     <h2>Вопрос ${questionNumber} из ${totalQuestions}</h2>
     <p>${question.questionText}</p>
     <form method="post" action="${pageContext.request.contextPath}/question">

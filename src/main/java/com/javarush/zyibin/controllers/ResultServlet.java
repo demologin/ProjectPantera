@@ -32,7 +32,7 @@ public class ResultServlet extends HttpServlet {
         int totalQuestions = state.getTotalQuestions();
         boolean passed = score >= totalQuestions / 2.0;
 
-        req.setAttribute("topic", state.getTopic());
+        req.setAttribute("topics", state.getTopics());
         req.setAttribute("score", score);
         req.setAttribute("totalQuestions", totalQuestions);
         req.setAttribute("passed", passed);
