@@ -1,0 +1,207 @@
+/* ===== ОСНОВНАЯ РАЗМЕТКА ===== */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.layout {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* ===== ЛЕВОЕ МЕНЮ ===== */
+.menu {
+    width: 220px;
+    padding: 15px;
+    background: #f2f2f2;
+    border-right: 2px solid #ccc;
+}
+
+.menu h3 {
+    margin-top: 0;
+}
+
+.menu a {
+    display: block;
+    margin-bottom: 10px;
+    text-decoration: none;
+    color: #000;
+}
+
+.menu a:hover {
+    text-decoration: underline;
+}
+
+.menu-disabled {
+    pointer-events: none; /* блокирует клики */
+    opacity: 0.5;         /* визуально видно, что меню неактивно */
+}
+
+/* ===== ЦЕНТР ===== */
+.content {
+    flex: 1;
+    padding: 30px;
+}
+
+/* =============================
+   ОФОРМЛЕНИЕ КВЕСТА (СХЕМА)
+   ============================= */
+
+.quest-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+/* ВОПРОС */
+.flow-question {
+    margin: 0 auto 40px;
+    max-width: 700px;
+    padding: 20px 30px;
+
+    border: 2px solid #2b2b2b;
+    border-radius: 4px;
+
+    background: #38d9a9;
+    color: #000;
+
+    font-size: 18px;
+    text-align: center;
+    font-weight: 500;
+}
+
+/* ОТВЕТЫ */
+.flow-answers {
+    display: flex;
+    justify-content: center;
+    gap: 80px;
+}
+
+.flow-form {
+    margin: 0;
+}
+
+/* КНОПКИ-КВАДРАТЫ */
+.flow-answer {
+    min-width: 220px;
+    padding: 15px 20px;
+
+    border: 2px solid #2b2b2b;
+    border-radius: 4px;
+
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+/* ДА */
+.flow-answer.yes {
+    background: #38d9a9;
+}
+
+/* НЕТ */
+.flow-answer.no {
+    background: #ff9f7a;
+}
+
+.flow-answer:hover {
+    filter: brightness(0.95);
+}
+
+.flow-question.old {
+    background: #e6e6e6;
+    color: #444;
+    border-style: dashed;
+    margin-bottom: 20px;
+}
+
+.flow-question.old .chosen {
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+/* ===== ИСТОРИЯ КВЕСТА ===== */
+
+.flow-history .answer-text {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.flow-history .answer-text.yes {
+    color: #2f9e44;   /* зелёный текст */
+}
+
+.flow-history .answer-text.no {
+    color: #d9480f;   /* оранжевый текст */
+}
+
+/* ===== ВСПОМОГАТЕЛЬНЫЕ КЛАССЫ (ДЛЯ JSP, БЕЗ inline-style) ===== */
+
+.hidden {
+    display: none !important;
+}
+
+.inline {
+    display: inline;
+}
+
+.margin-top {
+    margin-top: 15px;
+}
+
+/* ===== ТАБЛИЦЫ АДМИНКИ ===== */
+
+.admin-table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.admin-table th,
+.admin-table td {
+    border: 1px solid #2b2b2b;
+    padding: 5px;
+    text-align: left;
+}
+
+.admin-table th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+.admin-actions {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.admin-actions form {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.admin-actions button {
+    white-space: nowrap;
+}
+
+.inline-form {
+    margin: 0;
+}
+
+button.danger {
+    color: red;
+}
+
+/* ===== РЕЗУЛЬТАТ КВЕСТА ===== */
+
+.result-box {
+    text-align: center;
+    margin-top: 50px;
+}
+
+.result-win {
+    color: green;
+}
+
+.result-lose {
+    color: red;
+}
