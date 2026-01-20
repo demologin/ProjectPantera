@@ -43,6 +43,14 @@ public class LoginServlet extends HttpServlet {
             req.getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(req, resp);
             return;
         }
+
+        if (user.isBlocked()) {
+            req.setAttribute("error", "Пользователь заблокирован администратором");
+            req.getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(req, resp);
+            return;
+        }
+
+
         HttpSession session = req.getSession(true);
         session.setAttribute("currentUser", user);
         resp.sendRedirect(req.getContextPath() + "/home");

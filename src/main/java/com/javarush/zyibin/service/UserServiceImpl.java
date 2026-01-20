@@ -13,7 +13,6 @@ public class UserServiceImpl implements UserService{
 
     private final UserRepository userRepository;
 
-    private final AtomicLong idGenerator = new AtomicLong(1);
 
     public UserServiceImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
@@ -30,7 +29,7 @@ public class UserServiceImpl implements UserService{
                 });
         String passwordHash = hashPassword(rawPassword);
         User user = new User(
-                idGenerator.getAndIncrement(),
+                0,
                 username,
                 passwordHash,
                 email,

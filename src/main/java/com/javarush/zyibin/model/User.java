@@ -4,15 +4,16 @@ import java.time.LocalDateTime;
 
 public class User {
 
-    private final long id;
+    private  long id;
     private final String username;
     private final String passwordHash;
     private final String email;
     private String nickname;
     private String about;
     private String avatarPath;
-    private final Role role;
+    private Role role;
     private final LocalDateTime createdAt;
+    private boolean blocked;
 
     public User(long id, String username, String passwordHash, String email, Role role) {
         this.id = id;
@@ -74,5 +75,24 @@ public class User {
 
     public void setAvatarPath(String avatarPath) {
         this.avatarPath = avatarPath;
+    }
+
+    public boolean isBlocked() {
+        return blocked;
+    }
+
+    public void setBlocked(boolean blocked) {
+        this.blocked = blocked;
+    }
+
+    public void changeRole(Role role) {
+        this.role = role;
+    }
+
+    public void setId(long id) {
+        if (this.id != 0) {
+            throw new IllegalStateException("ID пользователя уже установлен");
+        }
+        this.id = id;
     }
 }

@@ -46,6 +46,10 @@
     <a href="${pageContext.request.contextPath}/profile/edit">
         Редактировать профиль
     </a>
+    <a href="${pageContext.request.contextPath}/profile/avatar">
+        |
+        Изменить аватарку
+    </a>
     <%@ include file="/WEB-INF/jsp/common/footer.jsp" %>
 </body>
 </html>

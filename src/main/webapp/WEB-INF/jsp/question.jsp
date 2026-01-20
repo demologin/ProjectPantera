@@ -21,7 +21,7 @@
             <li>${topic.displayName}</li>
         </c:forEach>
     </ul>
-    <h2>Вопрос ${currentIndex + 1} из ${totalQuestions}</h2>
+    <h2>Вопрос ${questionNumber} из ${totalQuestions}</h2>
     <p>${question.questionText}</p>
     <form method="post" action="${pageContext.request.contextPath}/question">
         <c:forEach var="answer" items="${question.answers}" varStatus="status">
