@@ -6,10 +6,10 @@
 <body>
     <h1>Здесь начинается ваше приключение!"</h1>
 
-<form method="post" action="">
-    <p>Выберите квест:</p>
-    <input type="submit" name="quest" value="the way of the dragon rider">
-</form>
+    <form method="post" action="/quest-dragon">
+        <input type="hidden" name="quest" value="the way of the dragon rider">
+        <button type="submit">Начать квест</button>
+    </form>
 
 <p>${message}</p>
 </body>
