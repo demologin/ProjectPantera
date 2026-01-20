@@ -15,6 +15,17 @@
 </head>
 <body>
 <%@ include file="/WEB-INF/jsp/common/header.jspf" %>
+<h3>Загрузить свою аватарку</h3>
+<form method="post"
+      action="${pageContext.request.contextPath}/profile/avatar/upload"
+      enctype="multipart/form-data">
+    <input type="file"
+           name="avatar"
+           accept="image/*"
+           required />
+    <br><br>
+    <button type="submit">Загрузить</button>
+</form>
 <h2>Выбор аватарки</h2>
 <form method="post" action="${pageContext.request.contextPath}/profile/avatar">
     <c:forEach var="avatar" items="${avatars}">
