@@ -5,7 +5,7 @@
   Time: 10:15
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <!DOCTYPE html>
@@ -14,8 +14,13 @@
     <title>Результат интервью</title>
 </head>
 <body>
+<%@ include file="/WEB-INF/jsp/common/header.jspf" %>
 <h2>Результат интервью</h2>
-<h3>Тема теста: ${topic.displayName}</h3>
+<h3>Тема теста:
+        <c:forEach var="topic" items="${topics}">
+            ${topic.displayName}
+        </c:forEach>
+</h3>
 <p>Правильных ответов: ${score} из ${totalQuestions}</p>
 <c:choose>
     <c:when test="${passed}">
@@ -34,5 +39,6 @@
 <a href="${pageContext.request.contextPath}/test/settings">
     Настроить новый тест
 </a>
+<%@ include file="/WEB-INF/jsp/common/footer.jspf" %>
 </body>
 </html>

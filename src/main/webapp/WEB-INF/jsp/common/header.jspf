@@ -1,0 +1,28 @@
+
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+<header style="display: flex; justify-content: space-between; align-items: center;">
+    <div>
+        <a href="${pageContext.request.contextPath}/home">
+            <strong>Java Interview Trainer</strong>
+        </a>
+    </div>
+    <div>
+        <c:if test="${not empty currentUser}">
+            <form method="post"
+                  action="${pageContext.request.contextPath}/logout"
+                  style="display: inline;">
+                <span>${currentUser.nickname}</span>
+                <button type="submit">Logout</button>
+            </form>
+        </c:if>
+        <c:if test="${empty currentUser}">
+            <a href="${pageContext.request.contextPath}/login">Login</a>
+            |
+            <a href="${pageContext.request.contextPath}/register">Register</a>
+        </c:if>
+
+    </div>
+</header>
+
+<hr>

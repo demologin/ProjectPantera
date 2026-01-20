@@ -5,23 +5,18 @@
   Time: 14:56
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html; charset=UTF-8" language="java" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Java Interview Trainer</title>
+    <title>Главная</title>
 </head>
 <body>
-    <header>
-        <h1>Java Interview Trainer</h1>
-        <nav>
-            <a href="#">Учетная запись</a>
-        </nav>
-    </header>
-    <hr>
-    <main>
+<%@ include file="/WEB-INF/jsp/common/header.jspf" %>
+
+
         <h2>Добро пожаловать</h2>
         <p>
             Добро пожаловать в тренажер собеседований по Java
@@ -41,10 +36,7 @@
             <button type="submit">Перейти к настройке теста</button>
         </form>
 
-    </main>
     <hr>
-    <footer>
-        <p>Учебный проект. Java, Servlets, Junit 5, Mockito, Maven.</p>
-    </footer>
+<%@ include file="/WEB-INF/jsp/common/footer.jspf" %>
 </body>
 </html>
