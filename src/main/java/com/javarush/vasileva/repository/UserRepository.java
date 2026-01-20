@@ -3,10 +3,7 @@ package com.javarush.vasileva.repository;
 import com.javarush.vasileva.entity.Role;
 import com.javarush.vasileva.entity.User;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicLong;
 
 public class UserRepository implements Repository<User> {
@@ -23,8 +20,8 @@ public class UserRepository implements Repository<User> {
     }
 
     @Override
-    public Collection<User> getAll() {
-        return map.values();
+    public List<User> getAll() {
+        return new ArrayList<>(map.values());
     }
 
     @Override

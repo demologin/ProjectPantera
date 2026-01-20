@@ -1,13 +1,11 @@
 package com.javarush.vasileva.repository;
 
-import com.javarush.vasileva.entity.User;
-
-import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 public interface Repository<T> {
 
-    Collection<User> getAll();
+    List<T> getAll();
 
     Optional<T> get(long id);
 

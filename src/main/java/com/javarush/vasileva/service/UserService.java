@@ -3,10 +3,10 @@ package com.javarush.vasileva.service;
 import com.javarush.vasileva.entity.User;
 import com.javarush.vasileva.repository.UserRepository;
 
-import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
-public class UserService {
+public class UserService implements BaseService<User> {
 
     private final UserRepository userRepository;
 
@@ -14,6 +14,7 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
+    @Override
     public void create(User user) {
         userRepository.create(user);
     }
@@ -26,11 +27,12 @@ public class UserService {
         userRepository.delete(user);
     }
 
-    public Collection<User> getAll() {
+    public List<User> getAll() {
         return userRepository.getAll();
     }
 
-    public Optional<User> get(long id) {
+    @Override
+    public Optional<User> get(Long id) {
         return userRepository.get(id);
     }
 }
