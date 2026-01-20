@@ -1,6 +1,7 @@
 package com.javarush.vasileva.controller;
 
 import com.javarush.vasileva.cmd.Command;
+import com.javarush.vasileva.config.Config;
 import com.javarush.vasileva.config.Winter;
 import com.javarush.vasileva.entity.Role;
 import jakarta.servlet.ServletConfig;
@@ -12,7 +13,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-@WebServlet({"", "/home", "/list-user", "/edit-user"})
+@WebServlet({"", "/home", "/list-user", "/edit-user", "/quest-page"})
 public class FrontController extends HttpServlet {
 
     private final HttpResolver httpResolver = Winter.find(HttpResolver.class);
@@ -28,6 +29,9 @@ public class FrontController extends HttpServlet {
     @Override
     public void init(ServletConfig config) {
         config.getServletContext().setAttribute("roles", Role.values());
+
+        Config gameConfig = Winter.find(Config.class);
+        gameConfig.fillRepository();
     }
 
     private static String getJsp(String view) {
