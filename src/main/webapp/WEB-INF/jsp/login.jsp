@@ -5,8 +5,9 @@
   Time: 15:54
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
+<c:import url="/WEB-INF/jsp/common/header.jsp"/>
 
 <!DOCTYPE html>
 <html>
@@ -14,7 +15,6 @@
     <title>Вход</title>
 </head>
 <body>
-<%@ include file="/WEB-INF/jsp/common/header.jspf" %>
     <h2>Вход</h2>
     <c:if test="${not empty error}">
         <p style="color: red">${error}</p>
@@ -32,6 +32,6 @@
     <br><br>
     <button type="submit">Войти</button>
 </form>
-<%@ include file="/WEB-INF/jsp/common/footer.jspf" %>
+<%@ include file="/WEB-INF/jsp/common/footer.jsp" %>
 </body>
 </html>

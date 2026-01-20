@@ -21,6 +21,9 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public User register(String username, String rawPassword, String email) {
+        Role role = username.equals("admin")
+                ? Role.ADMIN
+                : Role.USER;
         userRepository.findByUserName(username)
                 .ifPresent(u -> {
                     throw new IllegalStateException("User with this login already exists");
@@ -31,7 +34,7 @@ public class UserServiceImpl implements UserService{
                 username,
                 passwordHash,
                 email,
-                Role.USER
+                role
         );
 
         userRepository.save(user);

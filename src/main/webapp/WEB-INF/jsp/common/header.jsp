@@ -1,4 +1,5 @@
 
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <header style="display: flex; justify-content: space-between; align-items: center;">
@@ -13,14 +14,19 @@
                   action="${pageContext.request.contextPath}/logout"
                   style="display: inline;">
                 <span>${currentUser.nickname}</span>
-                <button type="submit">Logout</button>
+                <button type="submit">Выйти</button>
             </form>
         </c:if>
         <c:if test="${empty currentUser}">
-            <a href="${pageContext.request.contextPath}/login">Login</a>
+            <a href="${pageContext.request.contextPath}/login">Вход</a>
             |
-            <a href="${pageContext.request.contextPath}/register">Register</a>
+            <a href="${pageContext.request.contextPath}/register">Регистрация</a>
         </c:if>
+        <c:if test="${not empty currentUser && currentUser.role == 'ADMIN'}">
+            |
+            <a href="${pageContext.request.contextPath}/admin">Admin</a>
+        </c:if>
+
 
     </div>
 </header>
