@@ -39,6 +39,8 @@ public class Config {
                         answerService.create(answer);
                     }
                 }
+                long startQuestionId = quest.getQuestions().get(0).getGeneratedId();
+                quest.setStartQuestionId(startQuestionId);
             }
         } catch (IOException e) {
             System.out.println(e.getMessage());

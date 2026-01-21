@@ -1,14 +1,11 @@
 package com.javarush.vasileva.cmd;
 
-import com.javarush.vasileva.entity.Answer;
-import com.javarush.vasileva.entity.Quest;
-import com.javarush.vasileva.entity.Question;
+import com.javarush.vasileva.entity.*;
 import com.javarush.vasileva.service.AnswerService;
 import com.javarush.vasileva.service.QuestService;
 import com.javarush.vasileva.service.QuestionService;
 import jakarta.servlet.http.HttpServletRequest;
 
-import java.util.List;
 import java.util.Optional;
 
 public class PlayGame implements Command {
@@ -24,18 +21,60 @@ public class PlayGame implements Command {
 
     @Override
     public String doGet(HttpServletRequest req) {
-        String strId = req.getParameter("id");
-        if (strId != null && !strId.isEmpty()) {
-            long id = Long.parseLong(strId);
-            Quest quest = questService.get(id).orElseThrow();
+        String questIdStr = req.getParameter("id");
+        String questionIdStr = req.getParameter("questionId");
+        if (questIdStr != null && !questIdStr.isEmpty()) {
+            long questId = Long.parseLong(questIdStr);
+            Quest quest = questService.get(questId).orElseThrow();
             req.setAttribute("quest", quest);
 
-            System.out.println(quest.getStartQuestionId());
-            Optional<Question> current = questionService.get(quest.getStartQuestionId());
-            current.ifPresent(question -> req.setAttribute("question", question));
-            List<Answer> answers = current.get().getAnswers();
-            req.setAttribute("answers", answers);
+            Long currentQuestionId;
+            if (questionIdStr == null || questionIdStr.isEmpty()) {
+                currentQuestionId = quest.getStartQuestionId();
+            } else {
+                currentQuestionId = Long.parseLong(questionIdStr);
+            }
+
+            System.out.println("current" + currentQuestionId);
+
+            Optional<Question> currentQuestion = questionService.get(currentQuestionId);
+            if (currentQuestion.isPresent()) {
+                req.setAttribute("question", currentQuestion.get());
+                req.setAttribute("answers", currentQuestion.get().getAnswers());
+            } else {
+                req.setAttribute("gameOver", true);
+            }
         }
         return getView();
+    }
+
+    @Override
+    public String doPost(HttpServletRequest req) {
+        String questIdStr = req.getParameter("questId");
+        String answerIdStr = req.getParameter("selectedAnswerId");
+
+        if (questIdStr == null || answerIdStr == null) {
+            return getView() + "?id=" + questIdStr; // Возвращаем на тот же экран
+        }
+
+        long questId = Long.parseLong(questIdStr);
+        long answerId = Long.parseLong(answerIdStr);
+
+        Optional<Answer> answerOpt = answerService.get(answerId);
+        if (answerOpt.isEmpty()) {
+            return getView() + "?id=" + questId;
+        }
+
+        Answer answer = answerOpt.get();
+
+        String nextQuestionIdStr = answer.getNextQuestionId();
+        if (nextQuestionIdStr == null || nextQuestionIdStr.isEmpty()) {
+            return getView() + "?id=" + questId + "&gameOver=true";
+        }
+
+        Optional<Question> nextQuestionOpt = questionService.getByIdAndQuestId(nextQuestionIdStr, questId);
+        long nextQuestionId = nextQuestionOpt.get().getGeneratedId();
+
+        return getView() + "?id=" + questId + "&questionId=" + nextQuestionId;
     }
 }

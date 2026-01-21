@@ -7,9 +7,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicLong;
 
 public class AnswerRepository implements Repository<Answer> {
     private final Map<Long, Answer> answers = new ConcurrentHashMap<>();
+    private static final AtomicLong generatedId = new AtomicLong();
 
     @Override
     public List<Answer> getAll() {
@@ -22,6 +24,7 @@ public class AnswerRepository implements Repository<Answer> {
     }
 
     public void create(Answer answer) {
+        answer.setId(generatedId.incrementAndGet());
         answers.put(answer.getId(), answer);
     }
 

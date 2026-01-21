@@ -8,29 +8,55 @@
 </head>
 <body>
 <h1>${requestScope.quest.title}</h1>
-<form class="form-horizontal">
-    <fieldset>
 
-        <!-- Form Name -->
-        <legend>Вопрос</legend>
+<c:if test="${not empty requestScope.gameOver}">
+    <div class="alert alert-success text-center">
+        <h3>Игра завершена! Спасибо за участие.</h3>
+        <a href="<c:url value='/home'/>" class="btn btn-primary">Вернуться на главную</a>
+    </div>
+</c:if>
 
-        <!-- Multiple Radios -->
-        <div class="form-group">
-            <label class="col-md-4 control-label" for="radios">${requestScope.question.text}</label>
-            <div class="col-md-4">
-                <c:forEach var="answer" items="${requestScope.answers}">
-                    <div class="radio" id="radios">
-                        <label for="radios-${answer.id}">
-                            <input type="radio" name="radios" id="radios-${answer.id}" value="${answer.text}"
-                                   checked="checked">
-                                ${answer.text}
-                        </label>
-                    </div>
-                </c:forEach>
+<c:if test="${empty requestScope.gameOver and not empty requestScope.question}">
+    <form method="POST" action="<c:url value='/play-game'/>" class="mt-3">
+        <input type="hidden" name="questId" value="${requestScope.quest.id}"/>
+
+        <fieldset>
+            <legend>Вопрос № ${requestScope.question.id}</legend>
+
+            <div class="form-group row mb-3">
+                <label class="col-md-4 col-form-label">
+                        ${requestScope.question.text}
+                </label>
+                <div class="col-md-8">
+                    <c:forEach var="answer" items="${requestScope.answers}">
+                        <div class="form-check">
+                            <input class="form-check-input"
+                                   type="radio"
+                                   name="selectedAnswerId"
+                                   id="answer-${answer.id}"
+                                   value="${answer.id}"
+                                   required>
+                            <label class="form-check-label" for="answer-${answer.id}">
+                                    ${answer.text}
+                            </label>
+                        </div>
+                    </c:forEach>
+                </div>
             </div>
-        </div>
 
-    </fieldset>
-</form>
+            <button type="submit" class="btn btn-success">
+                Выбрать
+            </button>
+        </fieldset>
+    </form>
+</c:if>
+
+<c:if test="${empty requestScope.question and empty requestScope.gameOver}">
+    <div class="alert alert-danger">
+        Вопрос не найден. Проверьте ID.
+    </div>
+    <a href="<c:url value='/home'/>" class="btn btn-secondary">Вернуться</a>
+</c:if>
+
 </body>
 </html>

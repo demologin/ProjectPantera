@@ -39,6 +39,13 @@ b {
 
 a {
     text-decoration: none;
+    color: #d4b588;
+}
+
+a:hover {
+    text-decoration: none;
+    color: #fff;
+    font-size: large;
 }
 
 button {
@@ -76,6 +83,10 @@ button:last-of-type {
 button:last-of-type:hover {
     background-color: #5e4c3a;
     transform: translateY(-2px);
+}
+
+.quest-container {
+    margin: 30px;
 }
 
 .quest-text {

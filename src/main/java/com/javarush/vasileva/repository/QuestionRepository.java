@@ -25,6 +25,13 @@ public class QuestionRepository implements Repository<Question> {
         return Optional.ofNullable(questions.get(id));
     }
 
+    public Optional<Question> getByIdAndQuestId(String id, long questId) {
+        return questions.values().stream()
+                .filter(question -> question.getId().equals(id))
+                .filter(question -> question.getQuestId() == questId)
+                .findFirst();
+    }
+
     public void create(Question question) {
         question.setGeneratedId(generatedId.incrementAndGet());
         questions.put(question.getGeneratedId(), question);
