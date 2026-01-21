@@ -7,7 +7,7 @@ import com.javarush.vasileva.repository.Repository;
 import java.util.List;
 import java.util.Optional;
 
-public class QuestionService implements BaseService<Question> {
+public class QuestionService {
 
     private final Repository<Question> questionRepository;
 
@@ -15,17 +15,14 @@ public class QuestionService implements BaseService<Question> {
         this.questionRepository = questionRepository;
     }
 
-    @Override
     public List<Question> getAll() {
         return questionRepository.getAll();
     }
 
-    @Override
     public Optional<Question> get(Long id) {
         return questionRepository.get(id);
     }
 
-    @Override
     public void create(Question question) {
         questionRepository.create(question);
     }

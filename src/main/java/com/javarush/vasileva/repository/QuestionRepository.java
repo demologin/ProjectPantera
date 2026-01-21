@@ -8,10 +8,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicLong;
 
 @NoArgsConstructor
 public class QuestionRepository implements Repository<Question> {
     private final Map<Long, Question> questions = new ConcurrentHashMap<>();
+    private static final AtomicLong generatedId = new AtomicLong(0);
 
     @Override
     public List<Question> getAll() {
@@ -23,9 +25,9 @@ public class QuestionRepository implements Repository<Question> {
         return Optional.ofNullable(questions.get(id));
     }
 
-    @Override
     public void create(Question question) {
-        questions.put(question.getId(), question);
+        question.setGeneratedId(generatedId.incrementAndGet());
+        questions.put(question.getGeneratedId(), question);
     }
 
     @Override

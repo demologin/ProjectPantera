@@ -6,7 +6,7 @@ import com.javarush.vasileva.repository.UserRepository;
 import java.util.List;
 import java.util.Optional;
 
-public class UserService implements BaseService<User> {
+public class UserService {
 
     private final UserRepository userRepository;
 
@@ -14,7 +14,6 @@ public class UserService implements BaseService<User> {
         this.userRepository = userRepository;
     }
 
-    @Override
     public void create(User user) {
         userRepository.create(user);
     }
@@ -31,7 +30,6 @@ public class UserService implements BaseService<User> {
         return userRepository.getAll();
     }
 
-    @Override
     public Optional<User> get(Long id) {
         return userRepository.get(id);
     }

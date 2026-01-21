@@ -4,6 +4,8 @@ import com.javarush.vasileva.entity.Quest;
 import com.javarush.vasileva.service.QuestService;
 import jakarta.servlet.http.HttpServletRequest;
 
+import java.util.Optional;
+
 public class QuestPage implements Command {
     private final QuestService questService;
 

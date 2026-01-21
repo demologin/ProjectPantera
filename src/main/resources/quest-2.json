@@ -4,294 +4,257 @@
   "description": "Много веков назад дракон Вельдан, хранитель древних знаний, скрылся в недрах горы с Сердцем Дракона — артефактом невообразимой силы, спрятав его в лабиринте, известном как Забытое Подземелье. Тысячи смельчаков отправлялись на поиски реликвии, но никто не вернулся; легенды гласят, что лишь тот, кто проявит мудрость, отвагу и хладнокровие, сможет завладеть Сердцем. Теперь вы — один из искателей: с факелом и мечом перед массивной дверью с драконьей пастью, за которой таятся тьма, сырость и нечто древнее. Дверь медленно приоткрывается — готовы ли вы бросить вызов подземелью?",
   "questions": [
     {
-      "id": 1,
+      "id": "1",
       "questId": 2,
       "text": "Вы входите в тёмный коридор. Впереди слышен шорох.",
       "answers": [
         {
           "id": 11,
-          "questionId": 1,
-          "nextQuestionId": 2,
+          "nextQuestionId": "2",
           "text": "Достанете факел и осторожно продвинетесь вперёд.",
           "description": ""
         },
         {
           "id": 12,
-          "questionId": 1,
-          "nextQuestionId": 2,
+          "nnextQuestionId": "2",
           "text": "Бросите камень в сторону шума, чтобы проверить.",
           "description": "Вы пугаете крысу. Путь свободен."
         },
         {
           "id": 13,
-          "questionId": 1,
-          "nextQuestionId": 910,
+          "nextQuestionId": "910",
           "text": "Повернётесь и пойдёте назад.",
           "description": "Попадаете в тупик."
         },
         {
           "id": 14,
-          "questionId": 1,
-          "nextQuestionId": 910,
+          "nextQuestionId": "910",
           "text": "Закричите, чтобы отпугнуть возможного врага.",
           "description": "Шум привлекает монстров."
         }
       ]
     },
     {
-      "id": 2,
+      "id": "2",
       "questId": 2,
       "text": "Факел осветил три двери. На каждой — символ: огонь, вода, луна. Какую выберете?",
       "answers": [
         {
           "id": 21,
-          "questionId": 2,
-          "nextQuestionId": 3,
+          "nextQuestionId": "3",
           "text": "С символом огня (рискованно, но может вести к сокровищам).",
           "description": "В комнате лава. Нужно найти мост."
         },
         {
           "id": 22,
-          "questionId": 2,
-          "nextQuestionId": 8,
+          "nextQuestionId": "8",
           "text": "С символом воды (кажется безопасной).",
           "description": "Подземный ручей."
         },
         {
           "id": 23,
-          "questionId": 2,
-          "nextQuestionId": 910,
+          "nextQuestionId": "910",
           "text": "С символом луны (загадочно, возможно, ловушка).",
           "description": "Ловушка: пол проваливается."
         }
       ]
     },
     {
-      "id": 3,
+      "id": "3",
       "questId": 2,
       "text": "За дверью — комната с ямой посередине. На стене рычаг. Ваши действия?",
       "answers": [
         {
           "id": 31,
-          "questionId": 3,
-          "nextQuestionId": 910,
+          "nextQuestionId": "910",
           "text": "Дёрнете рычаг сразу.",
           "description": "Яма расширяется."
         },
         {
           "id": 32,
-          "questionId": 3,
-          "nextQuestionId": 4,
+          "nextQuestionId": "4",
           "text": "Поищете другой путь, минуя яму.",
           "description": "Находите скрытый проход."
         },
         {
           "id": 33,
-          "questionId": 3,
-          "nextQuestionId": 910,
+          "nextQuestionId": "910",
           "text": "Попытаетесь перепрыгнуть яму.",
           "description": "Падение."
         },
         {
           "id": 34,
-          "questionId": 3,
-          "nextQuestionId": 4,
+          "nextQuestionId": "4",
           "text": "Кинете камень на противоположную сторону, проверяя пол.",
           "description": "Пол безопасен. Переходите."
         }
       ]
     },
     {
-      "id": 4,
+      "id": "4",
       "questId": 2,
       "text": "Рычаг активировал механизм: из стен выдвинулись шипы. Как спастись?",
       "answers": [
         {
           "id": 41,
-          "questionId": 4,
-          "nextQuestionId": 5,
+          "nextQuestionId": "5",
           "text": "Прижмётесь к стене и медленно пройдёте.",
           "description": "Успешно проходите."
         },
         {
           "id": 42,
-          "questionId": 4,
-          "nextQuestionId": 5,
+          "nextQuestionId": "5",
           "text": "Побежите напролом, уклоняясь.",
           "description": "Ранение. Здоровье снижается."
         },
         {
           "id": 43,
-          "questionId": 4,
-          "nextQuestionId": 5,
+          "nextQuestionId": "5",
           "text": "Найдёте кнопку отключения механизмов.",
           "description": "Находите механизм."
         },
         {
           "id": 44,
-          "questionId": 4,
-          "nextQuestionId": 910,
+          "nextQuestionId": "910",
           "text": "Вернётесь назад.",
           "description": "Путь заблокирован. "
         }
       ]
     },
     {
-      "id": 5,
+      "id": "5",
       "questId": 2,
       "text": "В этой комнате — статуя дракона. На постаменте надпись: «Скажи имя древнего бога».",
       "answers": [
         {
           "id": 51,
-          "questionId": 5,
-          "nextQuestionId": 910,
+          "nextQuestionId": "910",
           "text": "Азраэль.",
           "description": "Статуя атакует."
         },
         {
           "id": 52,
-          "questionId": 5,
-          "nextQuestionId": 6,
+          "nextQuestionId": "6",
           "text": "Таргон.",
           "description": "Верно! Статуя пропускает."
         },
         {
           "id": 53,
-          "questionId": 5,
-          "nextQuestionId": 910,
+          "nextQuestionId": "910",
           "text": "Вельдан.",
           "description": "Ошибка. Ловушка."
         },
         {
           "id": 54,
-          "questionId": 5,
-          "nextQuestionId": 5,
+          "nextQuestionId": "5",
           "text": "Промолчите и осмотрите комнату ещё раз.",
           "description": "Находите надпись с именем: Таргон"
         }
       ]
     },
     {
-      "id": 3,
+      "id": "3",
       "questId": 2,
       "text": "За дверью — комната с ямой посередине. На стене рычаг. Ваши действия?",
       "answers": [
         {
           "id": 31,
-          "questionId": 3,
-          "nextQuestionId": 910,
+          "nextQuestionId": "910",
           "text": "Дёрнете рычаг сразу.",
           "description": "Яма расширяется."
         },
         {
           "id": 32,
-          "questionId": 3,
-          "nextQuestionId": 4,
+          "nextQuestionId": "4",
           "text": "Поищете другой путь, минуя яму.",
           "description": "Находите скрытый проход."
         },
         {
           "id": 33,
-          "questionId": 3,
-          "nextQuestionId": 910,
+          "nextQuestionId": "910",
           "text": "Попытаетесь перепрыгнуть яму.",
           "description": "Падение."
         },
         {
           "id": 34,
-          "questionId": 3,
-          "nextQuestionId": 4,
+          "nextQuestionId": "4",
           "text": "Кинете камень на противоположную сторону, проверяя пол.",
           "description": "Пол безопасен. Переходите."
         }
       ]
     },
     {
-      "id": 3,
+      "id": "3",
       "questId": 2,
       "text": "За дверью — комната с ямой посередине. На стене рычаг. Ваши действия?",
       "answers": [
         {
           "id": 31,
-          "questionId": 3,
-          "nextQuestionId": 910,
+          "nextQuestionId": "910",
           "text": "Дёрнете рычаг сразу.",
           "description": "Яма расширяется."
         },
         {
           "id": 32,
-          "questionId": 3,
-          "nextQuestionId": 4,
+          "nextQuestionId": "4",
           "text": "Поищете другой путь, минуя яму.",
           "description": "Находите скрытый проход."
         },
         {
           "id": 33,
-          "questionId": 3,
-          "nextQuestionId": 910,
+          "nextQuestionId": "910",
           "text": "Попытаетесь перепрыгнуть яму.",
           "description": "Падение."
         },
         {
           "id": 34,
-          "questionId": 3,
-          "nextQuestionId": 4,
+          "nextQuestionId": "4",
           "text": "Кинете камень на противоположную сторону, проверяя пол.",
           "description": "Пол безопасен. Переходите."
         }
       ]
     },
     {
-      "id": 3,
+      "id": "3",
       "questId": 2,
       "text": "За дверью — комната с ямой посередине. На стене рычаг. Ваши действия?",
       "answers": [
         {
           "id": 31,
-          "questionId": 3,
-          "nextQuestionId": 910,
+          "nextQuestionId": "910",
           "text": "Дёрнете рычаг сразу.",
           "description": "Яма расширяется."
         },
         {
           "id": 32,
-          "questionId": 3,
-          "nextQuestionId": 4,
+          "nextQuestionId": "4",
           "text": "Поищете другой путь, минуя яму.",
           "description": "Находите скрытый проход."
         },
         {
           "id": 33,
-          "questionId": 3,
-          "nextQuestionId": 910,
+          "nextQuestionId": "910",
           "text": "Попытаетесь перепрыгнуть яму.",
           "description": "Падение."
         },
         {
           "id": 34,
-          "questionId": 3,
-          "nextQuestionId": 4,
+          "nextQuestionId": "4",
           "text": "Кинете камень на противоположную сторону, проверяя пол.",
           "description": "Пол безопасен. Переходите."
         }
       ]
     },
     {
-      "id": 810,
+      "id": "810",
       "questId": 1,
       "text": "Тебя вернули домой, победа",
       "answers": null
     },
     {
-      "id": 910,
+      "id": "910",
       "questId": 2,
       "text": "Проигрыш",
-      "answers": null
-    },
-    {
-      "id": 911,
-      "questId": 1,
-      "text": "Твою ложь разоблачили, поражение",
       "answers": null
     }
   ]

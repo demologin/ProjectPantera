@@ -12,7 +12,8 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 public class Question {
-    private Long id;
+    private Long generatedId;
+    private String id;
     private Long questId;
     private String text;
     private List<Answer> answers;

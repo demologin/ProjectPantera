@@ -4,76 +4,70 @@
   "description": "Про приключения в космосе",
   "questions": [
     {
-      "id": 1,
+      "id": "1",
       "questId": 1,
       "text": "Принять вызов НЛО?",
       "answers": [
         {
           "id": 11,
-          "questionId": 1,
-          "nextQuestionId": 2,
+          "nextQuestionId": "2",
           "text": "Принять вызов"
         },
         {
           "id": 12,
-          "questionId": 1,
-          "nextQuestionId": 910,
+          "nextQuestionId": "910",
           "text": "Отклонить вызов"
         }
       ]
     },
     {
-      "id": 2,
+      "id": "2",
       "questId": 1,
       "text": "Поднимешься на мостик к капитану?",
       "answers": [
         {
           "id": 21,
-          "questionId": 2,
-          "nextQuestionId": 3,
+          "nextQuestionId": "3",
           "text": "Подняться на мостик"
         },
         {
           "id": 22,
-          "questionId": 2,
-          "nextQuestionId": 910,
+          "nextQuestionId": "910",
           "text": "Отказаться подниматься на мостик"
         }
       ]
     },
     {
-      "id": 3,
+      "id": "3",
       "questId": 1,
       "text": "Ты поднялся на мостик. Ты кто?",
       "answers": [
         {
           "id": 31,
-          "questionId": 3,
-          "nextQuestionId": 810,
+          "nextQuestionId": "810",
           "text": "Рассказать правду о себе"
         },
         {
           "id": 32,
-          "questionId": 3,
-          "nextQuestionId": 911,
+          "nextQuestionId": "911",
           "text": "Солгать о себе"
         }
       ]
     },
     {
-      "id": 810,
+      "id": "810",
       "questId": 1,
       "text": "Тебя вернули домой, победа",
       "answers": null
     },
     {
-      "id": 910,
+      "id": "910",
       "questId": 1,
       "text": "Ты отклонил вызов, поражение",
       "answers": null
     },
     {
-      "id": 911,
+      "id": "911",
       "questId": 1,
       "text": "Твою ложь разоблачили, поражение",
       "answers": null

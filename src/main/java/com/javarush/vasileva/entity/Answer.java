@@ -1,18 +1,18 @@
 package com.javarush.vasileva.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-@Data
+@Getter
+@Setter
+@ToString
+@EqualsAndHashCode
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 public class Answer {
     private Long id;
     private Long questionId;
-    private Long nextQuestionId;
+    private String nextQuestionId;
     private String text;
     private String description;
 }

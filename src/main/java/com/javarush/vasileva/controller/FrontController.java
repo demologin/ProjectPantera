@@ -13,18 +13,10 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-@WebServlet({"", "/home", "/list-user", "/edit-user", "/quest-page"})
+@WebServlet({"", "/home", "/list-user", "/edit-user", "/quest-page", "/play-game"})
 public class FrontController extends HttpServlet {
 
     private final HttpResolver httpResolver = Winter.find(HttpResolver.class);
-
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Command command = httpResolver.resolve(req);
-        String view = command.doGet(req);
-        String jsp = getJsp(view);
-        req.getRequestDispatcher(jsp).forward(req, resp);
-    }
 
     @Override
     public void init(ServletConfig config) {
@@ -32,6 +24,14 @@ public class FrontController extends HttpServlet {
 
         Config gameConfig = Winter.find(Config.class);
         gameConfig.fillRepository();
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        Command command = httpResolver.resolve(req);
+        String view = command.doGet(req);
+        String jsp = getJsp(view);
+        req.getRequestDispatcher(jsp).forward(req, resp);
     }
 
     private static String getJsp(String view) {
