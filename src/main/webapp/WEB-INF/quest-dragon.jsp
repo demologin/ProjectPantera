@@ -107,12 +107,14 @@
             <p>Наставник ведёт тебя в просторный вольер.<br>
                 Перед тобой — четыре дракона, каждый оценивает тебя по-своему.</p>
 
+            <img src="/images/fourDragon.jpg" width="300"/>
+
             <form method="post" action="/quest-dragon">
                 <input type="hidden" name="stage" value="2"/>
                 <button name="choice" value="0">🔥 Огненный</button><br>
-                <button name="choice" value="0">❄ Ледяной</button><br>
                 <button name="choice" value="0">🌿 Лесной</button><br>
-                <button name="choice" value="0">⚡ Грозовой</button>
+                <button name="choice" value="0">⚡ Грозовой</button><br>
+                <button name="choice" value="0">❄ Снежный</button>
             </form>
         </c:if>
 

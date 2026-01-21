@@ -11,7 +11,6 @@ public class HttpResolver {
     private static final Map<String, Command> commandMap = new HashMap<>();
 
     static {
-        commandMap.put("/", new HomePage());
         commandMap.put("/home-page", new HomePage());
         commandMap.put("/quest-dragon", new QuestDragon());
     }
