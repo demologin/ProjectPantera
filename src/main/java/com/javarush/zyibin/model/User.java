@@ -2,9 +2,10 @@ package com.javarush.zyibin.model;
 
 import java.time.LocalDateTime;
 
+
 public class User {
 
-    private  long id;
+    private long id;
     private final String username;
     private final String passwordHash;
     private final String email;
@@ -96,3 +97,4 @@ public class User {
         this.id = id;
     }
 }
+
