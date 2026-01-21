@@ -13,32 +13,64 @@
 <html>
 <head>
     <title>Результат интервью</title>
+    <style>
+        .passed {
+            color: green;
+            font-weight: bold;
+        }
+
+        .failed {
+            color: red;
+            font-weight: bold;
+        }
+
+        .actions {
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
-<h2>Результат интервью</h2>
-<h3>Тема теста:
-        <c:forEach var="topic" items="${topics}">
-            ${topic.displayName}
-        </c:forEach>
-</h3>
-<p>Правильных ответов: ${score} из ${totalQuestions}</p>
+<h2>Результат теста</h2>
+
+<p>
+    <strong>Темы теста:</strong>
+    ${topics}
+</p>
+
+<p>
+    <strong>Результат:</strong>
+    ${correct} из ${total} правильных ответов
+</p>
+
 <c:choose>
     <c:when test="${passed}">
-        <h3>Поздравляем! Вы успешно прошли интервью 🎉</h3>
-        <p>Оффер отправлен на вашу почту</p>
+        <p class="passed">
+            Поздравляем! Вы успешно прошли тест 🎉
+        </p>
+        <p>
+            Оффер уже летит к вам… ну, по крайней мере моральный 😄
+        </p>
     </c:when>
     <c:otherwise>
-        <h3>К сожалению, интервью не пройдено</h3>
-        <p>Мы вам перезвоним... когда-нибудь... но это не точно</p>
+        <p class="failed">
+            К сожалению, тест не пройден
+        </p>
+        <p>
+            Но это учебный проект, так что можно просто попробовать ещё раз.
+        </p>
     </c:otherwise>
 </c:choose>
-<a href="${pageContext.request.contextPath}/home">
-    На главную страницу
-</a>
-<br><br>
-<a href="${pageContext.request.contextPath}/test/settings">
-    Настроить новый тест
-</a>
+
+<div class="actions">
+    <a href="${pageContext.request.contextPath}/home">
+        На главную
+    </a>
+    |
+    <a href="${pageContext.request.contextPath}/test/settings">
+        Пройти новый тест
+    </a>
+</div>
+
 <%@ include file="/WEB-INF/jsp/common/footer.jsp" %>
 </body>
 </html>

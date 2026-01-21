@@ -13,6 +13,31 @@
 <html>
 <head>
     <title>Профиль пользователя</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        th, td {
+            padding: 8px;
+            border-bottom: 1px solid #ddd;
+            text-align: left;
+        }
+        th {
+            background-color: #f3f3f3;
+        }
+
+        .passed {
+            color: green;
+            font-weight: bold;
+        }
+
+        .failed {
+            color: red;
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
     <h2>Профиль пользователя</h2>
@@ -50,6 +75,40 @@
         |
         Изменить аватарку
     </a>
+    <hr>
+    <h3>История прохождения тестов</h3>
+    <c:if test="${empty results}">
+        <p>Вы еще не проходили тесты.</p>
+    </c:if>
+    <c:if test="${not empty results}">
+        <table>
+            <tr>
+                <th>Тема</th>
+                <th>Вопросов</th>
+                <th>Правильных</th>
+                <th>Результат</th>
+                <th>Дата</th>
+            </tr>
+            <c:forEach var="result" items="${results}">
+                    <tr>
+                        <td>${result.topicCode}</td>
+                        <td>${result.totalQuestions}</td>
+                        <td>${result.correctAnswers}</td>
+                        <td>
+                            <c:choose>
+                                <c:when test="${result.passed}">
+                                    <span class="passed">Пройден</span>
+                                </c:when>
+                                <c:otherwise>
+                                    <span class="failed">Не пройден</span>
+                                </c:otherwise>
+                            </c:choose>
+                        </td>
+                        <td>${result.finishedAt}</td>
+                    </tr>
+            </c:forEach>
+        </table>
+    </c:if>
     <%@ include file="/WEB-INF/jsp/common/footer.jsp" %>
 </body>
 </html>
