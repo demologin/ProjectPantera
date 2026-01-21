@@ -24,6 +24,11 @@
         </a>
     </li>
     <li>
+        <a href="${pageContext.request.contextPath}/admin/statistics">
+            Статистика тестов
+        </a>
+    </li>
+    <li>
         Управление тестами (позже)
     </li>
     <li>

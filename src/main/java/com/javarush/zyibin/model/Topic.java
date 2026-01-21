@@ -26,4 +26,12 @@ public enum Topic {
     public String getDisplayName() {
         return displayName;
     }
+    public static Topic fromCode(String code) {
+        for (Topic topic : values()) {
+            if (topic.code.equals(code)) {
+                return topic;
+            }
+        }
+        throw new IllegalArgumentException("Unknown topic code: " + code);
+    }
 }
