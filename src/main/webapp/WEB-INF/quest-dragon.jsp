@@ -3,11 +3,24 @@
 
 <html>
 <head>
-    <title>Путь всадника дракона</title>
+    <title>Как приручить дракона</title>
 </head>
 <body>
 
-<h2>🐉 Путь всадника дракона</h2>
+<div style="float: right;">
+    <c:choose>
+        <c:when test="${not empty sessionScope.username}">
+            <form action="/logout" method="post" style="display:inline;">
+                <button type="submit">Выйти</button>
+            </form>
+        </c:when>
+        <c:otherwise>
+            <a href="/login-page">Войти</a> | <a href="/register-page">Зарегистрироваться</a>
+        </c:otherwise>
+    </c:choose>
+</div>
+
+<h2>🐉 Как приручить дракона</h2>
 
 <c:set var="stage" value="${sessionScope.stage}" />
 <c:set var="trust" value="${sessionScope.trust}" />
@@ -107,7 +120,7 @@
             <p>Наставник ведёт тебя в просторный вольер.<br>
                 Перед тобой — четыре дракона, каждый оценивает тебя по-своему.</p>
 
-            <img src="/images/fourDragon.jpg" width="300"/>
+            <img src="/images/fourDragonImg.jpg" width="300"/>
 
             <form method="post" action="/quest-dragon">
                 <input type="hidden" name="stage" value="2"/>
