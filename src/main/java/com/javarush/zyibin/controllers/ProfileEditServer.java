@@ -17,11 +17,6 @@ public class ProfileEditServer extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession(false);
 
-        if (session == null || session.getAttribute("currentUser") == null) {
-            resp.sendRedirect(req.getContextPath() + "/login");
-            return;
-        }
-
         req.getRequestDispatcher("/WEB-INF/jsp/profile-edit.jsp").forward(req, resp);
     }
 
@@ -29,11 +24,6 @@ public class ProfileEditServer extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         HttpSession session = req.getSession(false);
-
-        if (session == null || session.getAttribute("currentUser") == null) {
-            resp.sendRedirect(req.getContextPath() + "/login");
-            return;
-        }
 
         User user = (User) session.getAttribute("currentUser");
         String nickname = req.getParameter("nickname");

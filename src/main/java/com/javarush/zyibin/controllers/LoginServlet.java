@@ -28,10 +28,10 @@ public class LoginServlet extends HttpServlet {
         String username = req.getParameter("username");
         String password = req.getParameter("password");
 
-        UserRepository userRepository = (UserRepository)  req.getServletContext().getAttribute("userRepository");
+        UserRepository userRepository = (UserRepository) req.getServletContext().getAttribute("userRepository");
         Optional<User> userOptional = userRepository.findByUserName(username);
 
-        if(userOptional.isEmpty()) {
+        if (userOptional.isEmpty()) {
             req.setAttribute("error", "Invalid login or password");
             req.getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(req, resp);
             return;
@@ -55,8 +55,9 @@ public class LoginServlet extends HttpServlet {
         session.setAttribute("currentUser", user);
         resp.sendRedirect(req.getContextPath() + "/home");
     }
+
     private String hashPassword(String password) {
-        try{
+        try {
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
             byte[] hash = digest.digest(password.getBytes(StandardCharsets.UTF_8));
             return HexFormat.of().formatHex(hash);

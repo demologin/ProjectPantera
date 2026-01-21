@@ -1,6 +1,5 @@
 package com.javarush.zyibin.controllers.admin;
 
-import com.javarush.zyibin.model.Role;
 import com.javarush.zyibin.model.User;
 import com.javarush.zyibin.repository.UserRepository;
 import jakarta.servlet.ServletException;
@@ -20,22 +19,13 @@ public class AdminUserServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         HttpSession session = req.getSession(false);
-        if (session == null || session.getAttribute("currentUser") == null) {
-            resp.sendRedirect(req.getContextPath() + "/login");
-            return;
-        }
 
         User admin = (User) session.getAttribute("currentUser");
-        if (admin == null || admin.getRole() != Role.ADMIN) {
-            resp.sendRedirect(req.getContextPath() + "/home");
-            return;
-        }
 
         UserRepository userRepository = (UserRepository) getServletContext().getAttribute("userRepository");
 
         List<User> users = userRepository.findAll();
         req.setAttribute("users", users);
         req.getRequestDispatcher("/WEB-INF/jsp/admin/users.jsp").forward(req, resp);
-
     }
 }

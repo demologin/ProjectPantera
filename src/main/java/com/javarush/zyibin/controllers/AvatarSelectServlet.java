@@ -21,10 +21,6 @@ public class AvatarSelectServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         HttpSession session = req.getSession(false);
-        if (session == null || session.getAttribute("currentUser") == null) {
-            resp.sendRedirect(req.getContextPath() + "/login");
-            return;
-        }
 
         List<String> avatars = avatarService.getAvailableAvatars();
 
@@ -36,16 +32,13 @@ public class AvatarSelectServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         HttpSession session = req.getSession(false);
-        if (session == null || session.getAttribute("currentUser") == null) {
-            resp.sendRedirect(req.getContextPath() + "/login");
-            return;
-        }
+
         User user = (User) session.getAttribute("currentUser");
 
         String selectedAvatar = req.getParameter("avatarPath");
 
         List<String> availableAvatars = avatarService.getAvailableAvatars();
-        if(availableAvatars.contains(selectedAvatar)) {
+        if (availableAvatars.contains(selectedAvatar)) {
             user.setAvatarPath(selectedAvatar);
         }
         resp.sendRedirect(req.getContextPath() + "/profile");

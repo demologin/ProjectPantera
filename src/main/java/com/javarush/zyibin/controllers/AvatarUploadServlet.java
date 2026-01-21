@@ -25,11 +25,6 @@ public class AvatarUploadServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession(false);
 
-        if (session == null || session.getAttribute("currentUser") == null) {
-            resp.sendRedirect(req.getContextPath() + "/login");
-            return;
-        }
-
         User user = (User) session.getAttribute("currentUser");
 
         Part filePart = req.getPart("avatar");

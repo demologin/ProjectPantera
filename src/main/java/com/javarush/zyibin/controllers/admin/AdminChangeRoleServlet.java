@@ -22,17 +22,12 @@ public class AdminChangeRoleServlet extends HttpServlet {
         HttpSession session = req.getSession(false);
         User admin = (User) session.getAttribute("currentUser");
 
-        if (admin == null || admin.getRole() != Role.ADMIN) {
-            resp.sendRedirect(req.getContextPath() + "/home");
-            return;
-        }
-
         long userId = Long.parseLong(req.getParameter("userId"));
         Role newRole = Role.valueOf(req.getParameter("role"));
 
-        UserRepository userRepository = (UserRepository)  getServletContext().getAttribute("userRepository");
+        UserRepository userRepository = (UserRepository) getServletContext().getAttribute("userRepository");
         AdminUserService adminService = new AdminUserService(userRepository);
-        adminService.changeUserRole(admin.getId(),  userId, newRole);
+        adminService.changeUserRole(admin.getId(), userId, newRole);
         resp.sendRedirect(req.getContextPath() + "/admin/users");
     }
 }
