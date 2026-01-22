@@ -19,9 +19,10 @@ public class Config {
     private final AnswerService answerService = Winter.find(AnswerService.class);
     private final QuestMapper questMapper = Winter.find(QuestMapper.class);
 
-    public static final String QUEST_FILE_NAME_1 = "/Users/katiavasileva/IdeaProjects/quest/src/main/resources/quest-1.json";
-    public static final String QUEST_FILE_NAME_2 = "/Users/katiavasileva/IdeaProjects/quest/src/main/resources/quest-2.json";
-    public static final String[] QUEST_FILES = {QUEST_FILE_NAME_1, QUEST_FILE_NAME_2};
+    public static final String QUEST_FILE_NAME_1 = "/Users/katiavasileva/IdeaProjects/ProjectPantera/src/main/resources/quest-1.json";
+    public static final String QUEST_FILE_NAME_2 = "/Users/katiavasileva/IdeaProjects/ProjectPantera/src/main/resources/quest-2.json";
+    public static final String QUEST_FILE_NAME_3 = "/Users/katiavasileva/IdeaProjects/ProjectPantera/src/main/resources/quest-3.json";
+    public static final String[] QUEST_FILES = {QUEST_FILE_NAME_1, QUEST_FILE_NAME_2, QUEST_FILE_NAME_3};
 
     public void fillRepository() {
         try {

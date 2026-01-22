@@ -72,7 +72,10 @@ public class PlayGame implements Command {
             return getView() + "?id=" + questId + "&gameOver=true";
         }
 
+        System.out.println("Ищем вопрос: id=" + nextQuestionIdStr + ", questId=" + questId);
         Optional<Question> nextQuestionOpt = questionService.getByIdAndQuestId(nextQuestionIdStr, questId);
+        System.out.println("Найден вопрос: " + nextQuestionOpt.isPresent());
+
         long nextQuestionId = nextQuestionOpt.get().getGeneratedId();
 
         return getView() + "?id=" + questId + "&questionId=" + nextQuestionId;
