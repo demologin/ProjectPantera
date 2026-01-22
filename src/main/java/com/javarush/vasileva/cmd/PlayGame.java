@@ -35,7 +35,7 @@ public class PlayGame implements Command {
                 currentQuestionId = Long.parseLong(questionIdStr);
             }
 
-            System.out.println("current" + currentQuestionId);
+            System.out.println("current question" + currentQuestionId);
 
             Optional<Question> currentQuestion = questionService.get(currentQuestionId);
             if (currentQuestion.isPresent()) {
@@ -67,13 +67,13 @@ public class PlayGame implements Command {
 
         Answer answer = answerOpt.get();
 
-        String nextQuestionIdStr = answer.getNextQuestionId();
-        if (nextQuestionIdStr == null || nextQuestionIdStr.isEmpty()) {
+        String nextQuestionLabelStr = answer.getNextQuestionLabel();
+        if (nextQuestionLabelStr == null || nextQuestionLabelStr.isEmpty()) {
             return getView() + "?id=" + questId + "&gameOver=true";
         }
 
-        System.out.println("Ищем вопрос: id=" + nextQuestionIdStr + ", questId=" + questId);
-        Optional<Question> nextQuestionOpt = questionService.getByIdAndQuestId(nextQuestionIdStr, questId);
+        System.out.println("Ищем вопрос: id=" + nextQuestionLabelStr + ", questId=" + questId);
+        Optional<Question> nextQuestionOpt = questionService.getByQuestionLabelAndQuestId(nextQuestionLabelStr, questId);
         System.out.println("Найден вопрос: " + nextQuestionOpt.isPresent());
 
         long nextQuestionId = nextQuestionOpt.get().getGeneratedId();

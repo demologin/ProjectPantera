@@ -13,7 +13,7 @@ import java.util.List;
 @Builder
 public class Question {
     private Long generatedId;
-    private String id;
+    private String label;
     private Long questId;
     private String text;
     private List<Answer> answers;

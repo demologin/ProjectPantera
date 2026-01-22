@@ -22,12 +22,12 @@ public class QuestionRepository implements Repository<Question> {
 
     @Override
     public Optional<Question> get(long id) {
-        return Optional.ofNullable(questions.get(id));
+        return Optional.ofNullable(questions.get(id));  // generatedId
     }
 
-    public Optional<Question> getByIdAndQuestId(String id, long questId) {
+    public Optional<Question> getByQuestionLabelAndQuestId(String questionLabel, long questId) {
         return questions.values().stream()
-                .filter(question -> question.getId().equals(id))
+                .filter(question -> question.getLabel().equals(questionLabel))
                 .filter(question -> question.getQuestId() == questId)
                 .findFirst();
     }

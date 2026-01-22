@@ -22,8 +22,8 @@ public class QuestionService {
         return questionRepository.get(id);
     }
 
-    public Optional<Question> getByIdAndQuestId(String id, long questId) {
-        return questionRepository.getByIdAndQuestId(id, questId);
+    public Optional<Question> getByQuestionLabelAndQuestId(String questionLabel, long questId) {
+        return questionRepository.getByQuestionLabelAndQuestId(questionLabel, questId);
     }
 
     public void create(Question question) {

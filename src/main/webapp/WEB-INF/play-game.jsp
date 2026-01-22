@@ -21,7 +21,7 @@
         <input type="hidden" name="questId" value="${requestScope.quest.id}"/>
 
         <fieldset>
-            <legend>Вопрос № ${requestScope.question.id}</legend>
+            <legend>Вопрос № ${requestScope.question.label}</legend>
 
             <div class="form-group row mb-3">
                 <label class="col-md-4 col-form-label">

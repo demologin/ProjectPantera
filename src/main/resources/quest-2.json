@@ -3,522 +3,522 @@
   "description": "Много веков назад дракон Вельдан, хранитель древних знаний, скрылся в недрах горы с Сердцем Дракона — артефактом невообразимой силы, спрятав его в лабиринте, известном как Забытое Подземелье. Тысячи смельчаков отправлялись на поиски реликвии, но никто не вернулся; легенды гласят, что лишь тот, кто проявит мудрость, отвагу и хладнокровие, сможет завладеть Сердцем. Теперь вы — один из искателей: с факелом и мечом перед массивной дверью с драконьей пастью, за которой таятся тьма, сырость и нечто древнее. Дверь медленно приоткрывается — готовы ли вы бросить вызов подземелью?",
   "questions": [
     {
-      "id": "1",
+      "label": "1",
       "text": "Вы входите в тёмный коридор. Впереди слышен шорох.",
       "answers": [
         {
-          "nextQuestionId": "2",
+          "nextQuestionLabel": "2",
           "text": "Достанете факел и осторожно продвинетесь вперёд.",
           "description": ""
         },
         {
-          "nextQuestionId": "2",
+          "nextQuestionLabel": "2",
           "text": "Бросите камень в сторону шума, чтобы проверить.",
           "description": "Вы пугаете крысу. Путь свободен."
         },
         {
-          "nextQuestionId": "910",
+          "nextQuestionLabel": "910",
           "text": "Повернётесь и пойдёте назад.",
           "description": "Попадаете в тупик."
         },
         {
-          "nextQuestionId": "910",
+          "nextQuestionLabel": "910",
           "text": "Закричите, чтобы отпугнуть возможного врага.",
           "description": "Шум привлекает монстров."
         }
       ]
     },
     {
-      "id": "2",
+      "label": "2",
       "text": "Факел осветил три двери. На каждой — символ: огонь, вода, луна. Какую выберете?",
       "answers": [
         {
-          "nextQuestionId": "3",
+          "nextQuestionLabel": "3",
           "text": "С символом огня (рискованно, но может вести к сокровищам).",
           "description": "В комнате лава. Нужно найти мост."
         },
         {
-          "nextQuestionId": "8",
+          "nextQuestionLabel": "8",
           "text": "С символом воды (кажется безопасной).",
           "description": "Подземный ручей."
         },
         {
-          "nextQuestionId": "910",
+          "nextQuestionLabel": "910",
           "text": "С символом луны (загадочно, возможно, ловушка).",
           "description": "Ловушка: пол проваливается."
         }
       ]
     },
     {
-      "id": "3",
+      "label": "3",
       "text": "За дверью — комната с ямой посередине. На стене рычаг. Ваши действия?",
       "answers": [
         {
-          "nextQuestionId": "910",
+          "nextQuestionLabel": "910",
           "text": "Дёрнете рычаг сразу.",
           "description": "Яма расширяется."
         },
         {
-          "nextQuestionId": "4",
+          "nextQuestionLabel": "4",
           "text": "Поищете другой путь, минуя яму.",
           "description": "Находите скрытый проход."
         },
         {
-          "nextQuestionId": "910",
+          "nextQuestionLabel": "910",
           "text": "Попытаетесь перепрыгнуть яму.",
           "description": "Падение."
         },
         {
-          "nextQuestionId": "4",
+          "nextQuestionLabel": "4",
           "text": "Кинете камень на противоположную сторону, проверяя пол.",
           "description": "Пол безопасен. Переходите."
         }
       ]
     },
     {
-      "id": "4",
+      "label": "4",
       "text": "Рычаг активировал механизм: из стен выдвинулись шипы. Как спастись?",
       "answers": [
         {
-          "nextQuestionId": "5",
+          "nextQuestionLabel": "5",
           "text": "Прижмётесь к стене и медленно пройдёте.",
           "description": "Успешно проходите."
         },
         {
-          "nextQuestionId": "5",
+          "nextQuestionLabel": "5",
           "text": "Побежите напролом, уклоняясь.",
           "description": "Ранение. Здоровье снижается."
         },
         {
-          "nextQuestionId": "5",
+          "nextQuestionLabel": "5",
           "text": "Найдёте кнопку отключения механизмов.",
           "description": "Находите механизм."
         },
         {
-          "nextQuestionId": "910",
+          "nextQuestionLabel": "910",
           "text": "Вернётесь назад.",
           "description": "Путь заблокирован. "
         }
       ]
     },
     {
-      "id": "5",
+      "label": "5",
       "text": "В этой комнате — статуя дракона. На постаменте надпись: «Скажи имя древнего бога».",
       "answers": [
         {
-          "nextQuestionId": "910",
+          "nextQuestionLabel": "910",
           "text": "Азраэль.",
           "description": "Статуя атакует."
         },
         {
-          "nextQuestionId": "6",
+          "nextQuestionLabel": "6",
           "text": "Таргон.",
           "description": "Верно! Статуя пропускает."
         },
         {
-          "nextQuestionId": "910",
+          "nextQuestionLabel": "910",
           "text": "Вельдан.",
           "description": "Ошибка. Ловушка."
         },
         {
-          "nextQuestionId": "5",
+          "nextQuestionLabel": "5",
           "text": "Промолчите и осмотрите комнату ещё раз.",
           "description": "Находите надпись с именем: Таргон"
         }
       ]
     },
     {
-      "id": "6",
+      "label": "6",
       "text": "Статуя оживает! Как поступить?",
       "answers": [
         {
-          "nextQuestionId": "7",
+          "nextQuestionLabel": "7",
           "text": "Попробуете заговорить с ней.",
           "description": "Дракон даёт подсказку."
         },
         {
-          "nextQuestionId": "910",
+          "nextQuestionLabel": "910",
           "text": "Атакуете первым.",
           "description": "Проигрываете бой."
         },
         {
-          "nextQuestionId": "7",
+          "nextQuestionLabel": "7",
           "text": "Бросите в неё магический свиток.",
           "description": "Оглушаете дракона."
         },
         {
-          "nextQuestionId": "7",
+          "nextQuestionLabel": "7",
           "text": "Спрячетесь за колонну.",
           "description": "Дракон уходит. "
         }
       ]
     },
     {
-      "id": "7",
+      "label": "7",
       "text": "Дракон пропускает вас, но предупреждает: «Следующий — не человек». В коридоре два пути:",
       "answers": [
         {
-          "nextQuestionId": "8",
+          "nextQuestionLabel": "8",
           "text": "Левый — пахнет сыростью (возможно, вода).",
           "description": "Вы вышли к ручью."
         },
         {
-          "nextQuestionId": "9",
+          "nextQuestionLabel": "9",
           "text": "Правый — слышны голоса (люди или монстры?).",
           "description": "Вы вступили в бой с бандитами и победили их."
         },
         {
-          "nextQuestionId": "910",
+          "nextQuestionLabel": "910",
           "text": "Вернётесь к статуе за советом.",
           "description": "Статуя исчезла."
         }
       ]
     },
     {
-      "id": "8",
+      "label": "8",
       "text": "В левом коридоре — подземный ручей. Как перебраться?",
       "answers": [
         {
-          "nextQuestionId": "910",
+          "nextQuestionLabel": "910",
           "text": "Попытаетесь проплыть.",
           "description": "Вас уносит течением."
         },
         {
-          "nextQuestionId": "9",
+          "nextQuestionLabel": "9",
           "text": "Найдете упавшее бревно и используете его как мост.",
           "description": "Мост готов."
         },
         {
-          "nextQuestionId": "8",
+          "nextQuestionLabel": "8",
           "text": "Используете верёвку, чтобы перемахнуть.",
           "description": "Не хватает длины."
         },
         {
-          "nextQuestionId": "910",
+          "nextQuestionLabel": "910",
           "text": "Поищете обходной путь.",
           "description": "Вы заблудились и вас съел дракон."
         }
       ]
     },
     {
-      "id": "9",
+      "label": "9",
       "text": "На другом берегу — дверь с замком. Как вы поступите?",
       "answers": [
         {
-          "nextQuestionId": "10",
+          "nextQuestionLabel": "10",
           "text": "Взломаете замок отмычкой.",
           "description": "У вас получилось взломать замок."
         },
         {
-          "nextQuestionId": "11",
+          "nextQuestionLabel": "11",
           "text": "Ударите по нему мечом.",
           "description": "Замок ломается, но шум привлекает врагов."
         },
         {
-          "nextQuestionId": "10",
+          "nextQuestionLabel": "10",
           "text": "Поищете ключ поблизости.",
           "description": "Вы находите ключ в соседней комнате."
         },
         {
-          "nextQuestionId": "910",
+          "nextQuestionLabel": "910",
           "text": "Попробуете выбить дверь плечом.",
           "description": "Дверь не поддаётся."
         }
       ]
     },
     {
-      "id": "10",
+      "label": "10",
       "text": "За дверью — зал с четырьмя алтарями. На каждом — предмет: меч, книга, череп, кристалл. Какой возьмёте?",
       "answers": [
         {
-          "nextQuestionId": "11",
+          "nextQuestionLabel": "11",
           "text": "Меч (для защиты).",
           "description": "Активирует ловушку."
         },
         {
-          "nextQuestionId": "14",
+          "nextQuestionLabel": "14",
           "text": "Книгу (возможно, подсказка).",
           "description": "Подсказка к загадке. "
         },
         {
-          "nextQuestionId": "12",
+          "nextQuestionLabel": "12",
           "text": "Череп (опасно, но магически).",
           "description": "Вызывает духа. Вам приходится вступить с ним в бой."
         },
         {
-          "nextQuestionId": "13",
+          "nextQuestionLabel": "13",
           "text": "Кристалл (светится, может быть артефактом).",
           "description": "Светит в темноте."
         }
       ]
     },
     {
-      "id": "11",
+      "label": "11",
       "text": "Статуя оживает! Как поступить?",
       "answers": [
         {
-          "nextQuestionId": "",
+          "nextQuestionLabel": "",
           "text": "Попробуете заговорить с ней.",
           "description": ""
         },
         {
-          "nextQuestionId": "",
+          "nextQuestionLabel": "",
           "text": "Атакуете первым.",
           "description": ""
         },
         {
-          "nextQuestionId": "",
+          "nextQuestionLabel": "",
           "text": "Бросите в неё магический свиток.",
           "description": ""
         },
         {
-          "nextQuestionId": "",
+          "nextQuestionLabel": "",
           "text": "Спрячетесь за колонну.",
           "description": ""
         }
       ]
     },
     {
-      "id": "12",
+      "label": "12",
       "text": "Статуя оживает! Как поступить?",
       "answers": [
         {
-          "nextQuestionId": "",
+          "nextQuestionLabel": "",
           "text": "Попробуете заговорить с ней.",
           "description": ""
         },
         {
-          "nextQuestionId": "",
+          "nextQuestionLabel": "",
           "text": "Атакуете первым.",
           "description": ""
         },
         {
-          "nextQuestionId": "",
+          "nextQuestionLabel": "",
           "text": "Бросите в неё магический свиток.",
           "description": ""
         },
         {
-          "nextQuestionId": "",
+          "nextQuestionLabel": "",
           "text": "Спрячетесь за колонну.",
           "description": ""
         }
       ]
     },
     {
-      "id": "13",
+      "label": "13",
       "text": "Статуя оживает! Как поступить?",
       "answers": [
         {
-          "nextQuestionId": "",
+          "nextQuestionLabel": "",
           "text": "Попробуете заговорить с ней.",
           "description": ""
         },
         {
-          "nextQuestionId": "",
+          "nextQuestionLabel": "",
           "text": "Атакуете первым.",
           "description": ""
         },
         {
-          "nextQuestionId": "",
+          "nextQuestionLabel": "",
           "text": "Бросите в неё магический свиток.",
           "description": ""
         },
         {
-          "nextQuestionId": "",
+          "nextQuestionLabel": "",
           "text": "Спрячетесь за колонну.",
           "description": ""
         }
       ]
     },
     {
-      "id": "14",
+      "label": "14",
       "text": "Статуя оживает! Как поступить?",
       "answers": [
         {
-          "nextQuestionId": "",
+          "nextQuestionLabel": "",
           "text": "Попробуете заговорить с ней.",
           "description": ""
         },
         {
-          "nextQuestionId": "",
+          "nextQuestionLabel": "",
           "text": "Атакуете первым.",
           "description": ""
         },
         {
-          "nextQuestionId": "",
+          "nextQuestionLabel": "",
           "text": "Бросите в неё магический свиток.",
           "description": ""
         },
         {
-          "nextQuestionId": "",
+          "nextQuestionLabel": "",
           "text": "Спрячетесь за колонну.",
           "description": ""
         }
       ]
     },
     {
-      "id": "15",
+      "label": "15",
       "text": "Статуя оживает! Как поступить?",
       "answers": [
         {
-          "nextQuestionId": "",
+          "nextQuestionLabel": "",
           "text": "Попробуете заговорить с ней.",
           "description": ""
         },
         {
-          "nextQuestionId": "",
+          "nextQuestionLabel": "",
           "text": "Атакуете первым.",
           "description": ""
         },
         {
-          "nextQuestionId": "",
+          "nextQuestionLabel": "",
           "text": "Бросите в неё магический свиток.",
           "description": ""
         },
         {
-          "nextQuestionId": "",
+          "nextQuestionLabel": "",
           "text": "Спрячетесь за колонну.",
           "description": ""
         }
       ]
     },
     {
-      "id": "16",
+      "label": "16",
       "text": "Статуя оживает! Как поступить?",
       "answers": [
         {
-          "nextQuestionId": "",
+          "nextQuestionLabel": "",
           "text": "Попробуете заговорить с ней.",
           "description": ""
         },
         {
-          "nextQuestionId": "",
+          "nextQuestionLabel": "",
           "text": "Атакуете первым.",
           "description": ""
         },
         {
-          "nextQuestionId": "",
+          "nextQuestionLabel": "",
           "text": "Бросите в неё магический свиток.",
           "description": ""
         },
         {
-          "nextQuestionId": "",
+          "nextQuestionLabel": "",
           "text": "Спрячетесь за колонну.",
           "description": ""
         }
       ]
     },
     {
-      "id": "17",
+      "label": "17",
       "text": "Статуя оживает! Как поступить?",
       "answers": [
         {
-          "nextQuestionId": "",
+          "nextQuestionLabel": "",
           "text": "Попробуете заговорить с ней.",
           "description": ""
         },
         {
-          "nextQuestionId": "",
+          "nextQuestionLabel": "",
           "text": "Атакуете первым.",
           "description": ""
         },
         {
-          "nextQuestionId": "",
+          "nextQuestionLabel": "",
           "text": "Бросите в неё магический свиток.",
           "description": ""
         },
         {
-          "nextQuestionId": "",
+          "nextQuestionLabel": "",
           "text": "Спрячетесь за колонну.",
           "description": ""
         }
       ]
     },
     {
-      "id": "18",
+      "label": "18",
       "text": "Статуя оживает! Как поступить?",
       "answers": [
         {
-          "nextQuestionId": "",
+          "nextQuestionLabel": "",
           "text": "Попробуете заговорить с ней.",
           "description": ""
         },
         {
-          "nextQuestionId": "",
+          "nextQuestionLabel": "",
           "text": "Атакуете первым.",
           "description": ""
         },
         {
-          "nextQuestionId": "",
+          "nextQuestionLabel": "",
           "text": "Бросите в неё магический свиток.",
           "description": ""
         },
         {
-          "nextQuestionId": "",
+          "nextQuestionLabel": "",
           "text": "Спрячетесь за колонну.",
           "description": ""
         }
       ]
     },
     {
-      "id": "19",
+      "label": "19",
       "text": "Статуя оживает! Как поступить?",
       "answers": [
         {
-          "nextQuestionId": "",
+          "nextQuestionLabel": "",
           "text": "Попробуете заговорить с ней.",
           "description": ""
         },
         {
-          "nextQuestionId": "",
+          "nextQuestionLabel": "",
           "text": "Атакуете первым.",
           "description": ""
         },
         {
-          "nextQuestionId": "",
+          "nextQuestionLabel": "",
           "text": "Бросите в неё магический свиток.",
           "description": ""
         },
         {
-          "nextQuestionId": "",
+          "nextQuestionLabel": "",
           "text": "Спрячетесь за колонну.",
           "description": ""
         }
       ]
     },
     {
-      "id": "20",
+      "label": "20",
       "text": "Статуя оживает! Как поступить?",
       "answers": [
         {
-          "nextQuestionId": "",
+          "nextQuestionLabel": "",
           "text": "Попробуете заговорить с ней.",
           "description": ""
         },
         {
-          "nextQuestionId": "",
+          "nextQuestionLabel": "",
           "text": "Атакуете первым.",
           "description": ""
         },
         {
-          "nextQuestionId": "",
+          "nextQuestionLabel": "",
           "text": "Бросите в неё магический свиток.",
           "description": ""
         },
         {
-          "nextQuestionId": "",
+          "nextQuestionLabel": "",
           "text": "Спрячетесь за колонну.",
           "description": ""
         }
       ]
     },
     {
-      "id": "810",
+      "label": "810",
       "text": "Тебя вернули домой, победа",
       "answers": null
     },
     {
-      "id": "910",
+      "label": "910",
       "text": "Проигрыш",
       "answers": null
     }

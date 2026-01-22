@@ -3,59 +3,59 @@
   "description": "Про приключения в космосе",
   "questions": [
     {
-      "id": "1",
+      "label": "1",
       "text": "Принять вызов НЛО?",
       "answers": [
         {
-          "nextQuestionId": "2",
+          "nextQuestionLabel": "2",
           "text": "Принять вызов"
         },
         {
-          "nextQuestionId": "910",
+          "nextQuestionLabel": "910",
           "text": "Отклонить вызов"
         }
       ]
     },
     {
-      "id": "2",
+      "label": "2",
       "text": "Поднимешься на мостик к капитану?",
       "answers": [
         {
-          "nextQuestionId": "3",
+          "nextQuestionLabel": "3",
           "text": "Подняться на мостик"
         },
         {
-          "nextQuestionId": "910",
+          "nextQuestionLabel": "910",
           "text": "Отказаться подниматься на мостик"
         }
       ]
     },
     {
-      "id": "3",
+      "label": "3",
       "text": "Ты поднялся на мостик. Ты кто?",
       "answers": [
         {
-          "nextQuestionId": "810",
+          "nextQuestionLabel": "810",
           "text": "Рассказать правду о себе"
         },
         {
-          "nextQuestionId": "911",
+          "nextQuestionLabel": "911",
           "text": "Солгать о себе"
         }
       ]
     },
     {
-      "id": "810",
+      "label": "810",
       "text": "Тебя вернули домой, победа",
       "answers": null
     },
     {
-      "id": "910",
+      "label": "910",
       "text": "Ты отклонил вызов, поражение",
       "answers": null
     },
     {
-      "id": "911",
+      "label": "911",
       "text": "Твою ложь разоблачили, поражение",
       "answers": null
     }

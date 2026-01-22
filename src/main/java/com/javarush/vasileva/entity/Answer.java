@@ -12,7 +12,7 @@ import lombok.*;
 public class Answer {
     private Long id;
     private Long questionId;
-    private String nextQuestionId;
+    private String nextQuestionLabel;
     private String text;
     private String description;
 }
