@@ -138,6 +138,33 @@
         </c:forEach>
     </table>
 </c:if>
+<hr>
+<h3>Успешность тестов</h3>
+
+<c:if test="${empty testStats}">
+    <p>Нет данных по тестам.</p>
+</c:if>
+
+<c:if test="${not empty testStats}">
+    <table>
+        <tr>
+            <th>Тест</th>
+            <th>Попыток</th>
+            <th>Успешных</th>
+            <th>% успешности</th>
+        </tr>
+
+        <c:forEach var="stat" items="${testStats}">
+            <tr>
+                <td>${stat.testName}</td>
+                <td>${stat.total}</td>
+                <td>${stat.passed}</td>
+                <td>${stat.successRate}%</td>
+            </tr>
+        </c:forEach>
+    </table>
+</c:if>
+
 <%@ include file="/WEB-INF/jsp/common/footer.jsp" %>
 </body>
 </html>

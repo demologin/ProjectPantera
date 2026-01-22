@@ -25,7 +25,7 @@ public class UserStatisticsServiceImpl implements UserStatisticsService{
                 );
                 stats.incrementTotal();
                 if (result.isPassed()) {
-                    stats.incrementSuccessful();
+                    stats.incrementPassed();
                 }
             }
         }

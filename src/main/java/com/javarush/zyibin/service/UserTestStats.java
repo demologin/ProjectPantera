@@ -1,13 +1,13 @@
 package com.javarush.zyibin.service;
 
-public class UserTopicStats {
+public class UserTestStats {
 
-    private final String topicDisplayName;
+    private final String testName;
     private int total;
     private int passed;
 
-    public UserTopicStats(String topicDisplayName) {
-        this.topicDisplayName = topicDisplayName;
+    public UserTestStats(String testName) {
+        this.testName = testName;
     }
 
     public void incrementTotal() {
@@ -18,8 +18,8 @@ public class UserTopicStats {
         passed++;
     }
 
-    public String getTopicDisplayName() {
-        return topicDisplayName;
+    public String getTestName() {
+        return testName;
     }
 
     public int getTotal() {
@@ -29,7 +29,6 @@ public class UserTopicStats {
     public int getPassed() {
         return passed;
     }
-
     public int getSuccessRate() {
         if (total == 0) {
             return 0;
