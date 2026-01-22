@@ -25,4 +25,12 @@ public class AnswerService {
     public void create(Answer answer) {
         answerRepository.create(answer);
     }
+
+    public Long parseAnswerIdStrToLong(String answerIdStr) {
+        try {
+            return Long.parseLong(answerIdStr);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("Invalid answer id");
+        }
+    }
 }

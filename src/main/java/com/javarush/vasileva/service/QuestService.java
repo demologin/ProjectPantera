@@ -25,4 +25,20 @@ public class QuestService {
     public void create(Quest entity) {
         questRepository.create(entity);
     }
+
+    public Optional<Quest> getValidatedQuest(String questIdStr) {
+        if (questIdStr == null || questIdStr.isEmpty()) {
+            return Optional.empty();
+        }
+        Long questId = parseQuestIdStrToLong(questIdStr);
+        return get(questId);
+    }
+
+    public Long parseQuestIdStrToLong(String questIdStr) {
+        try {
+            return Long.parseLong(questIdStr);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("Invalid quest id");
+        }
+    }
 }

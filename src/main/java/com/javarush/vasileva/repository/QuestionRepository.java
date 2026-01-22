@@ -46,4 +46,5 @@ public class QuestionRepository implements Repository<Question> {
     public void delete(Question entity) {
 
     }
+
 }

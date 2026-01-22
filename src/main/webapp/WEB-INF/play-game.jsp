@@ -36,10 +36,6 @@
                         Выбрать новый квест
                     </button>
                 </form>
-
-<%--                <a href="<c:url value='/home'/>" class="btn btn-secondary">--%>
-<%--                    Выбрать новый квест--%>
-<%--                </a>--%>
             </div>
         </c:when>
 

@@ -24,34 +24,22 @@ public class PlayGame implements Command {
     public String doGet(HttpServletRequest req) {
         String questIdStr = req.getParameter("id");
         String questionIdStr = req.getParameter("questionId");
-        if (questIdStr != null && !questIdStr.isEmpty()) {
-            long questId = Long.parseLong(questIdStr);
-            Quest quest = questService.get(questId).orElseThrow();
-            req.setAttribute("quest", quest);
 
-            Long currentQuestionId;
-            if (questionIdStr == null || questionIdStr.isEmpty()) {
-                currentQuestionId = quest.getStartQuestionId();
+        Quest quest = questService.getValidatedQuest(questIdStr)
+                .orElseThrow(() -> new IllegalArgumentException("Quest is not found: id=" + questIdStr));
+        req.setAttribute("quest", quest);
+
+        Optional<Question> currentQuestion = questionService.findCurrentQuestion(questionIdStr, quest);
+        if (currentQuestion.isPresent()) {
+            req.setAttribute("question", currentQuestion.get());
+            List<Answer> answers = currentQuestion.get().getAnswers();
+            if (answers == null || answers.isEmpty()) {
+                req.setAttribute("noAnswers", true);
             } else {
-                currentQuestionId = Long.parseLong(questionIdStr);
+                req.setAttribute("answers", answers);
             }
-
-            System.out.println("current question" + currentQuestionId);
-
-            Optional<Question> currentQuestion = questionService.get(currentQuestionId);
-            if (currentQuestion.isPresent()) {
-                req.setAttribute("question", currentQuestion.get());
-
-                List<Answer> answers = currentQuestion.get().getAnswers();
-                System.out.println("answers: " + answers);
-                if (answers == null || answers.isEmpty()) {
-                    req.setAttribute("noAnswers", true);
-                } else {
-                    req.setAttribute("answers", currentQuestion.get().getAnswers());
-                }
-            } else {
-                req.setAttribute("gameOver", true);
-            }
+        } else {
+            req.setAttribute("gameOver", true);
         }
         return getView();
     }
@@ -62,29 +50,17 @@ public class PlayGame implements Command {
         String answerIdStr = req.getParameter("selectedAnswerId");
 
         if (questIdStr == null || answerIdStr == null) {
-            return getView() + "?id=" + questIdStr; // Возвращаем на тот же экран
+            return getView() + "?id=" + questIdStr; // Return to the same page
         }
 
-        long questId = Long.parseLong(questIdStr);
-        long answerId = Long.parseLong(answerIdStr);
+        long questId = questService.parseQuestIdStrToLong(questIdStr);
+        long answerId = answerService.parseAnswerIdStrToLong(answerIdStr);
 
-        Optional<Answer> answerOpt = answerService.get(answerId);
-        if (answerOpt.isEmpty()) {
+        Optional<Answer> answer = answerService.get(answerId);
+        if (answer.isEmpty()) {
             return getView() + "?id=" + questId;
         }
-
-        Answer answer = answerOpt.get();
-
-        String nextQuestionLabelStr = answer.getNextQuestionLabel();
-        if (nextQuestionLabelStr == null || nextQuestionLabelStr.isEmpty()) {
-            return getView() + "?id=" + questId + "&gameOver=true";
-        }
-
-        Question nextQuestion = questionService.getByQuestionLabelAndQuestId(nextQuestionLabelStr, questId)
-                .orElseThrow(() -> new IllegalArgumentException("Question is not found; label " + nextQuestionLabelStr + ", quest " + questId));
-
-        long nextQuestionId = nextQuestion.getGeneratedId();
-
+        long nextQuestionId = questionService.findNextQuestionId(questId, answer.get());
         return getView() + "?id=" + questId + "&questionId=" + nextQuestionId;
     }
 }
