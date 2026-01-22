@@ -5,6 +5,7 @@ import com.javarush.vasileva.entity.Quest;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 
 public class QuestMapper {
     private final ObjectMapper objectMapper;
@@ -20,8 +21,18 @@ public class QuestMapper {
      * @throws IOException Если файл не найден или ошибка парсинга
      */
     public Quest readFromJson(String filePath) throws IOException {
-        File file = new File(filePath);
-        return objectMapper.readValue(file, Quest.class);
+//        File file = new File(filePath);
+//        return objectMapper.readValue(file, Quest.class);
+
+        InputStream inputStream = getClass().getResourceAsStream(filePath);
+
+        if (inputStream == null) {
+            throw new IOException("Ресурс не найден: " + filePath);
+        }
+
+        try (inputStream) { // try-with-resources для автоматического закрытия
+            return objectMapper.readValue(inputStream, Quest.class);
+        }
     }
 
     /**

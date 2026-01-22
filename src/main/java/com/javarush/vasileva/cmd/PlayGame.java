@@ -6,6 +6,7 @@ import com.javarush.vasileva.service.QuestService;
 import com.javarush.vasileva.service.QuestionService;
 import jakarta.servlet.http.HttpServletRequest;
 
+import java.util.List;
 import java.util.Optional;
 
 public class PlayGame implements Command {
@@ -40,7 +41,14 @@ public class PlayGame implements Command {
             Optional<Question> currentQuestion = questionService.get(currentQuestionId);
             if (currentQuestion.isPresent()) {
                 req.setAttribute("question", currentQuestion.get());
-                req.setAttribute("answers", currentQuestion.get().getAnswers());
+
+                List<Answer> answers = currentQuestion.get().getAnswers();
+                System.out.println("answers: " + answers);
+                if (answers == null || answers.isEmpty()) {
+                    req.setAttribute("noAnswers", true);
+                } else {
+                    req.setAttribute("answers", currentQuestion.get().getAnswers());
+                }
             } else {
                 req.setAttribute("gameOver", true);
             }
@@ -72,11 +80,10 @@ public class PlayGame implements Command {
             return getView() + "?id=" + questId + "&gameOver=true";
         }
 
-        System.out.println("Ищем вопрос: id=" + nextQuestionLabelStr + ", questId=" + questId);
-        Optional<Question> nextQuestionOpt = questionService.getByQuestionLabelAndQuestId(nextQuestionLabelStr, questId);
-        System.out.println("Найден вопрос: " + nextQuestionOpt.isPresent());
+        Question nextQuestion = questionService.getByQuestionLabelAndQuestId(nextQuestionLabelStr, questId)
+                .orElseThrow(() -> new IllegalArgumentException("Question is not found; label " + nextQuestionLabelStr + ", quest " + questId));
 
-        long nextQuestionId = nextQuestionOpt.get().getGeneratedId();
+        long nextQuestionId = nextQuestion.getGeneratedId();
 
         return getView() + "?id=" + questId + "&questionId=" + nextQuestionId;
     }
