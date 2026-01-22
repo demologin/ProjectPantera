@@ -5,11 +5,13 @@ import lombok.NoArgsConstructor;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicLong;
 
 @NoArgsConstructor
 public class QuestRepository implements Repository<Quest> {
 
     private final Map<Long, Quest> quests = new ConcurrentHashMap<>();
+    private final AtomicLong generatedId = new AtomicLong(10);
 
     @Override
     public List<Quest> getAll() {
@@ -21,8 +23,9 @@ public class QuestRepository implements Repository<Quest> {
         return Optional.ofNullable(quests.get(id));
     }
 
-    public void create(Quest entity) {
-        quests.put(entity.getId(), entity);
+    public void create(Quest quest) {
+        quest.setId(generatedId.incrementAndGet());
+        quests.put(quest.getId(), quest);
     }
 
     @Override

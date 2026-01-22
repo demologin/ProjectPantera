@@ -30,6 +30,7 @@ public class Config {
                 Quest quest = questMapper.readFromJson(fileName);
                 questService.create(quest);
                 for (Question question : quest.getQuestions()) {
+                    question.setQuestId(quest.getId());
                     questionService.create(question);
                     List<Answer> answers = question.getAnswers();
                     if (answers == null) {
