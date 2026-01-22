@@ -1,31 +1,45 @@
 package com.javarush.popkov.controller;
 
 import com.javarush.popkov.cmd.Command;
+import com.javarush.popkov.cmd.StartPage;
 import com.javarush.popkov.config.Winter;
 import jakarta.servlet.http.HttpServletRequest;
 
 public class HttpResolver {
 
     public Command resolve(HttpServletRequest request) {
-        //   /cmd-example
+        String requestURI = request.getRequestURI();
+        requestURI = requestURI.equals("/") ? "/start-page" : requestURI;
+
+        String[] parts = requestURI.split("/");
+        String lastSegment = null;
+        for (int i = parts.length - 1; i >= 0; i--) {
+            if (!parts[i].isEmpty()) {
+                lastSegment = parts[i];
+                break;
+            }
+        }
+
+        if (lastSegment == null) {
+            lastSegment = "start-page";
+        }
+
+        String simpleName = convertToCamelCase(lastSegment);
+        String fullName = Command.class.getPackageName() + "." + simpleName;
+
         try {
-            String requestURI = request.getRequestURI();
-            requestURI = requestURI.equals("/") ? "/start-page" : requestURI;
-            String kebabName = requestURI.split("[?#/]")[1];
-            String simpleName = convertKebabStyleToCamelCase(kebabName);
-            String fullName = Command.class.getPackageName() + "." + simpleName;
-            Class<?> aClass = Class.forName(fullName);
-            return (Command) Winter.find(aClass);
+            Class<?> clazz = Class.forName(fullName);
+            return (Command) Winter.find(clazz);
         } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
+            return (Command) Winter.find(StartPage.class);
         }
     }
 
-    private String convertKebabStyleToCamelCase(String input) {
+    private String convertToCamelCase(String input) {
         StringBuilder result = new StringBuilder();
         boolean capitalizeNext = true;
         for (char c : input.toCharArray()) {
-            if (c == '-') {
+            if (c == '-' || c == '_') {
                 capitalizeNext = true;
             } else {
                 if (capitalizeNext) {
