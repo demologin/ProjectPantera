@@ -142,7 +142,6 @@ class GameServletTest {
 
         verify(session).setAttribute("state", GameState.LOSE);
         verify(session).setAttribute("message", "Твою ложь разоблачили. Поражение.");
-        // Проверяем, что счётчик увеличился на 1
         verify(session).setAttribute("gamesPlayed", 6);
         verify(dispatcher).forward(request, response);
     }
