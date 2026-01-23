@@ -1,6 +1,7 @@
 package com.javarush.alimov.quest;
 
 import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class GameLogicTest {
