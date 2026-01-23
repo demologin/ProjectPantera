@@ -15,6 +15,7 @@ public class Quest {
     private Long id;
     private String title;
     private String description;
+    private String text;
     private Long startQuestionId;
     private List<Question> questions;
 }
