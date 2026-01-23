@@ -8,12 +8,12 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-@WebServlet(Go.INDEX)
-public class IndexServlet extends HttpServlet {
+@WebServlet(Go.EDITOR)
+public class EditorServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher(Path.MAIN_MENU)
+        req.getRequestDispatcher(Path.EDITOR)
                 .forward(req, resp);
     }
 }

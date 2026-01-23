@@ -12,7 +12,7 @@
         <h1>Выберите квест</h1>
         <div id="quest-list"></div>
         <div id="special-actions"></div>
-        <button class="btn btn-create">Создать квест</button>
+        <button class="btn btn-create" onclick="window.location='/editor'">Создать квест</button>
     </div>
     <script>
         // Имитация данных от Backend

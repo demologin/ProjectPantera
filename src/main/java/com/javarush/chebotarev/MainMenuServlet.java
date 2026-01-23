@@ -8,8 +8,8 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-@WebServlet(Go.INDEX)
-public class IndexServlet extends HttpServlet {
+@WebServlet(Go.MAIN_MENU)
+public class MainMenuServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
