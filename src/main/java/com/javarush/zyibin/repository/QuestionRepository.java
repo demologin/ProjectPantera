@@ -8,9 +8,17 @@ import com.javarush.zyibin.source.QuestionSource;
 import java.util.List;
 
 public class QuestionRepository {
-    private static final QuestionSource source = new FileQuestionSource();
+    private  final QuestionSource source;
 
-    public static List<Question> getQuestions(Topic topic) {
+    public QuestionRepository(QuestionSource source) {
+        this.source = source;
+    }
+
+    public static QuestionRepository defaultRepository() {
+        return new QuestionRepository(new FileQuestionSource());
+    }
+
+    public List<Question> getQuestions(Topic topic) {
         return source.loadQuestions(topic);
     }
 }

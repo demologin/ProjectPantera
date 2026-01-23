@@ -20,6 +20,12 @@ import java.util.stream.Collectors;
 @WebServlet("/start")
 public class StartServlet extends HttpServlet {
 
+    private QuestionRepository questionRepository;
+
+    @Override
+    public void init() throws ServletException {
+        this.questionRepository = (QuestionRepository) getServletContext().getAttribute("questionRepository");
+    }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -36,7 +42,7 @@ public class StartServlet extends HttpServlet {
 
         List<Question> allQuestions = new ArrayList<>();
         for (Topic topic : selectedTopics) {
-            allQuestions.addAll(QuestionRepository.getQuestions(topic));
+            allQuestions.addAll(questionRepository.getQuestions(topic));
         }
         if (allQuestions.size() < questionCount) {
             throw new IllegalStateException("Not enough questions for the topic ");

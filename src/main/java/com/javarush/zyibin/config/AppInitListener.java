@@ -1,9 +1,6 @@
 package com.javarush.zyibin.config;
 
-import com.javarush.zyibin.repository.InMemoryTestResultRepository;
-import com.javarush.zyibin.repository.InMemoryUserRepository;
-import com.javarush.zyibin.repository.TestResultRepository;
-import com.javarush.zyibin.repository.UserRepository;
+import com.javarush.zyibin.repository.*;
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletContextEvent;
 import jakarta.servlet.ServletContextListener;
@@ -21,5 +18,9 @@ public class AppInitListener implements ServletContextListener {
 
         TestResultRepository testResultRepository = new InMemoryTestResultRepository();
         context.setAttribute("testResultRepository", testResultRepository);
+
+        QuestionRepository questionRepository =
+                QuestionRepository.defaultRepository();
+        context.setAttribute("questionRepository", questionRepository);
     }
 }
