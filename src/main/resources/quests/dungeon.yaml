@@ -1,0 +1,27 @@
+start: cell
+
+scenes:
+  cell:
+    text: "Ты очнулся в темнице. Слышишь шаги."
+    choices:
+      - id: wait
+        text: "Затаиться"
+        next: guard
+      - id: scream
+        text: "Кричать"
+        next: lose
+
+  guard:
+    text: "Страж проходит мимо. Есть шанс сбежать."
+    choices:
+      - id: run
+        text: "Бежать"
+        next: win
+
+  win:
+    text: "Ты сбежал. Победа!"
+    choices: []
+
+  lose:
+    text: "Страж убил тебя."
+    choices: []

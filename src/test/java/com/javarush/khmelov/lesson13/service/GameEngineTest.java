@@ -8,32 +8,37 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class GameEngineTest {
 
-    private final GameEngine engine = new GameEngine();
+    private final GameEngine engine =
+            new GameEngine("quests/space_quest.yaml");
 
     @Test
     void startSceneExists() {
-        Scene scene = engine.getScene("start");
+        Scene scene = engine.getScene(engine.getStartSceneId());
 
         assertNotNull(scene);
-        assertEquals("start", scene.getId());
+        assertEquals(engine.getStartSceneId(), scene.getId());
     }
 
     @Test
     void winPathWorks() {
-        GameResult step1 = engine.makeChoice("start", "yes");
+        GameResult step1 =
+                engine.makeChoice(engine.getStartSceneId(), "yes");
         assertFalse(step1.isGameOver());
 
-        GameResult step2 = engine.makeChoice(step1.getNextSceneId(), "go");
+        GameResult step2 =
+                engine.makeChoice(step1.getNextSceneId(), "go");
         assertFalse(step2.isGameOver());
 
-        GameResult step3 = engine.makeChoice(step2.getNextSceneId(), "truth");
+        GameResult step3 =
+                engine.makeChoice(step2.getNextSceneId(), "truth");
         assertTrue(step3.isGameOver());
         assertTrue(step3.isWin());
     }
 
     @Test
     void losePathWorks() {
-        GameResult result = engine.makeChoice("start", "no");
+        GameResult result =
+                engine.makeChoice(engine.getStartSceneId(), "no");
 
         assertTrue(result.isGameOver());
         assertFalse(result.isWin());
@@ -41,9 +46,10 @@ class GameEngineTest {
 
     @Test
     void wrongChoiceDoesNothing() {
-        GameResult result = engine.makeChoice("start", "wrong");
+        GameResult result =
+                engine.makeChoice(engine.getStartSceneId(), "wrong");
 
         assertFalse(result.isGameOver());
-        assertEquals("start", result.getNextSceneId());
+        assertEquals(engine.getStartSceneId(), result.getNextSceneId());
     }
 }

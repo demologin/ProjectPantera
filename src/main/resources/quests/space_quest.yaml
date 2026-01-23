@@ -1,0 +1,30 @@
+start: start
+
+scenes:
+  start:
+    text: "Ты потерял память. Принять вызов НЛО?"
+    choices:
+      - id: yes
+        text: "Принять вызов"
+        next: bridge
+      - id: no
+        text: "Отклонить вызов"
+        next: lose
+
+  bridge:
+    text: "Ты поднимаешься на мостик. Капитан ждёт ответа."
+    choices:
+      - id: truth
+        text: "Сказать правду"
+        next: win
+      - id: lie
+        text: "Солгать"
+        next: lose
+
+  win:
+    text: "Тебя вернули домой. Победа!"
+    choices: []
+
+  lose:
+    text: "Ты проиграл."
+    choices: []

@@ -12,12 +12,12 @@ import java.io.IOException;
 public class RestartServlet extends HttpServlet {
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+            throws IOException {
 
         HttpSession session = req.getSession();
-
         session.invalidate();
 
-        resp.sendRedirect(req.getContextPath() + "/game");
+        resp.sendRedirect(req.getContextPath() + "/login");
     }
 }

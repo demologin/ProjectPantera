@@ -10,14 +10,27 @@
     <link
             href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
             rel="stylesheet">
+    <link rel="stylesheet"
+          href="${pageContext.request.contextPath}/css/style.css">
 </head>
 <body class="bg-light">
-
+<div class="alert alert-secondary text-center">
+    📘 Квест: ${sessionScope.questId}
+</div>
 <div class="container mt-5">
-    <div class="card shadow">
+    <div class="card shadow game-card">
         <div class="card-body">
 
-            <h4 class="card-title mb-4">
+            <div class="alert alert-info text-center player-info">
+                👤 ${sessionScope.currentPlayerLogin}, твой выбор определит судьбу…
+            </div>
+            <div class="alert alert-secondary text-center stats">
+            🎮 Игр: ${player.gamesPlayed}
+                | 🏆 Побед: ${player.wins}
+                | 💀 Поражений: ${player.losses}
+            </div>
+
+            <h4 class="card-title mb-4 scene-text">
                 ${scene.text}
             </h4>
 
@@ -30,7 +43,7 @@
                                     type="submit"
                                     name="choice"
                                     value="${choice.id}"
-                                    class="btn btn-primary w-100 mb-2">
+                                    class="btn btn-primary w-100 mb-2 choice-btn">
                                     ${choice.text}
                             </button>
                         </c:forEach>
