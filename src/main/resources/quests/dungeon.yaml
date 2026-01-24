@@ -17,6 +17,9 @@ scenes:
       - id: run
         text: "Бежать"
         next: win
+      - id: stop
+        text: "Остановиться"
+        next: lose
 
   win:
     text: "Ты сбежал. Победа!"

@@ -6,74 +6,93 @@
 <head>
     <meta charset="UTF-8">
     <title>Quest</title>
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
           rel="stylesheet">
-    <link rel="stylesheet"
-          href="${pageContext.request.contextPath}/css/style.css">
 </head>
-<body class="bg-light">
 
-<div class="container mt-5">
-    <div class="card shadow login-card">
-        <div class="card-body">
+<body style="background: radial-gradient(circle at top, #f1e9d2, #d8cfc0);">
 
-            <h3 class="mb-4 text-center">👤 Выбор игрока</h3>
+<div class="min-vh-100 d-flex flex-column">
 
-            <c:if test="${not empty players}">
-                <h5>Существующие игроки</h5>
+    <div class="d-flex justify-content-center pt-5 flex-grow-1">
+        <div class="card shadow-lg border-0 rounded-4 rpg-card">
 
-                <c:forEach var="p" items="${players}">
-                    <form method="post" action="${pageContext.request.contextPath}/login" class="mb-2">
+            <div class="card-body text-center p-4">
 
-                        <input type="hidden" name="login" value="${p.login}">
+                <h3 class="mb-4 fw-bold text-primary">
+                    🧙 Выбор героя
+                </h3>
 
-                        <select name="questId" class="form-select mb-2">
+                <c:if test="${not empty players}">
+                    <form method="post" action="${pageContext.request.contextPath}/login">
+
+                        <select name="login" class="form-select mb-3 text-center" required>
+                            <option value="" disabled selected>Выберите героя</option>
+                            <c:forEach var="p" items="${players}">
+                                <option value="${p.login}">
+                                        ${p.login} — 🎮 ${p.gamesPlayed} | 🏆 ${p.wins} | 💀 ${p.losses}
+                                </option>
+                            </c:forEach>
+                        </select>
+
+                        <select name="questId" class="form-select mb-4 text-center" required>
+                            <option value="" disabled selected>Выберите квест</option>
                             <c:forEach var="q" items="${quests}">
                                 <option value="${q}">${q}</option>
                             </c:forEach>
                         </select>
 
-                        <button class="btn btn-outline-primary w-100 player-btn">
-                                ${p.login}
-                            — 🎮 ${p.gamesPlayed}
-                            | 🏆 ${p.wins}
-                            | 💀 ${p.losses}
+                        <button class="btn btn-primary rounded-pill px-4 shadow-sm">
+                            Начать приключение
                         </button>
                     </form>
-                </c:forEach>
 
-                <hr/>
-            </c:if>
+                    <hr class="my-4">
+                </c:if>
 
-            <h5>Новый игрок</h5>
+                <h5 class="fw-semibold mb-3">Новый герой</h5>
 
-            <form method="post" action="${pageContext.request.contextPath}/login">
+                <form method="post" action="${pageContext.request.contextPath}/login">
+                    <input class="form-control mb-3 text-center"
+                           name="login"
+                           placeholder="Имя героя"
+                           required>
 
-                <input class="form-control mb-2 text-center"
-                       name="login"
-                       placeholder="Введите логин"
-                       required>
+                    <select name="questId" class="form-select mb-4 text-center" required>
+                        <c:forEach var="q" items="${quests}">
+                            <option value="${q}">${q}</option>
+                        </c:forEach>
+                    </select>
 
-                <select name="questId" class="form-select mb-2" required>
-                    <c:forEach var="q" items="${quests}">
-                        <option value="${q}">${q}</option>
-                    </c:forEach>
-                </select>
+                    <button class="btn btn-success rounded-pill px-4 shadow">
+                        Создать и играть
+                    </button>
+                </form>
 
-                <button class="btn btn-success w-100">
-                    Создать и играть
-                </button>
-            </form>
-
-            <c:if test="${not empty error}">
-                <div class="alert alert-danger mt-3">
-                        ${error}
-                </div>
-            </c:if>
-
+            </div>
         </div>
     </div>
+
+    <footer class="text-center py-3 text-muted small">
+        🧭 <strong>Quest</strong> · v1.0 · by Andrew Lazareff
+    </footer>
+
 </div>
+
+<style>
+    .rpg-card {
+        max-width: 880px;
+        width: 100%;
+        background: linear-gradient(180deg, #ffffff, #f8f4ea);
+        animation: fadeIn .6s ease-out;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(12px); }
+        to   { opacity: 1; transform: translateY(0); }
+    }
+</style>
 
 </body>
 </html>

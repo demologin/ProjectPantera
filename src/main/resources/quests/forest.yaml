@@ -1,0 +1,140 @@
+start: clearing
+
+scenes:
+  clearing:
+    text: "Ты приходишь в себя на лесной поляне. Холодно, туман стелется по земле."
+    choices:
+      - id: explore
+        text: "Осмотреться вокруг"
+        next: crossroads
+      - id: shout
+        text: "Крикнуть и позвать на помощь"
+        next: wolves
+      - id: hide
+        text: "Спрятаться в кустах"
+        next: bushes
+
+  crossroads:
+    text: "Ты находишь развилку трёх троп."
+    choices:
+      - id: left
+        text: "Пойти по левой тропе"
+        next: river
+      - id: center
+        text: "Пойти прямо"
+        next: hut
+      - id: right
+        text: "Пойти по правой тропе"
+        next: swamp
+
+  bushes:
+    text: "Ты затаился. Кажется, кто-то проходит мимо."
+    choices:
+      - id: wait
+        text: "Продолжать ждать"
+        next: crossroads
+      - id: run
+        text: "Резко выбежать"
+        next: wolves
+      - id: sleep
+        text: "Попробовать уснуть"
+        next: lose   # ← ИСПРАВЛЕНО
+
+  wolves:
+    text: "Из тумана появляются волки."
+    choices:
+      - id: fight
+        text: "Попытаться отбиться"
+        next: lose
+      - id: climb
+        text: "Залезть на дерево"
+        next: tree
+      - id: run
+        text: "Бежать без оглядки"
+        next: swamp
+
+  tree:
+    text: "Ты на дереве. Волки ждут внизу."
+    choices:
+      - id: wait
+        text: "Переждать"
+        next: crossroads
+      - id: jump
+        text: "Прыгнуть и бежать"
+        next: swamp
+      - id: shout
+        text: "Кричать"
+        next: lose
+
+  river:
+    text: "Ты выходишь к бурной реке."
+    choices:
+      - id: swim
+        text: "Попытаться переплыть"
+        next: lose
+      - id: bridge
+        text: "Искать мост"
+        next: bridge
+      - id: follow
+        text: "Идти вдоль берега"
+        next: hut
+
+  bridge:
+    text: "Ты находишь старый мост."
+    choices:
+      - id: cross
+        text: "Перейти мост"
+        next: village
+      - id: inspect
+        text: "Осмотреть мост"
+        next: lose   # ← ловушка = поражение
+      - id: return
+        text: "Вернуться назад"
+        next: river
+
+  hut:
+    text: "Перед тобой старая хижина."
+    choices:
+      - id: enter
+        text: "Зайти внутрь"
+        next: win
+      - id: knock
+        text: "Постучать"
+        next: village
+      - id: bypass
+        text: "Обойти хижину"
+        next: lose   # ← ловушка = поражение
+
+  swamp:
+    text: "Ты увязаешь в болоте."
+    choices:
+      - id: struggle
+        text: "Вырываться"
+        next: lose
+      - id: calm
+        text: "Успокоиться и искать выход"
+        next: crossroads
+      - id: call
+        text: "Звать на помощь"
+        next: lose
+
+  village:
+    text: "Ты выходишь к деревне. Люди смотрят настороженно."
+    choices:
+      - id: talk
+        text: "Поговорить с жителями"
+        next: win
+      - id: steal
+        text: "Попытаться украсть припасы"
+        next: lose
+      - id: leave
+        text: "Уйти обратно в лес"
+        next: crossroads
+
+  win:
+    text: "Ты находишь помощь и выбираешься из леса. Победа!"
+    choices: []
+
+  lose:
+    text: "Это был твой последний выбор."
+    choices: []

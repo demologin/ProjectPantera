@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class GameEngineTest {
 
     private final GameEngine engine =
-            new GameEngine("quests/space_quest.yaml");
+            new GameEngine("quests/space.yaml");
 
     @Test
     void startSceneExists() {
