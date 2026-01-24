@@ -12,6 +12,8 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.util.*;
@@ -19,24 +21,35 @@ import java.util.stream.Collectors;
 
 @WebServlet("/start")
 public class StartServlet extends HttpServlet {
+    private static final Logger log = LoggerFactory.getLogger(StartServlet.class);
 
     private QuestionRepository questionRepository;
 
     @Override
     public void init() throws ServletException {
+        log.debug("Initializing StartServlet");
         this.questionRepository = (QuestionRepository) getServletContext().getAttribute("questionRepository");
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        log.debug("POST /start");
         HttpSession session = req.getSession(true);
         String[] topicParams = req.getParameterValues("topics");
         if (topicParams == null || topicParams.length == 0) {
+            log.warn("Interview start failed: no topics selected");
             throw new IllegalArgumentException("No topics selected");
         }
         Set<Topic> selectedTopics = Arrays.stream(topicParams)
                 .map(Topic::valueOf)
                 .collect(Collectors.toSet());
+
+        log.debug(
+                "Selected topics: {}",
+                selectedTopics.stream()
+                        .map(Topic::getCode)
+                        .collect(Collectors.joining(", "))
+        );
 
         int questionCount = Integer.parseInt(req.getParameter("questionCount"));
 
@@ -45,6 +58,9 @@ public class StartServlet extends HttpServlet {
             allQuestions.addAll(questionRepository.getQuestions(topic));
         }
         if (allQuestions.size() < questionCount) {
+            log.warn("Not enough questions: requested={}, available={}",
+                    questionCount,
+                    allQuestions.size());
             throw new IllegalStateException("Not enough questions for the topic ");
         }
 
@@ -53,6 +69,10 @@ public class StartServlet extends HttpServlet {
 
         InterviewState interviewState = new InterviewState(selectedTopics, selectedQuestions);
         SessionUtils.setInterviewState(session, interviewState);
+
+        log.info("Interview started: topics={}, questions={}",
+                selectedTopics.size(),
+                questionCount);
 
         resp.sendRedirect(req.getContextPath() + "/question");
     }

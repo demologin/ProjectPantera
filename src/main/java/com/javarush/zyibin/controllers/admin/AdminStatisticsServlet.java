@@ -9,6 +9,8 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -17,9 +19,11 @@ import java.util.Map;
 
 @WebServlet("/admin/statistics")
 public class AdminStatisticsServlet extends HttpServlet {
+    private static final Logger log = LoggerFactory.getLogger(AdminStatisticsServlet.class);
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        log.debug("GET /admin/statistics");
 
         TestResultRepository resultRepository = (TestResultRepository) getServletContext().getAttribute("testResultRepository");
 
@@ -67,7 +71,11 @@ public class AdminStatisticsServlet extends HttpServlet {
             }
         }
 
-        // передаём данные в JSP
+        log.info("Admin statistics prepared: totalTests={}, passedTests={}, users={}",
+                totalTests,
+                passedTests,
+                users.size());
+
         req.setAttribute("totalTests", totalTests);
         req.setAttribute("passedTests", passedTests);
         req.setAttribute("userStats", userStats.values());

@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+
+    <Properties>
+        <!-- Стандартный формат логирования -->
+        <Property name="LOG_PATTERN">
+            %d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%t] %c{1.} - %msg%n
+        </Property>
+
+        <!-- Использование базовой директории проекта для развёрнутого приложения -->
+        <Property name="LOG_DIR">./logs</Property>
+
+    </Properties>
+
+    <Appenders>
+        <!-- Вывод в консоль -->
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+        </Console>
+
+        <!-- Основной лог приложения (все логи) -->
+        <RollingFile
+                name="ApplicationFile"
+                fileName="${LOG_DIR}/application.log"
+                filePattern="${LOG_DIR}/application-%d{yyyy-MM-dd}.log.gz"
+                createOnDemand="true">
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+            <Policies>
+                <!-- Ротация каждый день в 00:00 -->
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+                <!-- Альтернативно: ротация при достижении размера 100MB -->
+                <SizeBasedTriggeringPolicy size="100MB"/>
+            </Policies>
+            <!-- Удалять логи старше 30 дней -->
+            <DefaultRolloverStrategy max="30"/>
+        </RollingFile>
+
+        <!-- Логи репозитория/БД -->
+        <RollingFile
+                name="RepositoryFile"
+                fileName="${LOG_DIR}/repository.log"
+                filePattern="${LOG_DIR}/repository-%d{yyyy-MM-dd}.log.gz"
+                createOnDemand="true">
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+                <SizeBasedTriggeringPolicy size="50MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="30"/>
+        </RollingFile>
+
+        <!-- Логи сервисов (бизнес-логика) -->
+        <RollingFile
+                name="ServiceFile"
+                fileName="${LOG_DIR}/service.log"
+                filePattern="${LOG_DIR}/service-%d{yyyy-MM-dd}.log.gz"
+                createOnDemand="true">
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+                <SizeBasedTriggeringPolicy size="50MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="30"/>
+        </RollingFile>
+
+        <!-- Логи контроллеров -->
+        <RollingFile
+                name="ControllerFile"
+                fileName="${LOG_DIR}/controller.log"
+                filePattern="${LOG_DIR}/controller-%d{yyyy-MM-dd}.log.gz"
+                createOnDemand="true">
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+                <SizeBasedTriggeringPolicy size="50MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="30"/>
+        </RollingFile>
+    </Appenders>
+
+    <Loggers>
+        <!-- Логи репозитория (работа с БД) -->
+        <Logger name="com.javarush.zyibin.repository" level="DEBUG" additivity="false">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="RepositoryFile"/>
+            <AppenderRef ref="ApplicationFile"/>
+        </Logger>
+
+        <!-- Логи сервисов (бизнес-логика) -->
+        <Logger name="com.javarush.zyibin.service" level="DEBUG" additivity="false">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="ServiceFile"/>
+            <AppenderRef ref="ApplicationFile"/>
+        </Logger>
+
+        <!-- Логи контроллеров (HTTP запросы) -->
+        <Logger name="com.javarush.zyibin.controllers" level="DEBUG" additivity="false">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="ControllerFile"/>
+            <AppenderRef ref="ApplicationFile"/>
+        </Logger>
+
+        <!-- Логи фильтров (обработка запросов) -->
+        <Logger name="com.javarush.zyibin.filter" level="DEBUG" additivity="false">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="ControllerFile"/>
+            <AppenderRef ref="ApplicationFile"/>
+        </Logger>
+
+        <!-- Логи валидации -->
+        <Logger name="com.javarush.zyibin.validation" level="INFO" additivity="false">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="ApplicationFile"/>
+        </Logger>
+
+        <!-- Логи источников данных -->
+        <Logger name="com.javarush.zyibin.source" level="DEBUG" additivity="false">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="RepositoryFile"/>
+            <AppenderRef ref="ApplicationFile"/>
+        </Logger>
+
+        <!-- Логи конфигурации -->
+        <Logger name="com.javarush.zyibin.config" level="INFO" additivity="false">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="ApplicationFile"/>
+        </Logger>
+
+        <!-- Основной логгер для всего пакета com.javarush.zyibin -->
+        <Logger name="com.javarush.zyibin" level="DEBUG" additivity="false">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="ApplicationFile"/>
+        </Logger>
+
+
+        <!-- Корневой логгер (для остального кода) -->
+        <Root level="INFO">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="ApplicationFile"/>
+        </Root>
+    </Loggers>
+</Configuration>
+
+
+
+

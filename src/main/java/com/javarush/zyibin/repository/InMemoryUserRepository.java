@@ -1,6 +1,8 @@
 package com.javarush.zyibin.repository;
 
 import com.javarush.zyibin.model.User;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +11,8 @@ import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
 
-public class InMemoryUserRepository implements UserRepository{
+public class InMemoryUserRepository implements UserRepository {
+    private static final Logger log = LoggerFactory.getLogger(InMemoryUserRepository.class);
 
     private final Map<Long, User> usersById = new ConcurrentHashMap<>();
 
@@ -24,20 +27,30 @@ public class InMemoryUserRepository implements UserRepository{
         }
         usersById.put(user.getId(), user);
         usersByUserName.put(user.getUsername(), user);
+        log.info("User saved: id={}, username={}, new={}",
+                user.getId(),
+                user.getUsername(),
+                user.getId() == idGenerator.get() - 1);
     }
 
     @Override
     public Optional<User> findByUserName(String username) {
-        return Optional.ofNullable(usersByUserName.get(username));
+        Optional<User> user = Optional.ofNullable(usersByUserName.get(username));
+        log.debug("findByUserName called: username={}, found={}", username, user.isPresent());
+        return user;
     }
 
     @Override
     public Optional<User> findById(long id) {
-        return Optional.ofNullable(usersById.get(id));
+        Optional<User> user = Optional.ofNullable(usersById.get(id));
+        log.debug("findById called: id={}, found={}", id, user.isPresent());
+        return user;
     }
 
     @Override
     public List<User> findAll() {
-        return new ArrayList<>(usersById.values());
+        ArrayList<User> users = new ArrayList<>(usersById.values());
+        log.debug("findAll called: count={}", users.size());
+        return users;
     }
 }

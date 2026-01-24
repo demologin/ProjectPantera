@@ -8,6 +8,8 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.util.List;
@@ -15,14 +17,20 @@ import java.util.List;
 @WebServlet("/profile/avatar")
 public class AvatarSelectServlet extends HttpServlet {
 
+    private static final Logger log = LoggerFactory.getLogger(AvatarSelectServlet.class);
+
     private final AvatarService avatarService = new AvatarService();
+
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+        log.debug("GET /profile/avatar");
+
         HttpSession session = req.getSession(false);
 
         List<String> avatars = avatarService.getAvailableAvatars();
+        log.debug("Loaded {} available avatars", avatars.size());
 
         req.setAttribute("avatars", avatars);
         req.getRequestDispatcher("/WEB-INF/jsp/avatar-select.jsp").forward(req, resp);
@@ -31,15 +39,23 @@ public class AvatarSelectServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+        log.debug("POST /profile/avatar");
+
         HttpSession session = req.getSession(false);
 
         User user = (User) session.getAttribute("currentUser");
 
         String selectedAvatar = req.getParameter("avatarPath");
+        log.debug("Selected avatar path: {}", selectedAvatar);
 
         List<String> availableAvatars = avatarService.getAvailableAvatars();
         if (availableAvatars.contains(selectedAvatar)) {
+            log.info("User {} changed avatar to {}", user.getUsername(), selectedAvatar);
             user.setAvatarPath(selectedAvatar);
+        } else {
+            log.warn("User {} attempted to select invalid avatar: {}",
+                    user.getUsername(),
+                    selectedAvatar);
         }
         resp.sendRedirect(req.getContextPath() + "/profile");
     }

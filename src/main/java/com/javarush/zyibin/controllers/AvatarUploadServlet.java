@@ -5,6 +5,8 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.IOException;
@@ -19,32 +21,43 @@ import java.util.UUID;
 )
 public class AvatarUploadServlet extends HttpServlet {
 
+    private static final Logger log = LoggerFactory.getLogger(AvatarUploadServlet.class);
     private static final String UPLOAD_DIR = "/uploads/avatars";
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        log.debug("POST /profile/avatar/upload");
+
         HttpSession session = req.getSession(false);
 
         User user = (User) session.getAttribute("currentUser");
+        log.debug("User {} initiates avatar upload", user.getUsername());
 
         Part filePart = req.getPart("avatar");
         if (filePart == null || filePart.getSize() == 0) {
+            log.warn("Пользователь {} попытался загрузить пустой файл", user.getUsername());
             resp.sendRedirect(req.getContextPath() + "/profile/avatar");
             return;
         }
         String submittedFileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
+        log.debug("Original file name: {}", submittedFileName);
         String extension = submittedFileName.substring(submittedFileName.lastIndexOf('.'));
+        log.debug("File extension: {}", extension);
         String fileName = UUID.randomUUID() + extension;
+        log.debug("New filename generated: {}", fileName);
         String uploadPath = getServletContext().getRealPath(UPLOAD_DIR);
         File uploadDir = new File(uploadPath);
         if (!uploadDir.exists()) {
-            uploadDir.mkdirs();
+             uploadDir.mkdirs();
         }
 
         File file = new File(uploadDir, fileName);
         filePart.write(file.getAbsolutePath());
+        log.debug("File successfully saved to: {}", file.getAbsolutePath());
 
         user.setAvatarPath(UPLOAD_DIR + "/" + fileName);
+        log.info("User {} successfully uploaded avatar: {}", user.getUsername(), fileName);
         resp.sendRedirect(req.getContextPath() + "/profile");
+        log.debug("Redirect user {} to /profile after avatar upload", user.getUsername());
     }
 }

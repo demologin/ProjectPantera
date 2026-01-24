@@ -9,7 +9,8 @@ public class AvatarService {
                 "/resources/avatars/default/avatar2.png",
                 "/resources/avatars/default/avatar3.png",
                 "/resources/avatars/default/avatar4.png",
-                "/resources/avatars/default/avatar5.png"
+                "/resources/avatars/default/avatar5.png",
+                "/resources/avatars/default/avatar6.png"
         );
     }
 }
