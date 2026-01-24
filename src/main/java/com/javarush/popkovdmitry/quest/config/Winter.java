@@ -1,4 +1,4 @@
-package com.javarush.khmelov.config;
+package com.javarush.popkovdmitry.quest.config;
 
 import lombok.SneakyThrows;
 

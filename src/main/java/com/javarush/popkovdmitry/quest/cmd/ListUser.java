@@ -1,7 +1,7 @@
-package com.javarush.khmelov.cmd;
+package com.javarush.popkovdmitry.quest.cmd;
 
-import com.javarush.khmelov.entity.User;
-import com.javarush.khmelov.service.UserService;
+import com.javarush.popkovdmitry.quest.entity.User;
+import com.javarush.popkovdmitry.quest.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 
 import java.util.Collection;
