@@ -34,7 +34,11 @@ public class GameServlet extends HttpServlet {
             return;
         }
 
-        Player player = playerService.get(login);
+        Player player = playerService.findByLogin(login);
+        if (player == null) {
+            resp.sendRedirect(req.getContextPath() + "/login");
+            return;
+        }
         req.setAttribute("player", player);
 
         String questPath = QuestRegistry.getPath(questId);

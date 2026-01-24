@@ -31,25 +31,30 @@ public class LoginServlet extends HttpServlet {
             throws ServletException, IOException {
 
         String login = req.getParameter("login");
+        String password = req.getParameter("password");
         String questId = req.getParameter("questId");
-
-        if (questId == null || questId.isBlank()) {
-            questId = "space"; // дефолт
-        }
+        String action = req.getParameter("action"); // login / register
 
         try {
-            Player player = playerService.getOrCreate(login);
+            Player player;
+
+            if ("register".equals(action)) {
+                player = playerService.register(login, password);
+            } else {
+                player = playerService.login(login, password);
+            }
 
             HttpSession session = req.getSession(true);
             session.setAttribute("currentPlayerLogin", player.getLogin());
-            session.setAttribute("questId", questId); // 🔥 ВАЖНО
-
-            // сбрасываем сцену при новом входе
+            session.setAttribute("questId", questId);
             session.removeAttribute("sceneId");
 
             resp.sendRedirect(req.getContextPath() + "/game");
+
         } catch (IllegalArgumentException e) {
             req.setAttribute("error", e.getMessage());
+            req.setAttribute("players", playerService.getAll());
+            req.setAttribute("quests", QuestRegistry.getQuestIds());
             req.getRequestDispatcher("/WEB-INF/login.jsp").forward(req, resp);
         }
     }

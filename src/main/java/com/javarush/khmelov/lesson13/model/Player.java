@@ -7,14 +7,22 @@ public class Player {
     @Getter
     private final String login;
     @Getter
+    private final String passwordHash;
+    @Getter
     private int gamesPlayed;
     @Getter
     private int wins;
     @Getter
     private int losses;
 
-    public Player(String login) {
+    public Player(String login, String passwordHash) {
+
         this.login = login;
+        this.passwordHash = passwordHash;
+    }
+
+    public boolean checkPassword(String rawPassword) {
+        return passwordHash.equals(hash(rawPassword));
     }
 
     public void recordWin() {
@@ -25,5 +33,9 @@ public class Player {
     public void recordLoss() {
         gamesPlayed++;
         losses++;
+    }
+
+    private static String hash(String input) {
+        return Integer.toHexString(input.hashCode());
     }
 }

@@ -2,13 +2,13 @@ package com.javarush.khmelov.lesson13.model;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class PlayerTest {
 
     @Test
     void winIncrementsStats() {
-        Player p = new Player("test");
+        Player p = new Player("test", "hash");
 
         p.recordWin();
 
