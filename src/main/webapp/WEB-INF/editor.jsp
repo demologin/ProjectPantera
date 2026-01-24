@@ -208,18 +208,21 @@
             let opts = node.options.map(o =>
 				'<div class="option-preview" id="opt-p-' + node.id + '-' + o.id + '">'
                 + '<b>"' + o.text + '"</b> ➔ #' + o.nextNodeId
-				+ '</div>').join('');
+				+ '</div>'
+            ).join('');
 
             // Создаем карточку
             const background = node.type === 'victory' ? '#2e7d32' : (node.type === 'defeat' ? '#c62828' : '#1565c0');
-            const card = $('<div class="node-card ' + node.type + '" id="node-' + node.id + '" style="left:' + node.x + 'px; top:' + node.y + 'px;">'
+            const card = $(
+                '<div class="node-card ' + node.type + '" id="node-' + node.id + '" style="left:' + node.x + 'px; top:' + node.y + 'px;">'
                 + '<button class="card-delete" onclick="deleteNode(' + node.id + ', event)">×</button>'
                 + '<div style="font-size:0.7rem; font-weight:bold; padding:3px 8px; border-radius:4px; text-transform:uppercase; margin-bottom:10px; display:inline-block; background:' + background + '">'
                 + badgeText + '#' + node.id
                 + '</div>'
                 + '<div class="node-text-display">' + node.text + '</div>'
                 + opts
-                + '</div>').on('mousedown', (e) => onNodeDown(e, node.id));
+                + '</div>'
+            ).on('mousedown', (e) => onNodeDown(e, node.id));
             list.append(card);
         });
 
@@ -242,7 +245,8 @@
                 + '<input type="text" class="o-txt" placeholder="Действие" style="flex:1;" value="' + text + '">'
                 + '<input type="number" class="o-next" placeholder="ID" value="' + next + '">'
                 + '<button onclick="$(this).parent().remove()" style="background:#c62828; color:white; border:none; border-radius:4px; width:30px; cursor:pointer;">×</button>'
-            + '</div>');
+            + '</div>'
+        );
     }
 
     function editNode(id) {
@@ -264,13 +268,28 @@
             const {x, y, ...clean} = node;
             return clean;
         });
-        const data = {title: $('#q-title').val(), prologue: $('#q-prologue').val(), nodes: cleanNodes};
-        console.log("Ready to send:", data);
-        alert("JSON готов (см. консоль).");
+        const data = {
+            title: $('#q-title').val(),
+            prologue: $('#q-prologue').val(),
+            nodes: cleanNodes
+        };
+        $.ajax({
+            url: '/editor', // Замените на ваш реальный URL
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify(data),
+            success: function() {
+                window.location.href = '/main-menu';
+            },
+            error: function(xhr, status, error) {
+                alert("Ошибка при публикации: " + error);
+                console.error("Статус:", status, "Детали:", xhr.responseText);
+            }
+        });
     }
 
     function saveToLocalStorage() {
-        localStorage.setItem('quest_final_zoomfix', JSON.stringify({
+        localStorage.setItem('quest', JSON.stringify({
             title: $('#q-title').val(),
             prologue: $('#q-prologue').val(),
             nodes: questNodes,
@@ -279,7 +298,7 @@
     }
 
     function loadFromLocalStorage() {
-        const saved = localStorage.getItem('quest_final_zoomfix');
+        const saved = localStorage.getItem('quest');
         if (saved) {
             const d = JSON.parse(saved);
             $('#q-title').val(d.title);

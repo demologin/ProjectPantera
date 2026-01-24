@@ -6,11 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Главное меню — Квесты</title>
     <link rel="stylesheet" href="../static/style.css">
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 </head>
 <body>
     <div class="container">
         <h1>Выберите квест</h1>
-        <div id="quest-list"></div>
+        <div id="quest-list">
+            <c:forEach var="availableQuest" items="${availableQuests}">
+                <button class="btn">
+                    <c:out value="${availableQuest}"/>
+                </button>
+            </c:forEach>
+        </div>
         <div id="special-actions"></div>
         <button class="btn btn-create" onclick="window.location='/editor'">Создать квест</button>
     </div>
@@ -25,12 +32,12 @@
         const specialActions = document.getElementById('special-actions');
 
         // Вывод обычных квестов
-        backendData.availableQuests.forEach(name => {
-            const btn = document.createElement('button');
-            btn.className = 'btn';
-            btn.innerText = name;
-            questListContainer.appendChild(btn);
-        });
+        // backendData.availableQuests.forEach(name => {
+        //     const btn = document.createElement('button');
+        //     btn.className = 'btn';
+        //     btn.innerText = name;
+        //     questListContainer.appendChild(btn);
+        // });
 
         // Кнопка продолжения (появляется только если есть данные)
         if (backendData.lastUnfinishedQuest) {

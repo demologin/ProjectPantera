@@ -1,4 +1,4 @@
-package com.javarush.chebotarev;
+package com.javarush.chebotarev.component;
 
 public interface Go {
 
