@@ -12,10 +12,18 @@ import java.io.IOException;
 @WebServlet("/start")
 public class StartServlet extends HttpServlet {
 
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        String playerName = request.getParameter("playerName");
+        HttpSession session = request.getSession();
+
+        if (session.getAttribute("user") == null) {
+            response.sendRedirect("login.jsp");
+            return;
+        }
+
+        String playerName = (String) session.getAttribute("user");
         String questName = request.getParameter("questName");
 
         if (playerName == null || playerName.isEmpty() || questName == null || questName.isEmpty()) {
@@ -25,8 +33,6 @@ public class StartServlet extends HttpServlet {
             return;
         }
 
-
-        HttpSession session = request.getSession();
         session.setAttribute("playerName", playerName);
         session.setAttribute("questName", questName);
         session.setAttribute("currentId", 1); // стартовый ID вопроса

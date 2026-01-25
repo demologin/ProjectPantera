@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="https://jakarta.ee/jstl/core" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <html>
 <head>
     <title>Текстовые квесты</title>
@@ -23,7 +23,7 @@
     </ul>
 </div>
 
-<form method="get" action="game">
+<form method="post" action="start">
     <label for="playerName">Введите ваше имя:</label><br>
     <input type="text" id="playerName" name="playerName" required><br>
 

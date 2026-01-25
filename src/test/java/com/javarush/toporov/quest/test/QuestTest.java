@@ -23,4 +23,13 @@ class QuestTest {
         assertTrue(winStep.isEnd());
         assertTrue(winStep.isWin());
     }
+
+    @Test
+    void testQuestLogic() {
+        Quest quest = QuestData.getQuest("Петля времени");
+        QuestStep step1 = quest.getStep(1);
+
+        Integer nextStepId = step1.getOptions().get("Проверить тело коллеги");
+        assertEquals(2, nextStepId);
+    }
 }
