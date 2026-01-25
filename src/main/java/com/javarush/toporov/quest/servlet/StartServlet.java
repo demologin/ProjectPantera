@@ -35,7 +35,8 @@ public class StartServlet extends HttpServlet {
 
         session.setAttribute("playerName", playerName);
         session.setAttribute("questName", questName);
-        session.setAttribute("currentId", 1); // стартовый ID вопроса
+        session.setAttribute("stepId", 1);
+        session.setAttribute("currentId", 1);
 
 
         response.sendRedirect(request.getContextPath() + "/game");
