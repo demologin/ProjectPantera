@@ -40,11 +40,8 @@ public class AvatarUploadServlet extends HttpServlet {
             return;
         }
         String submittedFileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
-        log.debug("Original file name: {}", submittedFileName);
         String extension = submittedFileName.substring(submittedFileName.lastIndexOf('.'));
-        log.debug("File extension: {}", extension);
         String fileName = UUID.randomUUID() + extension;
-        log.debug("New filename generated: {}", fileName);
         String uploadPath = getServletContext().getRealPath(UPLOAD_DIR);
         File uploadDir = new File(uploadPath);
         if (!uploadDir.exists()) {
@@ -53,11 +50,9 @@ public class AvatarUploadServlet extends HttpServlet {
 
         File file = new File(uploadDir, fileName);
         filePart.write(file.getAbsolutePath());
-        log.debug("File successfully saved to: {}", file.getAbsolutePath());
 
         user.setAvatarPath(UPLOAD_DIR + "/" + fileName);
         log.info("User {} successfully uploaded avatar: {}", user.getUsername(), fileName);
         resp.sendRedirect(req.getContextPath() + "/profile");
-        log.debug("Redirect user {} to /profile after avatar upload", user.getUsername());
     }
 }
