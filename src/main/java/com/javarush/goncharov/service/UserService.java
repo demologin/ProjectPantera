@@ -3,25 +3,24 @@ package com.javarush.goncharov.service;
 
 import com.javarush.goncharov.model.User;
 import com.javarush.goncharov.repository.Repository;
-import com.javarush.goncharov.repository.UserRepository;
 
 import java.util.Map;
 import java.util.Optional;
 
 public class UserService {
-//    private static UserService instance;
-    private final UserRepository userRepository;
+    private static UserService instance;
+    private final Repository<User> userRepository;
 
-    public UserService(UserRepository userRepository) {
+    public UserService(Repository<User> userRepository) {
         this.userRepository = userRepository;
     }
     
-//    public static UserService getInstance(Repository<User> repository){
-//        if (instance == null){
-//            return new UserService(userRepository);
-//        }
-//        return instance;
-//    }
+    public static UserService getInstance(Repository<User> repository){
+        if (instance == null){
+            instance = new UserService(repository);
+        }
+        return instance;
+    }
 
     public User get(Long id){
         return userRepository.get(id);
@@ -49,5 +48,4 @@ public class UserService {
     public Map<Long, User> getAll(){
         return userRepository.getAll();
     }
-    
 }

@@ -1,28 +1,27 @@
 package com.javarush.goncharov.repository;
 
 import com.javarush.goncharov.model.User;
-import com.javarush.goncharov.service.UserService;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicLong;
 
-public class UserRepository extends BaseRepository<User>{
-//    private static UserRepository instance;
+public class UserRepository implements Repository<User>{
+    private static UserRepository instance;
 
-//    private final Map<Long, User> map = new HashMap<>();
+    private final Map<Long, User> map;
     public static final AtomicLong id = new AtomicLong();
 
-//    private UserRepository() {
-//    }
+    private UserRepository(UserStorage userStorage) {
+        this.map = userStorage.getUsers();
+    }
 
-//    public static UserRepository getInstance(){
-//        if (instance == null){
-//            return new UserRepository();
-//        }
-//        return instance;
-//    }
+    public static UserRepository getInstance(UserStorage userStorage){
+        if (instance == null){
+            instance = new UserRepository(userStorage);
+        }
+        return instance;
+    }
 
     @Override
     public User get(long id) {

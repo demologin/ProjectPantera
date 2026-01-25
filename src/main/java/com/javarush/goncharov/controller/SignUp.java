@@ -2,6 +2,7 @@ package com.javarush.goncharov.controller;
 
 import com.javarush.goncharov.model.User;
 import com.javarush.goncharov.repository.UserRepository;
+import com.javarush.goncharov.repository.UserStorage;
 import com.javarush.goncharov.service.UserService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -25,7 +26,8 @@ public class SignUp extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String login = req.getParameter("login");
         String password = req.getParameter("password");
-//        UserService userService = UserService.getInstance(UserRepository.getInstance());
+        UserStorage userStorage = UserStorage.getInstance();
+        UserService userService = UserService.getInstance(UserRepository.getInstance(userStorage));
         User user = User.builder()
                 .login(login)
                 .password(password)
@@ -34,6 +36,5 @@ public class SignUp extends HttpServlet {
         HttpSession session = req.getSession();
         session.setAttribute("user", user);
         resp.sendRedirect(".");
-        System.out.println(userService.getAll());
     }
 }

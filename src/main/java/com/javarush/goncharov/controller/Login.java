@@ -3,6 +3,7 @@ package com.javarush.goncharov.controller;
 import com.javarush.goncharov.model.User;
 import com.javarush.goncharov.repository.MessageRepository;
 import com.javarush.goncharov.repository.UserRepository;
+import com.javarush.goncharov.repository.UserStorage;
 import com.javarush.goncharov.service.MessageService;
 import com.javarush.goncharov.service.UserService;
 import jakarta.servlet.ServletException;
@@ -25,7 +26,8 @@ public class Login extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String login = req.getParameter("login");
-        UserService userService = UserService.getInstance(UserRepository.getInstance());
+        UserStorage userStorage = UserStorage.getInstance();
+        UserService userService = UserService.getInstance(UserRepository.getInstance(userStorage));
         Optional<User> user = userService.find(login);
         if (user.isPresent()){
             HttpSession session = req.getSession();
