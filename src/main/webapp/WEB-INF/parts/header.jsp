@@ -11,8 +11,8 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&amp;display=swap">
     <link rel="stylesheet" href="assets/css/styles.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
-<%--    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">--%>
-<%--    <link rel="stylesheet" href="assets/css/Contact-Details-icons.css">--%>
+    <%--    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">--%>
+    <%--    <link rel="stylesheet" href="assets/css/Contact-Details-icons.css">--%>
     <%--    <link rel="stylesheet" href="assets/css/Team-icons.css">--%>
     <%--    <link rel="stylesheet" href="assets/css/Team-images.css">--%>
 </head>
@@ -38,7 +38,7 @@
                     <c:choose>
                         <c:when test="${not empty sessionScope.user}">
                             <ul class="navbar-nav ms-auto">
-                                <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
+                                <li class="nav-item"><a class="nav-link active" href=".">Home</a></li>
                                 <li class="nav-item"><a class="nav-link" href="#">Статистика</a></li>
                                 <li class="nav-item"><a class="nav-link" href="#">Пользователи</a>
                                 </li>
@@ -46,16 +46,18 @@
                                 </li>
                             </ul>
                             <ul class="nav col-md-3 text-end">
-                                <li><a href="#" class="btn btn-info ms-md-2" style="background: var(--bs-orange);">Profile</a>
+                                <li><a href="profile" class="btn btn-info ms-md-2" style="background: var(--bs-orange);">Profile</a>
                                 </li>
-                                <li><a href="#" class="btn btn-danger ms-md-2" style="background: var(--bs-orange);">Logout</a>
+                                <li><a href="logout" class="btn btn-danger ms-md-2" style="background: var(--bs-orange);">Logout</a>
                                 </li>
                             </ul>
                         </c:when>
                         <c:otherwise>
-                            <li><a href="#" class="btn btn-primary ms-md-2"
-                                   style="background: var(--bs-orange);">Login</a></li>
-                            <li><a href="#" class="btn btn-primary ms-md-2" style="background: var(--bs-orange);">Sign-up</a>
+                            <li>
+                                <a href="login" class="btn btn-primary ms-md-2" style="background: var(--bs-orange);">Login</a>
+                            </li>
+                            <li>
+                                <a href="signup" class="btn btn-primary ms-md-2" style="background: var(--bs-orange);">Sign-up</a>
                             </li>
                         </c:otherwise>
                     </c:choose>

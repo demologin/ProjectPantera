@@ -5,13 +5,12 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Data
 @Builder
-public class Message implements AbstractModel{
+public class User  implements AbstractModel{
     private Long id;
-    private String name;
-    private String email;
-    private String message;
+    private String login;
+    private String password;
 }
