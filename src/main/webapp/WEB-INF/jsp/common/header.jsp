@@ -35,11 +35,6 @@
             |
             <a href="${pageContext.request.contextPath}/register">Регистрация</a>
         </c:if>
-<%--        <c:if test="${not empty currentUser && currentUser.role == 'ADMIN'}">--%>
-<%--            |--%>
-<%--            <a href="${pageContext.request.contextPath}/admin">Admin</a>--%>
-<%--        </c:if>--%>
-
 
     </div>
 </header>

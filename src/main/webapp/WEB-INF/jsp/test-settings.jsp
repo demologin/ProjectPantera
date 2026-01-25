@@ -43,18 +43,7 @@
         </label>
         <br><br>
         <button type="submit">Начать тестирование</button>
-       <%-- <div>
-            <c:forEach var="topic" items="${topics}">
-                <button
-                    type="submit"
-                    name="topic"
-                    value="${topic}"
-                    style="display: block; margin: 10px 0"
-                    >
-                    ${topic.displayName}
-                </button>
-            </c:forEach>
-        </div>--%>
+
     </form>
 <%@ include file="/WEB-INF/jsp/common/footer.jsp" %>
 </body>
