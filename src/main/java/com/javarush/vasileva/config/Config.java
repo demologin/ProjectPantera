@@ -28,24 +28,29 @@ public class Config {
         try {
             for (String fileName : QUEST_FILES) {
                 Quest quest = questMapper.readFromJson(fileName);
+                System.out.println("Parsed quest 1  : " + quest);
                 questService.create(quest);
-                for (Question question : quest.getQuestions()) {
-                    question.setQuestId(quest.getId());
-                    questionService.create(question);
-                    List<Answer> answers = question.getAnswers();
-                    if (answers == null) {
-                        continue;
-                    }
-                    for (Answer answer : answers) {
-                        answer.setQuestionId(question.getGeneratedId());
-                        answerService.create(answer);
-                    }
-                }
-                long startQuestionId = quest.getQuestions().get(0).getGeneratedId();
-                quest.setStartQuestionId(startQuestionId);
+                setQuestParameters(quest);
             }
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
+    }
+
+    public void setQuestParameters(Quest quest) {
+        for (Question question : quest.getQuestions()) {
+            question.setQuestId(quest.getId());
+            questionService.create(question);
+            List<Answer> answers = question.getAnswers();
+            if (answers == null) {
+                continue;
+            }
+            for (Answer answer : answers) {
+                answer.setQuestionId(question.getGeneratedId());
+                answerService.create(answer);
+            }
+        }
+        long startQuestionId = quest.getQuestions().get(0).getGeneratedId();
+        quest.setStartQuestionId(startQuestionId);
     }
 }
