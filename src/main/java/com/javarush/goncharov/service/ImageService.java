@@ -1,17 +1,11 @@
 package com.javarush.goncharov.service;
 
-import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.Part;
 import lombok.SneakyThrows;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
 import java.util.List;
 import java.util.Objects;
 
@@ -28,7 +22,7 @@ public class ImageService {
 
     @SneakyThrows
     public ImageService() {
-        URL url = ImageService.class.getResource("/");
+        URL url = ImageService.class.getResource("/"); //"file:/C:/Users/Puh/IdeaProjects/ProjectPantera_3Module/target/project-Pantera-1.0-SNAPSHOT/WEB-INF/classes/"
         Path startPath = Paths.get(Objects.requireNonNull(url).toURI());
         String webInf = "WEB-INF";
         Path webPath = startPath.getParent().endsWith(webInf)
@@ -41,9 +35,9 @@ public class ImageService {
     @SneakyThrows
     public Path getImagePath(String filename) {
         return EXTENSIONS.stream()
-                .map(ext -> imagesFolder.resolve(filename + ext))
-                .filter(Files::exists)
-                .findAny()
-                .orElse(imagesFolder.resolve(NO_IMAGE_PNG));
+                .map(ext -> imagesFolder.resolve(filename + ext))// resolve возвращает Path, преобразуем stream<String> >> stream<Path>
+                .filter(Files::exists)// фильтруем результат
+                .findAny() // находим любое совпадение
+                .orElse(imagesFolder.resolve(NO_IMAGE_PNG)); // возврщаем найденное значение или если ничего неашлось то вернем no-image.png
     }
 }

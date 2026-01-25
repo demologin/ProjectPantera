@@ -29,7 +29,7 @@
             <div class="card border-0 shadow-none">
                 <div class="card-body text-center d-flex flex-column align-items-center p-0"><img class="rounded-circle mb-3 fit-cover" width="130" height="130" src="/images/architecor" loading="eager">
                     <h5 class="fw-bold text-primary card-title mb-0"><strong>Дмитрий Гончаров</strong></h5>
-                    <p class="text-muted card-text mb-2">Архитектора</p>
+                    <p class="text-muted card-text mb-2">Архитектура</p>
                 </div>
             </div>
         </div>

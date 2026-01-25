@@ -9,7 +9,8 @@
     <div class="container text-white py-4 py-lg-5">
         <ul class="list-inline">
             <li class="list-inline-item me-4"><a class="link-light" href="our-team">Our team</a></li>
-            <li class="list-inline-item me-4"><a class="link-light" href="#">Contact us</a></li>
+            <li class="list-inline-item me-4"><a class="link-light" href="contact">Contact us</a></li>
+            <li class="list-inline-item me-4"><a class="link-light" href="https://github.com/GDGo/ProjectPantera">Github</a></li>
         </ul>
         <p class="text-muted mb-0">Copyright&nbsp; &nbsp;© 2026 JRU Company, Inc. Pantera Group.&nbsp;</p>
     </div>

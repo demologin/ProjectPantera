@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&amp;display=swap">
     <link rel="stylesheet" href="assets/css/styles.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
+<%--    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">--%>
+<%--    <link rel="stylesheet" href="assets/css/Contact-Details-icons.css">--%>
     <%--    <link rel="stylesheet" href="assets/css/Team-icons.css">--%>
     <%--    <link rel="stylesheet" href="assets/css/Team-images.css">--%>
 </head>

@@ -19,10 +19,10 @@ public class ImageController extends HttpServlet {
     @Override
     @SneakyThrows
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
-        String requestURI = req.getRequestURI();
-        String target = req.getContextPath() + "/images/";
-        String nameImage = requestURI.replace(target, "");
-        Path path = imageService.getImagePath(nameImage);
+        String requestURI = req.getRequestURI(); // /images/qa, /images/analytic, /images/developer, /images/architector это прописано в jsp в src до каждой картинки
+        String target = req.getContextPath() + "/images/"; // /images/
+        String nameImage = requestURI.replace(target, ""); // qa
+        Path path = imageService.getImagePath(nameImage); // "C:\Users\Puh\IdeaProjects\ProjectPantera_3Module\target\project-Pantera-1.0-SNAPSHOT\WEB-INF\images\qa.jpg"
         Files.copy(path, resp.getOutputStream());
     }
 }
