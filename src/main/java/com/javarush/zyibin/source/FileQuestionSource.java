@@ -5,11 +5,14 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.javarush.zyibin.model.Question;
 import com.javarush.zyibin.model.Topic;
 import com.javarush.zyibin.validation.QuestionValidator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.InputStream;
 import java.util.List;
 
 public class FileQuestionSource implements QuestionSource{
+    private static final Logger log = LoggerFactory.getLogger(FileQuestionSource.class);
 
     private final ObjectMapper objectMapper = new ObjectMapper();
 
@@ -20,10 +23,13 @@ public class FileQuestionSource implements QuestionSource{
     public List<Question> loadQuestions(Topic topic) {
         String fileName = QUESTIONS_FOLDER + topic.getCode() + ".json";
 
+        log.debug("Loading questions from file={}", fileName);
+
         ClassLoader classLoader = getClass().getClassLoader();
         InputStream inputStream = classLoader.getResourceAsStream(fileName);
 
         if (inputStream == null) {
+            log.error("Questions file not found: {}", fileName);
             throw new IllegalStateException("File not found in resources: " + fileName);
         }
 
@@ -34,8 +40,10 @@ public class FileQuestionSource implements QuestionSource{
                     }
             );
             QuestionValidator.validate(questions);
+            log.info("Questions loaded successfully: topic={}, count={}", topic, questions.size());
             return questions;
         } catch (Exception e) {
+            log.error("Error reading questions file: {}", fileName, e);
             throw new IllegalStateException("Error reading: " + fileName, e);
         }
     }

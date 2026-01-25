@@ -71,6 +71,7 @@ public class LoginServlet extends HttpServlet {
             byte[] hash = digest.digest(password.getBytes(StandardCharsets.UTF_8));
             return HexFormat.of().formatHex(hash);
         } catch (Exception e) {
+            log.error("Password hashing failed", e);
             throw new IllegalStateException("Password hashing error", e);
         }
     }

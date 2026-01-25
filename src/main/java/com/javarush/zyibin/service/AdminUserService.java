@@ -2,8 +2,11 @@ package com.javarush.zyibin.service;
 
 import com.javarush.zyibin.model.Role;
 import com.javarush.zyibin.repository.UserRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class AdminUserService {
+    private static final Logger log = LoggerFactory.getLogger(AdminUserService.class);
 
     private final UserRepository userRepository;
 
@@ -12,12 +15,27 @@ public class AdminUserService {
     }
 
     public void changeUserRole(long adminId, long targetUserId, Role newRole) {
+        log.info("Admin {} attempts to change role of user {} to {}",
+                adminId,
+                targetUserId,
+                newRole
+        );
 
-        userRepository.findById(targetUserId).ifPresent(user -> {
+        userRepository.findById(targetUserId).ifPresentOrElse(user -> {
             if (user.getId() == adminId) {
+                log.warn("Admin {} attempted to change own role. Operation denied", adminId);
                 return;
             }
             user.changeRole(newRole);
+            log.info("User {} role changed to {} by admin {}",
+                    targetUserId,
+                    newRole,
+                    adminId
+            );
+        }, () -> {
+            log.warn("Admin {} attempted to change role of non-existing user {}",
+                    adminId,
+                    targetUserId);
         });
     }
 }

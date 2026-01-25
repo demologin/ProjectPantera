@@ -8,8 +8,7 @@
         </Property>
 
         <!-- Использование базовой директории проекта для развёрнутого приложения -->
-        <Property name="LOG_DIR">./logs</Property>
-
+        <Property name="LOG_DIR">${sys:catalina.home}/logs</Property>
     </Properties>
 
     <Appenders>
