@@ -1,5 +1,7 @@
 package com.javarush.toporov.quest.servlet;
 
+import com.javarush.toporov.quest.model.Quest;
+import com.javarush.toporov.quest.util.QuestData;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -44,7 +46,29 @@ public class StartServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
 
-        doGet(request, response);
+        if (session.getAttribute("user") == null) {
+            response.sendRedirect("login.jsp");
+            return;
+        }
+
+        String questName = request.getParameter("questName");
+
+
+        Quest quest = QuestData.getQuest(questName);
+        if (quest == null) {
+            response.sendRedirect("index.jsp");
+            return;
+        }
+
+
+        session.setAttribute("questName", questName);
+        session.setAttribute("questPrologue", quest.getPrologue());
+        session.setAttribute("stepId", 1);
+        session.removeAttribute("result");
+
+
+        response.sendRedirect("prologue.jsp");
     }
 }
