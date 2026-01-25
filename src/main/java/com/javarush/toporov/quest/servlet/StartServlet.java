@@ -18,30 +18,7 @@ public class StartServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        HttpSession session = request.getSession();
-
-        if (session.getAttribute("user") == null) {
-            response.sendRedirect("login.jsp");
-            return;
-        }
-
-        String playerName = (String) session.getAttribute("user");
-        String questName = request.getParameter("questName");
-
-        if (playerName == null || playerName.isEmpty() || questName == null || questName.isEmpty()) {
-
-            request.setAttribute("error", "Пожалуйста, введите имя и выберите квест.");
-            request.getRequestDispatcher("index.jsp").forward(request, response);
-            return;
-        }
-
-        session.setAttribute("playerName", playerName);
-        session.setAttribute("questName", questName);
-        session.setAttribute("stepId", 1);
-        session.setAttribute("currentId", 1);
-
-
-        response.sendRedirect(request.getContextPath() + "/game");
+        doPost(request, response);
     }
 
     @Override

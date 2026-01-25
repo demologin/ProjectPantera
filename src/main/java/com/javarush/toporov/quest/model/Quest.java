@@ -8,7 +8,7 @@ public class Quest {
     private String prologue;
     private Map<Integer, QuestStep> steps;
 
-    public Quest(String name) {
+    public Quest(String name, String prologue) {
         this.name = name;
         this.prologue = prologue;
         this.steps = new HashMap<>();
