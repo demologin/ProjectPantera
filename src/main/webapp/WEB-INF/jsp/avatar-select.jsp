@@ -1,49 +1,57 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: ZybinAV
-  Date: 20.01.2026
-  Time: 13:33
-  To change this template use File | Settings | File Templates.
---%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
+
 <c:import url="/WEB-INF/jsp/common/header.jsp"/>
 
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Выбор аватарки</title>
-</head>
-<body>
-<h3>Загрузить свою аватарку</h3>
-<form method="post"
-      action="${pageContext.request.contextPath}/profile/avatar/upload"
-      enctype="multipart/form-data">
-    <input type="file"
-           name="avatar"
-           accept="image/*"
-           required />
-    <br><br>
-    <button type="submit">Загрузить</button>
-</form>
-<h2>Выбор аватарки</h2>
-<form method="post" action="${pageContext.request.contextPath}/profile/avatar">
-    <c:forEach var="avatar" items="${avatars}">
-        <label style="display: inline-block; margin: 10px; text-align: center;">
-            <input type="radio"
-                   name="avatarPath"
-                   value="${avatar}"
-                   required />
-            <br>
-            <img src="${pageContext.request.contextPath}${avatar}"
-                 width="100"
-                 alt="avatar">
-        </label>
-    </c:forEach>
-    <br><br>
-    <button type="submit">Сохранить</button>
-    <a href="${pageContext.request.contextPath}/profile">Отмена</a>
-</form>
-<%@ include file="/WEB-INF/jsp/common/footer.jsp" %>
-</body>
-</html>
+<div class="container">
+
+    <h2>Аватар профиля</h2>
+
+    <div class="avatar-section">
+        <h3>Загрузить свою аватарку</h3>
+
+        <form method="post"
+              action="${pageContext.request.contextPath}/profile/avatar/upload"
+              enctype="multipart/form-data">
+
+            <div class="form-group">
+                <input type="file"
+                       name="avatar"
+                       accept="image/*"
+                       required>
+            </div>
+
+            <button type="submit">Загрузить</button>
+        </form>
+    </div>
+
+    <div class="avatar-section">
+        <h3>Выбрать из доступных</h3>
+
+        <form method="post" action="${pageContext.request.contextPath}/profile/avatar">
+
+            <div class="avatar-grid">
+                <c:forEach var="avatar" items="${avatars}">
+                    <label class="avatar-option">
+                        <input type="radio"
+                               name="avatarPath"
+                               value="${avatar}"
+                               required>
+                        <img src="${pageContext.request.contextPath}${avatar}"
+                             alt="avatar">
+                    </label>
+                </c:forEach>
+            </div>
+
+            <div class="avatar-actions">
+                <button type="submit">Сохранить</button>
+                <a href="${pageContext.request.contextPath}/profile">Отмена</a>
+            </div>
+
+        </form>
+    </div>
+
+</div>
+
+<c:import url="/WEB-INF/jsp/common/footer.jsp"/>
+

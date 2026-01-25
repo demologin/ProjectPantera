@@ -1,9 +1,8 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<hr>
+<%@ page contentType="text/html;charset=UTF-8" %>
 
-<footer>
-    <p>
+<footer class="app-footer">
+    <div class="footer-content">
         Учебный проект. Java, Servlets, JUnit 5, Mockito, Maven.
-    </p>
+    </div>
 </footer>
+

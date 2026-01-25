@@ -1,6 +1,8 @@
 package com.javarush.zyibin.model;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TestResult {
 
@@ -56,8 +58,19 @@ public class TestResult {
     public boolean isPassed() {
         return passed;
     }
-
     public LocalDateTime getFinishedAt() {
         return finishedAt;
+    }
+
+    public String getTopicDisplayName() {
+        String[] codes = topicCode.split(",");
+        List<String> names = new ArrayList<>();
+
+        for (String code : codes) {
+            Topic topic = Topic.fromCode(code.trim());
+            names.add(topic.getDisplayName());
+        }
+
+        return String.join(", ", names);
     }
 }

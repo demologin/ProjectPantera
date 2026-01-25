@@ -1,13 +1,19 @@
 package com.javarush.zyibin.controllers.admin;
 
+import com.javarush.zyibin.model.Topic;
+
 public class TopicStats {
 
     private final String topicCode;
     private int total;
     private int passed;
+    private String topicDisplayName;
+
 
     public TopicStats(String topicCode) {
         this.topicCode = topicCode;
+        Topic topic = Topic.fromCode(topicCode);
+        this.topicDisplayName = topic.getDisplayName();
     }
 
     public void incrementTotal() {
@@ -20,6 +26,9 @@ public class TopicStats {
 
     public String getTopicCode() {
         return topicCode;
+    }
+    public String getTopicDisplayName() {
+        return topicDisplayName;
     }
 
     public int getTotal() {
@@ -36,4 +45,6 @@ public class TopicStats {
         }
         return (passed * 100) / total;
     }
+
+
 }
