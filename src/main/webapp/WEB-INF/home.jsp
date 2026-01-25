@@ -19,7 +19,7 @@
             <div class="col text-center">
                 <section>
                     <div style="height: 500px;background: url('/images/background-main.png') center / cover;"></div>
-                    <div style="color: white"><h1>Квесты</h1></div>
+<%--                    <div style="color: white"><h1>Квесты</h1></div>--%>
                     <div class="container position-relative" style="top: -100px">
                         <div class="row gy-5 gy-lg-0 row-cols-1 row-cols-md-2 row-cols-lg-3">
                             <c:forEach var="quest" items="${requestScope.quests}">
@@ -29,7 +29,7 @@
                                             <h4 class="card-title">${quest.title}</h4>
                                             <p class="card-text text-center">${quest.description}</p>
                                         </div>
-                                        <div class="card-footer p-4 py-3"><a href="quest-page?id=${quest.id}">Посмотреть
+                                        <div class="card-footer p-4 py-3"><a href="play-game?id=${quest.id}">Посмотреть
                                             квест &nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"
                                                              fill="currentColor" viewBox="0 0 16 16"
                                                              class="bi bi-arrow-right">

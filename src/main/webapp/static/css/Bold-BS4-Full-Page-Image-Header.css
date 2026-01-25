@@ -7,3 +7,16 @@
   background-repeat: no-repeat;
 }
 
+.col {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.button-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-top: 20px;
+}
+

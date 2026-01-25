@@ -29,6 +29,10 @@ public class PlayGame implements Command {
                 .orElseThrow(() -> new IllegalArgumentException("Quest is not found: id=" + questIdStr));
         req.setAttribute("quest", quest);
 
+        if (questionIdStr == null || questionIdStr.isEmpty()) {
+            return getView();
+        }
+
         Optional<Question> currentQuestion = questionService.findCurrentQuestion(questionIdStr, quest);
         if (currentQuestion.isPresent()) {
             req.setAttribute("question", currentQuestion.get());
