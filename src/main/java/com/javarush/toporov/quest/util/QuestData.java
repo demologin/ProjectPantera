@@ -1,0 +1,207 @@
+package com.javarush.toporov.quest.util;
+
+
+import com.javarush.toporov.quest.model.Quest;
+import com.javarush.toporov.quest.model.QuestStep;
+
+import java.util.*;
+
+public class QuestData {
+
+    private static Map<String, Quest> quests = new HashMap<>();
+
+    static {
+        // ===================== Quest 1: The Black Orchid =====================
+        Quest blackOrchid = new Quest("Черная Орхидея");
+        blackOrchid.addStep(new QuestStep(1,
+                "Ты входишь в кабинет профессора. Дождь бьёт по стеклу, неон отражается в мокром полу.",
+                Map.of("Осмотреть тело", 2, "Осмотреть кабинет", 3, "Включить диктофон", 5, "Допросить охранника", 4),
+                false, false));
+        blackOrchid.addStep(new QuestStep(2,
+                "На шее виден след укола. Лицо выражает ужас.",
+                Map.of("Взять образцы для токсикологии", 6, "Обыскать карманы", 7, "Решить, что это естественная смерть", -1),
+                false, false));
+        blackOrchid.addStep(new QuestStep(3,
+                "Кабинет аккуратен. Замечаешь сейф, компьютер и личный дневник.",
+                Map.of("Взломать компьютер", 10, "Открыть сейф", 8, "Уйти и вернуться позже", -1, "Прочитать дневник", 9),
+                false, false));
+        blackOrchid.addStep(new QuestStep(4,
+                "Охранник нервничает, глаза бегают по комнате.",
+                Map.of("Давить логикой", 11, "Попытаться вызвать доверие", 12, "Запугать", -1),
+                false, false));
+        blackOrchid.addStep(new QuestStep(5,
+                "Диктофон воспроизводит запись: 'Если ты слышишь это — значит, я не успел… она слишком близко…'",
+                Map.of("Игнорировать", -1, "Отправить на экспертизу", 13, "Немедленно ехать к жене", 14),
+                false, false));
+        blackOrchid.addStep(new QuestStep(6,
+                "Токсин редкий, военного образца.",
+                Map.of("Проверить лабораторию", 15, "Рассказать полиции", -1),
+                false, false));
+        blackOrchid.addStep(new QuestStep(7,
+                "В кармане фотография женщины с подписью 'Она знает слишком много'.",
+                Map.of("Считать улику неважной", -1, "Найти эту женщину", 14),
+                false, false));
+        blackOrchid.addStep(new QuestStep(8,
+                "В сейфе флешка с пометкой 'Проект Орхидея'.",
+                Map.of("Уничтожить", -1, "Спрятать флешку", -1, "Попробовать расшифровать данные", 16),
+                false, false));
+        blackOrchid.addStep(new QuestStep(9,
+                "Дневник профессора: 'Если эксперимент завершат — сотрут память всем участникам'.",
+                Map.of("Найти участников эксперимента", 17, "Игнорировать", -1, "Сжечь дневник", -1),
+                false, false));
+        blackOrchid.addStep(new QuestStep(10,
+                "Компьютер зашифрован.",
+                Map.of("Разбить компьютер", -1, "Обратиться к хакеру", 18),
+                false, false));
+        blackOrchid.addStep(new QuestStep(11,
+                "Охранник говорит: ночью видел женщину в лаборатории.",
+                Map.of("Арестовать охранника", -1, "Узнать описание", 14),
+                false, false));
+        blackOrchid.addStep(new QuestStep(12,
+                "Охранник упоминает людей из корпорации.",
+                Map.of("Узнать название корпорации", 19, "Прекратить допрос", -1),
+                false, false));
+        blackOrchid.addStep(new QuestStep(13,
+                "Экспертиза голоса: это не жена, а коллега профессора.",
+                Map.of("Удалить запись", -1, "Найти учёную", 20),
+                false, false));
+        blackOrchid.addStep(new QuestStep(14,
+                "Жена профессора: 'Он хотел закрыть проект'.",
+                Map.of("Арестовать", -1, "Проверить алиби", 21, "Поверить ей", -1),
+                false, false));
+        blackOrchid.addStep(new QuestStep(15,
+                "В лаборатории пропал нейропрепарат.",
+                Map.of("Проверить журналы доступа", 22, "Уйти", -1),
+                false, false));
+        blackOrchid.addStep(new QuestStep(16,
+                "Флешка раскрывает видеозапись убийства, монтаж очевиден.",
+                Map.of("Обнародовать", -1, "Отдать эксперту", 23),
+                false, false));
+        blackOrchid.addStep(new QuestStep(17,
+                "Один участник эксперимента сошёл с ума.",
+                Map.of("Игнорировать", -1, "Допросить его", 24),
+                false, false));
+        blackOrchid.addStep(new QuestStep(18,
+                "Хакер находит переписку профессора с корпорацией NeuroLab.",
+                Map.of("Уничтожить данные", -1, "Найти представителя корпорации", 19),
+                false, false));
+        blackOrchid.addStep(new QuestStep(19,
+                "Корпорация финансировала эксперимент по стиранию памяти.",
+                Map.of("Закрыть дело", -1, "Найти заказчика", 25),
+                false, false));
+        blackOrchid.addStep(new QuestStep(20,
+                "Учёная признаётся: 'Жена профессора приказала продолжить эксперимент'.",
+                Map.of("Проверить её слова", 21, "Сдать учёную полиции", -1),
+                false, false));
+        blackOrchid.addStep(new QuestStep(21,
+                "Сопоставляешь алиби жены с видеозаписью.",
+                Map.of("Закрыть расследование", -1, "Сравнить время и место", 26),
+                false, false));
+        blackOrchid.addStep(new QuestStep(22,
+                "Журналы доступа подделаны.",
+                Map.of("Игнорировать", -1, "Найти того, кто подделал", 24),
+                false, false));
+        blackOrchid.addStep(new QuestStep(23,
+                "Эксперт подтверждает: видео — фальшивка.",
+                Map.of("Уничтожить запись", -1, "Найти, кому выгодно", 26),
+                false, false));
+        blackOrchid.addStep(new QuestStep(24,
+                "Свидетель: 'В ночь убийства профессор спорил с женой'.",
+                Map.of("Не верить", -1, "Проверить жену", 26),
+                false, false));
+        blackOrchid.addStep(new QuestStep(25,
+                "Ты узнаёшь: заказчик эксперимента — жена профессора.",
+                Map.of("Собрать доказательства", 27, "Уйти", -1),
+                false, false));
+        blackOrchid.addStep(new QuestStep(26,
+                "Все улики сходятся на одном человеке.",
+                Map.of("Подготовить дело для суда", 27, "Скрыть правду", -1),
+                false, false));
+        blackOrchid.addStep(new QuestStep(27,
+                "Ты стоишь перед судьёй. Доказательства против жены профессора неопровержимы.",
+                Map.of("Передать материалы в суд", -2, "Взять деньги корпорации", -1),
+                true, true));
+
+        quests.put(blackOrchid.getName(), blackOrchid);
+
+        // ===================== Quest 2: The Time Loop =====================
+        Quest timeLoop = new Quest("Петля времени");
+        timeLoop.addStep(new QuestStep(1,
+                "Ты просыпаешься в лаборатории, всё повторяется.",
+                Map.of("Проверить тело коллеги", 2, "Осмотреть оборудование", 3, "Поговорить с коллегой", -1),
+                false, false));
+        timeLoop.addStep(new QuestStep(2,
+                "На теле следы странной жидкости.",
+                Map.of("Проанализировать жидкость", 4, "Игнорировать", -1),
+                false, false));
+        timeLoop.addStep(new QuestStep(3,
+                "Лаборатория заполнена приборами и записями.",
+                Map.of("Взломать компьютер", 5, "Осмотреть записи", 4, "Попытаться починить машину времени", 6),
+                false, false));
+        timeLoop.addStep(new QuestStep(4,
+                "Жидкость нестабильна, могла вызвать галлюцинации.",
+                Map.of("Найти всех, кто имел доступ", 7, "Игнорировать", -1),
+                false, false));
+        timeLoop.addStep(new QuestStep(5,
+                "Портал может замыкать время в петле.",
+                Map.of("Использовать портал", 6, "Уничтожить данные", -1),
+                false, false));
+        timeLoop.addStep(new QuestStep(6,
+                "Ты стоишь перед порталом.",
+                Map.of("Прыгнуть в портал", 8, "Попытаться отключить петлю", 7, "Игнорировать", -1),
+                false, false));
+        timeLoop.addStep(new QuestStep(7,
+                "Ты выяснил, кто убийца.",
+                Map.of("Объявить подозреваемого", 9, "Скрыть доказательства", -1),
+                false, false));
+        timeLoop.addStep(new QuestStep(8,
+                "Прыжок в портал возвращает тебя к началу эксперимента.",
+                Map.of("Изменить эксперимент", -2, "Не менять ничего", -1),
+                true, true));
+        quests.put(timeLoop.getName(), timeLoop);
+
+        // ===================== Quest 3: King Arthur =====================
+        Quest kingArthur = new Quest("Король Артур: Проклятый трон");
+        kingArthur.addStep(new QuestStep(1,
+                "Ты стоишь у ворот Камелота.",
+                Map.of("Идти прямо к трону", 2, "Обследовать замок", 3, "Отправиться в лес", 4),
+                false, false));
+        kingArthur.addStep(new QuestStep(2,
+                "Король ослаблен проклятием.",
+                Map.of("Найти лекарство в аптеке", 5, "Игнорировать и готовиться к битве", -1),
+                false, false));
+        kingArthur.addStep(new QuestStep(3,
+                "Замок пуст, слышны шёпоты.",
+                Map.of("Осмотреть библиотеку", 6, "Проверить доспехи", 5),
+                false, false));
+        kingArthur.addStep(new QuestStep(4,
+                "Лес окутан магическим туманом.",
+                Map.of("Идти на поляну", 6, "Следовать за тенями", -1, "Искать руины", 7),
+                false, false));
+        kingArthur.addStep(new QuestStep(5,
+                "Ты находишь лекарство, кто-то следит за тобой.",
+                Map.of("Вернуться к королю", 8, "Поймать шпиона", 7),
+                false, false));
+        kingArthur.addStep(new QuestStep(6,
+                "В библиотеке находишь книгу заклинаний.",
+                Map.of("Использовать заклинание", 8, "Игнорировать", -1),
+                false, false));
+        kingArthur.addStep(new QuestStep(7,
+                "Сталкиваешься с темным магом.",
+                Map.of("Бросить вызов", 9, "Попытаться договориться", 8),
+                false, false));
+        kingArthur.addStep(new QuestStep(8,
+                "Король спасён, но магия угрожает Камелоту.",
+                Map.of("Использовать заклинание", -2, "Оставить всё как есть", -1),
+                true, true));
+        quests.put(kingArthur.getName(), kingArthur);
+    }
+
+    public static Quest getQuest(String name) {
+        return quests.get(name);
+    }
+
+    public static Set<String> getQuestNames() {
+        return quests.keySet();
+    }
+}
