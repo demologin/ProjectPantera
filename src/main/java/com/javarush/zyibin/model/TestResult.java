@@ -1,6 +1,7 @@
 package com.javarush.zyibin.model;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -72,5 +73,9 @@ public class TestResult {
         }
 
         return String.join(", ", names);
+    }
+
+    public String getFormattedFinishedAt() {
+        return finishedAt.format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss"));
     }
 }

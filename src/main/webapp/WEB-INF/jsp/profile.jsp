@@ -2,6 +2,7 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 
 
+
 <c:import url="/WEB-INF/jsp/common/header.jsp"/>
 
 <div class="container">
@@ -70,8 +71,7 @@
                                 </c:otherwise>
                             </c:choose>
                         </td>
-                        <td>${result.finishedAt}</td>
-                    </tr>
+                        <td>${result.formattedFinishedAt}</td>                    </tr>
                 </c:forEach>
             </table>
         </c:if>
