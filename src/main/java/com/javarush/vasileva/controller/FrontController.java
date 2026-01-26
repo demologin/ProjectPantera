@@ -13,7 +13,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-@WebServlet({"", "/home", "/list-user", "/edit-user", "/quest-page", "/play-game", "/create-quest"})
+@WebServlet({"", "/home", "/list-user", "/edit-user", "/quest-page", "/play-game", "/create-quest", "/update-quest"})
 public class FrontController extends HttpServlet {
 
     private final HttpResolver httpResolver = Winter.find(HttpResolver.class);

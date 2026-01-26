@@ -29,8 +29,9 @@ public class QuestRepository implements Repository<Quest> {
     }
 
     @Override
-    public void update(Quest entity) {
-
+    public void update(Quest quest) {
+        long questId = quest.getId();
+        quests.put(questId, quest);
     }
 
     @Override

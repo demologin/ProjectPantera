@@ -22,8 +22,12 @@ public class QuestService {
         return questRepository.get(id);
     }
 
-    public void create(Quest entity) {
-        questRepository.create(entity);
+    public void create(Quest quest) {
+        questRepository.create(quest);
+    }
+
+    public void update(Quest quest) {
+        questRepository.update(quest);
     }
 
     public Optional<Quest> getValidatedQuest(String questIdStr) {

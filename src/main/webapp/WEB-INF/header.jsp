@@ -13,6 +13,7 @@
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link active" href="${pageContext.request.contextPath}/">Главная</a></li>
                     <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/create-quest">Создать квест</a></li>
+                    <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/update-quest">Обновить квест</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Вход/Регистрация</a></li>
                 </ul>
             </div>
