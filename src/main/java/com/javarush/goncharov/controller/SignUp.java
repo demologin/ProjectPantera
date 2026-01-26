@@ -17,6 +17,11 @@ import java.util.Map;
 
 @WebServlet("/signup")
 public class SignUp extends HttpServlet {
+
+    private final UserStorage userStorage = UserStorage.getInstance();
+//    private final UserService userService = UserService.getInstance(UserRepository.getInstance(userStorage));
+    private final UserService userService = new UserService(new UserRepository(userStorage));
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.getRequestDispatcher("/WEB-INF/signup.jsp").forward(req, resp);
@@ -26,8 +31,6 @@ public class SignUp extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String login = req.getParameter("login");
         String password = req.getParameter("password");
-        UserStorage userStorage = UserStorage.getInstance();
-        UserService userService = UserService.getInstance(UserRepository.getInstance(userStorage));
         User user = User.builder()
                 .login(login)
                 .password(password)
@@ -35,6 +38,6 @@ public class SignUp extends HttpServlet {
         userService.post(user);
         HttpSession session = req.getSession();
         session.setAttribute("user", user);
-        resp.sendRedirect(".");
+        resp.sendRedirect("/");
     }
 }

@@ -22,8 +22,8 @@
     <header>
         <nav class="navbar navbar-expand-md bg-dark py-3" data-bs-theme="dark">
             <div class="container">
-                <a class="navbar-brand d-flex align-items-center" href="https://javarush.com/">
-                    <h2 style="border-color: var(--bs-orange);color: var(--bs-orange);">JavaRush</h2>
+                <a class="navbar-brand d-flex align-items-center" href="/">
+                    <h2 style="border-color: var(--bs-orange);color: var(--bs-orange);">JavaQuests</h2>
                 </a>
                 <button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span
                         class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span>
@@ -46,19 +46,27 @@
                                 </li>
                             </ul>
                             <ul class="nav col-md-3 text-end">
-                                <li><a href="profile" class="btn btn-info ms-md-2" style="background: var(--bs-orange);">Profile</a>
+                                <li>
+                                    <a href="profile" class="btn btn-primary ms-md-2"
+                                       style="background: var(--bs-orange);">Profile</a>
                                 </li>
-                                <li><a href="logout" class="btn btn-danger ms-md-2" style="background: var(--bs-orange);">Logout</a>
+                                <li>
+                                    <a href="logout" class="btn btn-danger ms-md-2"
+                                       style="background: var(--bs-orange);">Logout</a>
                                 </li>
                             </ul>
                         </c:when>
                         <c:otherwise>
-                            <li>
-                                <a href="login" class="btn btn-primary ms-md-2" style="background: var(--bs-orange);">Login</a>
-                            </li>
-                            <li>
-                                <a href="signup" class="btn btn-primary ms-md-2" style="background: var(--bs-orange);">Sign-up</a>
-                            </li>
+                            <ul class="nav col-md-3 text-end">
+                                <li>
+                                    <a href="login" class="btn btn-primary ms-md-2"
+                                       style="background: var(--bs-orange);">Login</a>
+                                </li>
+                                <li>
+                                    <a href="signup" class="btn btn-primary ms-md-2"
+                                       style="background: var(--bs-orange);">Sign-up</a>
+                                </li>
+                            </ul>
                         </c:otherwise>
                     </c:choose>
                 </div>

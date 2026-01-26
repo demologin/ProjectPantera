@@ -11,9 +11,6 @@ public class UserStorage {
 
     private UserStorage() {
         users = new HashMap<>();
-        // Добавим тестового пользователя
-//        users.put(1L, new User(1L, "admin", "adminpass"));
-//        users.put(2L, new User(2L, "user", "userpass"));
     }
 
     public static UserStorage getInstance() {

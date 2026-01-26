@@ -18,7 +18,7 @@ public class Profile extends HttpServlet {
         if (req.getParameter("logout") == null) {
             HttpSession session = req.getSession();
             User user = (User) session.getAttribute("user");
-            resp.sendRedirect("/");
+            resp.sendRedirect("/edit-user");
         } else {
             resp.sendRedirect("/logout");
         }

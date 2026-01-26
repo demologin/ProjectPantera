@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Message implements AbstractModel{
+public class Message{
     private Long id;
     private String name;
     private String email;

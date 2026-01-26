@@ -7,20 +7,12 @@ import java.util.Optional;
 import java.util.concurrent.atomic.AtomicLong;
 
 public class UserRepository implements Repository<User>{
-    private static UserRepository instance;
 
     private final Map<Long, User> map;
     public static final AtomicLong id = new AtomicLong();
 
-    private UserRepository(UserStorage userStorage) {
+    public UserRepository(UserStorage userStorage) {
         this.map = userStorage.getUsers();
-    }
-
-    public static UserRepository getInstance(UserStorage userStorage){
-        if (instance == null){
-            instance = new UserRepository(userStorage);
-        }
-        return instance;
     }
 
     @Override
@@ -29,10 +21,11 @@ public class UserRepository implements Repository<User>{
     }
 
     @Override
-    public Optional<User> findBy(String login) {
+    public Optional<User> findBy(String login, String password) {
         return map.values()
                 .stream()
                 .filter(u -> u.getLogin().equals(login))
+                .filter(u -> u.getPassword().equals(password))
                 .findAny();
     }
 

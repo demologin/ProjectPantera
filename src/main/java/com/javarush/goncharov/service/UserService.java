@@ -8,30 +8,25 @@ import java.util.Map;
 import java.util.Optional;
 
 public class UserService {
-    private static UserService instance;
     private final Repository<User> userRepository;
 
     public UserService(Repository<User> userRepository) {
         this.userRepository = userRepository;
-    }
-    
-    public static UserService getInstance(Repository<User> repository){
-        if (instance == null){
-            instance = new UserService(repository);
-        }
-        return instance;
     }
 
     public User get(Long id){
         return userRepository.get(id);
     }
 
-    public Optional<User> find(String login){
-        return userRepository.findBy(login);
+    public Optional<User> find(String login, String password){
+        return userRepository.findBy(login, password);
     }
 
     public void post(User user){
-        if (userRepository.findBy(user.getLogin()).stream().findAny().isEmpty()){
+        if (userRepository.findBy(user.getLogin(), user.getPassword())
+                .stream()
+                .findAny()
+                .isEmpty()){
             user.setId(0L);
             userRepository.create(user);
         }

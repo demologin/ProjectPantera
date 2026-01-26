@@ -2,14 +2,17 @@ package com.javarush.goncharov.repository;
 
 import com.javarush.goncharov.model.Message;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicLong;
 
 public class MessageRepository implements Repository<Message>{
-    private final Map<Long, Message> map = new HashMap<>();
+    private final Map<Long, Message> map;
     public static final AtomicLong id = new AtomicLong();
+
+    public MessageRepository(MessageStorage messageStorage) {
+        this.map = messageStorage.getUsers();
+    }
 
     @Override
     public Message get(long id) {
@@ -17,10 +20,11 @@ public class MessageRepository implements Repository<Message>{
     }
 
     @Override
-    public Optional<Message> findBy(String name) {
+    public Optional<Message> findBy(String name, String email) {
         return map.values()
                 .stream()
                 .filter(u -> u.getName().equals(name))
+                .filter(u -> u.getEmail().equals(email))
                 .findAny();
     }
 
