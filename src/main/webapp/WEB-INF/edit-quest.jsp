@@ -23,6 +23,8 @@
                             ${requestScope.edit ? 'Редактирование квеста' : 'Новый квест'}
                         </h2>
 
+                        <p>Для редактирования квеста нажмите на карточку квеста "Редактировать квест"</p>
+
                         <form method="post" action="<c:url value='/edit-quest'/>" class="w-100">
                             <div class="field mb-3">
                                 <textarea class="form-control" name="questJson" id="questJson"

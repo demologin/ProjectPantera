@@ -8,12 +8,23 @@
 <body>
 <div>
     <nav class="navbar navbar-expand-lg fixed-top bg-dark navbar-dark">
-        <div class="container"><a class="navbar-brand" href="${pageContext.request.contextPath}/"><strong>QUESTS</strong></a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1" type="button"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+        <div class="container"><a class="navbar-brand"
+                                  href="${pageContext.request.contextPath}/"><strong>QUESTS</strong></a>
+            <button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1" type="button"><span
+                    class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navcol-1">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link active" href="${pageContext.request.contextPath}/">Главная</a></li>
-                    <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/edit-quest">Создать квест</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Вход/Регистрация</a></li>
+                    <li class="nav-item"><a class="nav-link
+                                            <c:if test="${pageContext.request.requestURI.contains('/home')}">active</c:if>"
+                                            href="${pageContext.request.contextPath}/home">Главная</a></li>
+                    <li class="nav-item"><a class="nav-link
+                            <c:if test="${pageContext.request.requestURI.contains('/edit-quest')}">active</c:if>"
+                                            href="${pageContext.request.contextPath}/edit-quest">Создать/Обновить
+                        квест</a></li>
+                    <li class="nav-item"><a class="nav-link
+                            <c:if test="${pageContext.request.requestURI.contains('/login')
+                                        or pageContext.request.requestURI.contains('/register')}">active</c:if>"
+                                            href="#">Вход/Регистрация</a></li>
                 </ul>
             </div>
         </div>
