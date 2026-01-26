@@ -14,12 +14,7 @@ public class Stop extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        HttpSession session = req.getSession();
-      //  int count = Integer.parseInt(session.getAttribute("count").toString());
-        session.setAttribute("id", 1);
 
-      //  String name = req.getParameter("name");
-      //  req.setAttribute("name", name);
         req.getServletContext().getRequestDispatcher("/stop.jsp").forward(req, resp);
     }
 }
