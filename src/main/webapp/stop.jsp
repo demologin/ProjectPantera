@@ -17,14 +17,14 @@
 
 <body>
 <div class="px-4 py-5 my-5 text-center">
-    <h2 class="display-5 fw-bold text-body-emphasis">Пролог</h2>
+    <h2 class="display-5 fw-bold text-body-emphasis">Все закончилось хорошо!</h2>
     <div class="col-lg-6 mx-auto">
         <p class="lead mb-4">
-            <%
+<%
                 RepositoryService r = new RepositoryService(Repository.getRepository());
-                String intro = r.getIntro();
+                String introStop = r.getIntroStop();
             %>
-            <%=intro%>
+            <%=introStop%>
         </p>
     </div>
     <br/>
@@ -33,41 +33,15 @@
             <p class="lead mb-4">
                 Игрок: ${name}
             </p>
+
             <br/>
             <br/>
         </div>
     </div>
-    <div class="text-end">
-        <button type="button" onclick="start()" class="btn btn-outline-primary me-2">Еще попытка...</button>
-    </div>
-     <div class="text-end">
-            <button type="button" onclick="stop()" class="btn btn-outline-primary me-2">Выйти из игры...</button>
-        </div>
+
 </div>
 
 <script>
-    function start() {
-        const url = "greeting";
-        $.ajax({
-            method: "GET",
-            url: url,
-            dataType: "html",
-            success: function () {
-                document.location.href = "greeting";
-            }
-        });
-    }
-    function stop() {
-            const url = "stop";
-            $.ajax({
-                method: "GET",
-                url: url,
-                dataType: "html",
-                success: function () {
-                    document.location.href = "stop";
-                }
-            });
-        }
 
 </script>
 

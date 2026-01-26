@@ -14,7 +14,7 @@ public class RepositoryService {
     List<Question> questions;
     List<Answer> answers;
     String intro;
-
+    String introStop;
 
     public RepositoryService(Repository repository) {
         questions = fillQuestionsFromRepo(repository.getRecords());
@@ -26,6 +26,10 @@ public class RepositoryService {
         for (String[] record : repoList) {
             if (record[0].equals("0")) {
                 intro = record[1];
+                continue;
+            }
+            if (record[0].equals("5")) {
+                introStop = record[1];
                 continue;
             }
             if (record.length != 3 && record.length != 4) {
@@ -119,5 +123,8 @@ public class RepositoryService {
     public String getIntro() {
         return intro;
     }
-
+    public String getIntroStop() {
+        return introStop;
+    }
 }
+
