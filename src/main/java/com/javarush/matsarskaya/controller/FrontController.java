@@ -10,7 +10,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-@WebServlet({"/home-page", "/quest-dragon", "/login-page", "/register-page", "/logout"})
+@WebServlet({"/home-page", "/quest-dragon", "/login-page", "/register-page", "/logout", "/statistic-page"})
 public class FrontController extends HttpServlet {
     private final HttpResolver httpResolver = new HttpResolver();
 

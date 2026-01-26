@@ -1,0 +1,27 @@
+<%@ page contentType="text/html;charset=UTF-8" %>
+
+<html>
+<head>
+  <title>Статистика</title>
+</head>
+<body>
+
+<h2>📊 Ваша статистика</h2>
+
+<table border="1">
+  <tr>
+    <th>Попытки</th>
+    <th>Победы</th>
+    <th>Поражения</th>
+  </tr>
+  <tr>
+    <td>${statistic.attempts}</td>
+    <td>${statistic.wins}</td>
+    <td>${statistic.losses}</td>
+  </tr>
+</table>
+
+<a href="/home-page">На главную</a>
+
+</body>
+</html>

@@ -10,6 +10,9 @@
 <div style="float: right;">
     <c:choose>
         <c:when test="${not empty sessionScope.username}">
+            <a href="/statistic-page">
+                <button type="button">Статистика</button>
+            </a>
             <form action="/logout" method="post" style="display:inline;">
                 <button type="submit">Выйти</button>
             </form>
