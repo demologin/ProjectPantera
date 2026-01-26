@@ -64,3 +64,18 @@ textarea:focus {
   box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
 }
 
+input[type="radio"] {
+  border: 2px solid #007BFF;
+  border-radius: 50%;
+  width: 16px;
+  height: 16px;
+}
+
+input[type="radio"]:hover {
+  border-color: #0056b3;
+}
+
+.row {
+  row-gap: 20px;
+}
+

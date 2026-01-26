@@ -19,7 +19,6 @@
             <div class="col text-center">
                 <section>
                     <div style="height: 500px;background: url('/images/background-main.png') center / cover;"></div>
-<%--                    <div style="color: white"><h1>Квесты</h1></div>--%>
                     <div class="container position-relative" style="top: -100px">
                         <div class="row gy-5 gy-lg-0 row-cols-1 row-cols-md-2 row-cols-lg-3">
                             <c:forEach var="quest" items="${requestScope.quests}">

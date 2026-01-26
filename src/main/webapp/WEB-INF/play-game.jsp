@@ -70,7 +70,7 @@
 
                                 <div class="form-group row mb-3">
                                     <label class="col-md-4 col-form-label">
-                                            ${requestScope.question.text}
+                                        <b>${requestScope.question.text}</b>
                                     </label>
                                     <div class="col-md-8">
                                         <c:forEach var="answer" items="${requestScope.answers}">
@@ -81,7 +81,7 @@
                                                        id="answer-${answer.id}"
                                                        value="${answer.id}"
                                                        required>
-                                                <label class="form-check-label" for="answer-${answer.id}">
+                                                <label class="form-check-label mb-3" for="answer-${answer.id}">
                                                         ${answer.text}
                                                 </label>
                                             </div>
