@@ -10,12 +10,12 @@ import jakarta.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.List;
 
-public class UpdateQuest implements Command {
+public class EditQuest implements Command {
     private final QuestService questService;
     private final QuestMapper questMapper = Winter.find(QuestMapper.class);
     private final Config config;
 
-    public UpdateQuest(QuestService questService, Config config) {
+    public EditQuest(QuestService questService, Config config) {
         this.questService = questService;
         this.config = config;
     }
@@ -29,13 +29,34 @@ public class UpdateQuest implements Command {
         if (questIdStr != null && !questIdStr.isEmpty()) {
             Quest quest = questService.getValidatedQuest(questIdStr)
                     .orElseThrow(() -> new IllegalArgumentException("Quest is not found: id=" + questIdStr));
+            req.setAttribute("edit", true);
             req.setAttribute("quest", quest);
             try {
                 String questJson = questMapper.toJsonString(quest);
                 req.setAttribute("questJson", questJson);
             } catch (IOException e) {
-                throw new RuntimeException(e);
+                throw new RuntimeException("Quest serialization error", e);
             }
+        } else {
+            req.setAttribute("edit", false);
+            req.setAttribute("questJson", """
+                    {
+                      "title": "Название",
+                      "description": "Краткое описание",
+                      "text": "Текст",
+                      "questions": [
+                        {
+                          "label": "1",
+                          "text": "Вопрос 1",
+                          "answers": [
+                            {
+                              "nextQuestionLabel": "2",
+                              "text": "Вариант ответа 1"
+                            }
+                          ]
+                        }
+                      ]
+                    }""");
         }
         return getView();
     }
@@ -50,8 +71,15 @@ public class UpdateQuest implements Command {
             }
 
             Quest quest = questMapper.fromJsonString(json);
-            config.setQuestParameters(quest);
-            questService.update(quest);
+            if (quest.getId() != null) {
+                questService.update(quest);
+                config.setQuestParameters(quest);
+                req.setAttribute("info", "Квест успешно обновлён");
+            } else {
+                questService.create(quest);
+                config.setQuestParameters(quest);
+                req.setAttribute("info", "Квест успешно создан");
+            }
             return "/home";
 
         } catch (Exception e) {
