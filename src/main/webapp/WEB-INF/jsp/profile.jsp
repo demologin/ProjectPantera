@@ -16,7 +16,8 @@
             <div class="profile-avatar-section">
                 <img class="profile-avatar-large"
                      src="${pageContext.request.contextPath}${user.avatarPath}"
-                     alt="Avatar">
+                     alt="Avatar"
+                     onerror="this.src='${pageContext.request.contextPath}/resources/avatars/default/default.png'">
                 <div class="profile-details">
                     <h3>${user.nickname}</h3>
                     <p class="profile-email">${user.email}</p>
