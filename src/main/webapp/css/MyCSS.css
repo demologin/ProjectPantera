@@ -1,0 +1,15 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.text-end {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.lead {
+    text-align: center;
+}
