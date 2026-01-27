@@ -13,7 +13,9 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-@WebServlet({"", "/home", "/list-user", "/edit-user", "/play-game", "/edit-quest"})
+import static com.javarush.vasileva.util.Link.*;
+
+@WebServlet({INDEX, HOME, USER_LIST, EDIT_USER, PLAY_GAME, EDIT_QUEST})
 public class FrontController extends HttpServlet {
 
     private final HttpResolver httpResolver = Winter.find(HttpResolver.class);
