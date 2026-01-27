@@ -3,12 +3,9 @@ package com.javarush.zyibin.service;
 import com.javarush.zyibin.model.Role;
 import com.javarush.zyibin.model.User;
 import com.javarush.zyibin.repository.UserRepository;
+import com.javarush.zyibin.util.PasswordUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
-import java.util.HexFormat;
 
 public class UserServiceImpl implements UserService {
     private static final Logger log = LoggerFactory.getLogger(UserServiceImpl.class);
@@ -31,7 +28,7 @@ public class UserServiceImpl implements UserService {
                     log.warn("Registration failed: username {} already exists", username);
                     throw new IllegalStateException("User with this login already exists");
                 });
-        String passwordHash = hashPassword(rawPassword);
+        String passwordHash = PasswordUtil.hashPassword(rawPassword);
         User user = new User(
                 0,
                 username,
@@ -49,14 +46,4 @@ public class UserServiceImpl implements UserService {
         return user;
     }
 
-    private String hashPassword(String password) {
-        try {
-            MessageDigest digest = MessageDigest.getInstance("SHA-256");
-            byte[] hash = digest.digest(password.getBytes(StandardCharsets.UTF_8));
-            return HexFormat.of().formatHex(hash);
-        } catch (Exception e) {
-            log.error("Password hashing failed", e);
-            throw new RuntimeException("Failed to hash password", e);
-        }
-    }
 }
