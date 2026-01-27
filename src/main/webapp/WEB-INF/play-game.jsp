@@ -20,7 +20,7 @@
             <c:if test="${empty requestScope.question and empty requestScope.gameOver}">
                 <div class="button-group">
                     <div>
-                        <a href="${pageContext.request.contextPath}/play-game?id=${requestScope.quest.id}&questionId=${requestScope.quest.startQuestionId}"
+                        <a href="${pageContext.request.contextPath}/play-game?questId=${requestScope.quest.id}&questionId=${requestScope.quest.startQuestionId}"
                            class="btn btn-primary fs-5 me-2 px-4 py-2">Начать</a>
                     </div>
                     <div>
@@ -47,7 +47,7 @@
 
                         <div class="button-group">
                             <form method="GET" action="<c:url value='/play-game'/>" style="display:inline; margin-bottom: 10px">
-                                <input type="hidden" name="id" value="${requestScope.quest.id}"/>
+                                <input type="hidden" name="questId" value="${requestScope.quest.id}"/>
                                 <button type="submit" class="btn btn-primary fs-5 me-2 px-4 py-2">
                                     Начать заново
                                 </button>

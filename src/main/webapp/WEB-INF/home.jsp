@@ -25,7 +25,7 @@
                                             <h4 class="card-title">${quest.title}</h4>
                                             <p class="card-text text-center">${quest.description}</p>
                                         </div>
-                                        <div class="card-footer p-4 py-3"><a href="play-game?id=${quest.id}">Посмотреть
+                                        <div class="card-footer p-4 py-3"><a href="play-game?questId=${quest.id}">Посмотреть
                                             квест &nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"
                                                              fill="currentColor" viewBox="0 0 16 16"
                                                              class="bi bi-arrow-right">

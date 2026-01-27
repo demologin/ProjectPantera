@@ -6,6 +6,8 @@ import jakarta.servlet.http.HttpServletRequest;
 
 import java.util.List;
 
+import static com.javarush.vasileva.util.Key.QUESTS;
+
 public class Home implements Command {
     private final QuestService questService;
 
@@ -17,7 +19,7 @@ public class Home implements Command {
     public String doGet(HttpServletRequest req) {
         try {
             List<Quest> quests = questService.getAll();
-            req.setAttribute("quests", quests);
+            req.setAttribute(QUESTS, quests);
             System.out.println("Quests loaded: " + quests.size());
             System.out.println("Loaded quests: " + quests);
 

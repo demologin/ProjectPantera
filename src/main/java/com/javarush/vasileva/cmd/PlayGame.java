@@ -9,6 +9,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Optional;
 
+import static com.javarush.vasileva.util.Key.*;
+
 public class PlayGame implements Command {
     private final QuestService questService;
     private final QuestionService questionService;
@@ -22,12 +24,12 @@ public class PlayGame implements Command {
 
     @Override
     public String doGet(HttpServletRequest req) {
-        String questIdStr = req.getParameter("id");
-        String questionIdStr = req.getParameter("questionId");
+        String questIdStr = req.getParameter(QUEST_ID);
+        String questionIdStr = req.getParameter(QUESTION_ID);
 
         Quest quest = questService.getValidatedQuest(questIdStr)
                 .orElseThrow(() -> new IllegalArgumentException("Quest is not found: id=" + questIdStr));
-        req.setAttribute("quest", quest);
+        req.setAttribute(QUEST, quest);
 
         if (questionIdStr == null || questionIdStr.isEmpty()) {
             return getView();
@@ -35,26 +37,26 @@ public class PlayGame implements Command {
 
         Optional<Question> currentQuestion = questionService.findCurrentQuestion(questionIdStr, quest);
         if (currentQuestion.isPresent()) {
-            req.setAttribute("question", currentQuestion.get());
+            req.setAttribute(QUESTION, currentQuestion.get());
             List<Answer> answers = currentQuestion.get().getAnswers();
             if (answers == null || answers.isEmpty()) {
-                req.setAttribute("noAnswers", true);
+                req.setAttribute(NO_ANSWERS, true);
             } else {
-                req.setAttribute("answers", answers);
+                req.setAttribute(ANSWERS, answers);
             }
         } else {
-            req.setAttribute("gameOver", true);
+            req.setAttribute(GAME_OVER, true);
         }
         return getView();
     }
 
     @Override
     public String doPost(HttpServletRequest req) {
-        String questIdStr = req.getParameter("questId");
-        String answerIdStr = req.getParameter("selectedAnswerId");
+        String questIdStr = req.getParameter(QUEST_ID);
+        String answerIdStr = req.getParameter(SELECTED_ANSWER_ID);
 
         if (questIdStr == null || answerIdStr == null) {
-            return getView() + "?id=" + questIdStr; // Return to the same page
+            return getView() + "?" + QUEST_ID + "=" + questIdStr; // Return to the same page
         }
 
         long questId = questService.parseQuestIdStrToLong(questIdStr);
@@ -62,9 +64,9 @@ public class PlayGame implements Command {
 
         Optional<Answer> answer = answerService.get(answerId);
         if (answer.isEmpty()) {
-            return getView() + "?id=" + questId;
+            return getView() + "?" + QUEST_ID + "=" + questId;
         }
         long nextQuestionId = questionService.findNextQuestionId(questId, answer.get());
-        return getView() + "?id=" + questId + "&questionId=" + nextQuestionId;
+        return getView() + "?" + QUEST_ID + "=" + questId + "&"+ QUESTION_ID + "=" + nextQuestionId;
     }
 }
