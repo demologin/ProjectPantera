@@ -23,7 +23,15 @@
                             ${requestScope.edit ? 'Редактирование квеста' : 'Новый квест'}
                         </h2>
 
-                        <p>Для редактирования квеста нажмите на карточку квеста "Редактировать квест"</p>
+                        <p>Для редактирования нажмите на карточку квеста "Редактировать квест" или выберите квест из списка ниже</p>
+
+                        <div class="mb-4">
+                            <c:forEach var="quest" items="${requestScope.quests}">
+                                <div class="mb-1">
+                                    <a href="edit-quest?questId=${quest.id}" class="link text-white">${quest.title}</a>
+                                </div>
+                            </c:forEach>
+                        </div>
 
                         <form method="post" action="<c:url value='/edit-quest'/>" class="w-100">
                             <div class="field mb-3">
