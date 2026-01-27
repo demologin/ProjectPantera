@@ -9,33 +9,20 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
-import java.util.Optional;
+import java.util.Collection;
 
-@WebServlet("/login")
-public class Login extends HttpServlet {
+@WebServlet("/list-users")
+public class ListUsers extends HttpServlet {
 
     private final Storage userStorage = Storage.getInstance();
     private final UserService userService = new UserService(new UserRepository(userStorage));
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("/WEB-INF/login.jsp").forward(req, resp);
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String login = req.getParameter("login");
-        String password = req.getParameter("password");
-        Optional<User> user = userService.find(login, password);
-        if (user.isPresent()){
-            HttpSession session = req.getSession();
-            session.setAttribute("user", user.get());
-            resp.sendRedirect("/");
-        } else {
-            resp.sendRedirect("/login");
-        }
+        Collection<User> users = userService.getAll().values();
+        req.setAttribute("users", users);
+        req.getRequestDispatcher("/WEB-INF/list-user.jsp").forward(req, resp);
     }
 }

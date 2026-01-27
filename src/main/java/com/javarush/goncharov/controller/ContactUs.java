@@ -2,7 +2,7 @@ package com.javarush.goncharov.controller;
 
 import com.javarush.goncharov.model.Message;
 import com.javarush.goncharov.repository.MessageRepository;
-import com.javarush.goncharov.repository.MessageStorage;
+import com.javarush.goncharov.repository.Storage;
 import com.javarush.goncharov.service.MessageService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -15,7 +15,7 @@ import java.io.IOException;
 @WebServlet("/contact")
 public class ContactUs extends HttpServlet {
 
-    private final MessageStorage messageStorage = MessageStorage.getInstance();
+    private final Storage messageStorage = Storage.getInstance();
     private final MessageService messageService = new MessageService(new MessageRepository(messageStorage));
 
     @Override

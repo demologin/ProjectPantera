@@ -4,8 +4,8 @@
 <div class="container py-4 py-xl-5">
     <div class="row mb-4 mb-lg-5">
         <div class="col-md-8 col-xl-6 text-center mx-auto">
-            <h2>Our Team</h2>
-            <p class="w-lg-50">Команда работающая над разработкой сайта</p>
+            <h2>Команда мечты</h2>
+            <p class="w-lg-50">Над проектом работали:</p>
         </div>
     </div>
     <div class="row gy-4 row-cols-2 row-cols-md-4">

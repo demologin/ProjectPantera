@@ -8,26 +8,26 @@
             <!-- Form Name -->
             <legend>Edit user:</legend>
             <!-- File Button -->
-            <p class="text-muted">Нажмите для загрузки фото</p>
-            <!-- File Button -->
-            <div class="form-group">
-                <label for="image">
-                    <img id="previewId" src="images/${requestScope.user.image}"  width="250px"
-                         alt="${requestScope.user.image}">
-                </label>
-                <input onchange="PreviewImage('image','previewId');" id="image" name="image"
-                       style="visibility:hidden;"
-                       class="input-file" type="file">
-                <script type="text/javascript">
-                    function PreviewImage(inputFileId, imageId) {
-                        let oFReader = new FileReader();
-                        oFReader.readAsDataURL(document.getElementById(inputFileId).files[0]);
-                        oFReader.onload = function (oFREvent) {
-                            document.getElementById(imageId).src = oFREvent.target.result;
-                        };
-                    }
-                </script>
-            </div>
+<%--            <p class="text-muted">Нажмите для загрузки фото</p>--%>
+<%--            <!-- File Button -->--%>
+<%--            <div class="form-group">--%>
+<%--                <label for="image">--%>
+<%--                    <img id="previewId" src="images/${requestScope.user.image}"  width="250px"--%>
+<%--                         alt="${requestScope.user.image}">--%>
+<%--                </label>--%>
+<%--                <input onchange="PreviewImage('image','previewId');" id="image" name="image"--%>
+<%--                       style="visibility:hidden;"--%>
+<%--                       class="input-file" type="file">--%>
+<%--                <script type="text/javascript">--%>
+<%--                    function PreviewImage(inputFileId, imageId) {--%>
+<%--                        let oFReader = new FileReader();--%>
+<%--                        oFReader.readAsDataURL(document.getElementById(inputFileId).files[0]);--%>
+<%--                        oFReader.onload = function (oFREvent) {--%>
+<%--                            document.getElementById(imageId).src = oFREvent.target.result;--%>
+<%--                        };--%>
+<%--                    }--%>
+<%--                </script>--%>
+<%--            </div>--%>
             <!-- Text input-->
             <div class="form-group">
                 <label class="col-md-4 control-label" for="login">Login</label>
@@ -58,7 +58,6 @@
                     <span class="help-block">min 8 symbols</span>
                 </div>
             </div>
-
 
             <!-- Select Basic -->
             <div class="form-group">

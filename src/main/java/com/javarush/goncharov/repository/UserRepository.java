@@ -11,7 +11,7 @@ public class UserRepository implements Repository<User>{
     private final Map<Long, User> map;
     public static final AtomicLong id = new AtomicLong();
 
-    public UserRepository(UserStorage userStorage) {
+    public UserRepository(Storage userStorage) {
         this.map = userStorage.getUsers();
     }
 

@@ -11,10 +11,6 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&amp;display=swap">
     <link rel="stylesheet" href="assets/css/styles.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
-    <%--    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">--%>
-    <%--    <link rel="stylesheet" href="assets/css/Contact-Details-icons.css">--%>
-    <%--    <link rel="stylesheet" href="assets/css/Team-icons.css">--%>
-    <%--    <link rel="stylesheet" href="assets/css/Team-images.css">--%>
 </head>
 
 <body class="d-flex flex-column min-vh-100">
@@ -23,7 +19,7 @@
         <nav class="navbar navbar-expand-md bg-dark py-3" data-bs-theme="dark">
             <div class="container">
                 <a class="navbar-brand d-flex align-items-center" href="/">
-                    <h2 style="border-color: var(--bs-orange);color: var(--bs-orange);">JavaQuests</h2>
+                    <h2 style="border-color: var(--bs-orange);color: var(--bs-orange);">JavaQuest</h2>
                 </a>
                 <button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span
                         class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span>
@@ -40,7 +36,7 @@
                             <ul class="navbar-nav ms-auto">
                                 <li class="nav-item"><a class="nav-link active" href=".">Home</a></li>
                                 <li class="nav-item"><a class="nav-link" href="#">Статистика</a></li>
-                                <li class="nav-item"><a class="nav-link" href="#">Пользователи</a>
+                                <li class="nav-item"><a class="nav-link" href="list-users">Пользователи</a>
                                 </li>
                                 <li class="nav-item"><a class="nav-link" href="#">Создать квест</a>
                                 </li>

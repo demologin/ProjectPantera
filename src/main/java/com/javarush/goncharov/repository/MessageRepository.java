@@ -10,8 +10,8 @@ public class MessageRepository implements Repository<Message>{
     private final Map<Long, Message> map;
     public static final AtomicLong id = new AtomicLong();
 
-    public MessageRepository(MessageStorage messageStorage) {
-        this.map = messageStorage.getUsers();
+    public MessageRepository(Storage messageStorage) {
+        this.map = messageStorage.getMessages();
     }
 
     @Override
