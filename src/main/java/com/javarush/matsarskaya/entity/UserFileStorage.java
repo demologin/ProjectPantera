@@ -1,13 +1,15 @@
 package com.javarush.matsarskaya.entity;
 
+import com.javarush.matsarskaya.config.FileStorageConfig;
+
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 public class UserFileStorage {
-    private static final String USERS_FILE_PATH = "users.txt";
     private final Map<String, String> users = new HashMap<>();
     private boolean loaded = false;
 
@@ -15,22 +17,41 @@ public class UserFileStorage {
         loadUsersIfNeeded();
     }
 
+    /**
+     * Сохраняет пользователя в файл.
+     * @param username имя пользователя
+     * @param password пароль
+     */
     public void saveUser(String username, String password) {
         loadUsersIfNeeded();
         users.put(username, password);
         saveUsersToFile();
     }
 
-    public String getPasswordByUsername(String username) {
+    /**
+     * Возвращает пароль пользователя по имени.
+     * @param username имя пользователя
+     * @return Optional с паролем, если пользователь существует
+     */
+    public Optional<String> getPasswordByUsername(String username) {
         loadUsersIfNeeded();
-        return users.get(username);
+        return Optional.ofNullable(users.get(username));
     }
 
+    /**
+     * Проверяет существование пользователя.
+     * @param username имя пользователя
+     * @return true если пользователь существует
+     */
     public boolean userExists(String username) {
         loadUsersIfNeeded();
         return users.containsKey(username);
     }
 
+    /**
+     * Возвращает копию всех пользователей.
+     * @return Map с пользователями
+     */
     public Map<String, String> getAllUsers() {
         loadUsersIfNeeded();
         return new HashMap<>(users);
@@ -44,7 +65,8 @@ public class UserFileStorage {
     }
 
     private void saveUsersToFile() {
-        try (PrintWriter writer = new PrintWriter(new FileWriter(USERS_FILE_PATH))) {
+        String filePath = FileStorageConfig.getUsersFilePath();
+        try (PrintWriter writer = new PrintWriter(new FileWriter(filePath))) {
             for (Map.Entry<String, String> entry : users.entrySet()) {
                 writer.println(entry.getKey() + ":" + entry.getValue());
             }
@@ -54,11 +76,12 @@ public class UserFileStorage {
     }
 
     private void loadUsersFromFile() {
-        if (!Files.exists(Paths.get(USERS_FILE_PATH))) {
+        String filePath = FileStorageConfig.getUsersFilePath();
+        if (!Files.exists(Paths.get(filePath))) {
             return;
         }
 
-        try (BufferedReader reader = new BufferedReader(new FileReader(USERS_FILE_PATH))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] parts = line.split(":", 2);

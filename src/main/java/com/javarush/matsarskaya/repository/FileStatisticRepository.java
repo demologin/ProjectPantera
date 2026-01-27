@@ -1,5 +1,6 @@
 package com.javarush.matsarskaya.repository;
 
+import com.javarush.matsarskaya.config.FileStorageConfig;
 import com.javarush.matsarskaya.entity.Statistic;
 
 import java.io.*;
@@ -10,7 +11,6 @@ import java.util.Map;
 import java.util.Optional;
 
 public class FileStatisticRepository implements StatisticRepository {
-    private static final String FILE_PATH = "statistics.txt";
     private final Map<String, Statistic> statistics = new HashMap<>();
     private boolean loaded = false;
 
@@ -18,11 +18,12 @@ public class FileStatisticRepository implements StatisticRepository {
         if (loaded) return;
         loaded = true;
 
-        if (!Files.exists(Paths.get(FILE_PATH))) {
+        String filePath = FileStorageConfig.getStatisticsFilePath();
+        if (!Files.exists(Paths.get(filePath))) {
             return;
         }
 
-        try (BufferedReader reader = new BufferedReader(new FileReader(FILE_PATH))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] parts = line.split(":");
@@ -36,7 +37,7 @@ public class FileStatisticRepository implements StatisticRepository {
                 }
             }
         } catch (IOException e) {
-            throw new RuntimeException("Ошибка чтения statistics.txt", e);
+            throw new RuntimeException("Ошибка чтения " + filePath, e);
         }
     }
 
@@ -51,7 +52,8 @@ public class FileStatisticRepository implements StatisticRepository {
         loadIfNeeded();
         statistics.put(statistic.getUsername(), statistic);
 
-        try (PrintWriter writer = new PrintWriter(new FileWriter(FILE_PATH))) {
+        String filePath = FileStorageConfig.getStatisticsFilePath();
+        try (PrintWriter writer = new PrintWriter(new FileWriter(filePath))) {
             for (Statistic s : statistics.values()) {
                 writer.println(
                         s.getUsername() + ":" +
@@ -61,7 +63,7 @@ public class FileStatisticRepository implements StatisticRepository {
                 );
             }
         } catch (IOException e) {
-            throw new RuntimeException("Ошибка записи statistics.txt", e);
+            throw new RuntimeException("Ошибка записи " + filePath, e);
         }
     }
 }

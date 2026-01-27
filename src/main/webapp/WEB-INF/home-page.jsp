@@ -5,22 +5,7 @@
     <title>Квесты</title>
 </head>
 <body>
-
-<div style="float: right;">
-    <c:choose>
-        <c:when test="${not empty sessionScope.username}">
-            <a href="/statistic-page">
-                <button type="button">Статистика</button>
-            </a>
-            <form action="/logout" method="post" style="display:inline;">
-                <button type="submit">Выйти</button>
-            </form>
-        </c:when>
-        <c:otherwise>
-            <a href="/login-page">Войти</a> | <a href="/register-page">Зарегистрироваться</a>
-        </c:otherwise>
-    </c:choose>
-</div>
+<jsp:include page="/WEB-INF/header.jsp"/>
 
     <h2>Здесь начинается ваше приключение!"</h2>
     <h3>Выберите квест чтобы продолжить</h3>
@@ -31,7 +16,7 @@
     </form>
 
 <c:if test="${empty sessionScope.username}">
-    <p style="color: #4099ff;">Зарегистрируйтесь/войдите чтобы продолжить</p>
+    <p style="color: #4099ff;">Зарегистрируйтесь/ войдите чтобы продолжить</p>
 </c:if>
 
 <p>${message}</p>

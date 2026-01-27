@@ -16,40 +16,46 @@ public class FrontController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        // Получение пути запроса (например, "/home-page" или "/quest-dragon")
-        String pathInfo = req.getServletPath();
-
-        // Проверяем, нужно ли проверять авторизацию
-        if (pathInfo.equals("/quest-dragon")) {
-            // Проверяем авторизацию для квеста
-            if (!UserService.isAuthenticated(req)) {
-                resp.sendRedirect(req.getContextPath() + "/home-page");
-                return;
-            }
-        }
-        // Использование HttpResolver для получения соответствующей команды
-        Command command = httpResolver.resolve(pathInfo);
-        // Вызов метода doGet команды, который возвращает путь к JSP-странице
-        String viewPath = command.doGet(req);
-        // Перенаправление запроса на соответствующую JSP-страницу
-        req.getRequestDispatcher(viewPath).forward(req, resp);
+        processRequest(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        processRequest(req, resp);
+    }
+
+    /**
+     * Обрабатывает HTTP-запрос.
+     * @param req HTTP запрос
+     * @param resp HTTP ответ
+     * @throws ServletException ошибка сервлета
+     * @throws IOException ошибка ввода-вывода
+     */
+    private void processRequest(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
         String pathInfo = req.getServletPath();
 
-        // Проверяем, нужно ли проверять авторизацию
-        if (pathInfo.equals("/quest-dragon")) {
-            if (!UserService.isAuthenticated(req)) {
-                resp.sendRedirect(req.getContextPath() + "/home-page");
-                return;
-            }
+        // Проверяем авторизацию для защищённых страниц
+        if (isProtectedPath(pathInfo) && !UserService.isAuthenticated(req)) {
+            resp.sendRedirect(req.getContextPath() + "/home-page");
+            return;
         }
 
+        // Получаем команду и выполняем её
         Command command = httpResolver.resolve(pathInfo);
-        String viewPath = command.doPost(req);
+        String viewPath = "GET".equals(req.getMethod()) ? command.doGet(req) : command.doPost(req);
+
+        // Перенаправляем на JSP-страницу
         req.getRequestDispatcher(viewPath).forward(req, resp);
+    }
+
+    /**
+     * Проверяет, является ли путь защищённым (требует авторизации).
+     * @param pathInfo путь запроса
+     * @return true если путь защищённый
+     */
+    private boolean isProtectedPath(String pathInfo) {
+        return "/quest-dragon".equals(pathInfo) || "/statistic-page".equals(pathInfo);
     }
 }
 

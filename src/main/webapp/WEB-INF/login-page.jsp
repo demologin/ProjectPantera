@@ -5,6 +5,9 @@
     <title>Вход</title>
 </head>
 <body>
+
+<jsp:include page="/WEB-INF/header.jsp"/>
+
 <h2>Вход</h2>
 <c:if test="${not empty error}">
     <p style="color: #ff3f3f;">${error}</p>

@@ -6,6 +6,8 @@
 </head>
 <body>
 
+<jsp:include page="/WEB-INF/header.jsp"/>
+
 <h2>📊 Ваша статистика</h2>
 
 <table border="1">

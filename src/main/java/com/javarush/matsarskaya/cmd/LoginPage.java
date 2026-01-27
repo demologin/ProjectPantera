@@ -1,8 +1,7 @@
 package com.javarush.matsarskaya.cmd;
 
-import com.javarush.matsarskaya.entity.UserFileStorage;
-import com.javarush.matsarskaya.repository.FileUserRepository;
-import com.javarush.matsarskaya.repository.UserRepository;
+import com.javarush.matsarskaya.exception.InvalidCredentialsException;
+import com.javarush.matsarskaya.exception.UserNotFoundException;
 import com.javarush.matsarskaya.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -10,7 +9,6 @@ import jakarta.servlet.http.HttpSession;
 public class LoginPage implements Command {
     private final UserService userService;
 
-    // Конструктор, принимающий UserService
     public LoginPage(UserService userService) {
         this.userService = userService;
     }
@@ -25,14 +23,18 @@ public class LoginPage implements Command {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
 
-        if (userService.loginUser(username, password).isPresent()) {
+        try {
+            userService.loginUser(username, password);
             HttpSession session = request.getSession();
             session.setAttribute("username", username);
             return "/home-page";
-        } else {
+        } catch (UserNotFoundException e) {
+            request.setAttribute("error", "Пользователь не найден");
+        } catch (InvalidCredentialsException e) {
             request.setAttribute("error", "Неверное имя пользователя или пароль");
-            return getView();
         }
+
+        return getView();
     }
 
     @Override

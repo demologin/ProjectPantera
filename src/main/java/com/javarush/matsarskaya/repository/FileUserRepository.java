@@ -2,6 +2,7 @@ package com.javarush.matsarskaya.repository;
 
 import com.javarush.matsarskaya.entity.User;
 import com.javarush.matsarskaya.entity.UserFileStorage;
+import com.javarush.matsarskaya.exception.UserAlreadyExistsException;
 
 import java.util.Optional;
 
@@ -14,17 +15,17 @@ public class FileUserRepository implements UserRepository{
 
     @Override
     public boolean save(User user) {
+        if (storage.userExists(user.getUsername())) {
+            throw new UserAlreadyExistsException(user.getUsername());
+        }
         storage.saveUser(user.getUsername(), user.getPassword());
         return true;
     }
 
     @Override
     public Optional<User> findByUsername(String username) {
-        String password = storage.getPasswordByUsername(username);
-        if (password != null) {
-            return Optional.of(new User(username, password));
-        }
-        return Optional.empty();
+        Optional<String> password = storage.getPasswordByUsername(username);
+        return password.map(pwd -> new User(username, pwd));
     }
 
     @Override

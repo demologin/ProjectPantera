@@ -9,25 +9,36 @@ import com.javarush.matsarskaya.repository.UserRepository;
 import com.javarush.matsarskaya.service.StatisticService;
 import com.javarush.matsarskaya.service.UserService;
 
-import java.util.HashMap;
 import java.util.Map;
 
 public class HttpResolver {
-    private static final UserFileStorage storage = new UserFileStorage();
-    private static final UserRepository repository = new FileUserRepository(storage);
-    private static final UserService userService = new UserService(repository);
-    private static final StatisticRepository statisticRepository = new FileStatisticRepository();
-    private static final StatisticService statisticService = new StatisticService(statisticRepository);
+    private final Map<String, Command> commandMap;
 
-    private final Map<String, Command> commandMap = Map.of(
-            "/home-page", new HomePage(),
-            "/quest-dragon", new QuestDragon(statisticService),
-            "/login-page", new LoginPage(userService),
-            "/register-page", new RegisterPage(userService),
-            "/logout", new LogoutPage(userService),
-            "/statistic-page", new StatisticPage(statisticService)
-    );
+    public HttpResolver() {
+        // Инициализация зависимостей через ServiceFactory
+        UserFileStorage storage = new UserFileStorage();
+        UserRepository userRepository = new FileUserRepository(storage);
+        UserService userService = new UserService(userRepository);
 
+        StatisticRepository statisticRepository = new FileStatisticRepository();
+        StatisticService statisticService = new StatisticService(statisticRepository);
+
+        // Создание карты команд
+        this.commandMap = Map.of(
+                "/home-page", new HomePage(),
+                "/quest-dragon", new QuestDragon(statisticService),
+                "/login-page", new LoginPage(userService),
+                "/register-page", new RegisterPage(userService),
+                "/logout", new LogoutPage(userService),
+                "/statistic-page", new StatisticPage(statisticService)
+        );
+    }
+
+    /**
+     * Возвращает команду по пути запроса.
+     * @param pathInfo путь запроса
+     * @return команда для обработки запроса
+     */
     public Command resolve(String pathInfo) {
         return commandMap.getOrDefault(pathInfo, new HomePage());
     }

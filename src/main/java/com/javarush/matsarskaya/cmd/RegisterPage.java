@@ -1,8 +1,6 @@
 package com.javarush.matsarskaya.cmd;
 
-import com.javarush.matsarskaya.entity.UserFileStorage;
-import com.javarush.matsarskaya.repository.FileUserRepository;
-import com.javarush.matsarskaya.repository.UserRepository;
+import com.javarush.matsarskaya.exception.UserAlreadyExistsException;
 import com.javarush.matsarskaya.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -10,7 +8,6 @@ import jakarta.servlet.http.HttpSession;
 public class RegisterPage implements Command{
     private final UserService userService;
 
-    // Конструктор, принимающий UserService
     public RegisterPage(UserService userService) {
         this.userService = userService;
     }
@@ -25,15 +22,17 @@ public class RegisterPage implements Command{
         String username = request.getParameter("username");
         String password = request.getParameter("password");
 
-        if (userService.registerUser(username, password)) {
+        try {
+            userService.registerUser(username, password);
             // Автоматический вход после регистрации
             HttpSession session = request.getSession();
             session.setAttribute("username", username);
             return "/home-page";
-        } else {
+        } catch (UserAlreadyExistsException e) {
             request.setAttribute("error", "Пользователь уже существует");
-            return getView();
         }
+
+        return getView();
     }
 
     @Override

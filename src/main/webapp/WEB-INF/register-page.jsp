@@ -5,6 +5,9 @@
   <title>Регистрация</title>
 </head>
 <body>
+
+<jsp:include page="/WEB-INF/header.jsp"/>
+
 <h2>Регистрация</h2>
 <c:if test="${not empty error}">
   <p style="color: #ff3535;">${error}</p>

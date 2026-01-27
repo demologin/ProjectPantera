@@ -7,21 +7,7 @@
 </head>
 <body>
 
-<div style="float: right;">
-    <c:choose>
-        <c:when test="${not empty sessionScope.username}">
-            <a href="/statistic-page">
-                <button type="button">Статистика</button>
-            </a>
-            <form action="/logout" method="post" style="display:inline;">
-                <button type="submit">Выйти</button>
-            </form>
-        </c:when>
-        <c:otherwise>
-            <a href="/login-page">Войти</a> | <a href="/register-page">Зарегистрироваться</a>
-        </c:otherwise>
-    </c:choose>
-</div>
+<jsp:include page="/WEB-INF/header.jsp"/>
 
 <h2>🐉 Как приручить дракона</h2>
 
