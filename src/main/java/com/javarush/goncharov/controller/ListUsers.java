@@ -9,6 +9,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.util.Collection;
@@ -22,7 +23,10 @@ public class ListUsers extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Collection<User> users = userService.getAll().values();
+        HttpSession session = req.getSession();
+        User user = (User) session.getAttribute("user");
         req.setAttribute("users", users);
+        req.setAttribute("user", user);
         req.getRequestDispatcher("/WEB-INF/list-user.jsp").forward(req, resp);
     }
 }

@@ -75,6 +75,7 @@
             <div class="form-group">
                 <label class="col-md-4 control-label" for="create">Operation</label>
                 <div class="col-md-8">
+
                     <c:if test="${requestScope.user==null}">
                         <button id="create" name="create" class="btn btn-success">Create</button>
                     </c:if>

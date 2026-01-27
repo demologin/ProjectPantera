@@ -14,7 +14,7 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public User get(Long id){
+    public Optional<User> get(Long id){
         return userRepository.get(id);
     }
 
@@ -27,7 +27,7 @@ public class UserService {
                 .stream()
                 .findAny()
                 .isEmpty()){
-            user.setId(0L);
+            user.setId(2L);
             userRepository.create(user);
         }
     }

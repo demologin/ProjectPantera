@@ -8,15 +8,28 @@
             </div>
         </div>
         <div class="row gy-4 row-cols-2 row-cols-md-4">
-            <c:forEach var="user" items="${requestScope.users}">
-                <div class="col">
-                    <div class="card border-0 shadow-none">
-                        <div class="card-body text-center d-flex flex-column align-items-center p-0"><img class="rounded-circle mb-3 fit-cover" width="130" height="130" src="/images/kwa" loading="eager">
-                            <h5 class="fw-bold text-primary card-title mb-0"><strong><a href="edit-user?id=${user.id}">${user.login}</a> <br> <br></strong></h5>
+            <c:if test="${requestScope.user.role=='ADMIN'}">
+                <c:forEach var="user" items="${requestScope.users}">
+                    <div class="col">
+                        <div class="card border-0 shadow-none">
+                            <div class="card-body text-center d-flex flex-column align-items-center p-0"><img class="rounded-circle mb-3 fit-cover" width="130" height="130" src="/images/kwa" loading="eager">
+                                <h5 class="fw-bold text-primary card-title mb-0"><strong><a href="edit-user?id=${user.id}">${user.login}</a> <br> <br></strong></h5>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </c:forEach>
+                </c:forEach>
+            </c:if>
+            <c:if test="${requestScope.user.role!='ADMIN'}">
+                <c:forEach var="user" items="${requestScope.users}">
+                    <div class="col">
+                        <div class="card border-0 shadow-none">
+                            <div class="card-body text-center d-flex flex-column align-items-center p-0"><img class="rounded-circle mb-3 fit-cover" width="130" height="130" src="/images/kwa" loading="eager">
+                                <h5 class="fw-bold text-primary card-title mb-0"><strong>${user.login} <br> <br></strong></h5>
+                            </div>
+                        </div>
+                    </div>
+                </c:forEach>
+            </c:if>
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>

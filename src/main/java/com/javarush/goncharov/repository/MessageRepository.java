@@ -15,8 +15,8 @@ public class MessageRepository implements Repository<Message>{
     }
 
     @Override
-    public Message get(long id) {
-        return map.get(id);
+    public Optional<Message> get(long id) {
+        return Optional.ofNullable(map.get(id));
     }
 
     @Override

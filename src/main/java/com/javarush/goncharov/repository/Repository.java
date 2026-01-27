@@ -5,7 +5,7 @@ import java.util.Optional;
 
 public interface Repository<T> {
 
-    T get(long id);
+    Optional<T> get(long id);
 
     Optional<T> findBy(String value1, String valiue2);
 

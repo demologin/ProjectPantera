@@ -13,7 +13,7 @@ public class MessageService {
         this.messageRepository = messageRepository;
     }
 
-    public Message get(Long id){
+    public Optional<Message> get(Long id){
         return messageRepository.get(id);
     }
 

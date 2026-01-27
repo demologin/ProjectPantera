@@ -9,15 +9,15 @@ import java.util.concurrent.atomic.AtomicLong;
 public class UserRepository implements Repository<User>{
 
     private final Map<Long, User> map;
-    public static final AtomicLong id = new AtomicLong();
+    public static final AtomicLong id = new AtomicLong(2);
 
     public UserRepository(Storage userStorage) {
         this.map = userStorage.getUsers();
     }
 
     @Override
-    public User get(long id) {
-        return map.get(id);
+    public Optional<User> get(long id) {
+        return Optional.ofNullable(map.get(id));
     }
 
     @Override

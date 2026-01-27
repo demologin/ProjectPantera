@@ -38,6 +38,7 @@ public class SignUp extends HttpServlet {
         userService.post(user);
         HttpSession session = req.getSession();
         session.setAttribute("user", user);
+//        req.setAttribute("user", user);
         resp.sendRedirect("/");
     }
 }
