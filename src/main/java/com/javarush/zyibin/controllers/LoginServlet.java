@@ -2,6 +2,7 @@ package com.javarush.zyibin.controllers;
 
 import com.javarush.zyibin.model.User;
 import com.javarush.zyibin.repository.UserRepository;
+import com.javarush.zyibin.util.PasswordUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -12,9 +13,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
-import java.util.HexFormat;
 import java.util.Optional;
 
 @WebServlet("/login")
@@ -43,7 +41,7 @@ public class LoginServlet extends HttpServlet {
             return;
         }
         User user = userOptional.get();
-        String passwordHash = hashPassword(password);
+        String passwordHash = PasswordUtil.hashPassword(password);
         if (!user.getPasswordHash().equals(passwordHash)) {
             log.warn("Login failed: invalid password for user {}", username);
             req.setAttribute("error", "Invalid login or password");
@@ -65,14 +63,4 @@ public class LoginServlet extends HttpServlet {
         resp.sendRedirect(req.getContextPath() + "/home");
     }
 
-    private String hashPassword(String password) {
-        try {
-            MessageDigest digest = MessageDigest.getInstance("SHA-256");
-            byte[] hash = digest.digest(password.getBytes(StandardCharsets.UTF_8));
-            return HexFormat.of().formatHex(hash);
-        } catch (Exception e) {
-            log.error("Password hashing failed", e);
-            throw new IllegalStateException("Password hashing error", e);
-        }
-    }
 }
