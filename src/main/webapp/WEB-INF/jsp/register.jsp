@@ -22,7 +22,8 @@
                 <label for="username">Логин</label>
                 <div class="input-wrapper">
                     <input type="text" id="username" name="username" required
-                           placeholder="Придумайте логин" minlength="3" maxlength="20">
+                           placeholder="Придумайте логин" minlength="3" maxlength="20"
+                           title="Правила логина: от 3 до 20 символов, только буквы, цифры, подчеркивания и дефисы">
                     <span class="input-icon">
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>

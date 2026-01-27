@@ -1741,4 +1741,24 @@ input[type="radio"] {
     }
 }
 
+/* Стили для подсказок форм */
+.form-hint {
+    display: block;
+    margin-top: 6px;
+    font-size: 12px;
+    color: #718096;
+    font-style: italic;
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+}
+
+.form-group-modern:hover .form-hint {
+    opacity: 1;
+}
+
+/* Улучшение для title атрибута */
+input[title]:hover {
+    cursor: help;
+}
+
 

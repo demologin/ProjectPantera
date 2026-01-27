@@ -2,6 +2,8 @@ package com.javarush.zyibin.controllers;
 
 import com.javarush.zyibin.session.SessionUtils;
 import com.javarush.zyibin.state.InterviewState;
+import com.javarush.zyibin.service.QuestionService;
+import com.javarush.zyibin.handler.RequestHandler;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -17,11 +19,17 @@ import java.io.IOException;
 public class QuestionServlet extends HttpServlet {
     private static final Logger log = LoggerFactory.getLogger(QuestionServlet.class);
 
+    private QuestionService questionService;
+    private RequestHandler requestHandler;
+
+    @Override
+    public void init() {
+        this.questionService = new QuestionService();
+        this.requestHandler = new RequestHandler();
+    }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        log.debug("GET / question");
-
         HttpSession session = req.getSession(false);
 
         if (!SessionUtils.hasInterview(session)) {
@@ -29,6 +37,7 @@ public class QuestionServlet extends HttpServlet {
             resp.sendRedirect(req.getContextPath() + "/start");
             return;
         }
+        
         InterviewState state = SessionUtils.getInterviewState(session);
 
         if (state.isFinished()) {
@@ -36,6 +45,7 @@ public class QuestionServlet extends HttpServlet {
             resp.sendRedirect(req.getContextPath() + "/result");
             return;
         }
+        
         log.debug("Displaying question {} of {}", state.getCurrentIndex(), state.getTotalQuestions());
 
         req.setAttribute("topics", state.getTopics());
@@ -44,13 +54,10 @@ public class QuestionServlet extends HttpServlet {
         req.setAttribute("totalQuestions", state.getTotalQuestions());
 
         req.getRequestDispatcher("/WEB-INF/jsp/question.jsp").forward(req, resp);
-
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        log.debug("POST /question");
-
         HttpSession session = req.getSession(false);
 
         if (!SessionUtils.hasInterview(session)) {
@@ -58,30 +65,13 @@ public class QuestionServlet extends HttpServlet {
             resp.sendRedirect(req.getContextPath() + "/start");
             return;
         }
+
         String answerIndexParam = req.getParameter("answerIndex");
 
-        if (answerIndexParam == null) {
-            log.debug("No answer selected, redirecting back to question");
+        requestHandler.handleRequest(req, resp, () -> {
+            InterviewState state = SessionUtils.getInterviewState(session);
+            questionService.processAnswer(state, answerIndexParam);
             resp.sendRedirect(req.getContextPath() + "/question");
-            return;
-        }
-        int selectedIndex = Integer.parseInt(answerIndexParam);
-        InterviewState state = SessionUtils.getInterviewState(session);
-
-        if (selectedIndex == state.getCurrentQuestion().getCorrectAnswerIndex()) {
-            log.debug("Correct answer selected");
-            state.incrementScore();
-        } else {
-            log.debug("Incorrect answer selected");
-        }
-
-        state.moveToNextQuestion();
-
-        log.debug("Moving to next question, current index is now {}", state.getCurrentIndex());
-
-
-        resp.sendRedirect(req.getContextPath() + "/question");
-
-
+        }, "/WEB-INF/jsp/question.jsp");
     }
 }
