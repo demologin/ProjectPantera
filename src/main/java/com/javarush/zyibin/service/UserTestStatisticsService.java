@@ -1,7 +1,7 @@
 package com.javarush.zyibin.service;
 
 import com.javarush.zyibin.model.TestResult;
-import com.javarush.zyibin.model.Topic;
+import com.javarush.zyibin.util.TopicUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -31,15 +31,7 @@ public class UserTestStatisticsService {
     }
 
     private String buildTestName(String topicCode) {
-        String[] codes = topicCode.split(",");
-        List<String> names = new ArrayList<>();
-
-        for (String code : codes) {
-            Topic topic = Topic.fromCode(code.trim());
-            names.add(topic.getDisplayName());
-        }
-
-        return String.join(", ", names);
+        return TopicUtils.convertTopicCodesToDisplayNames(topicCode);
     }
 }
 

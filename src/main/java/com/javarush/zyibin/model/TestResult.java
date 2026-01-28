@@ -1,9 +1,8 @@
 package com.javarush.zyibin.model;
 
+import com.javarush.zyibin.util.TopicUtils;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
 
 public class TestResult {
 
@@ -65,15 +64,7 @@ public class TestResult {
     }
 
     public String getTopicDisplayName() {
-        String[] codes = topicCode.split(",");
-        List<String> names = new ArrayList<>();
-
-        for (String code : codes) {
-            Topic topic = Topic.fromCode(code.trim());
-            names.add(topic.getDisplayName());
-        }
-
-        return String.join(", ", names);
+        return TopicUtils.convertTopicCodesToDisplayNames(topicCode);
     }
 
     public String getFormattedFinishedAt() {

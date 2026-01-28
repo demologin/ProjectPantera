@@ -1,6 +1,8 @@
 package com.javarush.zyibin.controllers.admin;
 
 import com.javarush.zyibin.controllers.BaseServlet;
+import com.javarush.zyibin.dto.TopicStats;
+import com.javarush.zyibin.dto.UserStats;
 import com.javarush.zyibin.model.TestResult;
 import com.javarush.zyibin.model.User;
 import jakarta.servlet.ServletException;
