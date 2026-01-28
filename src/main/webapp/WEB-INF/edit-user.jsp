@@ -1,49 +1,48 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@include file="head.jsp" %>
-<body>
-<div class="container">
-    <form class="form-horizontal" method="post">
+<%@include file="parts/header.jsp" %>
+<div class="container py-4">
+    <form method="post">
         <fieldset>
 
             <!-- Form Name -->
-            <legend>Edit user:</legend>
+            <legend class="mb-4">Edit user:</legend>
 
             <!-- Text input-->
-            <div class="form-group">
-                <label class="col-md-4 control-label" for="login">Login</label>
-                <div class="col-md-4">
+            <div class="row mb-3">
+                <label class="col-sm-2 col-form-label" for="login">Login</label>
+                <div class="col-sm-6">
                     <input
                             id="login"
                             name="login"
                             type="text"
                             value="${requestScope.user.login}"
                             placeholder="your login"
-                            class="form-control input-md"
+                            class="form-control"
                             required="">
-                    <span class="help-block">min 3 symbols</span>
+                    <div class="form-text">min 3 symbols</div>
                 </div>
             </div>
 
             <!-- Password input-->
-            <div class="form-group">
-                <label class="col-md-4 control-label" for="password">Password</label>
-                <div class="col-md-4">
+            <div class="row mb-3">
+                <label class="col-sm-2 col-form-label" for="password">Password</label>
+                <div class="col-sm-6">
                     <input id="password"
                            name="password"
                            type="password"
                            value="${requestScope.user.password}"
                            placeholder="your password"
-                           class="form-control input-md"
+                           class="form-control"
                            required="">
-                    <span class="help-block">min 8 symb</span>
+                    <div class="form-text">min 8 symb</div>
                 </div>
             </div>
 
 
             <!-- Select Basic -->
-            <div class="form-group">
-                <label class="col-md-4 control-label" for="role">Role</label>
-                <div class="col-md-4">
+            <div class="row mb-3">
+                <label class="col-sm-2 col-form-label" for="role">Role</label>
+                <div class="col-sm-6">
                     <select id="role" name="role" class="form-control">
                         <c:forEach var="role" items="${applicationScope.roles}">
                             <option value="${role}" ${role==requestScope.user.role?"selected":""}>${role}</option>
@@ -53,9 +52,9 @@
             </div>
 
             <!-- Button (Double) -->
-            <div class="form-group">
-                <label class="col-md-4 control-label" for="create">Operation</label>
-                <div class="col-md-8">
+            <div class="row mb-3">
+                <label class="col-sm-2 col-form-label" for="create">Operation</label>
+                <div class="col-sm-6">
                     <c:if test="${requestScope.user==null}">
                         <button id="create" name="create" class="btn btn-success">Create</button>
                     </c:if>
@@ -69,5 +68,5 @@
         </fieldset>
     </form>
 </div>
-</body>
+<%@include file="parts/footer.jsp" %>
 

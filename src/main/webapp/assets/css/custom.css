@@ -1,0 +1,62 @@
+/* Motorcycle theme accents */
+:root {
+    --bs-primary: #e76f51;
+    --bs-primary-rgb: 231, 111, 81;
+    --bs-link-color: #f4a261;
+    --bs-link-hover-color: #ffd166;
+}
+
+body {
+    min-height: 100vh;
+    color: #e9ecef;
+    background-color: #1b1e23;
+    background-repeat: no-repeat;
+    background-position: center calc(50% - 200px);
+    background-attachment: fixed;
+    background-size: cover;
+    font-size: 1.15rem;
+    font-weight: 600;
+}
+
+.navbar.bg-secondary,
+footer.bg-secondary {
+    background-color: rgba(35, 40, 46, 0.85) !important;
+}
+
+.hero-title {
+    color: #000000;
+    font-size: 3.5rem;
+    font-weight: 700;
+    -webkit-text-stroke: 1px #ffffff;
+    text-shadow: 0 0 1px rgba(0, 0, 0, 0.25);
+}
+
+.navbar,
+.nav-link,
+.btn,
+.list-group-item,
+body {
+    font-weight: 600;
+}
+
+.list-group-item,
+.list-group-item a {
+    font-size: 1.25rem;
+}
+.list-group {
+    background-color: transparent;
+}
+
+.list-group-item {
+    background-color: transparent;
+    border: 0;
+    box-shadow: none;
+}
+
+.list-group-item + .list-group-item {
+    border-top: 0;
+}
+
+.page-title {
+    font-weight: 800;
+}
