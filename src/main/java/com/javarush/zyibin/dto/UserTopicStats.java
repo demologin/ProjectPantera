@@ -1,4 +1,4 @@
-package com.javarush.zyibin.service;
+package com.javarush.zyibin.dto;
 
 public class UserTopicStats extends BaseStats {
 

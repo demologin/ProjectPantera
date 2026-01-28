@@ -1,5 +1,6 @@
 package com.javarush.zyibin.service;
 
+import com.javarush.zyibin.dto.UserTestStats;
 import com.javarush.zyibin.model.TestResult;
 import com.javarush.zyibin.util.TopicUtils;
 import org.slf4j.Logger;

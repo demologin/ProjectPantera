@@ -1,7 +1,4 @@
-package com.javarush.zyibin.state;
-
-import com.javarush.zyibin.model.Question;
-import com.javarush.zyibin.model.Topic;
+package com.javarush.zyibin.model;
 
 import java.util.List;
 import java.util.Set;

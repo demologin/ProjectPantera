@@ -1,7 +1,7 @@
 package com.javarush.zyibin.service;
 
-import com.javarush.zyibin.factory.ValidationFactory;
-import com.javarush.zyibin.state.InterviewState;
+import com.javarush.zyibin.model.InterviewState;
+import com.javarush.zyibin.util.ValidationFactory;
 import com.javarush.zyibin.validation.QuestionValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

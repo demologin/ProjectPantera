@@ -2,7 +2,7 @@ package com.javarush.zyibin.service;
 
 import com.javarush.zyibin.exception.AuthenticationException;
 import com.javarush.zyibin.exception.ValidationException;
-import com.javarush.zyibin.factory.ValidationFactory;
+import com.javarush.zyibin.util.ValidationFactory;
 import com.javarush.zyibin.model.User;
 import com.javarush.zyibin.repository.UserRepository;
 import com.javarush.zyibin.util.PasswordUtil;

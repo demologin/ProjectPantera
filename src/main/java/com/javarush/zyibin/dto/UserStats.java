@@ -1,7 +1,6 @@
 package com.javarush.zyibin.dto;
 
 import com.javarush.zyibin.model.User;
-import com.javarush.zyibin.service.BaseStats;
 
 public class UserStats extends BaseStats {
 

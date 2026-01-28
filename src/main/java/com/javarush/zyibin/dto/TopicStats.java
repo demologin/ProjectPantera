@@ -1,7 +1,6 @@
 package com.javarush.zyibin.dto;
 
 import com.javarush.zyibin.model.Topic;
-import com.javarush.zyibin.service.BaseStats;
 
 public class TopicStats extends BaseStats {
 

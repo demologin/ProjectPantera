@@ -3,7 +3,7 @@ package com.javarush.zyibin.controllers;
 import com.javarush.zyibin.model.Question;
 import com.javarush.zyibin.model.Topic;
 import com.javarush.zyibin.session.SessionUtils;
-import com.javarush.zyibin.state.InterviewState;
+import com.javarush.zyibin.model.InterviewState;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServletRequest;

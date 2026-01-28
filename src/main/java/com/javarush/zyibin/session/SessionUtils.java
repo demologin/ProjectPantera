@@ -1,6 +1,6 @@
 package com.javarush.zyibin.session;
 
-import com.javarush.zyibin.state.InterviewState;
+import com.javarush.zyibin.model.InterviewState;
 import jakarta.servlet.http.HttpSession;
 
 public class SessionUtils {

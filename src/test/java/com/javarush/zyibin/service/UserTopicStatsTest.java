@@ -1,5 +1,6 @@
 package com.javarush.zyibin.service;
 
+import com.javarush.zyibin.dto.UserTopicStats;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

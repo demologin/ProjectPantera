@@ -1,8 +1,8 @@
 package com.javarush.zyibin.controllers;
 
+import com.javarush.zyibin.model.InterviewState;
 import com.javarush.zyibin.service.QuestionService;
 import com.javarush.zyibin.session.SessionUtils;
-import com.javarush.zyibin.state.InterviewState;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServletRequest;

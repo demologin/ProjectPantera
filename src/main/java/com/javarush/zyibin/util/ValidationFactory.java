@@ -1,4 +1,4 @@
-package com.javarush.zyibin.factory;
+package com.javarush.zyibin.util;
 
 import com.javarush.zyibin.handler.ErrorHandler;
 import com.javarush.zyibin.validation.QuestionValidator;

@@ -1,6 +1,6 @@
 package com.javarush.zyibin.service;
 
-import com.javarush.zyibin.factory.ValidationFactory;
+import com.javarush.zyibin.util.ValidationFactory;
 import com.javarush.zyibin.model.User;
 import com.javarush.zyibin.validation.UserValidation;
 
