@@ -1,6 +1,5 @@
 package com.javarush.zyibin.config;
 
-import com.javarush.zyibin.repository.*;
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletContextEvent;
 import jakarta.servlet.ServletContextListener;

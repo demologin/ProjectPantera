@@ -12,7 +12,7 @@ import java.util.List;
 public class QuestionRepository {
     private static final Logger log = LoggerFactory.getLogger(QuestionRepository.class);
 
-    private  final QuestionSource source;
+    private final QuestionSource source;
 
     public QuestionRepository(QuestionSource source) {
         this.source = source;

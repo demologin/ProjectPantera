@@ -23,9 +23,11 @@ public class UserStats {
     public String getUsername() {
         return username;
     }
+
     public int getTotal() {
         return total;
     }
+
     public int getPassed() {
         return passed;
     }

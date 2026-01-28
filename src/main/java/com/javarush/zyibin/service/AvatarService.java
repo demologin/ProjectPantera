@@ -7,6 +7,7 @@ import java.util.List;
 
 public class AvatarService {
     private static final Logger log = LoggerFactory.getLogger(AvatarService.class);
+
     public List<String> getAvailableAvatars() {
         log.debug("Loading available avatars list");
         return List.of(

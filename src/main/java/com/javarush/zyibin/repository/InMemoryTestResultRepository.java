@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
 
-public class InMemoryTestResultRepository implements TestResultRepository{
+public class InMemoryTestResultRepository implements TestResultRepository {
     private static final Logger log = LoggerFactory.getLogger(InMemoryTestResultRepository.class);
 
     private ConcurrentHashMap<Long, TestResult> results = new ConcurrentHashMap<>();
@@ -39,7 +39,7 @@ public class InMemoryTestResultRepository implements TestResultRepository{
             }
         }
         log.debug("Loaded {} test results for userId={}", list.size(), userId);
-        return  list;
+        return list;
     }
 
     @Override

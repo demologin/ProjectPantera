@@ -12,7 +12,7 @@ import org.slf4j.LoggerFactory;
 import java.io.InputStream;
 import java.util.List;
 
-public class FileQuestionSource implements QuestionSource{
+public class FileQuestionSource implements QuestionSource {
     private static final Logger log = LoggerFactory.getLogger(FileQuestionSource.class);
 
     private final ObjectMapper objectMapper = new ObjectMapper();
@@ -35,7 +35,7 @@ public class FileQuestionSource implements QuestionSource{
         }
 
         try {
-            List<Question> questions =  objectMapper.readValue(
+            List<Question> questions = objectMapper.readValue(
                     inputStream,
                     new TypeReference<List<Question>>() {
                     }

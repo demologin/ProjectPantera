@@ -12,7 +12,7 @@ public class QuestionValidator {
             throw ValidationException.general("The list of questions is empty");
         }
         for (int i = 0; i < questions.size(); i++) {
-            validateQuestion(questions.get(i),i);
+            validateQuestion(questions.get(i), i);
         }
     }
 
@@ -21,7 +21,7 @@ public class QuestionValidator {
             throw ValidationException.general("Index issue " + index + " equals null");
         }
         if (question.getQuestionText() == null ||
-            question.getQuestionText().isBlank()) {
+                question.getQuestionText().isBlank()) {
             throw ValidationException.general("Blank question text (index=" + index + ")");
         }
         int correctIndex = question.getCorrectAnswerIndex();

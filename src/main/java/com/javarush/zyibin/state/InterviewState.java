@@ -36,7 +36,7 @@ public class InterviewState {
     }
 
     public Set<Topic> getTopics() {
-        return  topics;
+        return topics;
     }
 
     public int getTotalQuestions() {

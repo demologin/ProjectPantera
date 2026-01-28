@@ -29,6 +29,7 @@ public class UserTestStats {
     public int getPassed() {
         return passed;
     }
+
     public int getSuccessRate() {
         if (total == 0) {
             return 0;

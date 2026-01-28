@@ -59,6 +59,7 @@ public class TestResult {
     public boolean isPassed() {
         return passed;
     }
+
     public LocalDateTime getFinishedAt() {
         return finishedAt;
     }

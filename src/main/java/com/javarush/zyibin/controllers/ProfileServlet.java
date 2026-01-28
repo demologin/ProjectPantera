@@ -2,18 +2,13 @@ package com.javarush.zyibin.controllers;
 
 import com.javarush.zyibin.model.TestResult;
 import com.javarush.zyibin.model.User;
-import com.javarush.zyibin.repository.TestResultRepository;
 import com.javarush.zyibin.service.UserStatisticsService;
 import com.javarush.zyibin.service.UserStatisticsServiceImpl;
 import com.javarush.zyibin.service.UserTestStatisticsService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.util.List;

@@ -64,7 +64,7 @@ public abstract class BaseServlet extends HttpServlet {
         if (session == null) {
             return null;
         }
-        return  (User) session.getAttribute("currentUser");
+        return (User) session.getAttribute("currentUser");
     }
 
     protected boolean isUserAuthenticated(HttpServletRequest req) {
@@ -72,7 +72,7 @@ public abstract class BaseServlet extends HttpServlet {
     }
 
     protected boolean isCurrentUserAdmin(HttpServletRequest req) {
-        User user =  getCurrentUser(req);
+        User user = getCurrentUser(req);
         return user != null && user.getRole() == Role.ADMIN;
     }
 

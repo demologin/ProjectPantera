@@ -89,7 +89,7 @@ public class ErrorHandler {
             case "INVALID_CREDENTIALS":
                 return "Invalid login or password";
             case "USER_BLOCKED":
-                return "Пользователь заблокирован администратором";
+                return "User blocked by administrator";
             case "USER_NOT_FOUND":
                 return "User not found";
             default:

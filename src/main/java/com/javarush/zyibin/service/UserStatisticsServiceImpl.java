@@ -10,7 +10,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class UserStatisticsServiceImpl implements UserStatisticsService{
+public class UserStatisticsServiceImpl implements UserStatisticsService {
     private static final Logger log = LoggerFactory.getLogger(UserStatisticsServiceImpl.class);
 
     @Override

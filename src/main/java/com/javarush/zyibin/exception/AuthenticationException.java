@@ -1,6 +1,6 @@
 package com.javarush.zyibin.exception;
 
-public class AuthenticationException extends RuntimeException{
+public class AuthenticationException extends RuntimeException {
 
     private final String reason;
 

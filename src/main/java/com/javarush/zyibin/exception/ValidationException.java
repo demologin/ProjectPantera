@@ -1,6 +1,6 @@
 package com.javarush.zyibin.exception;
 
-public class ValidationException extends RuntimeException{
+public class ValidationException extends RuntimeException {
 
     private final String field;
     private final String errorCode;

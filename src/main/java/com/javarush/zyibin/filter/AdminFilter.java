@@ -36,7 +36,7 @@ public class AdminFilter implements Filter {
             resp.sendRedirect(req.getContextPath() + "/home");
             return;
         }
-        log.debug( "Admin access granted. user={}, path={}",
+        log.debug("Admin access granted. user={}, path={}",
                 user.getUsername(),
                 path);
 

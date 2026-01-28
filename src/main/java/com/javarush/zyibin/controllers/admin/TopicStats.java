@@ -27,6 +27,7 @@ public class TopicStats {
     public String getTopicCode() {
         return topicCode;
     }
+
     public String getTopicDisplayName() {
         return topicDisplayName;
     }
