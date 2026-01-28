@@ -15,6 +15,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.util.Optional;
 
 @WebServlet("/edit-user")
 public class EditUser extends HttpServlet {
@@ -37,16 +38,21 @@ public class EditUser extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String login = req.getParameter("login");
-        String password = req.getParameter("password");
+        String role = "";
         Long idUser = Long.parseLong(req.getParameter("id"));
+        Optional<User> userFind = userService.get(idUser);
+        if (userFind.isPresent() && req.getParameter("role") == null){
+            role = userFind.get().getRole().toString();
+        } else {
+            role = req.getParameter("role");
+        }
         User user = User.builder()
+                .id(idUser)
                 .login(req.getParameter("login"))
                 .password(req.getParameter("password"))
-                .role(Role.valueOf(req.getParameter("role")))
+                .role(Role.valueOf(role))
                 .build();
-        System.out.println(user);
         userService.update(user);
-        resp.sendRedirect("/edit-user" + "?id=" + user.getId());
+        resp.sendRedirect("/list-users");
     }
 }

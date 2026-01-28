@@ -51,7 +51,8 @@ public class UserRepository implements Repository<User>{
     public void update(User user) {
         if (map.containsKey(user.getId())){
             map.get(user.getId()).setLogin(user.getLogin());
-            map.get(user.getId()).setLogin(user.getPassword());
+            map.get(user.getId()).setPassword(user.getPassword());
+            map.get(user.getId()).setRole(user.getRole());
         }
     }
 }
