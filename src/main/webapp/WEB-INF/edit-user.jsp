@@ -19,7 +19,7 @@
                             placeholder="your login"
                             class="form-control"
                             required="">
-                    <div class="form-text">min 3 symbols</div>
+                    <div class="form-text">min 3 characters</div>
                 </div>
             </div>
 
@@ -34,7 +34,7 @@
                            placeholder="your password"
                            class="form-control"
                            required="">
-                    <div class="form-text">min 8 symb</div>
+                    <div class="form-text">min 8 characters</div>
                 </div>
             </div>
 
