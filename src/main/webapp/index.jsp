@@ -80,21 +80,21 @@
                        aria-label="Search">
             </form>
             <div class="text-end">
-                <button type="button" onclick="start()" class="btn btn-outline-primary me-2">Поехали!</button>
+                <button type="button" onclick="usersing()" class="btn btn-outline-primary me-2">Поехали!</button>
             </div>
         </div>
     </div>
 </div>
 
 <script>
-    function start() {
-        const url = "greeting";
+    function usersing() {
+        const url = "usersing";
         $.ajax({
             method: "GET",
             url: url,
             dataType: "html",
             success: function () {
-                document.location.href = "greeting";
+                document.location.href = "usersing";
             }
         });
     }
