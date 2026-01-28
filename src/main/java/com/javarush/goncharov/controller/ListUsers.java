@@ -24,7 +24,7 @@ public class ListUsers extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Collection<User> users = userService.getAll().values();
         HttpSession session = req.getSession();
-        User user = (User) session.getAttribute("user");
+        User user = (User) session.getAttribute("userSession");
         req.setAttribute("users", users);
         req.setAttribute("user", user);
         req.getRequestDispatcher("/WEB-INF/list-user.jsp").forward(req, resp);

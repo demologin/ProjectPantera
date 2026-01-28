@@ -7,7 +7,8 @@
 
     <div class="px-4 py-5 my-5 text-center">
         <p class="lead mb-4">
-        <h1 class="display-3 fw-bold">User login: ${user.login}</h1>
+        <h2 class="display-3 fw-bold">Login: ${user.login}</h2>
+        <h2 class="display-3 fw-bold">Role: ${user.role}</h2>
         <div class="col-lg-6 mx-auto">
             <form class="form-horizontal" action="profile" method="post" enctype="multipart/form-data">
                 <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">

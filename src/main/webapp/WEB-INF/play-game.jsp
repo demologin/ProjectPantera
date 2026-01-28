@@ -4,7 +4,7 @@
 <body>
 
 
-<jsp:useBean id="user" scope="session" type="com.javarush.khmelov.entity.User"/>
+<jsp:useBean id="userSession" scope="session" type="com.javarush.khmelov.entity.User"/>
 <jsp:useBean id="question" scope="request" type="com.javarush.khmelov.entity.Question"/>
 <jsp:useBean id="game" scope="request" type="com.javarush.khmelov.entity.Game"/>
 

@@ -50,9 +50,8 @@ public class UserRepository implements Repository<User>{
     @Override
     public void update(User user) {
         if (map.containsKey(user.getId())){
-            user.setId(id.incrementAndGet());
-            user.setLogin(user.getLogin());
-            user.setPassword(user.getPassword());
+            map.get(user.getId()).setLogin(user.getLogin());
+            map.get(user.getId()).setLogin(user.getPassword());
         }
     }
 }

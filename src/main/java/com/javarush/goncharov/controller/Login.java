@@ -33,6 +33,7 @@ public class Login extends HttpServlet {
         if (user.isPresent()){
             HttpSession session = req.getSession();
             session.setAttribute("user", user.get());
+            req.setAttribute("user", user.get());
             resp.sendRedirect("/");
         } else {
             resp.sendRedirect("/login");

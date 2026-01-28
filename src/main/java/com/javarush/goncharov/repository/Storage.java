@@ -5,7 +5,6 @@ import com.javarush.goncharov.model.Role;
 import com.javarush.goncharov.model.User;
 import lombok.Getter;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
