@@ -20,7 +20,7 @@
                         <div class="row gy-5 gy-lg-0 row-cols-1 row-cols-md-2 row-cols-lg-3">
                             <c:forEach var="quest" items="${requestScope.quests}">
                                 <div class="col">
-                                    <div class="card h-100 box-border">
+                                    <div class="card h-100 w-100 box-border">
                                         <div class="card-body p-4 pt-5">
                                             <h4 class="card-title">${quest.title}</h4>
                                             <p class="card-text text-center">${quest.description}</p>

@@ -3,6 +3,7 @@ package com.javarush.vasileva.service;
 import com.javarush.vasileva.entity.Answer;
 import com.javarush.vasileva.entity.Quest;
 import com.javarush.vasileva.entity.Question;
+import com.javarush.vasileva.exception.AppException;
 import com.javarush.vasileva.repository.QuestionRepository;
 
 import java.util.List;
@@ -49,7 +50,7 @@ public class QuestionService {
     public long findNextQuestionId(long questId, Answer answer) {
         String nextQuestionLabelStr = answer.getNextQuestionLabel();
         Question nextQuestion = getByQuestionLabelAndQuestId(nextQuestionLabelStr, questId)
-                .orElseThrow(() -> new IllegalArgumentException("Question is not found; label " + nextQuestionLabelStr + ", quest " + questId));
+                .orElseThrow(() -> new AppException("Question is not found; label " + nextQuestionLabelStr + ", quest " + questId));
 
         return nextQuestion.getGeneratedId();
     }
