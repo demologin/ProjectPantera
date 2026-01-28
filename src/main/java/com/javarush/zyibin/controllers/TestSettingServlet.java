@@ -3,22 +3,22 @@ package com.javarush.zyibin.controllers;
 import com.javarush.zyibin.model.Topic;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 
 @WebServlet("/test/settings")
-public class TestSettingServlet extends HttpServlet {
-    private static final Logger log = LoggerFactory.getLogger(TestSettingServlet.class);
+public class TestSettingServlet extends BaseServlet {
+
+    @Override
+    protected void initializeSpecificServices() {
+    }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         log.debug("GET /test/settings");
         req.setAttribute("topics", Topic.values());
-        req.getRequestDispatcher("/WEB-INF/jsp/test-settings.jsp").forward(req,resp);
+        req.getRequestDispatcher("/WEB-INF/jsp/test-settings.jsp").forward(req, resp);
     }
 }

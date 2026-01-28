@@ -1,30 +1,40 @@
 package com.javarush.zyibin.controllers;
 
+import com.javarush.zyibin.model.User;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 
 @WebServlet("/logout")
-public class LogoutServlet extends HttpServlet {
-    private static final Logger log = LoggerFactory.getLogger(LogoutServlet.class);
+public class LogoutServlet extends BaseServlet {
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        log.debug("POST /logout");
+    protected void initializeSpecificServices() {
+    }
 
-        HttpSession session = req.getSession(false);
-        if (session != null) {
-            log.info("User session invalidated");
-            session.invalidate();
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+        performLogout(req, resp);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+        performLogout(req, resp);
+    }
+
+    private void performLogout(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+        User currentUser = getCurrentUser(req);
+        if (currentUser != null) {
+            log.info("User {} logged out", currentUser.getUsername());
         }
-        resp.sendRedirect(req.getContextPath() + "/home");
 
+        clearCurrentUser(req);
+        resp.sendRedirect(req.getContextPath() + "/login");
     }
 }

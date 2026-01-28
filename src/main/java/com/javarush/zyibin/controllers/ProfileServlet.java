@@ -19,44 +19,32 @@ import java.io.IOException;
 import java.util.List;
 
 @WebServlet("/profile")
-public class ProfileServlet extends HttpServlet {
-    private static final Logger log = LoggerFactory.getLogger(ProfileServlet.class);
+public class ProfileServlet extends BaseServlet {
 
     private UserStatisticsService topicStatisticsService;
     private UserTestStatisticsService testStatisticsService;
 
     @Override
-    public void init() throws ServletException {
-        log.debug("Initializing ProfileServlet services");
-
-        topicStatisticsService = new UserStatisticsServiceImpl();
-        testStatisticsService = new UserTestStatisticsService();
+    protected void initializeSpecificServices() {
+        this.topicStatisticsService = new UserStatisticsServiceImpl();
+        this.testStatisticsService = new UserTestStatisticsService();
     }
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
         log.debug("GET /profile");
 
-        HttpSession session = req.getSession(false);
-
-        User user = (User) session.getAttribute("currentUser");
+        User user = getCurrentUser(req);
         log.debug("Loading test results for user {}", user.getUsername());
 
-        TestResultRepository repository = (TestResultRepository) getServletContext().getAttribute("testResultRepository");
-        List<TestResult> results = repository.findByUserId(user.getId());
+        List<TestResult> results = testResultRepository.findByUserId(user.getId());
         req.setAttribute("results", results);
 
-        req.setAttribute(
-                "testStats",
-                testStatisticsService.calculate(results)
-        );
+        req.setAttribute("testStats", testStatisticsService.calculate(results));
+        req.setAttribute("topicStats", topicStatisticsService.calculateUserTopicStats(results));
 
-        req.setAttribute(
-                "topicStats",
-                topicStatisticsService.calculateUserTopicStats(results)
-        );
         log.info("Profile page prepared for user {}", user.getUsername());
-
         req.getRequestDispatcher("/WEB-INF/jsp/profile.jsp").forward(req, resp);
     }
 }

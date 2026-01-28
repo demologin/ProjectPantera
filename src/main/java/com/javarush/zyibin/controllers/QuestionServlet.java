@@ -1,35 +1,29 @@
 package com.javarush.zyibin.controllers;
 
+import com.javarush.zyibin.service.QuestionService;
 import com.javarush.zyibin.session.SessionUtils;
 import com.javarush.zyibin.state.InterviewState;
-import com.javarush.zyibin.service.QuestionService;
-import com.javarush.zyibin.handler.RequestHandler;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 
 @WebServlet("/question")
-public class QuestionServlet extends HttpServlet {
-    private static final Logger log = LoggerFactory.getLogger(QuestionServlet.class);
+public class QuestionServlet extends BaseServlet {
 
     private QuestionService questionService;
-    private RequestHandler requestHandler;
 
     @Override
-    public void init() {
+    protected void initializeSpecificServices() {
         this.questionService = new QuestionService();
-        this.requestHandler = new RequestHandler();
     }
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
         HttpSession session = req.getSession(false);
 
         if (!SessionUtils.hasInterview(session)) {
@@ -37,7 +31,7 @@ public class QuestionServlet extends HttpServlet {
             resp.sendRedirect(req.getContextPath() + "/start");
             return;
         }
-        
+
         InterviewState state = SessionUtils.getInterviewState(session);
 
         if (state.isFinished()) {
@@ -45,7 +39,7 @@ public class QuestionServlet extends HttpServlet {
             resp.sendRedirect(req.getContextPath() + "/result");
             return;
         }
-        
+
         log.debug("Displaying question {} of {}", state.getCurrentIndex(), state.getTotalQuestions());
 
         req.setAttribute("topics", state.getTopics());
@@ -56,8 +50,10 @@ public class QuestionServlet extends HttpServlet {
         req.getRequestDispatcher("/WEB-INF/jsp/question.jsp").forward(req, resp);
     }
 
+
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
         HttpSession session = req.getSession(false);
 
         if (!SessionUtils.hasInterview(session)) {

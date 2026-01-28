@@ -19,18 +19,20 @@ import java.util.UUID;
         maxFileSize = 5 * 1024 * 1024,  // 5MB
         maxRequestSize = 6 * 1024 * 1024 // 6MB
 )
-public class AvatarUploadServlet extends HttpServlet {
+public class AvatarUploadServlet extends BaseServlet {
 
-    private static final Logger log = LoggerFactory.getLogger(AvatarUploadServlet.class);
     private static final String UPLOAD_DIR = "/uploads/avatars";
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void initializeSpecificServices() {
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
         log.debug("POST /profile/avatar/upload");
 
-        HttpSession session = req.getSession(false);
-
-        User user = (User) session.getAttribute("currentUser");
+        User user = getCurrentUser(req);
         log.debug("User {} initiates avatar upload", user.getUsername());
 
         Part filePart = req.getPart("avatar");
@@ -39,13 +41,14 @@ public class AvatarUploadServlet extends HttpServlet {
             resp.sendRedirect(req.getContextPath() + "/profile/avatar");
             return;
         }
+
         String submittedFileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
         String extension = submittedFileName.substring(submittedFileName.lastIndexOf('.'));
         String fileName = UUID.randomUUID() + extension;
         String uploadPath = getServletContext().getRealPath(UPLOAD_DIR);
         File uploadDir = new File(uploadPath);
         if (!uploadDir.exists()) {
-             uploadDir.mkdirs();
+            uploadDir.mkdirs();
         }
 
         File file = new File(uploadDir, fileName);

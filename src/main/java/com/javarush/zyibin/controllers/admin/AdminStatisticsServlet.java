@@ -1,16 +1,12 @@
 package com.javarush.zyibin.controllers.admin;
 
+import com.javarush.zyibin.controllers.BaseServlet;
 import com.javarush.zyibin.model.TestResult;
 import com.javarush.zyibin.model.User;
-import com.javarush.zyibin.repository.TestResultRepository;
-import com.javarush.zyibin.repository.UserRepository;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -18,18 +14,18 @@ import java.util.List;
 import java.util.Map;
 
 @WebServlet("/admin/statistics")
-public class AdminStatisticsServlet extends HttpServlet {
-    private static final Logger log = LoggerFactory.getLogger(AdminStatisticsServlet.class);
+public class AdminStatisticsServlet extends BaseServlet {
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void initializeSpecificServices() {
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
         log.debug("GET /admin/statistics");
 
-        TestResultRepository resultRepository = (TestResultRepository) getServletContext().getAttribute("testResultRepository");
-
-        UserRepository userRepository = (UserRepository) getServletContext().getAttribute("userRepository");
-
-        List<TestResult> results = resultRepository.findAll();
+        List<TestResult> results = testResultRepository.findAll();
         List<User> users = userRepository.findAll();
 
         int totalTests = results.size();
@@ -55,7 +51,6 @@ public class AdminStatisticsServlet extends HttpServlet {
         Map<String, TopicStats> topicStats = new HashMap<>();
 
         for (TestResult r : results) {
-            // поддержка смешанных тем
             String[] topics = r.getTopicCode().split(",");
 
             for (String rawTopic : topics) {

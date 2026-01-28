@@ -1,5 +1,6 @@
 package com.javarush.zyibin.controllers.admin;
 
+import com.javarush.zyibin.controllers.BaseServlet;
 import com.javarush.zyibin.model.User;
 import com.javarush.zyibin.repository.UserRepository;
 import jakarta.servlet.ServletException;
@@ -15,19 +16,18 @@ import java.io.IOException;
 import java.util.List;
 
 @WebServlet("/admin/users")
-public class AdminUserServlet extends HttpServlet {
-    private static final Logger log = LoggerFactory.getLogger(AdminUserServlet.class);
+public class AdminUserServlet extends BaseServlet {
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void initializeSpecificServices() {
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
         log.debug("GET /admin/users");
 
-        HttpSession session = req.getSession(false);
-
-        User admin = (User) session.getAttribute("currentUser");
-
-        UserRepository userRepository = (UserRepository) getServletContext().getAttribute("userRepository");
-
+        User admin = getCurrentUser(req);
         List<User> users = userRepository.findAll();
 
         log.info("Admin {} loaded users list, count={}", admin.getUsername(), users.size());

@@ -4,30 +4,26 @@ import com.javarush.zyibin.model.User;
 import com.javarush.zyibin.service.AvatarService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.util.List;
 
 @WebServlet("/profile/avatar")
-public class AvatarSelectServlet extends HttpServlet {
-
-    private static final Logger log = LoggerFactory.getLogger(AvatarSelectServlet.class);
+public class AvatarSelectServlet extends BaseServlet {
 
     private final AvatarService avatarService = new AvatarService();
 
+    @Override
+    protected void initializeSpecificServices() {
+    }
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
         log.debug("GET /profile/avatar");
-
-        HttpSession session = req.getSession(false);
 
         List<String> avatars = avatarService.getAvailableAvatars();
         log.debug("Loaded {} available avatars", avatars.size());
@@ -37,14 +33,11 @@ public class AvatarSelectServlet extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
         log.debug("POST /profile/avatar");
 
-        HttpSession session = req.getSession(false);
-
-        User user = (User) session.getAttribute("currentUser");
-
+        User user = getCurrentUser(req);
         String selectedAvatar = req.getParameter("avatarPath");
         log.debug("Selected avatar path: {}", selectedAvatar);
 
