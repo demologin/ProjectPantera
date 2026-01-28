@@ -16,21 +16,26 @@ public class AppInitListener implements ServletContextListener {
     public void contextInitialized(ServletContextEvent sce) {
         log.info("Application context initialization started");
 
+        ApplicationConfig config = new ApplicationConfig();
         ServletContext context = sce.getServletContext();
 
-        UserRepository userRepository = new InMemoryUserRepository();
-        context.setAttribute("userRepository", userRepository);
+
+        context.setAttribute("userRepository", config.getUserRepository());
         log.info("UserRepository initialized");
 
-        TestResultRepository testResultRepository = new InMemoryTestResultRepository();
-        context.setAttribute("testResultRepository", testResultRepository);
+
+        context.setAttribute("testResultRepository", config.getTestResultRepository());
         log.info("TestResultRepository initialized");
 
-        QuestionRepository questionRepository =
-                QuestionRepository.defaultRepository();
-        context.setAttribute("questionRepository", questionRepository);
+
+        context.setAttribute("questionRepository", config.getQuestionRepository());
         log.info("QuestionRepository initialized");
 
         log.info("Application context initialization completed successfully");
+    }
+
+    @Override
+    public void contextDestroyed(ServletContextEvent sce) {
+        log.info("Application context destroyed");
     }
 }
