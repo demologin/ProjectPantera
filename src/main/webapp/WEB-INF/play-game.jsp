@@ -96,9 +96,14 @@
                     </c:otherwise>
                 </c:choose>
             </c:if>
+            <c:if test="${not empty sessionScope.error}">
+                <div>${sessionScope.error}</div>
+            </c:if>
         </div>
     </div>
 </div>
+
+<%@include file="footer.jsp" %>
 
 </body>
 </html>

@@ -50,7 +50,7 @@ public class QuestionService {
     public long findNextQuestionId(long questId, Answer answer) {
         String nextQuestionLabelStr = answer.getNextQuestionLabel();
         Question nextQuestion = getByQuestionLabelAndQuestId(nextQuestionLabelStr, questId)
-                .orElseThrow(() -> new AppException("Question is not found; label " + nextQuestionLabelStr + ", quest " + questId));
+                .orElseThrow(() -> new AppException("Следующий вопрос с меткой " + nextQuestionLabelStr + " в квесте id=" + questId + " не найден."));
 
         return nextQuestion.getGeneratedId();
     }

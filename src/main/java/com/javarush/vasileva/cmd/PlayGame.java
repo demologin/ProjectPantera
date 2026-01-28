@@ -1,6 +1,7 @@
 package com.javarush.vasileva.cmd;
 
 import com.javarush.vasileva.entity.*;
+import com.javarush.vasileva.exception.AppException;
 import com.javarush.vasileva.service.AnswerService;
 import com.javarush.vasileva.service.QuestService;
 import com.javarush.vasileva.service.QuestionService;
@@ -28,7 +29,7 @@ public class PlayGame implements Command {
         String questionIdStr = req.getParameter(QUESTION_ID);
 
         Quest quest = questService.getValidatedQuest(questIdStr)
-                .orElseThrow(() -> new IllegalArgumentException("Quest is not found: id=" + questIdStr));
+                .orElseThrow(() -> new AppException("Quest is not found: id=" + questIdStr));
         req.setAttribute(QUEST, quest);
 
         if (questionIdStr == null || questionIdStr.isEmpty()) {
@@ -51,22 +52,22 @@ public class PlayGame implements Command {
     }
 
     @Override
-    public String doPost(HttpServletRequest req) {
-        String questIdStr = req.getParameter(QUEST_ID);
-        String answerIdStr = req.getParameter(SELECTED_ANSWER_ID);
+    public String doPost(HttpServletRequest req) throws AppException {
+            String questIdStr = req.getParameter(QUEST_ID);
+            String answerIdStr = req.getParameter(SELECTED_ANSWER_ID);
 
-        if (questIdStr == null || answerIdStr == null) {
-            return getView() + "?" + QUEST_ID + "=" + questIdStr; // Return to the same page
-        }
+            if (questIdStr == null || answerIdStr == null) {
+                return getView() + "?" + QUEST_ID + "=" + questIdStr; // Return to the same page
+            }
 
-        long questId = questService.parseQuestIdStrToLong(questIdStr);
-        long answerId = answerService.parseAnswerIdStrToLong(answerIdStr);
+            long questId = questService.parseQuestIdStrToLong(questIdStr);
+            long answerId = answerService.parseAnswerIdStrToLong(answerIdStr);
 
-        Optional<Answer> answer = answerService.get(answerId);
-        if (answer.isEmpty()) {
-            return getView() + "?" + QUEST_ID + "=" + questId;
-        }
-        long nextQuestionId = questionService.findNextQuestionId(questId, answer.get());
-        return getView() + "?" + QUEST_ID + "=" + questId + "&"+ QUESTION_ID + "=" + nextQuestionId;
+            Optional<Answer> answer = answerService.get(answerId);
+            if (answer.isEmpty()) {
+                return getView() + "?" + QUEST_ID + "=" + questId;
+            }
+            long nextQuestionId = questionService.findNextQuestionId(questId, answer.get());
+            return getView() + "?" + QUEST_ID + "=" + questId + "&"+ QUESTION_ID + "=" + nextQuestionId;
     }
 }

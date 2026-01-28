@@ -3,6 +3,7 @@ package com.javarush.vasileva.cmd;
 import com.javarush.vasileva.config.Config;
 import com.javarush.vasileva.config.Winter;
 import com.javarush.vasileva.entity.Quest;
+import com.javarush.vasileva.exception.AppException;
 import com.javarush.vasileva.mapper.QuestMapper;
 import com.javarush.vasileva.service.QuestService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -32,13 +33,13 @@ public class EditQuest implements Command {
         String questIdStr = req.getParameter(QUEST_ID);
         if (questIdStr != null && !questIdStr.isEmpty()) {
             Quest quest = questService.getValidatedQuest(questIdStr)
-                    .orElseThrow(() -> new IllegalArgumentException("Quest is not found: id=" + questIdStr));
+                    .orElseThrow(() -> new AppException("Квест с id=" + questIdStr + "не найден!"));
             req.setAttribute(EDIT, true);
             try {
                 String questJson = questMapper.toJsonString(quest);
                 req.setAttribute(QUEST_JSON, questJson);
             } catch (IOException e) {
-                throw new RuntimeException("Quest serialization error", e);
+                throw new IllegalArgumentException("Ошибка сериализация квеста");
             }
         } else {
             req.setAttribute(EDIT, false);
@@ -53,7 +54,7 @@ public class EditQuest implements Command {
             String json = req.getParameter(QUEST_JSON);
             if (json == null || json.trim().isEmpty()) {
                 req.setAttribute(ERROR, JSON_EMPTY_ERROR);
-                return getView();
+//                return getView();
             }
 
             Quest quest = questMapper.fromJsonString(json);
