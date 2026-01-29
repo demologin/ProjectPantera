@@ -24,16 +24,27 @@
                            href="${pageContext.request.contextPath}/edit-quest">Создать/Редактировать квест
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link <c:if test="${pageContext.request.requestURI.contains('/login')}">active</c:if>"
-                            href="${pageContext.request.contextPath}/login">Вход
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link <c:if test="${pageContext.request.requestURI.contains('/register')}">active</c:if>"
-                           href="${pageContext.request.contextPath}/register">Регистрация
-                        </a>
-                    </li>
+
+                    <c:if test="${empty sessionScope.user}">
+                        <li class="nav-item">
+                            <a class="nav-link <c:if test="${pageContext.request.requestURI.contains('/login')}">active</c:if>"
+                               href="${pageContext.request.contextPath}/login">Вход
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link <c:if test="${pageContext.request.requestURI.contains('/register')}">active</c:if>"
+                               href="${pageContext.request.contextPath}/register">Регистрация
+                            </a>
+                        </li>
+                    </c:if>
+
+                    <c:if test="${not empty sessionScope.user}">
+                        <li class="nav-item">
+                            <a class="nav-link <c:if test="${pageContext.request.requestURI.contains('/profile')}">active</c:if>"
+                               href="${pageContext.request.contextPath}/profile">${sessionScope.user.login}
+                            </a>
+                        </li>
+                    </c:if>
                 </ul>
             </div>
         </div>
