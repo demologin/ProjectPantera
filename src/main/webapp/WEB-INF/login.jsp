@@ -10,7 +10,7 @@
 <head>
     <title>Title</title>
 </head>
-<body class="bg-primary">
+<body class="bg-primary-subtle">
 <div class="container" style="max-width: 400px; margin-top: 100px;">
   <div class="card">
     <div class="card-header">

@@ -14,7 +14,7 @@
 <body>
 <section class="py-4 py-xl-5">
     <div class="textarea-container">
-        <div class="text-white bg-primary border rounded border-0 p-4 py-5 w-100">
+        <div class="text-white bg-primary-subtle border rounded border-0 p-4 py-5 w-100">
             <div class="row h-100 justify-content-center">
                 <div class="col-md-10 col-xl-8">
                     <div class="d-flex flex-column align-items-center text-center">
