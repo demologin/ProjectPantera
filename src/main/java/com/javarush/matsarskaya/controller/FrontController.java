@@ -15,7 +15,15 @@ import java.io.IOException;
 @WebServlet({"/home-page", "/quest-dragon", "/login-page", "/register-page", "/logout", "/statistic-page"})
 public class FrontController extends HttpServlet {
     private static final Logger logger = LoggerFactory.getLogger(FrontController.class);
-    private final HttpResolver httpResolver = new HttpResolver();
+    private final HttpResolver httpResolver;
+
+    public FrontController() {
+        this(new HttpResolver());
+    }
+
+    public FrontController(HttpResolver httpResolver) {
+        this.httpResolver = httpResolver;
+    }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
