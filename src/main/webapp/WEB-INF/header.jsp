@@ -14,17 +14,26 @@
                     class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navcol-1">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link
-                                            <c:if test="${pageContext.request.requestURI.contains('/home')}">active</c:if>"
-                                            href="${pageContext.request.contextPath}/home">Главная</a></li>
-                    <li class="nav-item"><a class="nav-link
-                            <c:if test="${pageContext.request.requestURI.contains('/edit-quest')}">active</c:if>"
-                                            href="${pageContext.request.contextPath}/edit-quest">Создать/Обновить
-                        квест</a></li>
-                    <li class="nav-item"><a class="nav-link
-                            <c:if test="${pageContext.request.requestURI.contains('/login')
-                                        or pageContext.request.requestURI.contains('/register')}">active</c:if>"
-                                            href="#">Вход/Регистрация</a></li>
+                    <li class="nav-item">
+                        <a class="nav-link <c:if test="${pageContext.request.requestURI.contains('/home')}">active</c:if>"
+                           href="${pageContext.request.contextPath}/home">Главная
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link <c:if test="${pageContext.request.requestURI.contains('/edit-quest')}">active</c:if>"
+                           href="${pageContext.request.contextPath}/edit-quest">Создать/Редактировать квест
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link <c:if test="${pageContext.request.requestURI.contains('/login')}">active</c:if>"
+                            href="${pageContext.request.contextPath}/login">Вход
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link <c:if test="${pageContext.request.requestURI.contains('/register')}">active</c:if>"
+                           href="${pageContext.request.contextPath}/register">Регистрация
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>
