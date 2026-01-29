@@ -10,7 +10,6 @@
 
     <c:set var="user" value="${sessionScope.currentUser}"/>
 
-    <!-- Информация о пользователе -->
     <div class="content-card">
         <div class="profile-info">
             <div class="profile-avatar-section">
@@ -24,7 +23,9 @@
                     <div class="profile-actions">
                         <a href="${pageContext.request.contextPath}/profile/edit" class="btn-secondary">
                             <span>
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: inline-block; margin-right: 6px; vertical-align: middle;">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                     stroke-width="2"
+                                     style="display: inline-block; margin-right: 6px; vertical-align: middle;">
                                     <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
                                     <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
                                 </svg>
@@ -33,7 +34,9 @@
                         </a>
                         <a href="${pageContext.request.contextPath}/profile/avatar" class="btn-secondary">
                             <span>
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: inline-block; margin-right: 6px; vertical-align: middle;">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                     stroke-width="2"
+                                     style="display: inline-block; margin-right: 6px; vertical-align: middle;">
                                     <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
                                     <circle cx="8.5" cy="8.5" r="1.5"></circle>
                                     <polyline points="21 15 16 10 5 21"></polyline>
@@ -61,10 +64,10 @@
         </div>
     </div>
 
-    <!-- История тестов -->
     <div class="content-card">
         <h3>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: inline-block; margin-right: 8px; vertical-align: middle;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                 style="display: inline-block; margin-right: 8px; vertical-align: middle;">
                 <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
                 <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
             </svg>
@@ -100,7 +103,9 @@
                                 <c:choose>
                                     <c:when test="${result.passed}">
                                         <span class="status-badge success">
-                                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" style="display: inline-block; margin-right: 4px;">
+                                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none"
+                                                 stroke="currentColor" stroke-width="3"
+                                                 style="display: inline-block; margin-right: 4px;">
                                                 <polyline points="20 6 9 17 4 12"></polyline>
                                             </svg>
                                             Пройден
@@ -108,7 +113,9 @@
                                     </c:when>
                                     <c:otherwise>
                                         <span class="status-badge fail">
-                                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" style="display: inline-block; margin-right: 4px;">
+                                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none"
+                                                 stroke="currentColor" stroke-width="3"
+                                                 style="display: inline-block; margin-right: 4px;">
                                                 <line x1="18" y1="6" x2="6" y2="18"></line>
                                                 <line x1="6" y1="6" x2="18" y2="18"></line>
                                             </svg>
@@ -126,10 +133,10 @@
         </c:if>
     </div>
 
-    <!-- Статистика по темам -->
     <div class="content-card">
         <h3>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: inline-block; margin-right: 8px; vertical-align: middle;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                 style="display: inline-block; margin-right: 8px; vertical-align: middle;">
                 <line x1="18" y1="20" x2="18" y2="10"></line>
                 <line x1="12" y1="20" x2="12" y2="4"></line>
                 <line x1="6" y1="20" x2="6" y2="14"></line>

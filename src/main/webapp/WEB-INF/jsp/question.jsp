@@ -4,7 +4,6 @@
 <c:import url="/WEB-INF/jsp/common/header.jsp"/>
 
 <div class="container">
-    <!-- Прогресс теста -->
     <div class="test-progress">
         <div class="progress-header">
             <h2>Вопрос ${questionNumber} из ${totalQuestions}</h2>
@@ -18,7 +17,8 @@
 
         <div class="test-topics">
             <strong>
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: inline-block; margin-right: 6px; vertical-align: middle;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                     style="display: inline-block; margin-right: 6px; vertical-align: middle;">
                     <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
                     <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
                 </svg>
@@ -32,7 +32,6 @@
         </div>
     </div>
 
-    <!-- Вопрос -->
     <div class="content-card question-card">
         <div class="question-header">
             <span class="question-number">Вопрос ${questionNumber}</span>
@@ -44,7 +43,6 @@
         </div>
     </div>
 
-    <!-- Варианты ответов -->
     <form method="post" action="${pageContext.request.contextPath}/question" class="answer-form">
         <div class="answers-container">
             <c:forEach var="answer" items="${question.answers}" varStatus="status">
@@ -52,7 +50,7 @@
                     <input type="radio"
                            name="answerIndex"
                            value="${status.index}"
-                           required />
+                           required/>
                     <div class="answer-content">
                         <div class="answer-checkbox">
                             <svg class="checkmark" viewBox="0 0 24 24">

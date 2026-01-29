@@ -7,7 +7,7 @@
 
     <h2>Редактирование профиля</h2>
 
-    <c:set var="user" value="${sessionScope.currentUser}" />
+    <c:set var="user" value="${sessionScope.currentUser}"/>
 
     <form method="post" action="${pageContext.request.contextPath}/profile/edit">
 

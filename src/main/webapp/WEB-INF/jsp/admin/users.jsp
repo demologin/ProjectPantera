@@ -35,7 +35,6 @@
                 </td>
                 <td class="user-actions">
 
-                    <!-- Смена роли -->
                     <form method="post"
                           action="${pageContext.request.contextPath}/admin/users/role">
                         <input type="hidden" name="userId" value="${user.id}">
@@ -46,7 +45,6 @@
                         <button type="submit">Сменить роль</button>
                     </form>
 
-                    <!-- Блокировка -->
                     <form method="post"
                           action="${pageContext.request.contextPath}/admin/users/block">
                         <input type="hidden" name="userId" value="${user.id}">

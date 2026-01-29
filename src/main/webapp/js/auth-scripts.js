@@ -1,6 +1,4 @@
-// Переключение видимости пароля
 document.addEventListener('DOMContentLoaded', function() {
-    // Находим все кнопки переключения пароля
     const passwordToggles = document.querySelectorAll('.password-toggle');
 
     passwordToggles.forEach(button => {
@@ -12,7 +10,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Валидация в реальном времени
     const inputs = document.querySelectorAll('input[required]');
 
     inputs.forEach(input => {
@@ -40,7 +37,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Анимация при загрузке
     const authCard = document.querySelector('.auth-card');
     if (authCard) {
         authCard.style.opacity = '0';

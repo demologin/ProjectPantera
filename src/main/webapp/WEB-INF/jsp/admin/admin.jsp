@@ -6,7 +6,8 @@
 <div class="container">
     <div class="admin-header">
         <h2>
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: inline-block; margin-right: 8px; vertical-align: middle;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                 style="display: inline-block; margin-right: 8px; vertical-align: middle;">
                 <circle cx="12" cy="12" r="3"></circle>
                 <path d="M12 1v6m0 6v6m4.22-13.22l4.24 4.24M1.54 9.54l4.24 4.24M20.46 14.46l4.24 4.24M1.54 14.46l4.24 4.24"></path>
             </svg>
@@ -17,10 +18,10 @@
         </p>
     </div>
 
-    <!-- Основное меню -->
     <div class="content-card admin-menu-card">
         <h3>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: inline-block; margin-right: 8px; vertical-align: middle;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                 style="display: inline-block; margin-right: 8px; vertical-align: middle;">
                 <circle cx="12" cy="12" r="10"></circle>
                 <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon>
             </svg>
@@ -47,7 +48,7 @@
                     </svg>
                 </div>
             </a>
-            
+
             <a href="${pageContext.request.contextPath}/admin/statistics" class="admin-menu-item">
                 <div class="menu-icon">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -67,7 +68,7 @@
                     </svg>
                 </div>
             </a>
-            
+
             <div class="admin-menu-item disabled">
                 <div class="menu-icon">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -86,7 +87,7 @@
                     </svg>
                 </div>
             </div>
-            
+
             <div class="admin-menu-item disabled">
                 <div class="menu-icon">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">

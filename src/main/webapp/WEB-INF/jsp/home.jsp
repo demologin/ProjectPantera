@@ -19,7 +19,8 @@
                 <div class="hero-features">
                     <div class="feature-item">
                         <span class="feature-icon">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                 stroke-width="2">
                                 <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
                                 <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
                             </svg>
@@ -31,7 +32,8 @@
                     </div>
                     <div class="feature-item">
                         <span class="feature-icon">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                 stroke-width="2">
                                 <path d="M21 21l-6-6m2-5a7 7 0 1 1-14 0 7 7 0 0 1 14 0z"></path>
                             </svg>
                         </span>
@@ -42,7 +44,8 @@
                     </div>
                     <div class="feature-item">
                         <span class="feature-icon">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                 stroke-width="2">
                                 <line x1="18" y1="20" x2="18" y2="10"></line>
                                 <line x1="12" y1="20" x2="12" y2="4"></line>
                                 <line x1="6" y1="20" x2="6" y2="14"></line>
@@ -55,7 +58,8 @@
                     </div>
                     <div class="feature-item">
                         <span class="feature-icon">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                 stroke-width="2">
                                 <circle cx="12" cy="12" r="10"></circle>
                                 <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon>
                             </svg>
@@ -74,7 +78,8 @@
                 <button type="submit" class="btn-primary btn-large">
                     <span>Начать подготовку</span>
                     <span class="button-icon">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                             stroke-width="2">
                             <path d="M4.5 16.5c0 1.1.9 2 2 2s2-.9 2-2-.9-2-2-2-2 .9-2 2zm0-9c0 1.1.9 2 2 2s2-.9 2-2-.9-2-2-2-2 .9-2 2zm9 0c0 1.1.9 2 2 2s2-.9 2-2-.9-2-2-2-2 .9-2 2z"></path>
                         </svg>
                     </span>

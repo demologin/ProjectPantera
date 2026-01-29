@@ -13,10 +13,10 @@
     </div>
 
     <form method="post" action="${pageContext.request.contextPath}/start" class="test-settings-form">
-        <!-- Выбор тем -->
         <div class="content-card">
             <h3>
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: inline-block; margin-right: 8px; vertical-align: middle;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                     style="display: inline-block; margin-right: 8px; vertical-align: middle;">
                     <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
                     <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
                 </svg>
@@ -28,7 +28,8 @@
                         <input type="checkbox" name="topics" value="${topic}">
                         <div class="topic-content">
                             <span class="topic-icon">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                     stroke-width="2">
                                     <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
                                     <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
                                 </svg>
@@ -36,7 +37,8 @@
                             <span class="topic-name">${topic.displayName}</span>
                         </div>
                         <div class="topic-check">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                 stroke-width="2">
                                 <polyline points="20 6 9 17 4 12"></polyline>
                             </svg>
                         </div>
@@ -45,10 +47,10 @@
             </div>
         </div>
 
-        <!-- Количество вопросов -->
         <div class="content-card">
             <h3>
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: inline-block; margin-right: 8px; vertical-align: middle;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                     style="display: inline-block; margin-right: 8px; vertical-align: middle;">
                     <circle cx="12" cy="12" r="10"></circle>
                     <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon>
                 </svg>
