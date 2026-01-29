@@ -19,12 +19,10 @@ public class ErrorHandler {
                                       ValidationException e, String returnPage) throws IOException {
         log.warn("Validation error: field={}, message={}", e.getField(), e.getMessage());
 
-        // Устанавливаем атрибуты для отображения ошибок в JSP
         req.setAttribute("error", e.getMessage());
         req.setAttribute("errorField", e.getField());
         req.setAttribute("errorCode", e.getErrorCode());
 
-        // Сохраняем введенные данные для восстановления формы
         preserveFormData(req);
 
         try {
@@ -73,7 +71,6 @@ public class ErrorHandler {
     private void preserveFormData(HttpServletRequest req) {
         Map<String, String> formData = new HashMap<>();
 
-        // Сохраняем параметры формы
         req.getParameterMap().forEach((key, values) -> {
             if (values != null && values.length > 0) {
                 formData.put(key, values[0]);

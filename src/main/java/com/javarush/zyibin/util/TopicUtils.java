@@ -6,12 +6,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TopicUtils {
-    
+
     public static String convertTopicCodesToDisplayNames(String topicCodes) {
         if (topicCodes == null || topicCodes.trim().isEmpty()) {
             return "";
         }
-        
+
         String[] codes = topicCodes.split(",");
         List<String> names = new ArrayList<>();
 

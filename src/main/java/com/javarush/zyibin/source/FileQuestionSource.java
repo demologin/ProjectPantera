@@ -2,9 +2,9 @@ package com.javarush.zyibin.source;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.javarush.zyibin.util.ValidationFactory;
 import com.javarush.zyibin.model.Question;
 import com.javarush.zyibin.model.Topic;
+import com.javarush.zyibin.util.ValidationFactory;
 import com.javarush.zyibin.validation.QuestionValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
