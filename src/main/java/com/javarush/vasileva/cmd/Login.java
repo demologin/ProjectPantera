@@ -7,18 +7,12 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 import static com.javarush.vasileva.util.Link.HOME;
-import static com.javarush.vasileva.util.Link.LOGIN;
 
 public class Login implements Command {
     private final UserService userService;
 
     public Login(UserService userService) {
         this.userService = userService;
-    }
-
-    @Override
-    public String doGet(HttpServletRequest request) {
-        return LOGIN;
     }
 
     @Override

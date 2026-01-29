@@ -1,0 +1,63 @@
+<%@ page contentType="text/html;charset=UTF-8" isELIgnored="false" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@include file="header.jsp" %>
+
+<link rel="stylesheet" type="text/css" href="<c:url value='/static/bootstrap/css/bootstrap.min.css'/>">
+<link rel="stylesheet" type="text/css" href="<c:url value='/static/css/Hero-Features-icons.css'/>">
+<link rel="stylesheet" type="text/css" href="<c:url value='/static/css/Bold-BS4-Full-Page-Image-Header.css'/>">
+
+<html>
+<head>
+    <title>Register</title>
+</head>
+<body class="bg-primary">
+<div class="container" style="max-width: 400px; margin-top: 100px">
+    <div class="card">
+        <div class="card-header">
+            <h3 class="text-center">Регистрация</h3>
+        </div>
+        <div class="card-body">
+
+            <c:if test="${not empty error}">
+                <div class="alert alert-danger">${error}</div>
+            </c:if>
+
+            <form action="<c:url value='/register'/>" method="post">
+                <div class="mb-3">
+                    <label for="login" class="form-label">Имя</label>
+                    <input type="text"
+                           class="form-control"
+                           id="login"
+                           name="login"
+                           required>
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email"
+                           class="form-control"
+                           id="email"
+                           name="email"
+                           required>
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Пароль</label>
+                    <input type="password"
+                           class="form-control"
+                           id="password"
+                           name="password"
+                           required>
+                </div>
+                <button type="submit" class="btn btn-success w-100">Зарегистрироваться</button>
+            </form>
+
+            <hr>
+            <div class="text-center">
+                <a href="<c:url value='/login'/>" class="btn btn-outline-primary">
+                    Войти в систему
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
