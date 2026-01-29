@@ -4,6 +4,7 @@ public class Link {
     public static final String INDEX = "";
     public static final String HOME = "/home";
     public static final String LOGIN = "/login";
+    public static final String LOGOUT = "/logout";
     public static final String REGISTER = "/register";
     public static final String USER_LIST = "/list-user";
     public static final String EDIT_USER = "/edit-user";
