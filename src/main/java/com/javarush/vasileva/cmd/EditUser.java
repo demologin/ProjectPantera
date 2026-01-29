@@ -23,7 +23,7 @@ public class EditUser implements Command {
         String stringId = req.getParameter("id");
         if (stringId != null) {
             long id = Long.parseLong(stringId);
-            Optional<User> optionalUser = userService.get(id);
+            Optional<User> optionalUser = userService.findById(id);
             if (optionalUser.isPresent()) {
                 User user = optionalUser.get();
                 req.setAttribute("user", user);

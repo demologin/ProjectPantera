@@ -13,10 +13,9 @@ public class UserRepository implements Repository<User> {
     public static final AtomicLong id = new AtomicLong(System.currentTimeMillis());
 
     public UserRepository() {
-        map.put(1L, new User(1L, "Alisa", "qwerty", Role.USER));
-        map.put(2L, new User(2L, "Bob", "", Role.GUEST));
-        map.put(3L, new User(3L, "Carl", "admin", Role.ADMIN));
-        map.put(4L, new User(4L, "Khmelov", "admin", Role.ADMIN));
+        map.put(1L, new User(1L, "Alisa", "alisa@gmail.com","qwerty", Role.USER));
+        map.put(2L, new User(2L, "Bob", "bob@gmail.com", "12345", Role.GUEST));
+        map.put(3L, new User(3L, "Carl", "admin@gmail.com", "admin", Role.ADMIN));
     }
 
     @Override
@@ -25,13 +24,19 @@ public class UserRepository implements Repository<User> {
     }
 
     @Override
-    public Optional<User> get(long id) {
+    public Optional<User> findById(long id) {
         return Optional.ofNullable(map.get(id));
     }
 
-    public void create(User entity) {
-        entity.setId(id.incrementAndGet());
-        update(entity);
+   public Optional<User> findByEmail(String email) {
+        return map.values().stream()
+                .filter(user -> user.getEmail().equals(email))
+                .findFirst();
+   }
+
+    public void create(User user) {
+        user.setId(id.incrementAndGet());
+        update(user);
     }
 
     @Override

@@ -26,7 +26,7 @@ public class QuestionService {
     }
 
     public Optional<Question> get(Long id) {
-        return questionRepository.get(id);
+        return questionRepository.findById(id);
     }
 
     public Optional<Question> getByQuestionLabelAndQuestId(String questionLabel, long questId) {

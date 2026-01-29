@@ -19,7 +19,7 @@ public class QuestService {
     }
 
     public Optional<Quest> get(Long id) {
-        return questRepository.get(id);
+        return questRepository.findById(id);
     }
 
     public void create(Quest quest) {

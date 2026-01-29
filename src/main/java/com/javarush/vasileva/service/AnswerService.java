@@ -19,7 +19,7 @@ public class AnswerService {
     }
 
     public Optional<Answer> get(Long id) {
-        return answerRepository.get(id);
+        return answerRepository.findById(id);
     }
 
     public void create(Answer answer) {

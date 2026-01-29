@@ -19,7 +19,7 @@ public class QuestRepository implements Repository<Quest> {
     }
 
     @Override
-    public Optional<Quest> get(long id) {
+    public Optional<Quest> findById(long id) {
         return Optional.ofNullable(quests.get(id));
     }
 

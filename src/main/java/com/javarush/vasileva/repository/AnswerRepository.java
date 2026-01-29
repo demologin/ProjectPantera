@@ -19,7 +19,7 @@ public class AnswerRepository implements Repository<Answer> {
     }
 
     @Override
-    public Optional<Answer> get(long id) {
+    public Optional<Answer> findById(long id) {
         return Optional.ofNullable(answers.get(id));
     }
 

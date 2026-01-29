@@ -21,7 +21,7 @@ public class QuestionRepository implements Repository<Question> {
     }
 
     @Override
-    public Optional<Question> get(long id) {
+    public Optional<Question> findById(long id) {
         return Optional.ofNullable(questions.get(id));  // generatedId
     }
 

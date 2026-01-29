@@ -7,7 +7,7 @@ public interface Repository<T> {
 
     List<T> getAll();
 
-    Optional<T> get(long id);
+    Optional<T> findById(long id);
 
     void create(T entity);
 
