@@ -6,7 +6,6 @@
 <link rel="stylesheet" type="text/css" href="<c:url value='/static/css/Hero-Features-icons.css'/>">
 <link rel="stylesheet" type="text/css" href="<c:url value='/static/css/Bold-BS4-Full-Page-Image-Header.css'/>">
 
-
 <html>
 <head>
     <title>${requestScope.quest != null ? 'Редактирование квеста' : 'Создание квеста'}</title>
@@ -14,12 +13,12 @@
 <body>
 <section class="py-4 py-xl-5">
     <div class="textarea-container">
-        <div class="text-white bg-primary-subtle border rounded border-0 p-4 py-5 w-100">
+        <div class="text bg-primary-subtle border rounded border-0 p-4 py-5 w-100">
             <div class="row h-100 justify-content-center">
                 <div class="col-md-10 col-xl-8">
                     <div class="d-flex flex-column align-items-center text-center">
 
-                        <h2 class="text-uppercase fw-bold text-white mb-3">
+                        <h2 class="text-uppercase fw-bold text mb-3">
                             ${requestScope.edit ? 'Редактирование квеста' : 'Новый квест'}
                         </h2>
 
@@ -28,7 +27,7 @@
                         <div class="mb-4">
                             <c:forEach var="quest" items="${requestScope.quests}">
                                 <div class="mb-1">
-                                    <a href="edit-quest?questId=${quest.id}" class="link text-white">${quest.title}</a>
+                                    <a href="edit-quest?questId=${quest.id}" class="link text">${quest.title}</a>
                                 </div>
                             </c:forEach>
                         </div>

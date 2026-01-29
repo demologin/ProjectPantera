@@ -39,17 +39,20 @@
                     </c:if>
 
                     <c:if test="${not empty sessionScope.user}">
+                        <li>
+                            <c:if test="${sessionScope.user.isAdmin()}">
+                                <a class="nav-link <c:if test="${pageContext.request.requestURI.contains('/list-user')}">active</c:if>"
+                                   href="${pageContext.request.contextPath}/list-user">Список пользователей
+                                </a>
+                            </c:if>
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link <c:if test="${pageContext.request.requestURI.contains('/profile')}">active</c:if>"
                                href="${pageContext.request.contextPath}/profile"><b style="color: sandybrown">${sessionScope.user.login}</b>
                             </a>
                         </li>
-                        <li>
-                            <a class="nav-link"
-                               href="<c:url value='/logout'/>">Выйти
-                            </a>
-                        </li>
                     </c:if>
+
                 </ul>
             </div>
         </div>

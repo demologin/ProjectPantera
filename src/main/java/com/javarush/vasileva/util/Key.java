@@ -1,6 +1,8 @@
 package com.javarush.vasileva.util;
 
 public class Key {
+    public static final String USER_ID = "id";
+    public static final String USER = "user";
     public static final String QUESTS = "quests";
     public static final String QUEST_ID = "questId";
     public static final String QUEST = "quest";

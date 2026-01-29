@@ -25,4 +25,8 @@ public class User {
         return "image-" + id;
     }
 
+    public boolean isAdmin() {
+        return role != null && role.equals(Role.ADMIN);
+    }
+
 }

@@ -3,6 +3,7 @@ package com.javarush.vasileva.cmd;
 import com.javarush.vasileva.entity.Role;
 import com.javarush.vasileva.entity.User;
 import com.javarush.vasileva.service.UserService;
+import com.javarush.vasileva.util.Link;
 import jakarta.servlet.http.HttpServletRequest;
 
 import java.util.Optional;
@@ -36,6 +37,7 @@ public class EditUser implements Command {
     public String doPost(HttpServletRequest req) {
         User user = User.builder()
                 .login(req.getParameter("login"))
+                .email(req.getParameter("email"))
                 .password(req.getParameter("password"))
                 .role(Role.valueOf(req.getParameter("role")))
                 .build();
@@ -45,7 +47,8 @@ public class EditUser implements Command {
             user.setId(Long.parseLong(req.getParameter("id")));
             userService.update(user);
         }
-        return getView() + "?id=" + user.getId();
+//        return getView() + "?id=" + user.getId();
+        return Link.USER_LIST;
     }
 
 
