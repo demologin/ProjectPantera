@@ -164,19 +164,7 @@ h3::after {
     font-size: 18px;
 }
 
-button {
-    background-color: #2563eb;
-    color: white;
-    border: none;
-    padding: 10px 18px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 14px;
-}
-
-button:hover {
-    background-color: #1d4ed8;
-}
+/* Базовые стили кнопок удалены для избежания конфликтов с .btn-primary и .btn-secondary */
 
 .button-icon {
     font-size: 18px;
@@ -210,45 +198,15 @@ button:hover {
    ФОРМЫ И ПОЛЯ ВВОДА
    ============================================= */
 
-.form-group {
-    margin-bottom: 16px;
-}
+/* Устаревшие стили форм удалены - используются .form-group-modern и .input-wrapper */
 
-.form-group label {
-    margin-bottom: 8px;
-}
-
+/* Базовый стиль label все еще нужен для некоторых страниц */
 label {
     display: block;
     color: #4a5568;
     font-weight: 600;
     margin-bottom: 8px;
     cursor: pointer;
-}
-
-input[type="text"],
-input[type="password"],
-input[type="email"] {
-    width: 100%;
-    padding: 8px 10px;
-    margin-top: 6px;
-    border: 1px solid #cbd5f5;
-    border-radius: 6px;
-}
-
-textarea {
-    width: 100%;
-    padding: 8px 10px;
-    margin-top: 6px;
-    border: 1px solid #cbd5f5;
-    border-radius: 6px;
-    resize: vertical;
-    font-family: inherit;
-}
-
-input[type="checkbox"],
-input[type="radio"] {
-    margin-right: 8px;
 }
 
 /* =============================================
@@ -654,7 +612,7 @@ input[type="radio"] {
     overflow: hidden;
 }
 
-.progress-bar {
+.stat-progress .progress-bar {
     height: 100%;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     border-radius: 4px;
