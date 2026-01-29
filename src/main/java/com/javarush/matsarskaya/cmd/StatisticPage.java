@@ -3,7 +3,6 @@ package com.javarush.matsarskaya.cmd;
 import com.javarush.matsarskaya.entity.Statistic;
 import com.javarush.matsarskaya.service.StatisticService;
 import jakarta.servlet.http.HttpServletRequest;
-
 import java.util.Optional;
 
 public class StatisticPage implements Command{
