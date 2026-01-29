@@ -16,31 +16,45 @@
             <div class="col text-center">
                 <section>
                     <div style="height: 500px;background: url('/images/background-main.png') center / cover;"></div>
-                    <div class="container position-relative" style="top: -100px">
-                        <div class="row gy-5 gy-lg-0 row-cols-1 row-cols-md-2 row-cols-lg-3">
+                    <div class="container position-relative" style="top: -200px">
+                        <div class="row gy-2 gy-lg-0 row-cols-1 row-cols-md-2 row-cols-lg-3">
                             <c:forEach var="quest" items="${requestScope.quests}">
                                 <div class="col">
                                     <div class="card h-100 w-100 box-border">
-                                        <div class="card-body p-4 pt-5">
+
+                                        <div class="card-body">
                                             <h4 class="card-title">${quest.title}</h4>
                                             <p class="card-text text-center">${quest.description}</p>
                                         </div>
-                                        <div class="card-footer p-4 py-3"><a href="play-game?questId=${quest.id}">Посмотреть
-                                            квест &nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"
-                                                             fill="currentColor" viewBox="0 0 16 16"
-                                                             class="bi bi-arrow-right">
-                                                <path fill-rule="evenodd"
-                                                      d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"></path>
-                                            </svg>
-                                        </a></div>
-                                        <div class="card-footer p-4 py-3"><a href="edit-quest?questId=${quest.id}">Редактировать
-                                            квест &nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"
-                                                             fill="currentColor" viewBox="0 0 16 16"
-                                                             class="bi bi-arrow-right">
-                                                <path fill-rule="evenodd"
-                                                      d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"></path>
-                                            </svg>
-                                        </a></div>
+
+                                        <div class="mb-2">
+                                            <form method="GET" action="play-game" style="display:inline;">
+                                                <input type="hidden" name="questId" value="${quest.id}">
+                                                <button type="submit" class="btn btn-sm btn-primary w-75">
+                                                    Посмотреть квест
+                                                </button>
+                                            </form>
+                                        </div>
+
+                                        <div class="mb-2">
+                                            <form method="GET" action="edit-quest" style="display:inline;">
+                                                <input type="hidden" name="questId" value="${quest.id}">
+                                                <button type="submit" class="btn btn-sm btn-warning w-75">
+                                                    Редактировать квест
+                                                </button>
+                                            </form>
+                                        </div>
+
+                                        <div class="mb-4">
+                                            <form method="POST" action="<c:url value='/home'/>" style="display:inline;">
+                                                <input type="hidden" name="_method" value="DELETE">
+                                                <input type="hidden" name="questId" value="${quest.id}">
+                                                <button type="submit" class="btn btn-sm btn-danger w-75"
+                                                        onclick="return confirm('Удалить квест ${quest.title}?')">
+                                                Удалить квест
+                                                </button>
+                                            </form>
+                                        </div>
                                     </div>
                                 </div>
                             </c:forEach>

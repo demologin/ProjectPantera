@@ -30,6 +30,10 @@ public class QuestService {
         questRepository.update(quest);
     }
 
+    public void delete(Quest quest) {
+        questRepository.delete(quest);
+    }
+
     public Optional<Quest> getValidatedQuest(String questIdStr) {
         if (questIdStr == null || questIdStr.isEmpty()) {
             return Optional.empty();

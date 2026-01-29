@@ -35,7 +35,7 @@ public class QuestRepository implements Repository<Quest> {
     }
 
     @Override
-    public void delete(Quest entity) {
-
+    public void delete(Quest quest) {
+        quests.remove(quest.getId());
     }
 }

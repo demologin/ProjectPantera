@@ -15,6 +15,10 @@ public interface Command {
         return getView();
     }
 
+    default String doDelete(HttpServletRequest request) {
+        return getView();
+    }
+
     default String getView() {
         String simpleName = this.getClass().getSimpleName();
         return convertCamelCaseToKebabStyle(simpleName);
@@ -32,6 +36,4 @@ public interface Command {
                 ? snakeName.substring(1)
                 : snakeName;
     }
-
-
 }

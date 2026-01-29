@@ -42,8 +42,20 @@ public class FrontController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        String methodOverride = req.getParameter("_method");
+        if ("DELETE".equalsIgnoreCase(methodOverride)) {
+            doDelete(req, resp);
+            return;
+        }
         Command command = httpResolver.resolve(req);
         String redirect = command.doPost(req);
+        resp.sendRedirect(redirect);
+    }
+
+    @Override
+    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        Command command = httpResolver.resolve(req);
+        String redirect = command.doDelete(req);
         resp.sendRedirect(redirect);
     }
 }
