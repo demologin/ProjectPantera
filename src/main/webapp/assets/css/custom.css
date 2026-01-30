@@ -40,8 +40,62 @@ body {
 }
 
 .list-group-item,
-.list-group-item a {
+.list-group-item a,
+.list-group-item a:visited,
+.list-group-item a:hover,
+.list-group-item a:active,
+.list-group-item a:focus {
     font-size: 1.25rem;
+    font-weight: 700;
+    color: #ffffff !important;
+    -webkit-text-stroke: 0;
+    text-shadow: none;
+}
+
+.page-title {
+    font-weight: 800;
+    color: #ffffff !important;
+    -webkit-text-stroke: 0;
+    text-shadow: none;
+    font-size: 2rem;
+}
+
+.content-panel {
+    background-color: rgba(0, 0, 0, 0.55);
+    border-radius: 12px;
+    padding: 1.25rem 1.5rem;
+}
+
+.content-panel p {
+    font-weight: 700;
+    color: #ffffff !important;
+    -webkit-text-stroke: 1px #000000;
+    text-shadow: 0 0 2px rgba(0, 0, 0, 0.6);
+}
+
+label,
+.form-label,
+.col-form-label,
+legend,
+.form-text {
+    color: #ffffff !important;
+    font-weight: 700 !important;
+    -webkit-text-stroke: 0.5px #000000 !important;
+    text-shadow: 0 0 2px rgba(0, 0, 0, 0.6) !important;
+}
+
+.user-row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.user-avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid rgba(255, 255, 255, 0.7);
 }
 .list-group {
     background-color: transparent;

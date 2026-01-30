@@ -1,5 +1,6 @@
 package com.javarush.popkov.repository;
 
+import com.javarush.popkov.entity.Gender;
 import com.javarush.popkov.entity.Role;
 import com.javarush.popkov.entity.User;
 
@@ -16,10 +17,10 @@ public class UserRepository implements Repository<User> {
     public static final AtomicLong id = new AtomicLong(System.currentTimeMillis());
 
     public UserRepository() {
-        map.put(1L, new User(1L, "Alisa", "qwerty", Role.USER));
-        map.put(2L, new User(2L, "Bob", "", Role.GUEST));
-        map.put(3L, new User(3L, "Carl", "admin", Role.ADMIN));
-        map.put(4L, new User(4L, "Khmelov", "admin", Role.ADMIN));
+        map.put(1L, new User(1L, "Alisa", "qwerty", Role.USER, Gender.FEMALE, null));
+        map.put(2L, new User(2L, "Bob", "", Role.GUEST, Gender.MALE, null));
+        map.put(3L, new User(3L, "Carl", "admin", Role.ADMIN, Gender.MALE, null));
+        map.put(4L, new User(4L, "Khmelov", "admin", Role.ADMIN, Gender.MALE, null));
     }
 
     @Override

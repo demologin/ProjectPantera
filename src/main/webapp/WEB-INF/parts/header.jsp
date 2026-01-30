@@ -21,7 +21,7 @@
             content: "";
             position: fixed;
             inset: 0;
-            background: url("<c:url value='/assets/images/moto-bg.png'/>?v=3") center center / cover no-repeat fixed;
+            background: url("<c:url value='/images/background-wallpaper.png'/>?v=1") center center / cover no-repeat fixed;
             z-index: 0;
         }
 
@@ -41,10 +41,10 @@
                         </svg></span><span>Pantera</span></a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navcol-1">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link active" href="http://localhost:8080/">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="http://localhost:8080/statistics">Статистика</a></li>
-                    <li class="nav-item"><a class="nav-link" href="http://localhost:8080/list-user">Пользователи</a></li>
-                    <li class="nav-item"><a class="nav-link" href="http://localhost:8080/create-quest">Создать квест</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="<c:url value='/home'/>">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="<c:url value='/statistics'/>">Статистика</a></li>
+                    <li class="nav-item"><a class="nav-link" href="<c:url value='/list-user'/>">Пользователи</a></li>
+                    <li class="nav-item"><a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Создать квест</a></li>
                 </ul><a class="btn btn-primary ms-md-2" role="button" href="#">Login</a><a class="btn btn-primary ms-md-2" role="button" href="#">Sign up</a>
             </div>
         </div>

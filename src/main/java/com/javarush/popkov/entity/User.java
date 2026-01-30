@@ -19,8 +19,21 @@ public class User {
 
     private Role role;
 
+    private Gender gender;
+
+    private String imageId;
+
     public String getImage() { //TODO move to DTO
-        return "image-" + id;
+        if (imageId != null && !imageId.isBlank()) {
+            return imageId;
+        }
+        if (gender == Gender.FEMALE) {
+            return "female";
+        }
+        if (gender == Gender.MALE) {
+            return "male";
+        }
+        return "no-image";
     }
 
 }
