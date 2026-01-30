@@ -18,7 +18,7 @@ public class AnswerService {
         return answerRepository.getAll();
     }
 
-    public Optional<Answer> get(Long id) {
+    public Optional<Answer> findById(Long id) {
         return answerRepository.findById(id);
     }
 
@@ -26,11 +26,4 @@ public class AnswerService {
         answerRepository.create(answer);
     }
 
-    public Long parseAnswerIdStrToLong(String answerIdStr) {
-        try {
-            return Long.parseLong(answerIdStr);
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("Invalid answer id");
-        }
-    }
 }

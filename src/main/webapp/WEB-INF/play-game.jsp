@@ -2,9 +2,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@include file="header.jsp" %>
 
-<link rel="stylesheet" type="text/css" href="<c:url value='/static/bootstrap/css/bootstrap.min.css'/>">
-<link rel="stylesheet" type="text/css" href="<c:url value='/static/css/Hero-Features-icons.css'/>">
 <link rel="stylesheet" type="text/css" href="<c:url value='/static/css/Bold-BS4-Full-Page-Image-Header.css'/>">
+<link rel="stylesheet" type="text/css" href="<c:url value='/static/css/Hero-Features-icons.css'/>">
+<link rel="stylesheet" type="text/css" href="<c:url value='/static/bootstrap/css/bootstrap.min.css'/>">
 <html>
 <head>
     <title>${requestScope.quest.title}</title>
@@ -41,8 +41,8 @@
             <c:if test="${empty requestScope.gameOver and not empty requestScope.question}">
                 <c:choose>
                     <c:when test="${requestScope.noAnswers}">
-                        <div class="question-text">
-                                ${requestScope.question.text}
+                        <div class="question-text" style="font-size: 20px; font-weight: bold; color: #0b5ed7">
+                            <b>${requestScope.question.text}</b>
                         </div>
 
                         <div class="button-group">
@@ -65,7 +65,7 @@
                         <form method="POST" action="<c:url value='/play-game'/>" class="mt-3">
                             <input type="hidden" name="questId" value="${requestScope.quest.id}"/>
                             <fieldset>
-                                <legend>Вопрос № ${requestScope.question.label}</legend>
+                                <legend>Вопрос</legend>
 
                                 <div class="form-group row mb-3">
                                     <label class="col-md-4 col-form-label">

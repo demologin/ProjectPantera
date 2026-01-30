@@ -6,6 +6,7 @@ import com.javarush.vasileva.service.AnswerService;
 import com.javarush.vasileva.service.QuestService;
 import com.javarush.vasileva.service.QuestionService;
 import com.javarush.vasileva.util.RequestHelpers;
+import com.javarush.vasileva.util.Value;
 import jakarta.servlet.http.HttpServletRequest;
 
 import java.util.List;
@@ -13,6 +14,7 @@ import java.util.Optional;
 
 import static com.javarush.vasileva.util.Key.*;
 
+@SuppressWarnings("unused")
 public class PlayGame implements Command {
     private final QuestService questService;
     private final QuestionService questionService;
@@ -30,7 +32,7 @@ public class PlayGame implements Command {
         String questionIdStr = req.getParameter(QUESTION_ID);
 
         Quest quest = questService.findById(questIdStr)
-                .orElseThrow(() -> new AppException("Quest is not found: id=" + questIdStr));
+                .orElseThrow(() -> new AppException(Value.QUEST_NOT_FOUND + questIdStr));
         req.setAttribute(QUEST, quest);
 
         if (questionIdStr == null || questionIdStr.isEmpty()) {
@@ -62,9 +64,9 @@ public class PlayGame implements Command {
             }
 
             long questId = RequestHelpers.parseStringToLong(questIdStr);
-            long answerId = answerService.parseAnswerIdStrToLong(answerIdStr);
+            long answerId = RequestHelpers.parseStringToLong(answerIdStr);
 
-            Optional<Answer> answer = answerService.get(answerId);
+            Optional<Answer> answer = answerService.findById(answerId);
             if (answer.isEmpty()) {
                 return getView() + "?" + QUEST_ID + "=" + questId;
             }

@@ -90,5 +90,11 @@ input[type="radio"]:hover {
   margin-bottom: 20px;
 }
 
+.question-text {
+  font-size: large;
+  font-weight: bold;
+  color: #0b5ed7;
+}
+
 
 

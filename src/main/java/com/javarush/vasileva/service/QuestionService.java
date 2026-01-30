@@ -5,6 +5,8 @@ import com.javarush.vasileva.entity.Quest;
 import com.javarush.vasileva.entity.Question;
 import com.javarush.vasileva.exception.AppException;
 import com.javarush.vasileva.repository.QuestionRepository;
+import com.javarush.vasileva.util.RequestHelpers;
+import com.javarush.vasileva.util.Value;
 
 import java.util.List;
 import java.util.Optional;
@@ -36,11 +38,7 @@ public class QuestionService {
     public Optional<Question> findCurrentQuestion(String questionIdStr, Quest quest) {
         Long currentQuestionId;
         if (questionIdStr != null && !questionIdStr.isEmpty()) {
-            try {
-                currentQuestionId = Long.parseLong(questionIdStr);
-            } catch (NumberFormatException e) {
-                return Optional.empty();
-            }
+            currentQuestionId = RequestHelpers.parseStringToLong(questionIdStr);
         } else {
             currentQuestionId = quest.getStartQuestionId();
         }
@@ -50,8 +48,7 @@ public class QuestionService {
     public long findNextQuestionId(long questId, Answer answer) {
         String nextQuestionLabelStr = answer.getNextQuestionLabel();
         Question nextQuestion = getByQuestionLabelAndQuestId(nextQuestionLabelStr, questId)
-                .orElseThrow(() -> new AppException("Следующий вопрос с меткой " + nextQuestionLabelStr + " в квесте id=" + questId + " не найден."));
-
+                .orElseThrow(() -> new AppException(Value.QUESTION_NOT_FOUND + nextQuestionLabelStr));
         return nextQuestion.getGeneratedId();
     }
 }
