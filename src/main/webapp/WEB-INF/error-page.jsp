@@ -40,7 +40,7 @@
       </button>
     </form>
 
-    <form method="GET" action="<c:url value='/list-user'/>">
+    <form method="GET" action="<c:url value='/user-list'/>">
       <button type="submit" class="btn btn-outline-primary fs-5 px-4 py-2">
         Список пользователей
       </button>

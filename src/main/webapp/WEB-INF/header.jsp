@@ -41,8 +41,8 @@
                     <c:if test="${not empty sessionScope.user}">
                         <li>
                             <c:if test="${sessionScope.user.isAdmin()}">
-                                <a class="nav-link <c:if test="${pageContext.request.requestURI.contains('/list-user')}">active</c:if>"
-                                   href="${pageContext.request.contextPath}/list-user">Список пользователей
+                                <a class="nav-link <c:if test="${pageContext.request.requestURI.contains('/user-list')}">active</c:if>"
+                                   href="${pageContext.request.contextPath}/user-list">Список пользователей
                                 </a>
                             </c:if>
                         </li>

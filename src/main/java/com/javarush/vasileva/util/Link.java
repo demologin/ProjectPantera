@@ -7,7 +7,7 @@ public class Link {
     public static final String LOGOUT = "/logout";
     public static final String REGISTER = "/register";
     public static final String PROFILE = "/profile";
-    public static final String USER_LIST = "/list-user";
+    public static final String USER_LIST = "/user-list";
     public static final String EDIT_USER = "/edit-user";
     public static final String PLAY_GAME = "/play-game";
     public static final String EDIT_QUEST = "/edit-quest";

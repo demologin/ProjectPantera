@@ -42,7 +42,7 @@
 
                         <c:if test="${sessionScope.user.isAdmin()}">
                             <form method="POST"
-                                  action="<c:url value='/list-user'/>"
+                                  action="<c:url value='/user-list'/>"
                                   style="display:inline;"
                                   onsubmit="return confirm('Удалить пользователя ${user.login}?')">
                                 <input type="hidden" name="_method" value="DELETE">

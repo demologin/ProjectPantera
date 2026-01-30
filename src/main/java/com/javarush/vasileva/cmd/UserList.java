@@ -13,11 +13,11 @@ import static com.javarush.vasileva.util.Key.*;
 import static com.javarush.vasileva.util.Value.*;
 
 @SuppressWarnings("unused")
-public class ListUser implements Command {
+public class UserList implements Command {
 
     private final UserService userService;
 
-    public ListUser(UserService userService) {
+    public UserList(UserService userService) {
         this.userService = userService;
     }
 
