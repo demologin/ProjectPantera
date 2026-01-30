@@ -17,7 +17,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-@DisplayName("Тесты для StatisticPage")
+@DisplayName("Tests for StatisticPage")
 class StatisticPageTest {
     @Mock
     private StatisticService statisticService;
@@ -36,7 +36,7 @@ class StatisticPageTest {
     }
 
     @Test
-    @DisplayName("GET запрос с существующей статистикой")
+    @DisplayName("GET a request with existing statistics")
     void testDoGetWithStatistic() {
         when(request.getSession()).thenReturn(session);
         when(session.getAttribute("username")).thenReturn("testuser");
@@ -53,7 +53,7 @@ class StatisticPageTest {
     }
 
     @Test
-    @DisplayName("GET запрос без статистики")
+    @DisplayName("GET a request without statistics")
     void testDoGetWithoutStatistic() {
         when(request.getSession()).thenReturn(session);
         when(session.getAttribute("username")).thenReturn("testuser");
@@ -69,7 +69,7 @@ class StatisticPageTest {
     }
 
     @Test
-    @DisplayName("GET запрос без авторизованного пользователя")
+    @DisplayName("GET a request without an authorized user")
     void testDoGetWithoutUser() {
         when(request.getSession()).thenReturn(session);
         when(session.getAttribute("username")).thenReturn(null);
@@ -83,7 +83,7 @@ class StatisticPageTest {
     }
 
     @Test
-    @DisplayName("Получение пути к представлению")
+    @DisplayName("Getting the path to the view")
     void testGetView() {
         String result = statisticPage.getView();
 
