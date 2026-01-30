@@ -28,6 +28,14 @@ public class Node {
         return options;
     }
 
+    public boolean isCommonType() {
+        return type.equals(Type.COMMON);
+    }
+
+    public boolean isVictory() {
+        return type.equals(Type.VICTORY);
+    }
+
     public interface Type {
         String COMMON = "common";
         String VICTORY = "victory";

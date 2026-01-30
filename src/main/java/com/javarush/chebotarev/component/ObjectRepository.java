@@ -1,33 +1,34 @@
 package com.javarush.chebotarev.component;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
-import java.util.concurrent.ConcurrentHashMap;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class ObjectRepository {
 
-    public static final ConcurrentHashMap<Class<?>, Object> objects = new ConcurrentHashMap<>();
+    private static volatile ObjectRepository instance;
+    private final QuestService questService;
+    private final ObjectMapper objectMapper;
 
-    @SuppressWarnings("unchecked")
-    public static <T> T find(Class<T> aClass) {
-        Object object = objects.get(aClass);
-        if (object == null) {
-            Constructor<?> constructor = aClass.getConstructors()[0];
-            Class<?>[] parameterTypes = constructor.getParameterTypes();
-            Object[] parameters = new Object[parameterTypes.length];
-            for (int i = 0; i < parameters.length; i++) {
-                parameters[i] = ObjectRepository.find(parameterTypes[i]);
+    public static QuestService getQuestService() {
+        return getInstance().questService;
+    }
+
+    public static ObjectMapper getObjectMapper() {
+        return getInstance().objectMapper;
+    }
+
+    private ObjectRepository() {
+        questService = new QuestService();
+        objectMapper = new ObjectMapper();
+    }
+
+    private static ObjectRepository getInstance() {
+        if (instance == null) {
+            synchronized (ObjectRepository.class) {
+                if (instance == null) {
+                    instance = new ObjectRepository();
+                }
             }
-            Object newInstance;
-            try {
-                newInstance = constructor.newInstance(parameters);
-            } catch (InstantiationException
-                    | IllegalAccessException
-                    | InvocationTargetException e) {
-                throw new RuntimeException(e);
-            }
-            objects.put(aClass, newInstance);
         }
-        return (T) objects.get(aClass);
+        return instance;
     }
 }

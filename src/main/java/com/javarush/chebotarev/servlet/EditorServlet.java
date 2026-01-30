@@ -26,9 +26,9 @@ public class EditorServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         req.setCharacterEncoding("UTF-8");
-        ObjectMapper mapper = ObjectRepository.find(ObjectMapper.class);
+        ObjectMapper mapper = ObjectRepository.getObjectMapper();
         Quest quest = mapper.readValue(req.getReader(), Quest.class);
-        QuestService questService = ObjectRepository.find(QuestService.class);
-        questService.saveQuest(quest, mapper);
+        QuestService questService = ObjectRepository.getQuestService();
+        questService.saveQuest(quest);
     }
 }

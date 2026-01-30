@@ -22,4 +22,17 @@ public class Quest {
     public List<Node> getNodes() {
         return nodes;
     }
+
+    public Node getFirstNode() {
+        return nodes.get(0);
+    }
+
+    public Node getNode(int nodeId) {
+        for (Node node : nodes) {
+            if (node.getId() == nodeId) {
+                return node;
+            }
+        }
+        return null;
+    }
 }

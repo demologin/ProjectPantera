@@ -11,41 +11,20 @@
 <body>
     <div class="container">
         <h1>Выберите квест</h1>
-        <div id="quest-list">
-            <c:forEach var="availableQuest" items="${availableQuests}">
-                <button class="btn">
-                    <c:out value="${availableQuest}"/>
+        <c:forEach var="availableQuest" items="${availableQuests}" varStatus="status">
+            <button class="btn" onclick="window.location='/new-quest?questIndex=${status.index}'">
+                <c:out value="${availableQuest.title}"/>
+            </button>
+        </c:forEach>
+        <c:if test="${not empty currentQuest}">
+            <c:if test="${!currentQuest.isDone()}">
+                <button class="btn btn-continue" onclick="window.location='/continue-quest'">
+                    Продолжить квест:
+                    <c:out value="${currentQuest.title}"/>
                 </button>
-            </c:forEach>
-        </div>
-        <div id="special-actions"></div>
+            </c:if>
+        </c:if>
         <button class="btn btn-create" onclick="window.location='/editor'">Создать квест</button>
     </div>
-    <script>
-        // Имитация данных от Backend
-        const backendData = {
-            availableQuests: ["Тень леса", "Забытый замок", "Проклятие пирата"],
-            lastUnfinishedQuest: "Забытый замок" // Поставь null, если квеста нет
-        };
-
-        const questListContainer = document.getElementById('quest-list');
-        const specialActions = document.getElementById('special-actions');
-
-        // Вывод обычных квестов
-        // backendData.availableQuests.forEach(name => {
-        //     const btn = document.createElement('button');
-        //     btn.className = 'btn';
-        //     btn.innerText = name;
-        //     questListContainer.appendChild(btn);
-        // });
-
-        // Кнопка продолжения (появляется только если есть данные)
-        if (backendData.lastUnfinishedQuest) {
-            const contBtn = document.createElement('button');
-            contBtn.className = 'btn btn-continue';
-            contBtn.innerText = 'Продолжить квест: ' + backendData.lastUnfinishedQuest;
-            specialActions.appendChild(contBtn);
-        }
-    </script>
 </body>
 </html>
