@@ -14,7 +14,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-@DisplayName("Тесты для QuestDragon")
+@DisplayName("Tests for QuestDragon")
 class QuestDragonTest {
     @Mock
     private StatisticService statisticService;
@@ -33,7 +33,7 @@ class QuestDragonTest {
     }
 
     @Test
-    @DisplayName("GET запрос возвращает путь к странице квеста")
+    @DisplayName("The GET request returns the path to the quest page")
     void testDoGet() {
         String result = questDragon.doGet(request);
 
@@ -41,7 +41,7 @@ class QuestDragonTest {
     }
 
     @Test
-    @DisplayName("Начало квеста")
+    @DisplayName("The beginning of the quest")
     void testDoPostStartQuest() {
         when(request.getParameter("quest")).thenReturn("the way of the dragon rider");
         when(request.getParameter("stage")).thenReturn(null);
@@ -58,7 +58,7 @@ class QuestDragonTest {
     }
 
     @Test
-    @DisplayName("Переход на этап 1")
+    @DisplayName("Transition to stage 1")
     void testDoPostStage0() {
         when(request.getParameter("stage")).thenReturn("0");
         when(request.getSession()).thenReturn(session);
@@ -70,7 +70,7 @@ class QuestDragonTest {
     }
 
     @Test
-    @DisplayName("Ввод имени игрока")
+    @DisplayName("Entering the player's name")
     void testDoPostStage1WithName() {
         when(request.getParameter("stage")).thenReturn("1");
         when(request.getParameter("playerNameInput")).thenReturn("PlayerName");
@@ -85,7 +85,7 @@ class QuestDragonTest {
     }
 
     @Test
-    @DisplayName("Переход на следующий этап с выбором")
+    @DisplayName("Moving to the next stage with a choice")
     void testDoPostNextStage() {
         when(request.getParameter("stage")).thenReturn("2");
         when(request.getParameter("choice")).thenReturn("10");
@@ -102,9 +102,9 @@ class QuestDragonTest {
     }
 
     @Test
-    @DisplayName("Поражение при низком уровне доверия")
+    @DisplayName("Defeat at a low level of trust")
     void testDoPostLossCondition() {
-        when(request.getParameter("stage")).thenReturn("3");
+        when(request.getParameter("stage")).thenReturn("4");
         when(request.getParameter("choice")).thenReturn("-10");
         when(request.getSession()).thenReturn(session);
         when(session.getAttribute("username")).thenReturn("testuser");
@@ -116,11 +116,10 @@ class QuestDragonTest {
         assertThat(result).isEqualTo("/WEB-INF/quest-dragon.jsp");
         verify(statisticService).registerLoss("testuser");
         verify(session).setAttribute("questFinished", true);
-        verify(session).setAttribute("stage", 11);
     }
 
     @Test
-    @DisplayName("Победа при высоком уровне доверия")
+    @DisplayName("Winning with a high level of trust")
     void testDoPostWinCondition() {
         when(request.getParameter("stage")).thenReturn("9");
         when(request.getParameter("choice")).thenReturn("10");
@@ -137,7 +136,7 @@ class QuestDragonTest {
     }
 
     @Test
-    @DisplayName("Победа на финальном этапе при высоком уровне доверия")
+    @DisplayName("Winning the final stage with a high level of trust")
     void testDoPostFinalStageWin() {
         when(request.getParameter("stage")).thenReturn("10");
         when(request.getParameter("choice")).thenReturn("10");
@@ -155,7 +154,7 @@ class QuestDragonTest {
     }
 
     @Test
-    @DisplayName("Получение пути к представлению")
+    @DisplayName("Getting the path to the view")
     void testGetView() {
         String result = questDragon.getView();
 

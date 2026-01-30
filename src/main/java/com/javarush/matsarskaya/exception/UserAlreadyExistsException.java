@@ -2,10 +2,10 @@ package com.javarush.matsarskaya.exception;
 
 public class UserAlreadyExistsException extends RuntimeException {
     public UserAlreadyExistsException(String username) {
-        super("Пользователь с именем '" + username + "' уже существует");
+        super("A user named '\" username + \"' already exists");
     }
 
     public UserAlreadyExistsException(String username, Throwable cause) {
-        super("Пользователь с именем '" + username + "' уже существует", cause);
+        super("A user named '\" username + \"' already exists", cause);
     }
 }

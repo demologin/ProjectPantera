@@ -19,36 +19,36 @@ public class UserService {
 
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
-        logger.info("UserService инициализирован");
+        logger.info("UserService is initialized");
     }
 
     public void registerUser(String username, String password) {
-        logger.info("Попытка регистрации пользователя: {}", username);
+        logger.info("User Registration Attempt: {}", username);
 
         if (userRepository.existsByUsername(username)) {
-            logger.warn("Пользователь с именем {} уже существует", username);
+            logger.warn("The user named {} already exists", username);
             throw new UserAlreadyExistsException(username);
         }
 
         User newUser = new User(username, password);
         userRepository.save(newUser);
-        logger.info("Пользователь {} успешно зарегистрирован", username);
+        logger.info("User {} successfully registered", username);
     }
 
     public Optional<User> loginUser(String username, String password) {
-        logger.info("Попытка входа пользователя: {}", username);
+        logger.info("User Login Attempt: {}", username);
         Optional<User> user = userRepository.findByUsername(username);
 
         if (user.isEmpty()) {
-            logger.warn("Пользователь {} не найден", username);
+            logger.warn("User {} not found", username);
             throw new UserNotFoundException(username);
         }
 
         if (!user.get().getPassword().equals(password)) {
-            logger.warn("Неверный пароль для пользователя: {}", username);
+            logger.warn("Invalid password for the user: {}", username);
             throw new InvalidCredentialsException();
         }
-        logger.info("Пользователь {} успешно вошёл в систему", username);
+        logger.info("User {} successfully logged in", username);
         return user;
     }
 
@@ -58,7 +58,7 @@ public class UserService {
 
         if (authenticated) {
             String username = (String) session.getAttribute("username");
-            LoggerFactory.getLogger(UserService.class).debug("Проверка авторизации: пользователь {} авторизован", username);
+            LoggerFactory.getLogger(UserService.class).debug("Authorization check: user {} is authorized", username);
         }
 
         return authenticated;
@@ -69,9 +69,9 @@ public class UserService {
         if (session != null) {
             String username = (String) session.getAttribute("username");
             session.invalidate();
-            logger.info("Пользователь {} вышел из системы", username);
+            logger.info("User {} logged out", username);
         } else {
-            logger.debug("Попытка выхода без активной сессии");
+            logger.debug("Attempt to log out without an active session");
         }
     }
 }

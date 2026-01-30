@@ -15,7 +15,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-@DisplayName("Тесты для RegisterPage")
+@DisplayName("Tests for RegisterPage")
 class RegisterPageTest {
     @Mock
     private UserService userService;
@@ -34,7 +34,7 @@ class RegisterPageTest {
     }
 
     @Test
-    @DisplayName("GET запрос возвращает путь к странице регистрации")
+    @DisplayName("The GET request returns the path to the registration page")
     void testDoGet() {
         String result = registerPage.doGet(request);
 
@@ -42,7 +42,7 @@ class RegisterPageTest {
     }
 
     @Test
-    @DisplayName("Успешная регистрация нового пользователя")
+    @DisplayName("Successful registration of a new user")
     void testDoPostSuccess() {
         when(request.getParameter("username")).thenReturn("newuser");
         when(request.getParameter("password")).thenReturn("password123");
@@ -58,7 +58,7 @@ class RegisterPageTest {
     }
 
     @Test
-    @DisplayName("Регистрация существующего пользователя")
+    @DisplayName("Registering an existing user")
     void testDoPostUserAlreadyExists() {
         when(request.getParameter("username")).thenReturn("existinguser");
         when(request.getParameter("password")).thenReturn("password123");
@@ -68,12 +68,12 @@ class RegisterPageTest {
         String result = registerPage.doPost(request);
 
         assertThat(result).isEqualTo("/WEB-INF/register-page.jsp");
-        verify(request).setAttribute("error", "Пользователь уже существует");
+        verify(request).setAttribute("error", "The user already exists");
         verify(userService).registerUser("existinguser", "password123");
     }
 
     @Test
-    @DisplayName("Получение пути к представлению")
+    @DisplayName("Getting the path to the view")
     void testGetView() {
         String result = registerPage.getView();
 

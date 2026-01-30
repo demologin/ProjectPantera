@@ -38,7 +38,7 @@ class LoginPageTest {
     }
 
     @Test
-    @DisplayName("GET запрос возвращает путь к странице входа")
+    @DisplayName("The GET request returns the path to the login page")
     void testDoGet() {
         String result = loginPage.doGet(request);
 
@@ -46,7 +46,7 @@ class LoginPageTest {
     }
 
     @Test
-    @DisplayName("Успешный вход пользователя")
+    @DisplayName("Successful user login")
     void testDoPostSuccess() {
         when(request.getParameter("username")).thenReturn("testuser");
         when(request.getParameter("password")).thenReturn("password123");
@@ -63,7 +63,7 @@ class LoginPageTest {
     }
 
     @Test
-    @DisplayName("Вход с несуществующим пользователем")
+    @DisplayName("Login with a non-existent user")
     void testDoPostUserNotFound() {
         when(request.getParameter("username")).thenReturn("nonexistent");
         when(request.getParameter("password")).thenReturn("password123");
@@ -73,12 +73,12 @@ class LoginPageTest {
         String result = loginPage.doPost(request);
 
         assertThat(result).isEqualTo("/WEB-INF/login-page.jsp");
-        verify(request).setAttribute("error", "Пользователь не найден");
+        verify(request).setAttribute("error", "User not found");
         verify(userService).loginUser("nonexistent", "password123");
     }
 
     @Test
-    @DisplayName("Вход с неверным паролем")
+    @DisplayName("Log in with an incorrect password")
     void testDoPostInvalidPassword() {
         when(request.getParameter("username")).thenReturn("testuser");
         when(request.getParameter("password")).thenReturn("wrongpassword");
@@ -88,12 +88,12 @@ class LoginPageTest {
         String result = loginPage.doPost(request);
 
         assertThat(result).isEqualTo("/WEB-INF/login-page.jsp");
-        verify(request).setAttribute("error", "Неверное имя пользователя или пароль");
+        verify(request).setAttribute("error", "Invalid username or password");
         verify(userService).loginUser("testuser", "wrongpassword");
     }
 
     @Test
-    @DisplayName("Получение пути к представлению")
+    @DisplayName("Getting the path to the view")
     void testGetView() {
         String result = loginPage.getView();
 

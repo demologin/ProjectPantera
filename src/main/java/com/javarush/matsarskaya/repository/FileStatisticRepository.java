@@ -37,7 +37,7 @@ public class FileStatisticRepository implements StatisticRepository {
                 }
             }
         } catch (IOException e) {
-            throw new RuntimeException("Ошибка чтения " + filePath, e);
+            throw new RuntimeException("Reading error " + filePath, e);
         }
     }
 
@@ -63,7 +63,7 @@ public class FileStatisticRepository implements StatisticRepository {
                 );
             }
         } catch (IOException e) {
-            throw new RuntimeException("Ошибка записи " + filePath, e);
+            throw new RuntimeException("Recording error " + filePath, e);
         }
     }
 }

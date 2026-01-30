@@ -4,11 +4,11 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
 import static org.assertj.core.api.Assertions.assertThat;
 
-@DisplayName("Тесты для сущности User")
+@DisplayName("Tests for the User entity")
 class UserTest {
 
     @Test
-    @DisplayName("Создание пользователя с корректными данными")
+    @DisplayName("Creating a user with correct data")
     void testUserCreation() {
         User user = new User("testuser", "password123");
         
@@ -17,7 +17,7 @@ class UserTest {
     }
 
     @Test
-    @DisplayName("Создание пользователя с пустым именем")
+    @DisplayName("Creating a user with an empty name")
     void testUserWithEmptyUsername() {
         User user = new User("", "password123");
         
@@ -26,7 +26,7 @@ class UserTest {
     }
 
     @Test
-    @DisplayName("Создание пользователя с пустым паролем")
+    @DisplayName("Creating a user with an empty password")
     void testUserWithEmptyPassword() {
         User user = new User("testuser", "");
         
@@ -35,7 +35,7 @@ class UserTest {
     }
 
     @Test
-    @DisplayName("Геттеры возвращают корректные значения")
+    @DisplayName("Getters return correct values.")
     void testGetters() {
         User user = new User("admin", "admin123");
         

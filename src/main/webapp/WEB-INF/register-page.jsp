@@ -3,6 +3,7 @@
 <html>
 <head>
   <title>Регистрация</title>
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/styles.css">
 </head>
 <body>
 

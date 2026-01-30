@@ -4,11 +4,11 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
 import static org.assertj.core.api.Assertions.assertThat;
 
-@DisplayName("Тесты для FileStorageConfig")
+@DisplayName("Tests for FileStorageConfig")
 class FileStorageConfigTest {
 
     @Test
-    @DisplayName("Получение пути к файлу пользователей")
+    @DisplayName("Getting the path to the user's file")
     void testGetUsersFilePath() {
         String path = FileStorageConfig.getUsersFilePath();
 
@@ -16,7 +16,7 @@ class FileStorageConfigTest {
     }
 
     @Test
-    @DisplayName("Получение пути к файлу статистики")
+    @DisplayName("Getting the path to the statistics file")
     void testGetStatisticsFilePath() {
         String path = FileStorageConfig.getStatisticsFilePath();
 
@@ -24,14 +24,14 @@ class FileStorageConfigTest {
     }
 
     @Test
-    @DisplayName("Пути не являются null")
+    @DisplayName("Paths are not null")
     void testPathsAreNotNull() {
         assertThat(FileStorageConfig.getUsersFilePath()).isNotNull();
         assertThat(FileStorageConfig.getStatisticsFilePath()).isNotNull();
     }
 
     @Test
-    @DisplayName("Пути не являются пустыми")
+    @DisplayName("Paths are not empty")
     void testPathsAreNotEmpty() {
         assertThat(FileStorageConfig.getUsersFilePath()).isNotEmpty();
         assertThat(FileStorageConfig.getStatisticsFilePath()).isNotEmpty();

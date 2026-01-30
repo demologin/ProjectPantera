@@ -8,11 +8,11 @@ import org.junit.jupiter.params.provider.ValueSource;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-@DisplayName("Тесты для enum QuestStage")
+@DisplayName("Tests for the enum QuestStage")
 class QuestStageTest {
 
     @Test
-    @DisplayName("Получение номера этапа")
+    @DisplayName("Getting the stage number")
     void testGetStageNumber() {
         assertThat(QuestStage.START.getStageNumber()).isEqualTo(0);
         assertThat(QuestStage.NAME_INPUT.getStageNumber()).isEqualTo(1);
@@ -21,7 +21,7 @@ class QuestStageTest {
     }
 
     @Test
-    @DisplayName("Получение этапа по номеру")
+    @DisplayName("Getting a stage by number")
     void testFromNumber() {
         assertThat(QuestStage.fromNumber(0)).isEqualTo(QuestStage.START);
         assertThat(QuestStage.fromNumber(1)).isEqualTo(QuestStage.NAME_INPUT);
@@ -30,7 +30,7 @@ class QuestStageTest {
     }
 
     @Test
-    @DisplayName("Выброс исключения при неверном номере этапа")
+    @DisplayName("Throwing an exception for an incorrect stage number")
     void testFromNumberWithInvalidNumber() {
         assertThatThrownBy(() -> QuestStage.fromNumber(12))
             .isInstanceOf(IllegalArgumentException.class)
@@ -42,7 +42,7 @@ class QuestStageTest {
     }
 
     @Test
-    @DisplayName("Переход к следующему этапу")
+    @DisplayName("Moving on to the next stage")
     void testNext() {
         assertThat(QuestStage.START.next()).isEqualTo(QuestStage.NAME_INPUT);
         assertThat(QuestStage.NAME_INPUT.next()).isEqualTo(QuestStage.STAGE_2);
@@ -60,7 +60,7 @@ class QuestStageTest {
         "6, 49, true",
         "6, 50, false"
     })
-    @DisplayName("Проверка условия поражения для этапов 3-6")
+    @DisplayName("Checking the defeat condition for stages 3-6")
     void testIsLossStageForStages3To6(int stageNumber, int trust, boolean expected) {
         QuestStage stage = QuestStage.fromNumber(stageNumber);
         assertThat(stage.isLossStage(trust)).isEqualTo(expected);
@@ -77,7 +77,7 @@ class QuestStageTest {
         "10, 69, true",
         "10, 70, false"
     })
-    @DisplayName("Проверка условия поражения для этапов 7-10")
+    @DisplayName("Checking the damage condition for stages 7-10")
     void testIsLossStageForStages7To10(int stageNumber, int trust, boolean expected) {
         QuestStage stage = QuestStage.fromNumber(stageNumber);
         assertThat(stage.isLossStage(trust)).isEqualTo(expected);
@@ -85,7 +85,7 @@ class QuestStageTest {
 
     @ParameterizedTest
     @ValueSource(ints = {0, 1, 2, 11})
-    @DisplayName("Этапы 0, 1, 2 и 11 не имеют условия поражения")
+    @DisplayName("Stages 0, 1, 2, and 11 do not have a defeat condition.")
     void testIsLossStageForNonLossStages(int stageNumber) {
         QuestStage stage = QuestStage.fromNumber(stageNumber);
         assertThat(stage.isLossStage(0)).isFalse();

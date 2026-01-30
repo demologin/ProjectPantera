@@ -3,6 +3,7 @@
 <html>
 <head>
     <title>Вход</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/styles.css">
 </head>
 <body>
 

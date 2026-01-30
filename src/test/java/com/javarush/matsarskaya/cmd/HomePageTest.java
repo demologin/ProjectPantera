@@ -24,7 +24,7 @@ class HomePageTest {
     }
 
     @Test
-    @DisplayName("GET запрос возвращает путь к домашней странице")
+    @DisplayName("The GET request returns the path to the home page")
     void testDoGet() {
         String result = homePage.doGet(request);
 
@@ -32,7 +32,7 @@ class HomePageTest {
     }
 
     @Test
-    @DisplayName("POST запрос возвращает путь к домашней странице")
+    @DisplayName("The POST request returns the path to the home page")
     void testDoPost() {
         String result = homePage.doPost(request);
 
@@ -40,7 +40,7 @@ class HomePageTest {
     }
 
     @Test
-    @DisplayName("Получение пути к представлению")
+    @DisplayName("Getting the path to the view")
     void testGetView() {
         String result = homePage.getView();
 

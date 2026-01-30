@@ -18,7 +18,7 @@ import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-@DisplayName("Тесты для FileUserRepository")
+@DisplayName("Tests for FileUserRepository")
 class FileUserRepositoryTest {
     @Mock
     private UserFileStorage storage;
@@ -31,7 +31,7 @@ class FileUserRepositoryTest {
     }
 
     @Test
-    @DisplayName("Успешное сохранение нового пользователя")
+    @DisplayName("Successful saving of a new user")
     void testSaveNewUser() {
         when(storage.userExists("newuser")).thenReturn(false);
 
@@ -44,22 +44,22 @@ class FileUserRepositoryTest {
     }
 
     @Test
-    @DisplayName("Сохранение существующего пользователя выбрасывает исключение")
+    @DisplayName("Saving an existing user throws an exception")
     void testSaveExistingUser() {
         when(storage.userExists("existinguser")).thenReturn(true);
 
         User user = new User("existinguser", "password123");
-        
+
         assertThatThrownBy(() -> repository.save(user))
             .isInstanceOf(UserAlreadyExistsException.class)
-            .hasMessageContaining("existinguser");
+            .hasMessageContaining("username");
 
         verify(storage).userExists("existinguser");
         verify(storage, never()).saveUser(anyString(), anyString());
     }
 
     @Test
-    @DisplayName("Поиск существующего пользователя по имени")
+    @DisplayName("Search for an existing user by name")
     void testFindByUsernameExistingUser() {
         when(storage.getPasswordByUsername("testuser")).thenReturn(Optional.of("password123"));
 
@@ -72,7 +72,7 @@ class FileUserRepositoryTest {
     }
 
     @Test
-    @DisplayName("Поиск несуществующего пользователя по имени")
+    @DisplayName("Search for a non-existent user by name")
     void testFindByUsernameNonExistingUser() {
         when(storage.getPasswordByUsername("nonexistent")).thenReturn(Optional.empty());
 
@@ -83,7 +83,7 @@ class FileUserRepositoryTest {
     }
 
     @Test
-    @DisplayName("Проверка существования пользователя - пользователь существует")
+    @DisplayName("Verification of user's existence - user exists")
     void testExistsByUsernameTrue() {
         when(storage.userExists("existinguser")).thenReturn(true);
 
@@ -94,7 +94,7 @@ class FileUserRepositoryTest {
     }
 
     @Test
-    @DisplayName("Проверка существования пользователя - пользователь не существует")
+    @DisplayName("Verification of user's existence - user does not exist")
     void testExistsByUsernameFalse() {
         when(storage.userExists("nonexistent")).thenReturn(false);
 

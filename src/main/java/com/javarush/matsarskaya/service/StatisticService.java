@@ -12,60 +12,38 @@ public class StatisticService {
 
     public StatisticService(StatisticRepository repository) {
         this.repository = repository;
-        logger.info("StatisticService инициализирован");
+        logger.info("StatisticService initialized");
     }
 
-    /**
-     * Получает или создаёт статистику для пользователя.
-     * @param username имя пользователя
-     * @return статистика пользователя
-     */
     private Statistic getOrCreate(String username) {
-        logger.debug("Получение или создание статистики для пользователя: {}", username);
+        logger.debug("Getting or creating statistics for a user: {}", username);
         return repository.findByUsername(username)
                 .orElseGet(() -> new Statistic(username, 0, 0, 0));
     }
 
-    /**
-     * Регистрирует попытку прохождения квеста.
-     * @param username имя пользователя
-     */
     public void registerAttempt(String username) {
-        logger.debug("Регистрация попытки для пользователя: {}", username);
+        logger.debug("Registering an attempt for a user: {}", username);
         Statistic statistic = getOrCreate(username);
         statistic.incrementAttempts();
         repository.save(statistic);
     }
 
-    /**
-     * Регистрирует победу в квесте.
-     * @param username имя пользователя
-     */
     public void registerWin(String username) {
-        logger.info("Регистрация победы для пользователя: {}", username);
+        logger.info("Victory registration for the user: {}", username);
         Statistic statistic = getOrCreate(username);
         statistic.incrementWins();
         repository.save(statistic);
     }
 
-    /**
-     * Регистрирует поражение в квесте.
-     * @param username имя пользователя
-     */
     public void registerLoss(String username) {
-        logger.info("Регистрация поражения для пользователя: {}", username);
+        logger.info("Defeat registration for the user: {}", username);
         Statistic statistic = getOrCreate(username);
         statistic.incrementLosses();
         repository.save(statistic);
     }
 
-    /**
-     * Возвращает статистику пользователя.
-     * @param username имя пользователя
-     * @return Optional со статистикой
-     */
     public Optional<Statistic> getStatistic(String username) {
-        logger.debug("Получение статистики для пользователя: {}", username);
+        logger.debug("Getting statistics for the user: {}", username);
         return repository.findByUsername(username);
     }
 }

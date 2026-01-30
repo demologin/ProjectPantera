@@ -4,25 +4,25 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
 import static org.assertj.core.api.Assertions.assertThat;
 
-@DisplayName("Тесты для UserNotFoundException")
+@DisplayName("Tests for UserNotFoundException")
 class UserNotFoundExceptionTest {
 
     @Test
-    @DisplayName("Создание исключения с именем пользователя")
+    @DisplayName("Creating an exception with a username")
     void testExceptionWithUsername() {
         UserNotFoundException exception = new UserNotFoundException("testuser");
 
-        assertThat(exception.getMessage()).contains("testuser");
-        assertThat(exception.getMessage()).contains("не найден");
+        assertThat(exception.getMessage()).contains("username");
+        assertThat(exception.getMessage()).contains("not found");
     }
 
     @Test
-    @DisplayName("Создание исключения с именем пользователя и причиной")
+    @DisplayName("Creating an exception with a username and reason")
     void testExceptionWithUsernameAndCause() {
         Throwable cause = new RuntimeException("Database error");
         UserNotFoundException exception = new UserNotFoundException("testuser", cause);
 
-        assertThat(exception.getMessage()).contains("testuser");
+        assertThat(exception.getMessage()).contains("username");
         assertThat(exception.getCause()).isEqualTo(cause);
     }
 }

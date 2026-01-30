@@ -17,41 +17,22 @@ public class UserFileStorage {
         loadUsersIfNeeded();
     }
 
-    /**
-     * Сохраняет пользователя в файл.
-     * @param username имя пользователя
-     * @param password пароль
-     */
     public void saveUser(String username, String password) {
         loadUsersIfNeeded();
         users.put(username, password);
         saveUsersToFile();
     }
 
-    /**
-     * Возвращает пароль пользователя по имени.
-     * @param username имя пользователя
-     * @return Optional с паролем, если пользователь существует
-     */
     public Optional<String> getPasswordByUsername(String username) {
         loadUsersIfNeeded();
         return Optional.ofNullable(users.get(username));
     }
 
-    /**
-     * Проверяет существование пользователя.
-     * @param username имя пользователя
-     * @return true если пользователь существует
-     */
     public boolean userExists(String username) {
         loadUsersIfNeeded();
         return users.containsKey(username);
     }
 
-    /**
-     * Возвращает копию всех пользователей.
-     * @return Map с пользователями
-     */
     public Map<String, String> getAllUsers() {
         loadUsersIfNeeded();
         return new HashMap<>(users);
@@ -71,7 +52,7 @@ public class UserFileStorage {
                 writer.println(entry.getKey() + ":" + entry.getValue());
             }
         } catch (IOException e) {
-            System.err.println("Ошибка при записи в файл: " + e.getMessage());
+            System.err.println("Error when writing to a file: " + e.getMessage());
         }
     }
 
@@ -90,7 +71,7 @@ public class UserFileStorage {
                 }
             }
         } catch (IOException e) {
-            System.err.println("Ошибка при чтении из файла: " + e.getMessage());
+            System.err.println("Error when reading from a file: " + e.getMessage());
         }
     }
 }

@@ -22,7 +22,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-@DisplayName("Тесты для UserService")
+@DisplayName("Tests for UserService")
 class UserServiceTest {
     @Mock
     private UserRepository userRepository;
@@ -41,7 +41,7 @@ class UserServiceTest {
     }
 
     @Test
-    @DisplayName("Успешная регистрация нового пользователя")
+    @DisplayName("Successful registration of a new user")
     void testRegisterUserSuccess() {
         when(userRepository.existsByUsername("newuser")).thenReturn(false);
         when(userRepository.save(any(User.class))).thenReturn(true);
@@ -53,20 +53,20 @@ class UserServiceTest {
     }
 
     @Test
-    @DisplayName("Регистрация существующего пользователя выбрасывает исключение")
+    @DisplayName("Registering an existing user throws an exception")
     void testRegisterUserAlreadyExists() {
         when(userRepository.existsByUsername("existinguser")).thenReturn(true);
 
         assertThatThrownBy(() -> userService.registerUser("existinguser", "password123"))
                 .isInstanceOf(UserAlreadyExistsException.class)
-                .hasMessageContaining("existinguser");
+                .hasMessageContaining("username");
 
         verify(userRepository).existsByUsername("existinguser");
         verify(userRepository, never()).save(any(User.class));
     }
 
     @Test
-    @DisplayName("Успешный вход пользователя")
+    @DisplayName("Successful user login")
     void testLoginUserSuccess() {
         User user = new User("testuser", "password123");
         when(userRepository.findByUsername("testuser")).thenReturn(Optional.of(user));
@@ -79,19 +79,19 @@ class UserServiceTest {
     }
 
     @Test
-    @DisplayName("Вход с несуществующим пользователем выбрасывает исключение")
+    @DisplayName("Logging in with a non-existent user throws an exception")
     void testLoginUserNotFound() {
         when(userRepository.findByUsername("nonexistent")).thenReturn(Optional.empty());
 
         assertThatThrownBy(() -> userService.loginUser("nonexistent", "password123"))
                 .isInstanceOf(UserNotFoundException.class)
-                .hasMessageContaining("nonexistent");
+                .hasMessageContaining("username");
 
         verify(userRepository).findByUsername("nonexistent");
     }
 
     @Test
-    @DisplayName("Вход с неверным паролем выбрасывает исключение")
+    @DisplayName("Logging in with an incorrect password throws an exception.")
     void testLoginUserInvalidPassword() {
         User user = new User("testuser", "correctpassword");
         when(userRepository.findByUsername("testuser")).thenReturn(Optional.of(user));
@@ -103,7 +103,7 @@ class UserServiceTest {
     }
 
     @Test
-    @DisplayName("Проверка авторизации без сессии")
+    @DisplayName("Checking authorization without a session")
     void testIsAuthenticatedWithoutSession() {
         when(request.getSession(false)).thenReturn(null);
 
@@ -114,7 +114,7 @@ class UserServiceTest {
     }
 
     @Test
-    @DisplayName("Проверка авторизации с сессией без username")
+    @DisplayName("Verifying authorization with a session without username")
     void testIsAuthenticatedWithSessionWithoutUsername() {
         when(request.getSession(false)).thenReturn(session);
         when(session.getAttribute("username")).thenReturn(null);
@@ -127,7 +127,7 @@ class UserServiceTest {
     }
 
     @Test
-    @DisplayName("Успешный выход из системы")
+    @DisplayName("Successful logout")
     void testLogoutSuccess() {
         when(request.getSession(false)).thenReturn(session);
         when(session.getAttribute("username")).thenReturn("testuser");
@@ -140,7 +140,7 @@ class UserServiceTest {
     }
 
     @Test
-    @DisplayName("Выход из системы без активной сессии")
+    @DisplayName("Log out without an active session")
     void testLogoutWithoutSession() {
         when(request.getSession(false)).thenReturn(null);
 

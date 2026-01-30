@@ -5,7 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.BeforeEach;
 import static org.assertj.core.api.Assertions.assertThat;
 
-@DisplayName("Тесты для сущности Statistic")
+@DisplayName("Tests for the Statistical entity")
 class StatisticTest {
 
     private Statistic statistic;
@@ -16,7 +16,7 @@ class StatisticTest {
     }
 
     @Test
-    @DisplayName("Создание статистики с нулевыми значениями")
+    @DisplayName("Creating statistics with zero values")
     void testStatisticCreationWithZeros() {
         assertThat(statistic.getUsername()).isEqualTo("testuser");
         assertThat(statistic.getAttempts()).isEqualTo(0);
@@ -25,7 +25,7 @@ class StatisticTest {
     }
 
     @Test
-    @DisplayName("Создание статистики с начальными значениями")
+    @DisplayName("Creating statistics with initial values")
     void testStatisticCreationWithValues() {
         Statistic stat = new Statistic("player1", 10, 5, 5);
         
@@ -36,7 +36,7 @@ class StatisticTest {
     }
 
     @Test
-    @DisplayName("Увеличение количества попыток")
+    @DisplayName("Increasing the number of attempts")
     void testIncrementAttempts() {
         statistic.incrementAttempts();
         assertThat(statistic.getAttempts()).isEqualTo(1);
@@ -47,7 +47,7 @@ class StatisticTest {
     }
 
     @Test
-    @DisplayName("Увеличение количества побед")
+    @DisplayName("Increasing the number of wins")
     void testIncrementWins() {
         statistic.incrementWins();
         assertThat(statistic.getWins()).isEqualTo(1);
@@ -58,7 +58,7 @@ class StatisticTest {
     }
 
     @Test
-    @DisplayName("Увеличение количества поражений")
+    @DisplayName("An increase in the number of lesions")
     void testIncrementLosses() {
         statistic.incrementLosses();
         assertThat(statistic.getLosses()).isEqualTo(1);
@@ -69,7 +69,7 @@ class StatisticTest {
     }
 
     @Test
-    @DisplayName("Геттеры возвращают корректные значения")
+    @DisplayName("Getters return correct values.")
     void testGetters() {
         Statistic stat = new Statistic("user2", 15, 8, 7);
         

@@ -2,7 +2,7 @@ package com.javarush.matsarskaya.exception;
 
 public class InvalidCredentialsException extends RuntimeException {
     public InvalidCredentialsException() {
-        super("Неверное имя пользователя или пароль");
+        super("Invalid username or password");
     }
 
     public InvalidCredentialsException(String message) {

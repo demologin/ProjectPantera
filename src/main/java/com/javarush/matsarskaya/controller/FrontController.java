@@ -40,11 +40,10 @@ public class FrontController extends HttpServlet {
         String pathInfo = req.getServletPath();
         String method = req.getMethod();
 
-        logger.info("Получен {} запрос на путь: {}", method, pathInfo);
+        logger.info("Received {} request for path: {}", method, pathInfo);
 
-        // Проверяем авторизацию для защищённых страниц
         if (isProtectedPath(pathInfo) && !UserService.isAuthenticated(req)) {
-            logger.warn("Попытка доступа к защищённой странице без авторизации: {}", pathInfo);
+            logger.warn("An attempt to access a secure page without authorization: {}", pathInfo);
             resp.sendRedirect(req.getContextPath() + "/home-page");
             return;
         }
@@ -52,19 +51,13 @@ public class FrontController extends HttpServlet {
         try {
             Command command = httpResolver.resolve(pathInfo);
             String viewPath = "GET".equals(req.getMethod()) ? command.doGet(req) : command.doPost(req);
-            logger.debug("Запрос обработан успешно, перенаправление на: {}", viewPath);
+            logger.debug("Request processed successfully, redirection to: {}", viewPath);
             req.getRequestDispatcher(viewPath).forward(req, resp);
         } catch (Exception e) {
-            logger.error("Ошибка при обработке запроса {}: {}", pathInfo, e.getMessage(), e);
+            logger.error("Request processing error {}: {}", pathInfo, e.getMessage(), e);
             throw e;
         }
     }
-
-    /**
-     * Проверяет, является ли путь защищённым (требует авторизации).
-     * @param pathInfo путь запроса
-     * @return true если путь защищённый
-     */
     private boolean isProtectedPath(String pathInfo) {
         return "/quest-dragon".equals(pathInfo) || "/statistic-page".equals(pathInfo);
     }

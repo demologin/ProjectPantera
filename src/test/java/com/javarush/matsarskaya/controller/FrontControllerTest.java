@@ -19,7 +19,7 @@ import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-@DisplayName("Тесты для FrontController")
+@DisplayName("Tests for the FrontController")
 class FrontControllerTest {
     @Mock
     private HttpServletRequest request;
@@ -47,7 +47,7 @@ class FrontControllerTest {
     }
 
     @Test
-    @DisplayName("GET запрос обрабатывается корректно")
+    @DisplayName("The GET request is being processed correctly")
     void testDoGet() throws ServletException, IOException {
         when(request.getServletPath()).thenReturn("/home-page");
         when(request.getMethod()).thenReturn("GET");
@@ -64,7 +64,7 @@ class FrontControllerTest {
     }
 
     @Test
-    @DisplayName("POST запрос обрабатывается корректно")
+    @DisplayName("The POST request is being processed correctly")
     void testDoPost() throws ServletException, IOException {
         when(request.getServletPath()).thenReturn("/login-page");
         when(request.getMethod()).thenReturn("POST");
@@ -81,7 +81,7 @@ class FrontControllerTest {
     }
 
     @Test
-    @DisplayName("Перенаправление на домашнюю страницу при попытке доступа к защищённой странице без авторизации")
+    @DisplayName("Redirecting to the home page when trying to access a secure page without authorization")
     void testProtectedPathWithoutAuthentication() throws ServletException, IOException {
         when(request.getServletPath()).thenReturn("/quest-dragon");
         when(request.getMethod()).thenReturn("GET");
@@ -93,7 +93,7 @@ class FrontControllerTest {
     }
 
     @Test
-    @DisplayName("Доступ к защищённой странице с авторизацией")
+    @DisplayName("Access to a secure page with authorization")
     void testProtectedPathWithAuthentication() throws ServletException, IOException {
         when(request.getServletPath()).thenReturn("/quest-dragon");
         when(request.getMethod()).thenReturn("GET");

@@ -4,19 +4,19 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
 import static org.assertj.core.api.Assertions.assertThat;
 
-@DisplayName("Тесты для InvalidCredentialsException")
+@DisplayName("Tests for InvalidCredentialsException")
 class InvalidCredentialsExceptionTest {
 
     @Test
-    @DisplayName("Создание исключения без сообщения")
+    @DisplayName("Creating an exception without a message")
     void testExceptionWithoutMessage() {
         InvalidCredentialsException exception = new InvalidCredentialsException();
 
-        assertThat(exception.getMessage()).contains("Неверное имя пользователя или пароль");
+        assertThat(exception.getMessage()).contains("Invalid username or password");
     }
 
     @Test
-    @DisplayName("Создание исключения с сообщением")
+    @DisplayName("Creating an exception with a message")
     void testExceptionWithMessage() {
         String customMessage = "Custom error message";
         InvalidCredentialsException exception = new InvalidCredentialsException(customMessage);

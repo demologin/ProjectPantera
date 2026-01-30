@@ -15,7 +15,6 @@ public class HttpResolver {
     private final Map<String, Command> commandMap;
 
     public HttpResolver() {
-        // Инициализация зависимостей через ServiceFactory
         UserFileStorage storage = new UserFileStorage();
         UserRepository userRepository = new FileUserRepository(storage);
         UserService userService = new UserService(userRepository);
@@ -23,7 +22,6 @@ public class HttpResolver {
         StatisticRepository statisticRepository = new FileStatisticRepository();
         StatisticService statisticService = new StatisticService(statisticRepository);
 
-        // Создание карты команд
         this.commandMap = Map.of(
                 "/home-page", new HomePage(),
                 "/quest-dragon", new QuestDragon(statisticService),
@@ -34,11 +32,6 @@ public class HttpResolver {
         );
     }
 
-    /**
-     * Возвращает команду по пути запроса.
-     * @param pathInfo путь запроса
-     * @return команда для обработки запроса
-     */
     public Command resolve(String pathInfo) {
         return commandMap.getOrDefault(pathInfo, new HomePage());
     }

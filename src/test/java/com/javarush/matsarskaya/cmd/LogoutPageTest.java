@@ -13,7 +13,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-@DisplayName("Тесты для LogoutPage")
+@DisplayName("Tests for LogoutPage")
 class LogoutPageTest {
     @Mock
     private UserService userService;
@@ -29,7 +29,7 @@ class LogoutPageTest {
     }
 
     @Test
-    @DisplayName("POST запрос выполняет выход из системы")
+    @DisplayName("The POST request performs a logout")
     void testDoPost() {
         doNothing().when(userService).logout(request);
 
@@ -40,7 +40,7 @@ class LogoutPageTest {
     }
 
     @Test
-    @DisplayName("GET запрос вызывает doPost")
+    @DisplayName("The GET request calls doPost")
     void testDoGet() {
         doNothing().when(userService).logout(request);
 
@@ -51,7 +51,7 @@ class LogoutPageTest {
     }
 
     @Test
-    @DisplayName("Получение пути к представлению")
+    @DisplayName("Getting the path to the view")
     void testGetView() {
         String result = logoutPage.getView();
 

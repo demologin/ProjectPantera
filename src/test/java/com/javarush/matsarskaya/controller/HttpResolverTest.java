@@ -13,7 +13,7 @@ import org.junit.jupiter.api.BeforeEach;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@DisplayName("Тесты для HttpResolver")
+@DisplayName("Tests for HttpResolver")
 class HttpResolverTest {
     private HttpResolver httpResolver;
 
@@ -23,7 +23,7 @@ class HttpResolverTest {
     }
 
     @Test
-    @DisplayName("Разрешение команды для домашней страницы")
+    @DisplayName("Team permission for the home page")
     void testResolveHomePage() {
         Command command = httpResolver.resolve("/home-page");
 
@@ -32,7 +32,7 @@ class HttpResolverTest {
     }
 
     @Test
-    @DisplayName("Разрешение команды для страницы квеста")
+    @DisplayName("Team permission for the quest page")
     void testResolveQuestDragon() {
         Command command = httpResolver.resolve("/quest-dragon");
 
@@ -41,7 +41,7 @@ class HttpResolverTest {
     }
 
     @Test
-    @DisplayName("Разрешение команды для страницы входа")
+    @DisplayName("Team permission for the login page")
     void testResolveLoginPage() {
         Command command = httpResolver.resolve("/login-page");
 
@@ -50,7 +50,7 @@ class HttpResolverTest {
     }
 
     @Test
-    @DisplayName("Разрешение команды для страницы регистрации")
+    @DisplayName("Team permission for the registration page")
     void testResolveRegisterPage() {
         Command command = httpResolver.resolve("/register-page");
 
@@ -59,7 +59,7 @@ class HttpResolverTest {
     }
 
     @Test
-    @DisplayName("Разрешение команды для выхода")
+    @DisplayName("Allowing the command to exit")
     void testResolveLogout() {
         Command command = httpResolver.resolve("/logout");
 
@@ -68,7 +68,7 @@ class HttpResolverTest {
     }
 
     @Test
-    @DisplayName("Разрешение команды для страницы статистики")
+    @DisplayName("Team permission for the statistics page")
     void testResolveStatisticPage() {
         Command command = httpResolver.resolve("/statistic-page");
 
@@ -77,7 +77,7 @@ class HttpResolverTest {
     }
 
     @Test
-    @DisplayName("Разрешение неизвестного пути возвращает домашнюю страницу")
+    @DisplayName("Resolving an unknown path returns the home page")
     void testResolveUnknownPath() {
         Command command = httpResolver.resolve("/unknown-path");
 

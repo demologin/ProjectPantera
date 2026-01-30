@@ -2,7 +2,6 @@ package com.javarush.matsarskaya.entity;
 
 import java.util.Arrays;
 
-//этапы квеста
 public enum QuestStage {
     START(0),
     NAME_INPUT(1),

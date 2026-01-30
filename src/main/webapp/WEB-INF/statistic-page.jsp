@@ -2,13 +2,16 @@
 
 <html>
 <head>
+
   <title>Статистика</title>
+
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/styles.css">
 </head>
 <body>
 
 <jsp:include page="/WEB-INF/header.jsp"/>
 
-<h2>📊 Ваша статистика</h2>
+<h2>Ваша статистика</h2>
 
 <table border="1">
   <tr>

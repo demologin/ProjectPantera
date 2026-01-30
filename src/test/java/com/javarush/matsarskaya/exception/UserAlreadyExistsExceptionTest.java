@@ -4,25 +4,25 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
 import static org.assertj.core.api.Assertions.assertThat;
 
-@DisplayName("Тесты для UserAlreadyExistsException")
+@DisplayName("Tests for UserAlreadyExistsException")
 class UserAlreadyExistsExceptionTest {
 
     @Test
-    @DisplayName("Создание исключения с именем пользователя")
+    @DisplayName("Creating an exception with a username")
     void testExceptionWithUsername() {
         UserAlreadyExistsException exception = new UserAlreadyExistsException("testuser");
 
-        assertThat(exception.getMessage()).contains("testuser");
-        assertThat(exception.getMessage()).contains("уже существует");
+        assertThat(exception.getMessage()).contains("username");
+        assertThat(exception.getMessage()).contains("already exists");
     }
 
     @Test
-    @DisplayName("Создание исключения с именем пользователя и причиной")
+    @DisplayName("Creating an exception with a username and reason")
     void testExceptionWithUsernameAndCause() {
         Throwable cause = new RuntimeException("Database error");
         UserAlreadyExistsException exception = new UserAlreadyExistsException("testuser", cause);
 
-        assertThat(exception.getMessage()).contains("testuser");
+        assertThat(exception.getMessage()).contains("username");
         assertThat(exception.getCause()).isEqualTo(cause);
     }
 }

@@ -24,12 +24,11 @@ public class RegisterPage implements Command{
 
         try {
             userService.registerUser(username, password);
-            // Автоматический вход после регистрации
             HttpSession session = request.getSession();
             session.setAttribute("username", username);
             return "/home-page";
         } catch (UserAlreadyExistsException e) {
-            request.setAttribute("error", "Пользователь уже существует");
+            request.setAttribute("error", "The user already exists");
         }
 
         return getView();

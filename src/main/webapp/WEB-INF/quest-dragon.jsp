@@ -4,12 +4,13 @@
 <html>
 <head>
     <title>Как приручить дракона</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/styles.css">
 </head>
 <body>
 
 <jsp:include page="/WEB-INF/header.jsp"/>
 
-<h2>🐉 Как приручить дракона</h2>
+<h2>Как приручить дракона</h2>
 
 <c:set var="stage" value="${sessionScope.stage}" />
 <c:set var="trust" value="${sessionScope.trust}" />
@@ -22,7 +23,7 @@
 <c:choose>
 
     <c:when test="${stage >= 4 && stage <= 7 && trust < 50}">
-        <h3>❌ Поражение</h3>
+        <h3>❌ Поражение ❌</h3>
 
         <c:choose>
             <c:when test="${stage == 4}">
@@ -53,7 +54,7 @@
     </c:when>
 
     <c:when test="${stage >= 8 && stage <= 11 && trust < 70}">
-        <h3>❌ Поражение</h3>
+        <h3>❌ Поражение ❌</h3>
 
         <c:choose>
             <c:when test="${stage == 8}">
@@ -237,12 +238,12 @@
         <c:if test="${stage == 11}">
             <c:choose>
                 <c:when test="${trust >= 70}">
-                    <h3>🏁 Успех</h3>
+                    <h3>🏁 Успех 🏁</h3>
                     <p>Дракон склоняет голову, принимая тебя как своего всадника.
                         Сегодня ты сделал первый шаг на пути, который изменит вашу жизнь.</p>
                 </c:when>
                 <c:otherwise>
-                    <h3>❌ Провал</h3>
+                    <h3>❌ Провал ❌</h3>
                     <p>Дракон отступает, ясно давая понять — вы пока не готовы быть командой.
                         Возможно, в следующий раз ты сможешь подружиться с драконом, нужна практика.</p>
                 </c:otherwise>

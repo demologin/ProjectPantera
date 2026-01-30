@@ -18,7 +18,7 @@ public class LoginPage implements Command {
 
     @Override
     public String doGet(HttpServletRequest request) {
-        logger.debug("Отображение страницы входа");
+        logger.debug("Displaying the login page");
         return getView();
     }
 
@@ -26,23 +26,23 @@ public class LoginPage implements Command {
     public String doPost(HttpServletRequest request) {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-        logger.info("Обработка POST запроса на вход для пользователя: {}", username);
+        logger.info("Processing the POST login request for the user: {}", username);
 
         try {
             userService.loginUser(username, password);
             HttpSession session = request.getSession();
-            logger.info("Успешный вход пользователя: {}", username);
+            logger.info("Successful user login: {}", username);
             session.setAttribute("username", username);
             return "/home-page";
         } catch (UserNotFoundException e) {
-            logger.warn("Неудачная попытка входа: пользователь {} не найден", username);
-            request.setAttribute("error", "Пользователь не найден");
+            logger.warn("Failed login attempt: user {} not found", username);
+            request.setAttribute("error", "User not found");
         } catch (InvalidCredentialsException e) {
-            logger.warn("Неудачная попытка входа: неверный пароль для пользователя {}", username);
-            request.setAttribute("error", "Неверное имя пользователя или пароль");
+            logger.warn("Failed login attempt: invalid password for user {}", username);
+            request.setAttribute("error", "Invalid username or password");
         } catch (Exception e) {
-        logger.error("Неожиданная ошибка при входе пользователя {}: {}", username, e.getMessage(), e);
-        request.setAttribute("error", "Произошла ошибка при входе");
+        logger.error("Unexpected error when user logs in {}: {}", username, e.getMessage(), e);
+        request.setAttribute("error", "Error occurred when logging in");
     }
         return getView();
     }

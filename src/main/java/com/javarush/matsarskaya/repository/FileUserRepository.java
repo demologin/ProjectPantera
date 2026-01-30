@@ -13,36 +13,36 @@ public class FileUserRepository implements UserRepository{
 
     public FileUserRepository(UserFileStorage storage) {
         this.storage = storage;
-        logger.info("FileUserRepository инициализирован");
+        logger.info("FileUserRepository initialized");
     }
 
     @Override
     public boolean save(User user) {
-        logger.debug("Сохранение пользователя: {}", user.getUsername());
+        logger.debug("Saving the user: {}", user.getUsername());
         if (storage.userExists(user.getUsername())) {
-            logger.warn("Пользователь {} уже существует в хранилище", user.getUsername());
+            logger.warn("The user {} already exists in the repository", user.getUsername());
             throw new UserAlreadyExistsException(user.getUsername());
         }
         storage.saveUser(user.getUsername(), user.getPassword());
-        logger.info("Пользователь {} успешно сохранён", user.getUsername());
+        logger.info("User {} saved successfully", user.getUsername());
         return true;
     }
 
     @Override
     public Optional<User> findByUsername(String username) {
-        logger.debug("Поиск пользователя по имени: {}", username);
+        logger.debug("Search for a user by name: {}", username);
         Optional<String> password = storage.getPasswordByUsername(username);
         if (password.isPresent()) {
-            logger.debug("Пользователь {} найден", username);
+            logger.debug("User {} found", username);
         } else {
-            logger.debug("Пользователь {} не найден", username);
+            logger.debug("User {} not found", username);
         }
         return password.map(pwd -> new User(username, pwd));
     }
 
     @Override
     public boolean existsByUsername(String username) {
-        logger.debug("Проверка существования пользователя: {}", username);
+        logger.debug("Verifying the user's existence: {}", username);
         return storage.userExists(username);
     }
 }

@@ -31,7 +31,6 @@ public class QuestDragon implements Command{
 
         var session = request.getSession();
 
-        // Обработка перехода с главной страницы на квест
         if (quest != null && quest.equals("the way of the dragon rider")) {
             session.setAttribute("stage", 0);
             session.setAttribute("trust", 50);
@@ -49,15 +48,14 @@ public class QuestDragon implements Command{
             session.setAttribute("stage", 2);
 
         } else if (stageParam != null && choice != null) {
-            // Обработка других этапов
+
             int currentStage = Integer.parseInt(stageParam);
 
             String username = (String) session.getAttribute("username");
             Boolean finished = Optional.ofNullable((Boolean) session.getAttribute("questFinished"))
                     .orElse(false);
 
-            // Обновляем доверие в зависимости от выбора
-            if (currentStage >= 2 && currentStage <= 9) {
+            if (currentStage >= 2 && currentStage <= 10) {
                 Integer trust = Optional.ofNullable((Integer) session.getAttribute("trust"))
                         .orElse(50);
 
@@ -67,23 +65,20 @@ public class QuestDragon implements Command{
 
                 session.setAttribute("trust", trust);
 
-                // Проверяем условия поражения
                 boolean isLossCondition = false;
-                if (currentStage >= 3 && currentStage <= 6 && trust < 50) {
+                if (currentStage >= 4 && currentStage <= 7 && trust < 50) {
                     isLossCondition = true;
-                } else if (currentStage >= 7 && currentStage <= 10 && trust < 70) {
+                } else if (currentStage >= 8 && currentStage <= 11 && trust < 70) {
                     isLossCondition = true;
                 }
 
                 if (!finished && isLossCondition) {
                     Optional.ofNullable(username).ifPresent(statisticService::registerLoss);
                     session.setAttribute("questFinished", true);
-                    session.setAttribute("stage", 11);
                     return getView();
                 }
             }
 
-            // Переходим к следующему этапу
             int nextStage = currentStage + 1;
             session.setAttribute("stage", nextStage);
 

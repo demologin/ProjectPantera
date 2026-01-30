@@ -5,15 +5,13 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.io.TempDir;
 
-import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@DisplayName("Тесты для FileStatisticRepository")
+@DisplayName("Tests for FileStatisticRepository")
 class FileStatisticRepositoryTest {
 
     @TempDir
@@ -23,7 +21,7 @@ class FileStatisticRepositoryTest {
     private String testFilePath;
 
     @Test
-    @DisplayName("Сохранение и загрузка статистики")
+    @DisplayName("Saving and uploading statistics")
     void testSaveAndLoadStatistic() throws IOException {
         testFilePath = tempDir.resolve("test_statistics.txt").toString();
         System.setProperty("statistics.file.path", testFilePath);
@@ -43,7 +41,7 @@ class FileStatisticRepositoryTest {
     }
 
     @Test
-    @DisplayName("Поиск несуществующей статистики")
+    @DisplayName("Search for non-existent statistics")
     void testFindNonExistingStatistic() throws IOException {
         testFilePath = tempDir.resolve("test_statistics.txt").toString();
         System.setProperty("statistics.file.path", testFilePath);
@@ -56,7 +54,7 @@ class FileStatisticRepositoryTest {
     }
 
     @Test
-    @DisplayName("Обновление существующей статистики")
+    @DisplayName("Updating existing statistics")
     void testUpdateExistingStatistic() throws IOException {
         testFilePath = tempDir.resolve("test_statistics.txt").toString();
         System.setProperty("statistics.file.path", testFilePath);
@@ -78,7 +76,7 @@ class FileStatisticRepositoryTest {
     }
 
     @Test
-    @DisplayName("Сохранение статистики нескольких пользователей")
+    @DisplayName("Saving statistics for multiple users")
     void testSaveMultipleStatistics() throws IOException {
         testFilePath = tempDir.resolve("test_statistics.txt").toString();
         System.setProperty("statistics.file.path", testFilePath);
