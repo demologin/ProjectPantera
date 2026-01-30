@@ -17,10 +17,6 @@
       <h3 class="text-center">Вход в систему</h3>
     </div>
     <div class="card-body">
-      <c:if test="${not empty error}">
-        <div class="alert alert-danger">${error}</div>
-      </c:if>
-
       <form action="<c:url value='/login'/>" method="post">
         <div class="mb-3">
           <label for="email" class="form-label">Email</label>
@@ -49,6 +45,9 @@
       </div>
     </div>
   </div>
+  <c:if test="${not empty sessionScope.error}">
+    <div class="alert alert-danger mt-3">${sessionScope.error}</div>
+  </c:if>
 </div>
 </body>
 </html>

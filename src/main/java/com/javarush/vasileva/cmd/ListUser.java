@@ -4,13 +4,13 @@ import com.javarush.vasileva.entity.Role;
 import com.javarush.vasileva.entity.User;
 import com.javarush.vasileva.exception.AppException;
 import com.javarush.vasileva.service.UserService;
-import com.javarush.vasileva.util.Key;
 import com.javarush.vasileva.util.RequestHelpers;
 import jakarta.servlet.http.HttpServletRequest;
 
 import java.util.Collection;
 
-import static com.javarush.vasileva.util.Key.USER;
+import static com.javarush.vasileva.util.Key.*;
+import static com.javarush.vasileva.util.Value.*;
 
 @SuppressWarnings("unused")
 public class ListUser implements Command {
@@ -23,7 +23,7 @@ public class ListUser implements Command {
 
     @Override
     public String doGet(HttpServletRequest request) {
-        RequestHelpers.checkAuthorization(request, "Получить список пользователей могут только пользователи с правами ADMIN");
+        RequestHelpers.checkAuthorization(request, USER_LIST_AUTH_ERROR);
         Collection<User> users = userService.getAll();
         request.setAttribute("users", users);
         request.getSession().setAttribute("ADMIN_ROLE", Role.ADMIN);
@@ -32,18 +32,11 @@ public class ListUser implements Command {
 
     @Override
     public String doDelete(HttpServletRequest req) {
-        String userIdStr = req.getParameter(Key.USER_ID);
-        if (userIdStr == null) {
-            throw new IllegalArgumentException("User ID is not found");
-        }
-
+        String userIdStr = req.getParameter(USER_ID);
         User user = userService.findById(userIdStr)
-                .orElseThrow(() -> new AppException("User is not found: id=" + userIdStr));
-
+                .orElseThrow(() -> new AppException(USER_NOT_FOUND + userIdStr));
         req.setAttribute(USER, user);
         userService.delete(user);
         return getView();
     }
-
-
 }

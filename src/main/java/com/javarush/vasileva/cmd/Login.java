@@ -1,13 +1,17 @@
 package com.javarush.vasileva.cmd;
 
 import com.javarush.vasileva.entity.User;
-import com.javarush.vasileva.exception.AppException;
 import com.javarush.vasileva.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
-import static com.javarush.vasileva.util.Link.HOME;
+import java.util.Optional;
 
+import static com.javarush.vasileva.util.Key.*;
+import static com.javarush.vasileva.util.Link.HOME;
+import static com.javarush.vasileva.util.Value.*;
+
+@SuppressWarnings("unused")
 public class Login implements Command {
     private final UserService userService;
 
@@ -17,16 +21,19 @@ public class Login implements Command {
 
     @Override
     public String doPost(HttpServletRequest request) {
-        String email = request.getParameter("email");
-        String password = request.getParameter("password");
-
+        String email = request.getParameter(EMAIL);
+        String password = request.getParameter(PASSWORD);
         if (email.isEmpty() || password.isEmpty()) {
-            throw new AppException("Необходимо ввести email и пароль");
+            request.getSession().setAttribute(ERROR, EMPTY_DATA_ERROR);
         }
-
-        User user = userService.login(email, password).orElseThrow(() -> new AppException("Неверный email или пароль"));
-        HttpSession session = request.getSession();
-        session.setAttribute("user", user);
+        Optional<User> optionalUser = userService.login(email, password);
+        if (optionalUser.isPresent()) {
+            HttpSession session = request.getSession();
+            session.setAttribute(USER, optionalUser.get());
+        } else {
+            request.getSession().setAttribute(ERROR, INVALID_DATA_ERROR);
+            return getView();
+        }
         return HOME;
     }
 }

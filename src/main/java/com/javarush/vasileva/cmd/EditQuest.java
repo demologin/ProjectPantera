@@ -16,11 +16,13 @@ import static com.javarush.vasileva.util.Key.*;
 import static com.javarush.vasileva.util.Link.HOME;
 import static com.javarush.vasileva.util.Value.*;
 
+@SuppressWarnings("unused")
 public class EditQuest implements Command {
     private final QuestService questService;
     private final QuestMapper questMapper = Winter.find(QuestMapper.class);
     private final Config config;
 
+    @SuppressWarnings("unused")
     public EditQuest(QuestService questService, Config config) {
         this.questService = questService;
         this.config = config;

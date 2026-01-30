@@ -1,9 +1,11 @@
 package com.javarush.vasileva.cmd;
 
-import com.javarush.vasileva.util.Link;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
+import static com.javarush.vasileva.util.Link.LOGIN;
+
+@SuppressWarnings("unused")
 public class Logout implements Command {
 
     @Override
@@ -12,6 +14,6 @@ public class Logout implements Command {
         if (session != null) {
             session.invalidate();
         }
-        return Link.LOGIN;
+        return LOGIN;
     }
 }

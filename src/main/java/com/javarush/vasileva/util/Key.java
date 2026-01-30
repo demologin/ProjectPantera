@@ -3,6 +3,8 @@ package com.javarush.vasileva.util;
 public class Key {
     public static final String USER_ID = "id";
     public static final String USER = "user";
+    public static final String EMAIL = "email";
+    public static final String PASSWORD = "password";
     public static final String QUESTS = "quests";
     public static final String QUEST_ID = "questId";
     public static final String QUEST = "quest";
@@ -15,7 +17,6 @@ public class Key {
     public static final String SELECTED_ANSWER_ID= "selectedAnswerId";
 
     public static final String ERROR = "error";
-    public static final String INFO = "info";
 
     public static final String GAME_OVER = "gameOver";
 }
