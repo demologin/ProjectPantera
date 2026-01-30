@@ -28,12 +28,11 @@ public class SignUp extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String login = req.getParameter("login");
-        String password = req.getParameter("password");
         User user = User.builder()
-                .login(login)
-                .password(password)
+                .login(req.getParameter("login"))
+                .password(req.getParameter("password"))
                 .role(Role.USER)
+                .email(req.getParameter("email"))
                 .build();
         userService.post(user);
         HttpSession session = req.getSession();

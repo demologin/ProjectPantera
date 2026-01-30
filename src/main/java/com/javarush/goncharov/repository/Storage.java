@@ -15,7 +15,7 @@ public class Storage {
     private final Map<Long, Message> messages = new ConcurrentHashMap<>();
 
     private Storage() {
-        users.put(1L, new User(1L, "Admin", "123", Role.ADMIN));
+        users.put(1L, new User(1L, "Admin", "123", Role.ADMIN, "admin@test.ru"));
     }
 
     public static Storage getInstance() {

@@ -53,6 +53,7 @@ public class UserRepository implements Repository<User>{
             map.get(user.getId()).setLogin(user.getLogin());
             map.get(user.getId()).setPassword(user.getPassword());
             map.get(user.getId()).setRole(user.getRole());
+            map.get(user.getId()).setEmail(user.getEmail());
         }
     }
 }

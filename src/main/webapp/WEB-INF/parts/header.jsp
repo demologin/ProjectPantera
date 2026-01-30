@@ -36,10 +36,11 @@
                             <ul class="navbar-nav ms-auto">
                                 <li class="nav-item"><a class="nav-link active" href=".">Home</a></li>
                                 <li class="nav-item"><a class="nav-link" href="#">Статистика</a></li>
-                                <li class="nav-item"><a class="nav-link" href="list-users">Пользователи</a>
-                                </li>
-                                <li class="nav-item"><a class="nav-link" href="#">Создать квест</a>
-                                </li>
+                                <li class="nav-item"><a class="nav-link" href="#">Квесты</a></li>
+                                <c:if test="${sessionScope.user.role=='ADMIN'}">
+                                    <li class="nav-item"><a class="nav-link" href="list-users">Пользователи</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="#">Создать квест</a></li>
+                                </c:if>
                             </ul>
                             <ul class="nav col-md-3 text-end">
                                 <li>

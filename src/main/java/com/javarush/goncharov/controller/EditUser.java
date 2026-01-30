@@ -13,6 +13,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.util.Optional;
@@ -51,8 +52,9 @@ public class EditUser extends HttpServlet {
                 .login(req.getParameter("login"))
                 .password(req.getParameter("password"))
                 .role(Role.valueOf(role))
+                .email(req.getParameter("email"))
                 .build();
         userService.update(user);
-        resp.sendRedirect("/list-users");
+        resp.sendRedirect("/profile");
     }
 }

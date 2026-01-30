@@ -7,8 +7,12 @@
 
     <div class="px-4 py-5 my-5 text-center">
         <p class="lead mb-4">
-        <h2 class="display-3 fw-bold">Login: ${user.login}</h2>
-        <h2 class="display-3 fw-bold">Role: ${user.role}</h2>
+        <h1 class="display-3 fw-bold"
+            style="height: 41.25px;font-size: 27.88px;color: var(--bs-red);font-weight: bold;">Login: ${user.login}</h1>
+        <h1 class="display-3 fw-bold"
+            style="height: 41.25px;font-size: 27.88px;color: var(--bs-red);font-weight: bold;">Role: ${user.role}</h1>
+        <h1 class="display-3 fw-bold"
+            style="height: 41.25px;font-size: 27.88px;color: var(--bs-red);font-weight: bold;">Email: ${user.email}</h1>
         <div class="col-lg-6 mx-auto">
             <form class="form-horizontal" action="profile" method="post" enctype="multipart/form-data">
                 <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">

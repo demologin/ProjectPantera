@@ -61,6 +61,19 @@
                 </div>
             </div>
 
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="email">Email</label>
+                <div class="col-md-4">
+                    <input id="email"
+                           name="email"
+                           type="text"
+                           value="${requestScope.user.email}"
+                           placeholder="your email"
+                           class="form-control input-md"
+                           required="">
+                </div>
+            </div>
+
             <!-- Select Basic -->
             <c:if test="${sessionScope.user.role=='ADMIN'}">
                 <div class="form-group">
