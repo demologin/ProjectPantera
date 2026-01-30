@@ -36,11 +36,12 @@ public class UserService {
     }
 
     public void register(String login, String email, String password) {
-        User user = new User();
-        user.setLogin(login);
-        user.setEmail(email);
-        user.setPassword(password);
-        user.setRole(Role.USER);
+        User user = User.builder()
+                .login(login)
+                .email(email)
+                .password(password)
+                .role(Role.USER)
+                .build();
         userRepository.create(user);
     }
 
