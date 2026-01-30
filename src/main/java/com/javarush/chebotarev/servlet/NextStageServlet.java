@@ -2,6 +2,7 @@ package com.javarush.chebotarev.servlet;
 
 import com.javarush.chebotarev.component.Go;
 import com.javarush.chebotarev.component.Path;
+import com.javarush.chebotarev.component.Statistics;
 import com.javarush.chebotarev.component.Utils;
 import com.javarush.chebotarev.quest.CurrentQuest;
 import jakarta.servlet.ServletException;
@@ -26,7 +27,22 @@ public class NextStageServlet extends HttpServlet {
         );
         int nextNodeId = getSelectedNextNodeId(req);
         currentQuest.nextStage(nextNodeId);
-        String path = currentQuest.isDone() ? Path.RESULT : Path.QUEST;
+        String path;
+        if (currentQuest.isDone()) {
+            path = Path.RESULT;
+            Statistics statistics = Utils.extractAttribute(
+                    currentSession,
+                    "statistics",
+                    Statistics.class
+            );
+            if (currentQuest.isVictory()) {
+                statistics.incVictories();
+            } else {
+                statistics.incDefeats();
+            }
+        } else {
+            path = Path.QUEST;
+        }
         req.getRequestDispatcher(path)
                 .forward(req, resp);
     }

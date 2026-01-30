@@ -97,3 +97,27 @@ h1, h2 {
     color: #ffffff;
     margin-top: 0;
 }
+
+.statistics {
+    margin-top: 30px;
+    padding-top: 10px;
+    font-size: 1em;
+    color: #b0b0b0;
+}
+
+.stats-grid {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.stats-grid p {
+    margin: 5px 0;
+}
+
+.stats-grid strong {
+    font-size: 1.2em;
+}

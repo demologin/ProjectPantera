@@ -1,9 +1,6 @@
 package com.javarush.chebotarev.servlet;
 
-import com.javarush.chebotarev.component.Go;
-import com.javarush.chebotarev.component.ObjectRepository;
-import com.javarush.chebotarev.component.Path;
-import com.javarush.chebotarev.component.QuestService;
+import com.javarush.chebotarev.component.*;
 import com.javarush.chebotarev.quest.QuestMetadata;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -24,6 +21,15 @@ public class MainMenuServlet extends HttpServlet {
         QuestService questService = ObjectRepository.getQuestService();
         List<QuestMetadata> availableQuests = questService.obtainAvailableQuests(getServletContext());
         currentSession.setAttribute("availableQuests", availableQuests);
+        Statistics statistics = Utils.tryExtractAttribute(
+                currentSession,
+                "statistics",
+                Statistics.class
+        );
+        if (statistics == null) {
+            statistics = new Statistics();
+            currentSession.setAttribute("statistics", statistics);
+        }
         req.getRequestDispatcher(Path.MAIN_MENU)
                 .forward(req, resp);
     }

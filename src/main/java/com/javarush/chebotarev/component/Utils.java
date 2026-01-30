@@ -8,17 +8,32 @@ public class Utils {
     }
 
     @SuppressWarnings("unchecked")
-    public static <T> T extractAttribute(HttpSession currentSession,
-                                         String attributeName,
-                                         Class<T> attributeType) {
+    public static <T> T tryExtractAttribute(HttpSession currentSession,
+                                            String attributeName,
+                                            Class<T> attributeClass) {
         Object attribute = currentSession.getAttribute(attributeName);
         if (attribute != null) {
-            Class<?> attributeClass = attribute.getClass();
-            if (attributeClass.equals(attributeType)) {
+            Class<?> extractedAttributeClass = attribute.getClass();
+            if (extractedAttributeClass.equals(attributeClass)) {
                 return (T) attribute;
             }
         }
-        currentSession.invalidate();
-        throw new RuntimeException("Session is broken, try one more time");
+        return null;
+    }
+
+    public static <T> T extractAttribute(HttpSession currentSession,
+                                         String attributeName,
+                                         Class<T> attributeClass) {
+        T attribute = tryExtractAttribute(
+                currentSession,
+                attributeName,
+                attributeClass
+        );
+        if (attribute != null) {
+            return attribute;
+        } else {
+            currentSession.invalidate();
+            throw new RuntimeException("Session is broken, try one more time");
+        }
     }
 }
