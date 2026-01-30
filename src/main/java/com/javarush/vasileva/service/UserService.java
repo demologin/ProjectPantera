@@ -3,6 +3,7 @@ package com.javarush.vasileva.service;
 import com.javarush.vasileva.entity.Role;
 import com.javarush.vasileva.entity.User;
 import com.javarush.vasileva.repository.UserRepository;
+import com.javarush.vasileva.util.RequestHelpers;
 
 import java.util.List;
 import java.util.Optional;
@@ -31,8 +32,8 @@ public class UserService {
         return userRepository.getAll();
     }
 
-    public Optional<User> findById(Long id) {
-        return userRepository.findById(id);
+    public Optional<User> findById(String userIdStr) {
+        return getValidatedUser(userIdStr);
     }
 
     public void register(String login, String email, String password) {
@@ -50,6 +51,12 @@ public class UserService {
                 .filter(user -> user.getPassword().equals(password));
     }
 
-    public void logout() {}
+    private Optional<User> getValidatedUser(String userIdStr) {
+        if (userIdStr == null || userIdStr.isEmpty()) {
+            return Optional.empty();
+        }
+        Long questId = RequestHelpers.parseStringToLong(userIdStr);
+        return userRepository.findById(questId);
+    }
 
 }

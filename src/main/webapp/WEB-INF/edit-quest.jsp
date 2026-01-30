@@ -44,11 +44,8 @@
                                 ${requestScope.edit ? 'Обновить квест' : 'Создать квест'}
                             </button>
 
-                            <c:if test="${not empty requestScope.error}">
-                                <div class="alert alert-danger mt-3">${requestScope.error}</div>
-                            </c:if>
-                            <c:if test="${not empty requestScope.info}">
-                                <div class="alert alert-success mt-3">${requestScope.info}</div>
+                            <c:if test="${not empty sessionScope.error}">
+                                <div class="alert alert-danger mt-3">${sessionScope.error}</div>
                             </c:if>
                         </form>
                     </div>

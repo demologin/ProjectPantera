@@ -6,6 +6,7 @@ import com.javarush.vasileva.entity.Quest;
 import com.javarush.vasileva.exception.AppException;
 import com.javarush.vasileva.mapper.QuestMapper;
 import com.javarush.vasileva.service.QuestService;
+import com.javarush.vasileva.util.RequestHelpers;
 import jakarta.servlet.http.HttpServletRequest;
 
 import java.io.IOException;
@@ -27,19 +28,22 @@ public class EditQuest implements Command {
 
     @Override
     public String doGet(HttpServletRequest req) {
+        RequestHelpers.checkAuthorization(req, EDIT_QUEST_AUTH_ERROR);
+
         List<Quest> quests = questService.getAll();
         req.setAttribute(QUESTS, quests);
 
         String questIdStr = req.getParameter(QUEST_ID);
         if (questIdStr != null && !questIdStr.isEmpty()) {
-            Quest quest = questService.getValidatedQuest(questIdStr)
-                    .orElseThrow(() -> new AppException("Квест с id=" + questIdStr + "не найден!"));
+            Quest quest = questService.findById(questIdStr)
+                    .orElseThrow(() -> new AppException(QUEST_NOT_FOUND + questIdStr));
             req.setAttribute(EDIT, true);
             try {
                 String questJson = questMapper.toJsonString(quest);
                 req.setAttribute(QUEST_JSON, questJson);
             } catch (IOException e) {
-                throw new IllegalArgumentException("Ошибка сериализация квеста");
+                req.getSession().setAttribute(ERROR, QUEST_SERIALIZATION_ERROR);
+                return getView();
             }
         } else {
             req.setAttribute(EDIT, false);
@@ -52,11 +56,6 @@ public class EditQuest implements Command {
     public String doPost(HttpServletRequest req) {
         try {
             String json = req.getParameter(QUEST_JSON);
-            if (json == null || json.trim().isEmpty()) {
-                req.setAttribute(ERROR, JSON_EMPTY_ERROR);
-//                return getView();
-            }
-
             Quest quest = questMapper.fromJsonString(json);
             if (quest.getId() != null) {
                 questService.update(quest);
@@ -64,11 +63,9 @@ public class EditQuest implements Command {
                 questService.create(quest);
             }
             config.setQuestParameters(quest);
-            req.setAttribute(INFO, QUEST_SUCCESS);
             return HOME;
-
-        } catch (Exception e) {
-            req.setAttribute(ERROR, JSON_SAVE_ERROR + ": " + e.getMessage());
+        } catch (IOException e) {
+            req.getSession().setAttribute(ERROR, JSON_SAVE_ERROR);
             return getView();
         }
     }

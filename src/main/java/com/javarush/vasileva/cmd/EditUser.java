@@ -4,6 +4,7 @@ import com.javarush.vasileva.entity.Role;
 import com.javarush.vasileva.entity.User;
 import com.javarush.vasileva.service.UserService;
 import com.javarush.vasileva.util.Link;
+import com.javarush.vasileva.util.RequestHelpers;
 import jakarta.servlet.http.HttpServletRequest;
 
 import java.util.Optional;
@@ -18,18 +19,11 @@ public class EditUser implements Command {
         this.userService = userService;
     }
 
-
     @Override
     public String doGet(HttpServletRequest req) {
         String stringId = req.getParameter("id");
-        if (stringId != null) {
-            long id = Long.parseLong(stringId);
-            Optional<User> optionalUser = userService.findById(id);
-            if (optionalUser.isPresent()) {
-                User user = optionalUser.get();
-                req.setAttribute("user", user);
-            }
-        }
+        Optional<User> optionalUser = userService.findById(stringId);
+        optionalUser.ifPresent(user -> req.setAttribute("user", user));
         return getView();
     }
 
@@ -44,12 +38,9 @@ public class EditUser implements Command {
         if (req.getParameter("create") != null) {
             userService.create(user);
         } else if (req.getParameter("update") != null) {
-            user.setId(Long.parseLong(req.getParameter("id")));
+            user.setId(RequestHelpers.parseStringToLong(req.getParameter("id")));
             userService.update(user);
         }
-//        return getView() + "?id=" + user.getId();
         return Link.USER_LIST;
     }
-
-
 }

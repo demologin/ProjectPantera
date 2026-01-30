@@ -28,9 +28,21 @@
       </button>
     </form>
 
+    <form method="GET" action="<c:url value='/login'/>">
+      <button type="submit" class="btn btn-outline-primary fs-5 px-4 py-2">
+        Войти в систему
+      </button>
+    </form>
+
     <form method="GET" action="<c:url value='/edit-quest'/>">
       <button type="submit" class="btn btn-outline-primary fs-5 px-4 py-2">
-        Создать или отредактировать квест
+        Создать или редактировать квест
+      </button>
+    </form>
+
+    <form method="GET" action="<c:url value='/list-user'/>">
+      <button type="submit" class="btn btn-outline-primary fs-5 px-4 py-2">
+        Список пользователей
       </button>
     </form>
   </div>

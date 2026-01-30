@@ -3,6 +3,7 @@ package com.javarush.vasileva.service;
 import com.javarush.vasileva.entity.Quest;
 import com.javarush.vasileva.repository.QuestRepository;
 import com.javarush.vasileva.repository.Repository;
+import com.javarush.vasileva.util.RequestHelpers;
 
 import java.util.List;
 import java.util.Optional;
@@ -18,8 +19,8 @@ public class QuestService {
         return questRepository.getAll();
     }
 
-    public Optional<Quest> get(Long id) {
-        return questRepository.findById(id);
+    public Optional<Quest> findById(String questIdStr) {
+        return getValidatedQuest(questIdStr);
     }
 
     public void create(Quest quest) {
@@ -34,19 +35,11 @@ public class QuestService {
         questRepository.delete(quest);
     }
 
-    public Optional<Quest> getValidatedQuest(String questIdStr) {
+    private Optional<Quest> getValidatedQuest(String questIdStr) {
         if (questIdStr == null || questIdStr.isEmpty()) {
             return Optional.empty();
         }
-        Long questId = parseQuestIdStrToLong(questIdStr);
-        return get(questId);
-    }
-
-    public Long parseQuestIdStrToLong(String questIdStr) {
-        try {
-            return Long.parseLong(questIdStr);
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("Invalid quest id");
-        }
+        Long questId = RequestHelpers.parseStringToLong(questIdStr);
+        return questRepository.findById(questId);
     }
 }

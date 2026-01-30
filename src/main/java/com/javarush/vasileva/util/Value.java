@@ -20,7 +20,8 @@ public class Value {
               ]
             }""";
 
-    public static final String JSON_EMPTY_ERROR = "JSON не может быть пустым";
     public static final String JSON_SAVE_ERROR = "Ошибка при сохранении квеста";
-    public static final String QUEST_SUCCESS = "Квест успешно создан/обновлен";
+    public static final String QUEST_NOT_FOUND = "Квест не найден: id=";
+    public static final String QUEST_SERIALIZATION_ERROR = "Ошибка сериализации квеста";
+    public static final String EDIT_QUEST_AUTH_ERROR = "Редактировать квесты могут только пользователи с правами ADMIN";
 }

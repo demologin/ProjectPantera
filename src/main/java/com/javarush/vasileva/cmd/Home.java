@@ -3,6 +3,7 @@ package com.javarush.vasileva.cmd;
 import com.javarush.vasileva.entity.Quest;
 import com.javarush.vasileva.service.QuestService;
 import com.javarush.vasileva.util.Key;
+import com.javarush.vasileva.util.RequestHelpers;
 import jakarta.servlet.http.HttpServletRequest;
 
 import java.util.List;
@@ -32,12 +33,13 @@ public class Home implements Command {
 
     @Override
     public String doDelete(HttpServletRequest req) {
+        RequestHelpers.checkAuthorization(req, "Удалять квесты могут только пользователи с правами ADMIN");
         String questIdStr = req.getParameter(Key.QUEST_ID);
         if (questIdStr == null) {
             throw new IllegalArgumentException("Quest ID is not found");
         }
 
-        Quest quest = questService.getValidatedQuest(questIdStr)
+        Quest quest = questService.findById(questIdStr)
                 .orElseThrow(() -> new IllegalArgumentException("Quest is not found: id=" + questIdStr));
         req.setAttribute(QUEST, quest);
         questService.delete(quest);

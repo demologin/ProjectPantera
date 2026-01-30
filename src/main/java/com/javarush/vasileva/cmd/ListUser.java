@@ -5,6 +5,7 @@ import com.javarush.vasileva.entity.User;
 import com.javarush.vasileva.exception.AppException;
 import com.javarush.vasileva.service.UserService;
 import com.javarush.vasileva.util.Key;
+import com.javarush.vasileva.util.RequestHelpers;
 import jakarta.servlet.http.HttpServletRequest;
 
 import java.util.Collection;
@@ -22,6 +23,7 @@ public class ListUser implements Command {
 
     @Override
     public String doGet(HttpServletRequest request) {
+        RequestHelpers.checkAuthorization(request, "Получить список пользователей могут только пользователи с правами ADMIN");
         Collection<User> users = userService.getAll();
         request.setAttribute("users", users);
         request.getSession().setAttribute("ADMIN_ROLE", Role.ADMIN);
@@ -35,7 +37,7 @@ public class ListUser implements Command {
             throw new IllegalArgumentException("User ID is not found");
         }
 
-        User user = userService.findById(Long.parseLong(userIdStr))
+        User user = userService.findById(userIdStr)
                 .orElseThrow(() -> new AppException("User is not found: id=" + userIdStr));
 
         req.setAttribute(USER, user);

@@ -32,10 +32,8 @@
                 <dd class="col-8">${sessionScope.user.role}</dd>
             </dl>
 
-            <div class="d-flex justify-content-between">
-                <a href="<c:url value='/edit-user?id=${sessionScope.user.id}'/>"
-                   class="btn btn-primary">Редактировать</a>
-                <a href="<c:url value='/logout'/>" class="btn btn-outline-secondary">
+            <div class="d-flex justify-content-center">
+                <a href="<c:url value='/logout'/>" class="btn btn-primary w-50">
                     Выйти
                 </a>
             </div>

@@ -5,6 +5,7 @@ import com.javarush.vasileva.exception.AppException;
 import com.javarush.vasileva.service.AnswerService;
 import com.javarush.vasileva.service.QuestService;
 import com.javarush.vasileva.service.QuestionService;
+import com.javarush.vasileva.util.RequestHelpers;
 import jakarta.servlet.http.HttpServletRequest;
 
 import java.util.List;
@@ -28,7 +29,7 @@ public class PlayGame implements Command {
         String questIdStr = req.getParameter(QUEST_ID);
         String questionIdStr = req.getParameter(QUESTION_ID);
 
-        Quest quest = questService.getValidatedQuest(questIdStr)
+        Quest quest = questService.findById(questIdStr)
                 .orElseThrow(() -> new AppException("Quest is not found: id=" + questIdStr));
         req.setAttribute(QUEST, quest);
 
@@ -60,7 +61,7 @@ public class PlayGame implements Command {
                 return getView() + "?" + QUEST_ID + "=" + questIdStr; // Return to the same page
             }
 
-            long questId = questService.parseQuestIdStrToLong(questIdStr);
+            long questId = RequestHelpers.parseStringToLong(questIdStr);
             long answerId = answerService.parseAnswerIdStrToLong(answerIdStr);
 
             Optional<Answer> answer = answerService.get(answerId);

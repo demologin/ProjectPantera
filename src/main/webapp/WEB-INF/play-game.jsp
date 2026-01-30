@@ -10,7 +10,7 @@
     <title>${requestScope.quest.title}</title>
 </head>
 <body>
-<div class="container m-4">
+<div class="container m-4" style="height: 100vh;">
     <div class="row" style="margin-top: 100px;">
         <div class="col col-lg-4"><img class="" src="images/background-main.png" width="400" height="400" alt="space"></div>
         <div class="col-md-6 col-lg-8 offset-lg-0">

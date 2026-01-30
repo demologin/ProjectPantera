@@ -5,8 +5,6 @@ import com.javarush.vasileva.exception.ExceptionHelper;
 import com.javarush.vasileva.util.Link;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.ServletRequest;
-import jakarta.servlet.ServletResponse;
 import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.HttpFilter;
 import jakarta.servlet.http.HttpServletRequest;
@@ -18,14 +16,22 @@ import java.io.IOException;
 public class ExceptionFilter extends HttpFilter {
 
     @Override
-    public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException {
+    protected void doFilter(HttpServletRequest req, HttpServletResponse res, FilterChain chain)
+            throws IOException, ServletException {
         try {
             chain.doFilter(req, res);
+            AppException appException = (AppException) req.getAttribute("appException");
+            if (appException != null) {
+                handleAppException(req, res, appException);
+            }
         } catch (AppException e) {
-            HttpServletRequest request = (HttpServletRequest) req;
-            HttpServletResponse response = (HttpServletResponse) res;
-            ExceptionHelper.createError(request, e.getMessage());
-            request.getRequestDispatcher(Link.ERROR).forward(request, response);
+            handleAppException(req, res, e);
         }
+    }
+
+    private void handleAppException(HttpServletRequest req, HttpServletResponse res, AppException appException)
+            throws ServletException, IOException {
+        ExceptionHelper.createError(req, appException.getMessage());
+        req.getRequestDispatcher(Link.ERROR).forward(req, res);
     }
 }
