@@ -4,6 +4,7 @@ import com.javarush.popkov.cmd.Command;
 import com.javarush.popkov.config.Winter;
 import com.javarush.popkov.entity.Gender;
 import com.javarush.popkov.entity.Role;
+import com.javarush.popkov.util.Go;
 import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
@@ -14,8 +15,13 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-@WebServlet({"", "/home", "/statistics", "/list-user", "/edit-user"})
-@MultipartConfig
+@MultipartConfig(fileSizeThreshold = 1 << 20)
+@WebServlet({
+        Go.INDEX, Go.HOME,
+        Go.SIGNUP, Go.LOGIN, Go.LOGOUT,
+        Go.LIST_USER, Go.PROFILE, Go.EDIT_USER,
+        Go.STATISTICS,
+})
 public class FrontController extends HttpServlet {
 
     private final HttpResolver httpResolver = Winter.find(HttpResolver.class);
@@ -39,9 +45,9 @@ public class FrontController extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         Command command = httpResolver.resolve(req);
         String redirect = command.doPost(req);
-        resp.sendRedirect(redirect);
+        resp.sendRedirect(req.getContextPath() + redirect);
     }
 }

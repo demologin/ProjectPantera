@@ -3,17 +3,15 @@ package com.javarush.popkov.cmd;
 import com.javarush.popkov.entity.User;
 import com.javarush.popkov.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
+import lombok.AllArgsConstructor;
 
 import java.util.Collection;
 
 @SuppressWarnings("unused")
+@AllArgsConstructor
 public class ListUser implements Command {
 
     private final UserService userService;
-
-    public ListUser(UserService userService) {
-        this.userService = userService;
-    }
 
     @Override
     public String doGet(HttpServletRequest request) {

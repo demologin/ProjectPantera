@@ -5,11 +5,10 @@ import com.javarush.popkov.entity.Role;
 import com.javarush.popkov.entity.User;
 import com.javarush.popkov.service.ImageService;
 import com.javarush.popkov.service.UserService;
+import com.javarush.popkov.util.Go;
+import com.javarush.popkov.util.Key;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.SneakyThrows;
-
-import java.util.Optional;
-
 
 @SuppressWarnings("unused")
 public class EditUser implements Command {
@@ -23,16 +22,12 @@ public class EditUser implements Command {
     }
 
 
-    @Override
     public String doGet(HttpServletRequest req) {
-        String stringId = req.getParameter("id");
+        String stringId = req.getParameter(Key.ID);
         if (stringId != null) {
             long id = Long.parseLong(stringId);
-            Optional<User> optionalUser = userService.get(id);
-            if (optionalUser.isPresent()) {
-                User user = optionalUser.get();
-                req.setAttribute("user", user);
-            }
+            userService.get(id)
+                    .ifPresent(user -> req.setAttribute(Key.USER, user));
         }
         return getView();
     }
@@ -40,6 +35,7 @@ public class EditUser implements Command {
     @Override
     @SneakyThrows
     public String doPost(HttpServletRequest req) {
+        long id = Long.parseLong(req.getParameter(Key.ID));
         User user = User.builder()
                 .login(req.getParameter("login"))
                 .password(req.getParameter("password"))
@@ -61,7 +57,7 @@ public class EditUser implements Command {
             }
             userService.update(user);
         }
-        return getView() + "?id=" + user.getId();
+        return Go.EDIT_USER + "?id=" + user.getId();
     }
 
 

@@ -30,6 +30,15 @@ public class UserService {
         return userRepository.getAll();
     }
 
+    public Optional<User> get(String login, String password) {
+        User patternUser = User
+                .builder()
+                .login(login)
+                .password(password)
+                .build();
+        return userRepository.find(patternUser).findAny();
+    }
+
     public Optional<User> get(long id) {
         return userRepository.get(id);
     }

@@ -42,10 +42,10 @@
             <div class="collapse navbar-collapse" id="navcol-1">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link active" href="<c:url value='/home'/>">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="<c:url value='/statistics'/>">Статистика</a></li>
-                    <li class="nav-item"><a class="nav-link" href="<c:url value='/list-user'/>">Пользователи</a></li>
-                    <li class="nav-item"><a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Создать квест</a></li>
-                </ul><a class="btn btn-primary ms-md-2" role="button" href="#">Login</a><a class="btn btn-primary ms-md-2" role="button" href="#">Sign up</a>
+                    <li class="nav-item"><a class="nav-link" href="<c:url value='/statistics'/>">Statistics</a></li>
+                    <li class="nav-item"><a class="nav-link" href="<c:url value='/list-user'/>">Users</a></li>
+                    <li class="nav-item"><a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Create quest</a></li>
+                </ul><a class="btn btn-primary ms-md-2" role="button" href="<c:url value='/login'/>">Login</a><a class="btn btn-primary ms-md-2" role="button" href="<c:url value='/signup'/>">Sign up</a>
             </div>
         </div>
     </nav>
