@@ -95,12 +95,19 @@
                     <c:if test="${(requestScope.user!=null && requestScope.user.login==sessionScope.user.login) ||
                         (requestScope.user!=null && sessionScope.user.role=='ADMIN')}">
                         <%--<c:if test="${user!=null}">--%>
-                        <button id="update" name="update" class="btn btn-primary">Update</button>
+                        <button id="update" name="action" value="update" class="btn btn-primary">Update</button>
                     </c:if>
 
                     <c:if test="${requestScope.user==null && sessionScope.user.role=='ADMIN'}">
                         <%--                    <c:if test="${user==null}">--%>
-                        <button id="create" name="create" class="btn btn-success">Create</button>
+                        <button id="create" name="action" value="create" class="btn btn-success">Create</button>
+                    </c:if>
+
+                    <c:if test="${(requestScope.user.login==sessionScope.user.login &&
+                        sessionScope.user.role!='ADMIN') || (sessionScope.user.role=='ADMIN' &&
+                        requestScope.user.role!='ADMIN')}">
+                        <button type="submit" onclick="return confirm('Вы уверены?')" name="action" value="delete"
+                                class="btn btn-primary">Удалить</button>
                     </c:if>
 
                 </div>

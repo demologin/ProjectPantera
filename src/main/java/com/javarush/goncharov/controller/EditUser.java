@@ -39,9 +39,20 @@ public class EditUser extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        HttpSession session = req.getSession();
+        User userSession = (User) session.getAttribute("user");
         String role = "";
         Long idUser = Long.parseLong(req.getParameter("id"));
         Optional<User> userFind = userService.get(idUser);
+        if (req.getParameter("action").equals("delete")) {
+            userFind.ifPresent(userService::delete);
+            if (userSession.getRole().name().equals("ADMIN")){
+                resp.sendRedirect("/list-users");
+                return;
+            }
+            resp.sendRedirect("/logout");
+            return;
+        }
         if (userFind.isPresent() && req.getParameter("role") == null){
             role = userFind.get().getRole().toString();
         } else {

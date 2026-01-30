@@ -22,10 +22,13 @@ public class Profile extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        if (req.getParameter("logout") == null) {
-            HttpSession session = req.getSession();
-            User user = (User) session.getAttribute("user");
+        HttpSession session = req.getSession();
+        User user = (User) session.getAttribute("user");
+        if (req.getParameter("action").equals("edit")) {
             resp.sendRedirect("/edit-user" + "?id=" + user.getId());
+        } else if (req.getParameter("action").equals("delete")) {
+            userService.delete(user);
+            resp.sendRedirect("/logout");
         } else {
             resp.sendRedirect("/logout");
         }

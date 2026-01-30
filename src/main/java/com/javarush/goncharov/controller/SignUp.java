@@ -32,7 +32,7 @@ public class SignUp extends HttpServlet {
                 .login(req.getParameter("login"))
                 .password(req.getParameter("password"))
                 .role(Role.USER)
-                .email(req.getParameter("email"))
+                .email("test@test.ru")
                 .build();
         userService.post(user);
         HttpSession session = req.getSession();

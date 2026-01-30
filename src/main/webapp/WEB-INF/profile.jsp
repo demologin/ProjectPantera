@@ -14,11 +14,14 @@
         <h1 class="display-3 fw-bold"
             style="height: 41.25px;font-size: 27.88px;color: var(--bs-red);font-weight: bold;">Email: ${user.email}</h1>
         <div class="col-lg-6 mx-auto">
-            <form class="form-horizontal" action="profile" method="post" enctype="multipart/form-data">
+            <form class="form-horizontal" action="profile" method="post">
                 <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
                     <input type="hidden" name="id" value="${user.id}">
-                    <button type="submit" name="user" class="btn btn-primary btn-lg px-4 gap-3">Редактировать</button>
-                    <button type="submit" name="logout" class="btn btn-outline-secondary btn-lg px-4">Выход</button>
+                    <button type="submit" name="action" value="edit" class="btn btn-primary btn-lg px-4 gap-3">Редактировать</button>
+                    <c:if test="${sessionScope.user.login!=requestScope.user.login && sessionScope.user.role!='ADMIN'}">
+                        <button type="submit" onclick="return confirm('Вы уверены?')" name="action" value="delete"
+                                class="btn btn-primary btn-lg px-4 gap-3">Удалить</button>
+                    </c:if>
                 </div>
             </form>
         </div>
