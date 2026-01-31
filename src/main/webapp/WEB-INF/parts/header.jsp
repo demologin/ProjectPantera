@@ -39,7 +39,12 @@
                                 <li class="nav-item"><a class="nav-link" href="#">Квесты</a></li>
                                 <c:if test="${sessionScope.user.role=='ADMIN'}">
                                     <li class="nav-item"><a class="nav-link" href="list-users">Пользователи</a></li>
+                                </c:if>
+                                <c:if test="${sessionScope.user.role=='ADMIN' || sessionScope.user.role=='GAMEDEV'}">
                                     <li class="nav-item"><a class="nav-link" href="#">Создать квест</a></li>
+                                </c:if>
+                                <c:if test="${sessionScope.user.role=='ADMIN' || sessionScope.user.role=='MODERATOR'}">
+                                    <li class="nav-item"><a class="nav-link" href="messages">Сообщения</a></li>
                                 </c:if>
                             </ul>
                             <ul class="nav col-md-3 text-end">
@@ -50,6 +55,12 @@
                                 <li>
                                     <a href="logout" class="btn btn-danger ms-md-2"
                                        style="background: var(--bs-orange);">Logout</a>
+                                </li>
+                                <li>
+                                    <h4>" "</h4>
+                                </li>
+                                <li>
+                                    <h3 style="border-color: var(--bs-orange);color: var(--bs-orange);">${sessionScope.user.login}</h3>
                                 </li>
                             </ul>
                         </c:when>
@@ -62,6 +73,9 @@
                                 <li>
                                     <a href="signup" class="btn btn-primary ms-md-2"
                                        style="background: var(--bs-orange);">Sign-up</a>
+                                </li>
+                                <li>
+                                    <h4 style="border-color: var(--bs-orange);color: var(--bs-orange);">${sessionScope.user.login}</h4>
                                 </li>
                             </ul>
                         </c:otherwise>

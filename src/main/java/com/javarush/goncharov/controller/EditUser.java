@@ -43,15 +43,6 @@ public class EditUser extends HttpServlet {
         User userSession = (User) session.getAttribute("user");
         Long idUser = Long.parseLong(req.getParameter("id"));
         Optional<User> userFind = userService.get(idUser);
-//        if (req.getParameter("action").equals("delete")) {
-//            userFind.ifPresent(userService::delete);
-//            if (userSession.getRole().name().equals("ADMIN")){
-//                resp.sendRedirect("/list-users");
-//                return;
-//            }
-//            resp.sendRedirect("/logout");
-//            return;
-//        } else
         if (req.getParameter("action").equals("cancel")) {
             if (userSession.getLogin().equals(userFind.get().getLogin())){
                 resp.sendRedirect("/profile");
