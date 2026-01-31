@@ -23,6 +23,7 @@ public class AnswerRepository implements Repository<Answer> {
         return Optional.ofNullable(answers.get(id));
     }
 
+    @Override
     public void create(Answer answer) {
         answer.setId(generatedId.incrementAndGet());
         answers.put(answer.getId(), answer);
@@ -30,11 +31,9 @@ public class AnswerRepository implements Repository<Answer> {
 
     @Override
     public void update(Answer entity) {
-
     }
 
     @Override
     public void delete(Answer entity) {
-
     }
 }

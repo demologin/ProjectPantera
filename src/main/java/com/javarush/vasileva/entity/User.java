@@ -25,8 +25,8 @@ public class User {
         return "image-" + id;
     }
 
+    @SuppressWarnings("unused")
     public boolean isAdmin() {
         return role != null && role.equals(Role.ADMIN);
     }
-
 }

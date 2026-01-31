@@ -3,7 +3,7 @@ package com.javarush.vasileva.service;
 import com.javarush.vasileva.entity.Role;
 import com.javarush.vasileva.entity.User;
 import com.javarush.vasileva.repository.UserRepository;
-import com.javarush.vasileva.util.RequestHelpers;
+import com.javarush.vasileva.util.Helpers;
 
 import java.util.List;
 import java.util.Optional;
@@ -55,7 +55,7 @@ public class UserService {
         if (userIdStr == null || userIdStr.isEmpty()) {
             return Optional.empty();
         }
-        Long questId = RequestHelpers.parseStringToLong(userIdStr);
+        Long questId = Helpers.parseStringToLong(userIdStr);
         return userRepository.findById(questId);
     }
 

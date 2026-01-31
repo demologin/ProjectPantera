@@ -4,7 +4,7 @@ import com.javarush.vasileva.entity.Role;
 import com.javarush.vasileva.entity.User;
 import com.javarush.vasileva.exception.AppException;
 import com.javarush.vasileva.service.UserService;
-import com.javarush.vasileva.util.RequestHelpers;
+import com.javarush.vasileva.util.Helpers;
 import jakarta.servlet.http.HttpServletRequest;
 
 import java.util.Collection;
@@ -23,7 +23,7 @@ public class UserList implements Command {
 
     @Override
     public String doGet(HttpServletRequest request) {
-        RequestHelpers.checkAuthorization(request, USER_LIST_AUTH_ERROR);
+        Helpers.checkAdminAuthorization(request, USER_LIST_AUTH_ERROR);
         Collection<User> users = userService.getAll();
         request.setAttribute("users", users);
         request.getSession().setAttribute("ADMIN_ROLE", Role.ADMIN);

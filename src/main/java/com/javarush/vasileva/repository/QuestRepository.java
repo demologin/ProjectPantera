@@ -23,6 +23,7 @@ public class QuestRepository implements Repository<Quest> {
         return Optional.ofNullable(quests.get(id));
     }
 
+    @Override
     public void create(Quest quest) {
         quest.setId(generatedId.incrementAndGet());
         quests.put(quest.getId(), quest);

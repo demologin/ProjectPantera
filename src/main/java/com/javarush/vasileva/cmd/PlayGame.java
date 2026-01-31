@@ -5,7 +5,7 @@ import com.javarush.vasileva.exception.AppException;
 import com.javarush.vasileva.service.AnswerService;
 import com.javarush.vasileva.service.QuestService;
 import com.javarush.vasileva.service.QuestionService;
-import com.javarush.vasileva.util.RequestHelpers;
+import com.javarush.vasileva.util.Helpers;
 import com.javarush.vasileva.util.Value;
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -63,8 +63,8 @@ public class PlayGame implements Command {
                 return getView() + "?" + QUEST_ID + "=" + questIdStr; // Return to the same page
             }
 
-            long questId = RequestHelpers.parseStringToLong(questIdStr);
-            long answerId = RequestHelpers.parseStringToLong(answerIdStr);
+            long questId = Helpers.parseStringToLong(questIdStr);
+            long answerId = Helpers.parseStringToLong(answerIdStr);
 
             Optional<Answer> answer = answerService.findById(answerId);
             if (answer.isEmpty()) {

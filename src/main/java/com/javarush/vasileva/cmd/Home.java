@@ -2,7 +2,7 @@ package com.javarush.vasileva.cmd;
 
 import com.javarush.vasileva.entity.Quest;
 import com.javarush.vasileva.service.QuestService;
-import com.javarush.vasileva.util.RequestHelpers;
+import com.javarush.vasileva.util.Helpers;
 import jakarta.servlet.http.HttpServletRequest;
 
 import java.util.List;
@@ -27,7 +27,7 @@ public class Home implements Command {
 
     @Override
     public String doDelete(HttpServletRequest req) {
-        RequestHelpers.checkAuthorization(req, DELETE_QUEST_AUTH_ERROR);
+        Helpers.checkAdminAuthorization(req, DELETE_QUEST_AUTH_ERROR);
         String questIdStr = req.getParameter(QUEST_ID);
         Quest quest = questService.findById(questIdStr)
                 .orElseThrow(() -> new IllegalArgumentException(QUEST_NOT_FOUND + questIdStr));

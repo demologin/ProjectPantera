@@ -5,7 +5,7 @@ import com.javarush.vasileva.entity.Quest;
 import com.javarush.vasileva.entity.Question;
 import com.javarush.vasileva.exception.AppException;
 import com.javarush.vasileva.repository.QuestionRepository;
-import com.javarush.vasileva.util.RequestHelpers;
+import com.javarush.vasileva.util.Helpers;
 import com.javarush.vasileva.util.Value;
 
 import java.util.List;
@@ -38,7 +38,7 @@ public class QuestionService {
     public Optional<Question> findCurrentQuestion(String questionIdStr, Quest quest) {
         Long currentQuestionId;
         if (questionIdStr != null && !questionIdStr.isEmpty()) {
-            currentQuestionId = RequestHelpers.parseStringToLong(questionIdStr);
+            currentQuestionId = Helpers.parseStringToLong(questionIdStr);
         } else {
             currentQuestionId = quest.getStartQuestionId();
         }

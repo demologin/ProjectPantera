@@ -4,7 +4,7 @@ import com.javarush.vasileva.entity.Role;
 import com.javarush.vasileva.entity.User;
 import com.javarush.vasileva.service.UserService;
 import com.javarush.vasileva.util.Link;
-import com.javarush.vasileva.util.RequestHelpers;
+import com.javarush.vasileva.util.Helpers;
 import jakarta.servlet.http.HttpServletRequest;
 
 import java.util.Optional;
@@ -38,7 +38,7 @@ public class EditUser implements Command {
         if (req.getParameter("create") != null) {
             userService.create(user);
         } else if (req.getParameter("update") != null) {
-            user.setId(RequestHelpers.parseStringToLong(req.getParameter("id")));
+            user.setId(Helpers.parseStringToLong(req.getParameter("id")));
             userService.update(user);
         }
         return Link.USER_LIST;

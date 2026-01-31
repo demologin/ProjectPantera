@@ -6,7 +6,7 @@ import com.javarush.vasileva.entity.Quest;
 import com.javarush.vasileva.exception.AppException;
 import com.javarush.vasileva.mapper.QuestMapper;
 import com.javarush.vasileva.service.QuestService;
-import com.javarush.vasileva.util.RequestHelpers;
+import com.javarush.vasileva.util.Helpers;
 import jakarta.servlet.http.HttpServletRequest;
 
 import java.io.IOException;
@@ -30,7 +30,7 @@ public class EditQuest implements Command {
 
     @Override
     public String doGet(HttpServletRequest req) {
-        RequestHelpers.checkAuthorization(req, EDIT_QUEST_AUTH_ERROR);
+        Helpers.checkAdminAuthorization(req, EDIT_QUEST_AUTH_ERROR);
 
         List<Quest> quests = questService.getAll();
         req.setAttribute(QUESTS, quests);

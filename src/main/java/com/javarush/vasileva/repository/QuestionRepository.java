@@ -32,6 +32,7 @@ public class QuestionRepository implements Repository<Question> {
                 .findFirst();
     }
 
+    @Override
     public void create(Question question) {
         question.setGeneratedId(generatedId.incrementAndGet());
         questions.put(question.getGeneratedId(), question);
@@ -44,7 +45,5 @@ public class QuestionRepository implements Repository<Question> {
 
     @Override
     public void delete(Question entity) {
-
     }
-
 }

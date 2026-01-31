@@ -3,7 +3,6 @@ package com.javarush.vasileva.mapper;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.javarush.vasileva.entity.Quest;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -22,10 +21,6 @@ public class QuestMapper {
         try (inputStream) {
             return objectMapper.readValue(inputStream, Quest.class);
         }
-    }
-
-    public void writeToJson(Quest quest, String filePath) throws IOException {
-        objectMapper.writeValue(new File(filePath), quest);
     }
 
     public Quest fromJsonString(String jsonString) throws IOException {

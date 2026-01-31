@@ -6,14 +6,16 @@ import com.javarush.vasileva.exception.AppException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
-public class RequestHelpers {
+import static com.javarush.vasileva.util.Key.USER;
 
-    public RequestHelpers() {
+public class Helpers {
+
+    private Helpers() {
     }
 
-    public static void checkAuthorization(HttpServletRequest req, String message) {
+    public static void checkAdminAuthorization(HttpServletRequest req, String message) {
         HttpSession session = req.getSession(false);
-        User user = (User) session.getAttribute("user");
+        User user = (User) session.getAttribute(USER);
         if (user == null || user.getRole() == Role.GUEST || user.getRole() == Role.USER) {
             throw new AppException(message);
         }

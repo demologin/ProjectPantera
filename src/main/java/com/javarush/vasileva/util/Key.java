@@ -20,4 +20,8 @@ public class Key {
     public static final String ERROR = "error";
 
     public static final String GAME_OVER = "gameOver";
+
+    public static final String QUEST_FILE_NAME_1 = "/quest-1.json";
+    public static final String QUEST_FILE_NAME_2 = "/quest-2.json";
+    public static final String QUEST_FILE_NAME_3 = "/quest-3.json";
 }

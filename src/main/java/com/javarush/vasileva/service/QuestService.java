@@ -3,7 +3,7 @@ package com.javarush.vasileva.service;
 import com.javarush.vasileva.entity.Quest;
 import com.javarush.vasileva.repository.QuestRepository;
 import com.javarush.vasileva.repository.Repository;
-import com.javarush.vasileva.util.RequestHelpers;
+import com.javarush.vasileva.util.Helpers;
 
 import java.util.List;
 import java.util.Optional;
@@ -39,7 +39,7 @@ public class QuestService {
         if (questIdStr == null || questIdStr.isEmpty()) {
             return Optional.empty();
         }
-        Long questId = RequestHelpers.parseStringToLong(questIdStr);
+        Long questId = Helpers.parseStringToLong(questIdStr);
         return questRepository.findById(questId);
     }
 }

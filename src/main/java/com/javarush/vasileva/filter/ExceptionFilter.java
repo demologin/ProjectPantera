@@ -20,10 +20,6 @@ public class ExceptionFilter extends HttpFilter {
             throws IOException, ServletException {
         try {
             chain.doFilter(req, res);
-            AppException appException = (AppException) req.getAttribute("appException");
-            if (appException != null) {
-                handleAppException(req, res, appException);
-            }
         } catch (AppException e) {
             handleAppException(req, res, e);
         }
