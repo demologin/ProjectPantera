@@ -15,7 +15,7 @@ import java.io.IOException;
 
 import static com.javarush.vasileva.util.Link.*;
 
-@WebServlet({INDEX, HOME, LOGIN, REGISTER, LOGOUT, PROFILE, USER_LIST, EDIT_USER, PLAY_GAME, EDIT_QUEST, ERROR})
+@WebServlet({INDEX, HOME, LOGIN, REGISTER, LOGOUT, PROFILE, USER_LIST, EDIT_USER, PLAY_GAME, EDIT_QUEST, STATS, ERROR})
 public class FrontController extends HttpServlet {
 
     private final HttpResolver httpResolver = Winter.find(HttpResolver.class);

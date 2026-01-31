@@ -20,6 +20,11 @@
                         </a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link <c:if test="${pageContext.request.requestURI.contains('/stats')}">active</c:if>"
+                           href="${pageContext.request.contextPath}/stats">Статистика
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link <c:if test="${pageContext.request.requestURI.contains('/edit-quest')}">active</c:if>"
                            href="${pageContext.request.contextPath}/edit-quest">Создать/Редактировать квест
                         </a>

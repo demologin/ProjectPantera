@@ -11,6 +11,7 @@ public class Link {
     public static final String EDIT_USER = "/edit-user";
     public static final String PLAY_GAME = "/play-game";
     public static final String EDIT_QUEST = "/edit-quest";
+    public static final String STATS = "/stats";
     public static final String ERROR = "/error-page";
 
 }
