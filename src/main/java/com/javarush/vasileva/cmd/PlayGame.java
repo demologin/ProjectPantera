@@ -2,6 +2,7 @@ package com.javarush.vasileva.cmd;
 
 import com.javarush.vasileva.entity.*;
 import com.javarush.vasileva.exception.AppException;
+import com.javarush.vasileva.repository.UserRepository;
 import com.javarush.vasileva.service.AnswerService;
 import com.javarush.vasileva.service.QuestService;
 import com.javarush.vasileva.service.QuestionService;
@@ -19,11 +20,16 @@ public class PlayGame implements Command {
     private final QuestService questService;
     private final QuestionService questionService;
     private final AnswerService answerService;
+    private final UserRepository userRepository;
 
-    public PlayGame(QuestService questService, QuestionService questionService, AnswerService answerService) {
+    public PlayGame(QuestService questService,
+                    QuestionService questionService,
+                    AnswerService answerService,
+                    UserRepository userRepository) {
         this.questService = questService;
         this.questionService = questionService;
         this.answerService = answerService;
+        this.userRepository = userRepository;
     }
 
     @Override
@@ -45,6 +51,13 @@ public class PlayGame implements Command {
             List<Answer> answers = currentQuestion.get().getAnswers();
             if (answers == null || answers.isEmpty()) {
                 req.setAttribute(NO_ANSWERS, true);
+                User user = (User) req.getSession().getAttribute(USER);
+                if (user != null) {
+                    user.setGameNumber(user.getGameNumber() + 1);
+                    userRepository.create(user);
+                    req.getSession().setAttribute(USER, user);
+                    System.out.println(user);
+                }
             } else {
                 req.setAttribute(ANSWERS, answers);
             }
