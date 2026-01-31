@@ -102,14 +102,7 @@
                         <%--                    <c:if test="${user==null}">--%>
                         <button id="create" name="action" value="create" class="btn btn-success">Create</button>
                     </c:if>
-
-                    <c:if test="${(requestScope.user.login==sessionScope.user.login &&
-                        sessionScope.user.role!='ADMIN') || (sessionScope.user.role=='ADMIN' &&
-                        requestScope.user.role!='ADMIN')}">
-                        <button type="submit" onclick="return confirm('Вы уверены?')" name="action" value="delete"
-                                class="btn btn-primary">Удалить</button>
-                    </c:if>
-
+                    <button id="cancel" name="action" value="cancel" class="btn btn-primary">Отмена</button>
                 </div>
             </div>
 

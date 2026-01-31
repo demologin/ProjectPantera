@@ -20,7 +20,7 @@ import java.util.Optional;
 
 @WebServlet("/edit-user")
 public class EditUser extends HttpServlet {
-
+    private String role;
     private final Storage userStorage = Storage.getInstance();
     private final UserService userService = new UserService(new UserRepository(userStorage));
 
@@ -41,17 +41,25 @@ public class EditUser extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
         User userSession = (User) session.getAttribute("user");
-        String role = "";
         Long idUser = Long.parseLong(req.getParameter("id"));
         Optional<User> userFind = userService.get(idUser);
-        if (req.getParameter("action").equals("delete")) {
-            userFind.ifPresent(userService::delete);
-            if (userSession.getRole().name().equals("ADMIN")){
+//        if (req.getParameter("action").equals("delete")) {
+//            userFind.ifPresent(userService::delete);
+//            if (userSession.getRole().name().equals("ADMIN")){
+//                resp.sendRedirect("/list-users");
+//                return;
+//            }
+//            resp.sendRedirect("/logout");
+//            return;
+//        } else
+        if (req.getParameter("action").equals("cancel")) {
+            if (userSession.getLogin().equals(userFind.get().getLogin())){
+                resp.sendRedirect("/profile");
+                return;
+            } else if (userSession.getRole().name().equals("ADMIN")) {
                 resp.sendRedirect("/list-users");
                 return;
             }
-            resp.sendRedirect("/logout");
-            return;
         }
         if (userFind.isPresent() && req.getParameter("role") == null){
             role = userFind.get().getRole().toString();
@@ -66,6 +74,10 @@ public class EditUser extends HttpServlet {
                 .email(req.getParameter("email"))
                 .build();
         userService.update(user);
-        resp.sendRedirect("/profile");
+        if (userSession.getLogin().equals(userFind.get().getLogin())) {
+            resp.sendRedirect("/profile");
+        } else {
+            resp.sendRedirect("/list-users");
+        }
     }
 }
