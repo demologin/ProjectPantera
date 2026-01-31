@@ -12,7 +12,4 @@ import lombok.NoArgsConstructor;
 public class UserStats {
     private User user;
     private int completedQuests;
-    private int wins;
-    private int losses;
-    private String totalPlayTimeSeconds;
 }
