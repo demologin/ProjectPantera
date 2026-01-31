@@ -18,10 +18,6 @@
         </div>
         <div class="card-body">
 
-            <c:if test="${not empty error}">
-                <div class="alert alert-danger">${error}</div>
-            </c:if>
-
             <form action="<c:url value='/register'/>" method="post">
                 <div class="mb-3">
                     <label for="login" class="form-label">Имя</label>
@@ -29,7 +25,9 @@
                            class="form-control"
                            id="login"
                            name="login"
-                           required>
+                           required
+                           maxlength="15"
+                           minlength="3">
                 </div>
                 <div class="mb-3">
                     <label for="email" class="form-label">Email</label>
@@ -45,7 +43,9 @@
                            class="form-control"
                            id="password"
                            name="password"
-                           required>
+                           required
+                           maxlength="15"
+                           minlength="4">
                 </div>
                 <button type="submit" class="btn btn-success w-100">Зарегистрироваться</button>
             </form>

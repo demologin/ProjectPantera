@@ -12,7 +12,7 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 
 @WebFilter("/*")
-public class ErrorCleanerFilter extends HttpFilter {
+public class CleanerFilter extends HttpFilter {
 
     @Override
     protected void doFilter(HttpServletRequest req, HttpServletResponse res, FilterChain chain) throws IOException, ServletException {
@@ -20,6 +20,7 @@ public class ErrorCleanerFilter extends HttpFilter {
         HttpSession session = req.getSession(false);
         if(req.getMethod().equals("GET") && session != null) {
             session.removeAttribute(Key.ERROR);
+            session.removeAttribute(Key.QUEST_JSON);
         }
     }
 }

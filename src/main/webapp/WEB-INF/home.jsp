@@ -2,16 +2,17 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@include file="header.jsp" %>
 
+<link rel="stylesheet" type="text/css" href="<c:url value='/static/css/Bold-BS4-Full-Page-Image-Header.css'/>">
 <link rel="stylesheet" type="text/css" href="<c:url value='/static/bootstrap/css/bootstrap.min.css'/>">
 <link rel="stylesheet" type="text/css" href="<c:url value='/static/css/Hero-Features-icons.css'/>">
-<link rel="stylesheet" type="text/css" href="<c:url value='/static/css/Bold-BS4-Full-Page-Image-Header.css'/>">
+
 <html>
 <head>
     <title>Home</title>
 </head>
-<body>
+<body class="bg-primary-subtle">
 <div class="masthead">
-    <div class="container-fluid h-100">
+    <div class="container-fluid h-75">
         <div class="row h-100 justify-content-center align-items-center">
             <div class="col text-center">
                 <section>
@@ -27,15 +28,16 @@
                                             <p class="card-text text-center">${quest.description}</p>
                                         </div>
 
-                                        <div class="mb-2">
+                                        <div class="mb-4">
                                             <form method="GET" action="play-game" style="display:inline;">
                                                 <input type="hidden" name="questId" value="${quest.id}">
-                                                <button type="submit" class="btn btn-sm btn-primary w-75">
+                                                <button type="submit" class="btn btn-sm btn-primary w-75 h-100">
                                                     Посмотреть квест
                                                 </button>
                                             </form>
                                         </div>
 
+                                        <c:if test="${sessionScope.user.isAdmin()}">
                                         <div class="mb-2">
                                             <form method="GET" action="edit-quest" style="display:inline;">
                                                 <input type="hidden" name="questId" value="${quest.id}">
@@ -55,6 +57,7 @@
                                                 </button>
                                             </form>
                                         </div>
+                                        </c:if>
                                     </div>
                                 </div>
                             </c:forEach>

@@ -22,7 +22,8 @@
                             ${requestScope.edit ? 'Редактирование квеста' : 'Новый квест'}
                         </h2>
 
-                        <p>Для редактирования нажмите на карточку квеста "Редактировать квест" или выберите квест из списка ниже</p>
+                        <p>Для редактирования нажмите на карточку квеста "Редактировать квест" или выберите квест из
+                            списка ниже</p>
 
                         <div class="mb-4">
                             <c:forEach var="quest" items="${requestScope.quests}">
@@ -36,7 +37,8 @@
                             <div class="field mb-3">
                                 <textarea class="form-control" name="questJson" id="questJson"
                                           style="border: 0; border-bottom: 1px solid #E0E0E0;"
-                                          placeholder="Введите JSON квеста">${requestScope.questJson}</textarea>
+                                          placeholder="Введите JSON квеста">${not empty sessionScope.questJson ? sessionScope.questJson : requestScope.questJson}
+                                </textarea>
                                 <label class="form-label mb-0" for="questJson"></label>
                             </div>
 

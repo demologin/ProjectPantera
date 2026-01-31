@@ -11,7 +11,7 @@
 <head>
     <title>Statistics</title>
 </head>
-<body>
+<body class="bg-primary-subtle">
 <div class="container" style="height: 100vh; margin-top: 100px">
     <h2>Статистика игрока</h2>
 

@@ -56,9 +56,9 @@ public class EditQuest implements Command {
 
     @Override
     public String doPost(HttpServletRequest req) {
+        String questJson = req.getParameter(QUEST_JSON);
         try {
-            String json = req.getParameter(QUEST_JSON);
-            Quest quest = questMapper.fromJsonString(json);
+            Quest quest = questMapper.fromJsonString(questJson);
             if (quest.getId() != null) {
                 questService.update(quest);
             } else {
@@ -67,6 +67,7 @@ public class EditQuest implements Command {
             config.setQuestParameters(quest);
             return HOME;
         } catch (IOException e) {
+            req.getSession().setAttribute(QUEST_JSON, questJson);
             req.getSession().setAttribute(ERROR, JSON_SAVE_ERROR);
             return getView();
         }

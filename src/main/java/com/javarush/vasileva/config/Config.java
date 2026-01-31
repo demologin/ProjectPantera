@@ -1,6 +1,7 @@
 package com.javarush.vasileva.config;
 
 import com.javarush.vasileva.entity.*;
+import com.javarush.vasileva.exception.AppException;
 import com.javarush.vasileva.mapper.QuestMapper;
 import com.javarush.vasileva.service.AnswerService;
 import com.javarush.vasileva.service.QuestService;
@@ -12,6 +13,7 @@ import java.io.IOException;
 import java.util.List;
 
 import static com.javarush.vasileva.util.Key.*;
+import static com.javarush.vasileva.util.Value.JSON_SAVE_ERROR;
 
 @AllArgsConstructor
 public class Config {
@@ -48,7 +50,11 @@ public class Config {
     }
 
     public void setQuestParameters(Quest quest) {
-        for (Question question : quest.getQuestions()) {
+        List<Question> questions = quest.getQuestions();
+        if (questions == null || questions.isEmpty()) {
+            throw new AppException(JSON_SAVE_ERROR);
+        }
+        for (Question question : questions) {
             question.setQuestId(quest.getId());
             questionService.create(question);
             List<Answer> answers = question.getAnswers();

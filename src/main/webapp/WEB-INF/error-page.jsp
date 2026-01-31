@@ -23,28 +23,17 @@
   <div class="button-group">
     <form method="GET" action="<c:url value='/home'/>" style="display:inline; margin-bottom: 10px">
       <input type="hidden" name="questId" value="${requestScope.quest.id}"/>
-      <button type="submit" class="btn btn-primary fs-5 me-2 px-4 py-2">
+      <button type="submit" class="btn btn-primary fs-5 me-2 px-4 py-2 w-100">
         Вернуться на главную
       </button>
     </form>
 
     <form method="GET" action="<c:url value='/login'/>">
-      <button type="submit" class="btn btn-outline-primary fs-5 px-4 py-2">
-        Войти в систему
+      <button type="submit" class="btn btn-outline-primary fs-5 px-4 py-2 w-100">
+        Войти
       </button>
     </form>
 
-    <form method="GET" action="<c:url value='/edit-quest'/>">
-      <button type="submit" class="btn btn-outline-primary fs-5 px-4 py-2">
-        Создать или редактировать квест
-      </button>
-    </form>
-
-    <form method="GET" action="<c:url value='/user-list'/>">
-      <button type="submit" class="btn btn-outline-primary fs-5 px-4 py-2">
-        Список пользователей
-      </button>
-    </form>
   </div>
 
 </div>

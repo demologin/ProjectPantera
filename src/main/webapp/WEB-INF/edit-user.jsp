@@ -23,7 +23,9 @@
                             value="${requestScope.user.login}"
                             placeholder="Логин не менее 3-х символов"
                             class="form-control input-md"
-                            required="">
+                            required
+                            maxlength="15"
+                            minlength="3">
                 </div>
             </div>
 
@@ -37,7 +39,7 @@
                             value="${requestScope.user.email}"
                             placeholder="Электронная почта"
                             class="form-control input-md"
-                            required="">
+                            required>
                 </div>
             </div>
 
@@ -50,7 +52,9 @@
                            value="${requestScope.user.password}"
                            placeholder="Пароль не менее 4 символов"
                            class="form-control input-md"
-                           required="">
+                           required
+                           maxlength="15"
+                           minlength="4">
                 </div>
             </div>
 

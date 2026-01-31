@@ -9,6 +9,7 @@ import com.javarush.vasileva.service.QuestionService;
 import com.javarush.vasileva.util.Helpers;
 import com.javarush.vasileva.util.Value;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 
 import java.util.List;
 import java.util.Optional;
@@ -34,6 +35,13 @@ public class PlayGame implements Command {
 
     @Override
     public String doGet(HttpServletRequest req) {
+        HttpSession session = req.getSession();
+        User user = (User) session.getAttribute("user");
+
+        if (user == null) {
+            throw new AppException("Необходимо авторизоваться");
+        }
+
         String questIdStr = req.getParameter(QUEST_ID);
         String questionIdStr = req.getParameter(QUESTION_ID);
 
@@ -51,13 +59,10 @@ public class PlayGame implements Command {
             List<Answer> answers = currentQuestion.get().getAnswers();
             if (answers == null || answers.isEmpty()) {
                 req.setAttribute(NO_ANSWERS, true);
-                User user = (User) req.getSession().getAttribute(USER);
-                if (user != null) {
-                    user.setGameNumber(user.getGameNumber() + 1);
-                    userRepository.create(user);
-                    req.getSession().setAttribute(USER, user);
-                    System.out.println(user);
-                }
+                user.setGameNumber(user.getGameNumber() + 1);
+                userRepository.update(user);
+                session.setAttribute(USER, user);
+                System.out.println(user);
             } else {
                 req.setAttribute(ANSWERS, answers);
             }
@@ -69,21 +74,21 @@ public class PlayGame implements Command {
 
     @Override
     public String doPost(HttpServletRequest req) throws AppException {
-            String questIdStr = req.getParameter(QUEST_ID);
-            String answerIdStr = req.getParameter(SELECTED_ANSWER_ID);
+        String questIdStr = req.getParameter(QUEST_ID);
+        String answerIdStr = req.getParameter(SELECTED_ANSWER_ID);
 
-            if (questIdStr == null || answerIdStr == null) {
-                return getView() + "?" + QUEST_ID + "=" + questIdStr; // Return to the same page
-            }
+        if (questIdStr == null || answerIdStr == null) {
+            return getView() + "?" + QUEST_ID + "=" + questIdStr; // Return to the same page
+        }
 
-            long questId = Helpers.parseStringToLong(questIdStr);
-            long answerId = Helpers.parseStringToLong(answerIdStr);
+        long questId = Helpers.parseStringToLong(questIdStr);
+        long answerId = Helpers.parseStringToLong(answerIdStr);
 
-            Optional<Answer> answer = answerService.findById(answerId);
-            if (answer.isEmpty()) {
-                return getView() + "?" + QUEST_ID + "=" + questId;
-            }
-            long nextQuestionId = questionService.findNextQuestionId(questId, answer.get());
-            return getView() + "?" + QUEST_ID + "=" + questId + "&"+ QUESTION_ID + "=" + nextQuestionId;
+        Optional<Answer> answer = answerService.findById(answerId);
+        if (answer.isEmpty()) {
+            return getView() + "?" + QUEST_ID + "=" + questId;
+        }
+        long nextQuestionId = questionService.findNextQuestionId(questId, answer.get());
+        return getView() + "?" + QUEST_ID + "=" + questId + "&" + QUESTION_ID + "=" + nextQuestionId;
     }
 }
