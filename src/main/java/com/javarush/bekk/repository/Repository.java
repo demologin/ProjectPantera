@@ -1,6 +1,6 @@
-package com.javarush.khmelov.repository;
+package com.javarush.bekk.repository;
 
-import com.javarush.khmelov.entity.User;
+import com.javarush.bekk.entity.User;
 
 import java.util.Collection;
 import java.util.Optional;
