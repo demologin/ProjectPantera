@@ -49,7 +49,7 @@ public class MessageRepository implements Repository<Message>{
     @Override
     public void update(Message message) {
         if (map.containsKey(message.getId())){
-            message.setId(id.incrementAndGet());
+//            message.setId(id.incrementAndGet());
             message.setName(message.getName());
             message.setEmail(message.getEmail());
             message.setMessage(message.getMessage());

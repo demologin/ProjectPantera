@@ -5,13 +5,13 @@
 <div class="container py-4 py-xl-5">
     <div class="row mb-4 mb-lg-5">
         <div class="col-md-8 col-xl-6 text-center mx-auto">
-            <h4>Сообщения полученные через форму обратной связи</h4>
+            <h4>Обработанные сообщения полученные через форму обратной связи</h4>
         </div>
     </div>
     <form class="form-horizontal" method="post">
         <c:if test="${sessionScope.user.role=='ADMIN' || sessionScope.user.role=='MODERATOR'}">
             <c:forEach var="message" items="${requestScope.messages}">
-                <c:if test="${not message.completed}">
+                <c:if test="${message.completed}">
                     <div class="row">
                             <%--                <div class="col-md-8 col-xl-6 mx-auto p-4">--%>
                         <div class="d-flex align-items-center align-items-md-start align-items-xl-center">
@@ -26,14 +26,13 @@
                                 <h4>${message.topic}</h4>
                                 <p>${message.message}</p>
                                 <div class="form-group">
-                                    <button id="save" name="action" value="save" class="btn btn-success">Сохранить</button>
-<%--                                    <button id="delete" name="action" value="delete" class="btn btn-danger">Удалить--%>
+                                    <button id="delete" name="action" value="delete" class="btn btn-danger">Удалить
                                     </button>
                                 </div>
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox"
                                            id="rememberMe" name="rememberMe"
-                                    <c:if test="${message.completed}">checked</c:if>>
+                                           <c:if test="${message.completed}">checked</c:if>>
                                     <label class="form-check-label" for="rememberMe">Обработано</label>
                                 </div>
                                 <p>${message.name} - ${message.email}</p>
@@ -43,20 +42,6 @@
                     </div>
                 </c:if>
             </c:forEach>
-<%--            <nav>--%>
-<%--                <ul class="pagination">--%>
-<%--                    <li class="page-item"><a class="page-link" aria-label="Previous" href="#"><span aria-hidden="true">«</span></a></li>--%>
-<%--                    <li class="page-item"><a class="page-link" href="#">1</a></li>--%>
-<%--                    <li class="page-item"><a class="page-link" href="#">2</a></li>--%>
-<%--                    <li class="page-item"><a class="page-link" href="#">3</a></li>--%>
-<%--                    <li class="page-item"><a class="page-link" href="#">4</a></li>--%>
-<%--                    <li class="page-item"><a class="page-link" href="#">5</a></li>--%>
-<%--                    <li class="page-item"><a class="page-link" aria-label="Next" href="#"><span aria-hidden="true">»</span></a></li>--%>
-<%--                </ul>--%>
-<%--            </nav>--%>
-            <div class="form-group">
-                <button id="save" name="action" value="completedValues" class="btn btn-success">Обработанные сообщения</button>
-            </div>
         </c:if>
     </form>
 </div>

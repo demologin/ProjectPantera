@@ -16,8 +16,8 @@ import java.io.IOException;
 import java.util.Collection;
 import java.util.Optional;
 
-@WebServlet("/messages")
-public class Messages extends HttpServlet {
+@WebServlet("/completed-messages")
+public class CompletedMessages extends HttpServlet {
     private final Storage messageStorage = Storage.getInstance();
     private final MessageService messageService = new MessageService(new MessageRepository(messageStorage));
 
@@ -28,28 +28,16 @@ public class Messages extends HttpServlet {
         User user = (User) session.getAttribute("userSession");
         req.setAttribute("messages", messages);
         req.setAttribute("user", user);
-        req.getRequestDispatcher("/WEB-INF/messages.jsp").forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/completed-messages.jsp").forward(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        if (req.getParameter("action").equals("completedValues")) {
-            resp.sendRedirect("/completed-messages");
-            return;
-        }
         Long idMessage = Long.parseLong(req.getParameter("id"));
         Optional<Message> message = messageService.get(idMessage);
-//        if (req.getParameter("action").equals("delete")) {
-//            messageService.delete(message.get());
-//            resp.sendRedirect("/messages");
-//            return;
-//        }
-        String rememberMe = req.getParameter("rememberMe");
-        HttpSession session = req.getSession();
-        if (rememberMe != null && (rememberMe.equals("on") || rememberMe.equals("off"))) {
-            message.ifPresent(value -> value.setCompleted(true));
-            messageService.update(message.get());
+        if (req.getParameter("action").equals("delete")) {
+            messageService.delete(message.get());
         }
-        resp.sendRedirect("/messages");
+        resp.sendRedirect("/completed-messages");
     }
 }
