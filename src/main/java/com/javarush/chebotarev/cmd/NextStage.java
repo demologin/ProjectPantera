@@ -1,38 +1,30 @@
-package com.javarush.chebotarev.servlet;
+package com.javarush.chebotarev.cmd;
 
-import com.javarush.chebotarev.component.Go;
-import com.javarush.chebotarev.component.Path;
-import com.javarush.chebotarev.component.Statistics;
-import com.javarush.chebotarev.component.Utils;
+import com.javarush.chebotarev.component.*;
 import com.javarush.chebotarev.quest.CurrentQuest;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-import java.io.IOException;
-
-@WebServlet(Go.NEXT_STAGE)
-public class NextStageServlet extends HttpServlet {
+@SuppressWarnings("unused")
+public class NextStage extends Command {
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    public String doGet(HttpServletRequest req, HttpServlet servlet) {
         HttpSession currentSession = req.getSession();
         CurrentQuest currentQuest = Utils.extractAttribute(
                 currentSession,
-                "currentQuest",
+                Attribute.CURRENT_QUEST,
                 CurrentQuest.class
         );
         int nextNodeId = getSelectedNextNodeId(req);
         currentQuest.nextStage(nextNodeId);
-        String path;
+        String view;
         if (currentQuest.isDone()) {
-            path = Path.RESULT;
+            view = Go.RESULT;
             Statistics statistics = Utils.extractAttribute(
                     currentSession,
-                    "statistics",
+                    Attribute.STATISTICS,
                     Statistics.class
             );
             if (currentQuest.isVictory()) {
@@ -41,14 +33,13 @@ public class NextStageServlet extends HttpServlet {
                 statistics.incDefeats();
             }
         } else {
-            path = Path.QUEST;
+            view = Go.QUEST;
         }
-        req.getRequestDispatcher(path)
-                .forward(req, resp);
+        return view;
     }
 
     private int getSelectedNextNodeId(HttpServletRequest req) {
-        String nextNodeIdString = req.getParameter("nextNodeId");
+        String nextNodeIdString = req.getParameter(Parameter.NEXT_NODE_ID);
         return Integer.parseInt(nextNodeIdString);
     }
 }

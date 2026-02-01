@@ -34,7 +34,7 @@ public class QuestService {
             String filename = "quest_" + System.currentTimeMillis() + ".json";
             file = new File(userQuestsPath, filename);
         } while (file.exists());
-        ObjectMapper mapper = ObjectRepository.getObjectMapper();
+        ObjectMapper mapper = ObjectRepository.find(ObjectMapper.class);
         try {
             mapper.writerWithDefaultPrettyPrinter().writeValue(file, quest);
         } catch (IOException e) {
@@ -44,7 +44,7 @@ public class QuestService {
 
     public Quest loadQuest(QuestMetadata questMetadata, ServletContext servletContext) {
         Quest quest;
-        ObjectMapper mapper = ObjectRepository.getObjectMapper();
+        ObjectMapper mapper = ObjectRepository.find(ObjectMapper.class);
         if (questMetadata.isServerQuest()) {
             InputStream inputStream = servletContext.getResourceAsStream(questMetadata.getPath());
             try {
@@ -67,7 +67,7 @@ public class QuestService {
     public List<QuestMetadata> obtainAvailableQuests(ServletContext servletContext) {
         List<QuestMetadata> availableQuests = new ArrayList<>();
         Set<String> resourcePaths = servletContext.getResourcePaths(SERVER_QUESTS_PATH);
-        ObjectMapper mapper = ObjectRepository.getObjectMapper();
+        ObjectMapper mapper = ObjectRepository.find(ObjectMapper.class);
         for (String path : resourcePaths) {
             InputStream inputStream = servletContext.getResourceAsStream(path);
             Quest quest;

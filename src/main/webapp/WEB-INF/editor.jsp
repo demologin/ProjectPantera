@@ -9,36 +9,28 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-
 <div class="main-wrapper">
     <aside class="editor-sidebar">
         <h2>Quest Editor</h2>
         <label>Название квеста</label>
         <input type="text" id="q-title" placeholder="Введите название..." oninput="saveToLocalStorage()">
-
         <label>Пролог</label>
         <textarea id="q-prologue" placeholder="О чем эта история..." oninput="saveToLocalStorage()"
                   style="height:80px;"></textarea>
-
         <button class="btn-publish" onclick="publishQuest()">ОПУБЛИКОВАТЬ КВЕСТ</button>
-
         <hr>
-
         <div style="display:flex; justify-content:space-between; align-items:center;">
             <h3>Параметры этапа</h3>
             <input type="number" id="node-id" value="1" style="width:70px;">
         </div>
-
         <label>Тип этапа</label>
         <select id="node-type" onchange="toggleOptionsVisibility()">
             <option value="common">Обычный</option>
             <option value="victory">ПОБЕДА 🏆</option>
             <option value="defeat">ПРОИГРЫШ 💀</option>
         </select>
-
         <label>Текст описания</label>
         <textarea id="node-text" placeholder="Опишите ситуацию..." style="height:120px;"></textarea>
-
         <div id="options-section">
             <div id="options-inputs">
                 <label>Выборы игрока</label>
@@ -48,15 +40,12 @@
                 + Добавить выбор
             </button>
         </div>
-
         <button class="btn-main" onclick="saveNode()">Сохранить этап</button>
-
         <div class="sidebar-footer">
             <button class="btn-danger" onclick="clearAllData()">Очистить проект</button>
             <button class="btn-secondary" onclick="window.location='/main-menu'">Вернуться в меню</button>
         </div>
     </aside>
-
     <main class="nodes-canvas-area" id="canvas-container" oncontextmenu="return false;">
         <canvas id="canvas-arrows"></canvas>
         <div id="viewport">
@@ -65,7 +54,6 @@
         <div class="zoom-info" id="zoom-label">100%</div>
     </main>
 </div>
-
 <script>
     let questNodes = [];
     let draggedNode = null;

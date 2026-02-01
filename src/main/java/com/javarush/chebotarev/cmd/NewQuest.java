@@ -1,45 +1,42 @@
-package com.javarush.chebotarev.servlet;
+package com.javarush.chebotarev.cmd;
 
 import com.javarush.chebotarev.component.*;
 import com.javarush.chebotarev.quest.CurrentQuest;
 import com.javarush.chebotarev.quest.Quest;
 import com.javarush.chebotarev.quest.QuestMetadata;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-@WebServlet(Go.NEW_QUEST)
-public class NewQuestServlet extends HttpServlet {
+@SuppressWarnings("unused")
+public class NewQuest extends Command {
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    @SuppressWarnings("unchecked")
+    public String doGet(HttpServletRequest req, HttpServlet servlet) {
         HttpSession currentSession = req.getSession();
         int selectedQuestIndex = getSelectedQuestIndex(req);
         List<QuestMetadata> availableQuests = Utils.extractAttribute(
                 currentSession,
-                "availableQuests",
+                Attribute.AVAILABLE_QUESTS,
                 ArrayList.class
         );
-        QuestService questService = ObjectRepository.getQuestService();
+        QuestService questService = ObjectRepository.find(QuestService.class);
+        QuestMetadata selectedQuest = availableQuests.get(selectedQuestIndex);
         Quest quest = questService.loadQuest(
-                availableQuests.get(selectedQuestIndex),
-                getServletContext()
+                selectedQuest,
+                servlet.getServletContext()
         );
         CurrentQuest currentQuest = new CurrentQuest(quest);
-        currentSession.setAttribute("currentQuest", currentQuest);
-        req.getRequestDispatcher(Path.NEW_QUEST)
-                .forward(req, resp);
+        currentSession.setAttribute(Attribute.CURRENT_QUEST, currentQuest);
+        return getView();
     }
 
     private int getSelectedQuestIndex(HttpServletRequest req) {
-        String questIndexString = req.getParameter("questIndex");
+        String questIndexString = req.getParameter(Parameter.QUEST_INDEX);
         return Integer.parseInt(questIndexString);
     }
 }
