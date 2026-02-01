@@ -8,21 +8,40 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicLong;
+import java.util.stream.Stream;
 
-public class UserRepository implements Repository<User> {
+public class UserRepository extends BaseRepository<User> {
 
-    private final Map<Long, User> map = new HashMap<>();
+    //private final Map<Long, User> map = new HashMap<>();
 
-    public static final AtomicLong id = new AtomicLong(System.currentTimeMillis());
+    //public static final AtomicLong id = new AtomicLong(System.currentTimeMillis());
 
-    public UserRepository() {
+    /*public UserRepository() {
         map.put(1L, new User(1L, "Alisa", "qwerty", Role.USER));
         map.put(2L, new User(2L, "Bob", "", Role.GUEST));
         map.put(3L, new User(3L, "Carl", "admin", Role.ADMIN));
         map.put(4L, new User(4L, "Khmelov", "admin", Role.ADMIN));
-    }
+    }*/
 
     @Override
+    public Stream<User> find(User pattern) {
+       return map.values()
+               .stream()
+               .filter(user -> nullOrEquals(pattern.getId(), user.getId()))
+               .filter(user -> nullOrEquals(pattern.getLogin(), user.getLogin()))
+               .filter(user -> nullOrEquals(pattern.getPassword(), user.getPassword()))
+               .filter(user -> nullOrEquals(pattern.getRole(), user.getRole()));
+    }
+
+
+
+
+
+
+
+
+
+    /*@Override
     public Collection<User> getAll() {
         return map.values();
     }
@@ -46,5 +65,5 @@ public class UserRepository implements Repository<User> {
     @Override
     public void delete(User entity) {
         map.remove(entity.getId());
-    }
+    }*/
 }
