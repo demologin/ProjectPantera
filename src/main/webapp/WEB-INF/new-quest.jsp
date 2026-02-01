@@ -23,7 +23,7 @@
     <script>
         const fullText = document.getElementById("raw-text").innerText;
         let charIndex = 0;
-        const speed = 15; // Скорость появления букв (мс)
+        const speed = 10;
 
         function typeText() {
             if (charIndex < fullText.length) {

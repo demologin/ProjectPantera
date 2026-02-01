@@ -32,30 +32,5 @@
             </span>
         </div>
     </div>
-    <script>
-        // let candles = 3;
-        //
-        // function updateUI() {
-        //     const candleCountSpan = document.getElementById('candle-count');
-        //     const undoBtn = document.getElementById('undo-btn');
-        //
-        //     candleCountSpan.innerText = candles;
-        //
-        //     // Если свечей 0, скрываем кнопку возврата
-        //     if (candles <= 0) {
-        //         undoBtn.style.display = 'none';
-        //     }
-        // }
-        //
-        // document.getElementById('undo-btn').onclick = () => {
-        //     if (candles > 0) {
-        //         candles--;
-        //         updateUI();
-        //         // Здесь должна быть логика возврата к предыдущему состоянию
-        //     }
-        // };
-        //
-        // updateUI();
-    </script>
 </body>
 </html>

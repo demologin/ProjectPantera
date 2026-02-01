@@ -63,7 +63,8 @@
 
     window.onload = () => {
         loadFromLocalStorage();
-        if ($('.opt-row').length === 0) addOptionRow();
+        if ($('.opt-row').length === 0)
+            addOptionRow();
 
         const container = document.getElementById('canvas-container');
 
@@ -130,10 +131,12 @@
             $('.opt-row').each(function (idx) {
                 const txt = $(this).find('.o-txt').val();
                 const next = $(this).find('.o-next').val();
-                if (txt && next) options.push({id: idx, text: txt, nextNodeId: parseInt(next)});
+                if (txt && next)
+                    options.push({id: idx, text: txt, nextNodeId: parseInt(next)});
             });
         }
-        if (!text) return alert("Введите текст этапа!");
+        if (!text)
+            return alert("Введите текст этапа!");
         const index = questNodes.findIndex(n => n.id === id);
         let x, y;
         if (index > -1) {
@@ -152,10 +155,14 @@
             }
         }
         const nodeData = {id, text, type, options, x, y};
-        if (index > -1) questNodes[index] = nodeData; else questNodes.push(nodeData);
+        if (index > -1)
+            questNodes[index] = nodeData;
+        else
+            questNodes.push(nodeData);
         render();
         saveToLocalStorage();
-        if (index === -1) $('#node-id').val(id + 1);
+        if (index === -1)
+            $('#node-id').val(id + 1);
     }
 
     function drawArrows() {
@@ -165,7 +172,8 @@
         canvas.height = window.innerHeight;
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         questNodes.forEach(node => {
-            if (node.type !== 'common') return;
+            if (node.type !== 'common')
+                return;
             node.options.forEach(opt => {
                 const endNode = questNodes.find(n => n.id === opt.nextNodeId);
                 const optEl = document.getElementById('opt-p-' + node.id + '-' + opt.id);
@@ -192,14 +200,12 @@
         questNodes.forEach(node => {
             let badgeText = node.type === 'common' ? 'Этап' : (node.type === 'victory' ? 'Победа' : 'Проигрыш');
 
-            // Формируем список опций
             let opts = node.options.map(o =>
 				'<div class="option-preview" id="opt-p-' + node.id + '-' + o.id + '">'
                 + '<b>"' + o.text + '"</b> ➔ #' + o.nextNodeId
 				+ '</div>'
             ).join('');
 
-            // Создаем карточку
             const background = node.type === 'victory' ? '#2e7d32' : (node.type === 'defeat' ? '#c62828' : '#1565c0');
             const card = $(
                 '<div class="node-card ' + node.type + '" id="node-' + node.id + '" style="left:' + node.x + 'px; top:' + node.y + 'px;">'
@@ -214,12 +220,12 @@
             list.append(card);
         });
 
-        // Перерисовываем стрелки после рендера карточек
         setTimeout(drawArrows, 20);
     }
 
     function onNodeDown(e, id) {
-        if ($(e.target).hasClass('card-delete')) return;
+        if ($(e.target).hasClass('card-delete'))
+            return;
         e.stopPropagation();
         draggedNode = questNodes.find(n => n.id === id);
         clickOffset.x = (e.clientX - originX) / scale - draggedNode.x;
@@ -239,7 +245,8 @@
 
     function editNode(id) {
         const node = questNodes.find(n => n.id === id);
-        if (!node) return;
+        if (!node)
+            return;
         $('#node-id').val(node.id);
         $('#node-text').val(node.text);
         $('#node-type').val(node.type || 'common').trigger('change');
@@ -262,7 +269,7 @@
             nodes: cleanNodes
         };
         $.ajax({
-            url: '/editor', // Замените на ваш реальный URL
+            url: '/editor',
             type: 'POST',
             contentType: 'application/json',
             data: JSON.stringify(data),
