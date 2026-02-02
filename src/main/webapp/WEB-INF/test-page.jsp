@@ -4,16 +4,16 @@
 <h1><%= "Тестирование по по SOLID" %>
 </h1>
 
-<form action="next.jsp" method="post">
+<form action="test-page" method="post">
     <p>${sessionScope.question.text}</p>
 
-    <c:forEach var="user" items="${requestScope.users}">
+
     <input type="radio" id="option1" name="answer" value="option1" required>
     <label for="option1">${sessionScope.answer.text}</label><br>
 
     <input type="radio" id="option2" name="answer" value="option2">
-    <label for="option2">Вариант 2</label><br><br>
-    </c:forEach>
+    <label for="option2">${sessionScope.answer1.text}</label><br><br>
+
     <button type="submit">Далее</button>
 </form>
 
