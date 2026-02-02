@@ -16,11 +16,11 @@ public class Question implements AbstractEntity{ /*1 шаг в игре*/
 
     private Long id;  //пользователь
 
-    private Long questId;
+    //private Long questId;
 
     private String text;
 
-    private GameState gameState;
+    //private GameState gameState;
 
     private final Collection<Answer> answers = new ArrayList<>();
 

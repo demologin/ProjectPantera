@@ -12,18 +12,18 @@ import java.util.stream.Stream;
 
 public class UserRepository extends BaseRepository<User> {
 
-    //private final Map<Long, User> map = new HashMap<>();
+    private final Map<Long, User> map = new HashMap<>();
 
-    //public static final AtomicLong id = new AtomicLong(System.currentTimeMillis());
+    public static final AtomicLong id = new AtomicLong(System.currentTimeMillis());
 
-    /*public UserRepository() {
+    public UserRepository() {
         map.put(1L, new User(1L, "Alisa", "qwerty", Role.USER));
         map.put(2L, new User(2L, "Bob", "", Role.GUEST));
         map.put(3L, new User(3L, "Carl", "admin", Role.ADMIN));
         map.put(4L, new User(4L, "Khmelov", "admin", Role.ADMIN));
-    }*/
+    }
 
-    @Override
+   /* @Override
     public Stream<User> find(User pattern) {
        return map.values()
                .stream()
@@ -31,7 +31,7 @@ public class UserRepository extends BaseRepository<User> {
                .filter(user -> nullOrEquals(pattern.getLogin(), user.getLogin()))
                .filter(user -> nullOrEquals(pattern.getPassword(), user.getPassword()))
                .filter(user -> nullOrEquals(pattern.getRole(), user.getRole()));
-    }
+    }*/
 
 
 

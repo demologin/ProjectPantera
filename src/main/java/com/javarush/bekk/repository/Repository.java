@@ -10,7 +10,7 @@ public interface  Repository<T> {
 
     Collection<T> getAll();
 
-    Stream<T> find(T pattern);
+    //Stream<T> find(T pattern);
 
     T get(long id);
 

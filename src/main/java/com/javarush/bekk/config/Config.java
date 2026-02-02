@@ -1,7 +1,10 @@
 package com.javarush.bekk.config;
 
+import com.javarush.bekk.entity.Question;
 import com.javarush.bekk.entity.Role;
 import com.javarush.bekk.entity.User;
+import com.javarush.bekk.repository.QuestionRepository;
+import com.javarush.bekk.service.QuestionService;
 import com.javarush.bekk.service.UserService;
 import lombok.AllArgsConstructor;
 
@@ -9,7 +12,7 @@ import lombok.AllArgsConstructor;
 public class Config {
 
     private final UserService userService;
-
+private final QuestionRepository questionRepository;
     public void fillEmptyRepository() {
         if (userService.get(1L).isEmpty()){
             User admin = buildUser("Carl", "admin", Role.ADMIN);

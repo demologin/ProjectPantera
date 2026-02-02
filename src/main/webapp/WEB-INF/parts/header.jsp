@@ -25,7 +25,7 @@
                         </svg></span><span>Pantera</span></a>
       <button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span
               class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
-      <div class="collapse navbar-collapse" id="navcol-1">
+      <%--<div class="collapse navbar-collapse" id="navcol-1">
         <ul class="navbar-nav ms-auto">
           <li class="nav-item"><a class="nav-link active" href=".">Home</a></li>
           <li class="nav-item"><a class="nav-link" href="#statistics">Статистика</a></li>
@@ -46,7 +46,7 @@
             </c:otherwise>
           </c:choose>
         </ul>
-      </div>
+      </div>--%>
     </div>
   </nav>
 </header>

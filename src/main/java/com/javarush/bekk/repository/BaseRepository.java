@@ -44,7 +44,7 @@ public abstract class BaseRepository<T extends AbstractEntity> implements Reposi
         map.remove(entity.getId());
     }
 
-    protected boolean nullOrEquals(Object patternField, Object repoField) {
+    /*protected boolean nullOrEquals(Object patternField, Object repoField) {
         return patternField == null || patternField.equals(repoField);
-    }
+    }*/
 }

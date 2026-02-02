@@ -34,13 +34,13 @@ public class UserService {
         return Optional.ofNullable(userRepository.get(id));
     }
 
-    public Optional<User> get(String login, String password) {
+    /*public Optional<User> get(String login, String password) {
         User patternUser = User.
                 builder()
                 .login(login)
                 .password(password)
                 .build();
         return userRepository.find(patternUser).findAny();
-    }
+    }*/
 
 }
