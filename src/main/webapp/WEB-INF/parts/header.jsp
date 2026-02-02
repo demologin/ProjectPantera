@@ -41,7 +41,7 @@
                                     <li class="nav-item"><a class="nav-link" href="list-users">Пользователи</a></li>
                                 </c:if>
                                 <c:if test="${sessionScope.user.role=='ADMIN' || sessionScope.user.role=='GAMEDEV'}">
-                                    <li class="nav-item"><a class="nav-link" href="#">Создать квест</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="create-quest">Создать квест</a></li>
                                 </c:if>
                                 <c:if test="${sessionScope.user.role=='ADMIN' || sessionScope.user.role=='MODERATOR'}">
                                     <li class="nav-item"><a class="nav-link" href="messages">Сообщения</a></li>

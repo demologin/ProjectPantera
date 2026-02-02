@@ -1,10 +1,14 @@
 package com.javarush.goncharov.controller;
 
 import com.javarush.goncharov.model.Message;
+import com.javarush.goncharov.model.Role;
+import com.javarush.goncharov.model.Topic;
 import com.javarush.goncharov.model.User;
 import com.javarush.goncharov.repository.MessageRepository;
 import com.javarush.goncharov.repository.Storage;
 import com.javarush.goncharov.service.MessageService;
+import jakarta.servlet.ServletConfig;
+import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -22,6 +26,12 @@ public class Messages extends HttpServlet {
     private final MessageService messageService = new MessageService(new MessageRepository(messageStorage));
 
     @Override
+    public void init(ServletConfig config) throws ServletException {
+        ServletContext servletContext = config.getServletContext();
+        servletContext.setAttribute("topics", Topic.values());
+    }
+
+    @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Collection<Message> messages = messageService.getAll().values();
         HttpSession session = req.getSession();
@@ -33,23 +43,19 @@ public class Messages extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        if (req.getParameter("action").equals("completedValues")) {
+        if (req.getParameter("action").equals("GoArchive")) {
             resp.sendRedirect("/completed-messages");
             return;
         }
         Long idMessage = Long.parseLong(req.getParameter("id"));
         Optional<Message> message = messageService.get(idMessage);
-//        if (req.getParameter("action").equals("delete")) {
-//            messageService.delete(message.get());
-//            resp.sendRedirect("/messages");
-//            return;
-//        }
         String rememberMe = req.getParameter("rememberMe");
         HttpSession session = req.getSession();
         if (rememberMe != null && (rememberMe.equals("on") || rememberMe.equals("off"))) {
             message.ifPresent(value -> value.setCompleted(true));
-            messageService.update(message.get());
         }
+        message.ifPresent(value -> value.setTopic(Topic.valueOf(req.getParameter("topic"))));
+        messageService.update(message.get());
         resp.sendRedirect("/messages");
     }
 }

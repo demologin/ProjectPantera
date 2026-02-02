@@ -30,15 +30,15 @@
     </form>
 </div>
 
-<script>
-    //это чисто для отладки фрагмент
-    document.addEventListener('DOMContentLoaded', function() {
-        document.getElementById('jruDemo').addEventListener('click', function(event) {
-            event.preventDefault(); // Предотвращаем отправку формы и заполняем форму примерными данными
-            document.getElementById('quest-name').value = 'Проверим твои знания арифметики';
-            document.getElementById('questTextareaDomId').value =`<%@include file="./parts/quest-math.txt"%>`;
-        });
-    });
-</script>
+<%--<script>--%>
+<%--    //это чисто для отладки фрагмент--%>
+<%--    document.addEventListener('DOMContentLoaded', function() {--%>
+<%--        document.getElementById('jruDemo').addEventListener('click', function(event) {--%>
+<%--            event.preventDefault(); // Предотвращаем отправку формы и заполняем форму примерными данными--%>
+<%--            document.getElementById('quest-name').value = 'Проверим твои знания арифметики';--%>
+<%--            document.getElementById('questTextareaDomId').value =`<%@include file="./parts/quest-math.txt"%>`;--%>
+<%--        });--%>
+<%--    });--%>
+<%--</script>--%>
 <c:import url="parts/footer.jsp"/>
 

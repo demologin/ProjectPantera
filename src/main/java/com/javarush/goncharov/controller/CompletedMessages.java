@@ -1,10 +1,13 @@
 package com.javarush.goncharov.controller;
 
 import com.javarush.goncharov.model.Message;
+import com.javarush.goncharov.model.Topic;
 import com.javarush.goncharov.model.User;
 import com.javarush.goncharov.repository.MessageRepository;
 import com.javarush.goncharov.repository.Storage;
 import com.javarush.goncharov.service.MessageService;
+import jakarta.servlet.ServletConfig;
+import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -33,11 +36,15 @@ public class CompletedMessages extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        if (req.getParameter("action").equals("GoMessages")) {
+            resp.sendRedirect("/messages");
+            return;
+        }
         Long idMessage = Long.parseLong(req.getParameter("id"));
         Optional<Message> message = messageService.get(idMessage);
         if (req.getParameter("action").equals("delete")) {
             messageService.delete(message.get());
+            resp.sendRedirect("/completed-messages");
         }
-        resp.sendRedirect("/completed-messages");
     }
 }

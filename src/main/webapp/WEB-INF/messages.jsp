@@ -23,18 +23,24 @@
                             </div>
                             <div>
                                 <input type="hidden" name="id" value="${message.id}">
-                                <h4>${message.topic}</h4>
-                                <p>${message.message}</p>
-                                <div class="form-group">
-                                    <button id="save" name="action" value="save" class="btn btn-success">Сохранить</button>
-<%--                                    <button id="delete" name="action" value="delete" class="btn btn-danger">Удалить--%>
-                                    </button>
+                                <div class="col-md-4">
+                                    <select id="topic" name="topic" class="form-control">
+                                        <c:forEach var="topic" items="${applicationScope.topics}">
+                                            <option value="${topic}" ${topic==message.topic?"selected":""}>${topic}</option>
+                                        </c:forEach>
+                                    </select>
                                 </div>
+                                <p>${message.message}</p>
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox"
                                            id="rememberMe" name="rememberMe"
-                                    <c:if test="${message.completed}">checked</c:if>>
+                                           <c:if test="${message.completed}">checked</c:if>>
                                     <label class="form-check-label" for="rememberMe">Обработано</label>
+                                </div>
+                                <div class="form-group">
+                                    <button id="save" name="action" value="save" class="btn btn-success">Сохранить
+                                    </button>
+                                    </button>
                                 </div>
                                 <p>${message.name} - ${message.email}</p>
                             </div>
@@ -43,19 +49,19 @@
                     </div>
                 </c:if>
             </c:forEach>
-<%--            <nav>--%>
-<%--                <ul class="pagination">--%>
-<%--                    <li class="page-item"><a class="page-link" aria-label="Previous" href="#"><span aria-hidden="true">«</span></a></li>--%>
-<%--                    <li class="page-item"><a class="page-link" href="#">1</a></li>--%>
-<%--                    <li class="page-item"><a class="page-link" href="#">2</a></li>--%>
-<%--                    <li class="page-item"><a class="page-link" href="#">3</a></li>--%>
-<%--                    <li class="page-item"><a class="page-link" href="#">4</a></li>--%>
-<%--                    <li class="page-item"><a class="page-link" href="#">5</a></li>--%>
-<%--                    <li class="page-item"><a class="page-link" aria-label="Next" href="#"><span aria-hidden="true">»</span></a></li>--%>
-<%--                </ul>--%>
-<%--            </nav>--%>
+            <%--            <nav>--%>
+            <%--                <ul class="pagination">--%>
+            <%--                    <li class="page-item"><a class="page-link" aria-label="Previous" href="#"><span aria-hidden="true">«</span></a></li>--%>
+            <%--                    <li class="page-item"><a class="page-link" href="#">1</a></li>--%>
+            <%--                    <li class="page-item"><a class="page-link" href="#">2</a></li>--%>
+            <%--                    <li class="page-item"><a class="page-link" href="#">3</a></li>--%>
+            <%--                    <li class="page-item"><a class="page-link" href="#">4</a></li>--%>
+            <%--                    <li class="page-item"><a class="page-link" href="#">5</a></li>--%>
+            <%--                    <li class="page-item"><a class="page-link" aria-label="Next" href="#"><span aria-hidden="true">»</span></a></li>--%>
+            <%--                </ul>--%>
+            <%--            </nav>--%>
             <div class="form-group">
-                <button id="save" name="action" value="completedValues" class="btn btn-success">Обработанные сообщения</button>
+                <button id="save" name="action" value="GoArchive" class="btn btn-success">Архив</button>
             </div>
         </c:if>
     </form>

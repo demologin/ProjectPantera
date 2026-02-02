@@ -25,15 +25,15 @@
                                 <input type="hidden" name="id" value="${message.id}">
                                 <h4>${message.topic}</h4>
                                 <p>${message.message}</p>
-                                <div class="form-group">
-                                    <button id="delete" name="action" value="delete" class="btn btn-danger">Удалить
-                                    </button>
-                                </div>
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox"
                                            id="rememberMe" name="rememberMe"
                                            <c:if test="${message.completed}">checked</c:if>>
                                     <label class="form-check-label" for="rememberMe">Обработано</label>
+                                </div>
+                                <div class="form-group">
+                                    <button id="delete" name="action" value="delete" class="btn btn-danger">Удалить
+                                    </button>
                                 </div>
                                 <p>${message.name} - ${message.email}</p>
                             </div>
@@ -42,6 +42,9 @@
                     </div>
                 </c:if>
             </c:forEach>
+            <div class="form-group">
+                <button id="save" name="action" value="GoMessages" class="btn btn-success">Активные сообщения</button>
+            </div>
         </c:if>
     </form>
 </div>
