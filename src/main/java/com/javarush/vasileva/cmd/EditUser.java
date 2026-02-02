@@ -22,7 +22,7 @@ public class EditUser implements Command {
     @Override
     public String doGet(HttpServletRequest req) {
         String stringId = req.getParameter("id");
-        Optional<User> optionalUser = userService.findById(stringId);
+        Optional<User> optionalUser = userService.getValidatedUser(stringId);
         optionalUser.ifPresent(user -> req.setAttribute("user", user));
         return getView();
     }

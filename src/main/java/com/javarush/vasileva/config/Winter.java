@@ -15,7 +15,7 @@ public class Winter {
     public static <T> T find(Class<T> aClass) {
         Object component = components.get(aClass);
         if (component == null) {
-            Constructor<?> constructor = aClass.getDeclaredConstructors()[0];
+            Constructor<?> constructor = aClass.getConstructors()[0];
             Class<?>[] parameterTypes = constructor.getParameterTypes();
             Object[] parameters = new Object[parameterTypes.length];
             for (int i = 0; i < parameters.length; i++) {

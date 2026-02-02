@@ -29,7 +29,7 @@ public class Home implements Command {
     public String doDelete(HttpServletRequest req) {
         Helpers.checkAdminAuthorization(req, DELETE_QUEST_AUTH_ERROR);
         String questIdStr = req.getParameter(QUEST_ID);
-        Quest quest = questService.findById(questIdStr)
+        Quest quest = questService.getValidatedQuest(questIdStr)
                 .orElseThrow(() -> new IllegalArgumentException(QUEST_NOT_FOUND + questIdStr));
         req.setAttribute(QUEST, quest);
         questService.delete(quest);

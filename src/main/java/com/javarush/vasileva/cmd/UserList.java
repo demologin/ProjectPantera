@@ -33,7 +33,7 @@ public class UserList implements Command {
     @Override
     public String doDelete(HttpServletRequest req) {
         String userIdStr = req.getParameter(USER_ID);
-        User user = userService.findById(userIdStr)
+        User user = userService.getValidatedUser(userIdStr)
                 .orElseThrow(() -> new AppException(USER_NOT_FOUND + userIdStr));
         req.setAttribute(USER, user);
         userService.delete(user);

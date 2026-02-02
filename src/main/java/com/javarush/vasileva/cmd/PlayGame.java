@@ -2,93 +2,64 @@ package com.javarush.vasileva.cmd;
 
 import com.javarush.vasileva.entity.*;
 import com.javarush.vasileva.exception.AppException;
-import com.javarush.vasileva.repository.UserRepository;
-import com.javarush.vasileva.service.AnswerService;
-import com.javarush.vasileva.service.QuestService;
-import com.javarush.vasileva.service.QuestionService;
+import com.javarush.vasileva.service.GameService;
 import com.javarush.vasileva.util.Helpers;
-import com.javarush.vasileva.util.Value;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
-import java.util.List;
-import java.util.Optional;
-
 import static com.javarush.vasileva.util.Key.*;
+import static com.javarush.vasileva.util.Value.*;
 
 @SuppressWarnings("unused")
 public class PlayGame implements Command {
-    private final QuestService questService;
-    private final QuestionService questionService;
-    private final AnswerService answerService;
-    private final UserRepository userRepository;
 
-    public PlayGame(QuestService questService,
-                    QuestionService questionService,
-                    AnswerService answerService,
-                    UserRepository userRepository) {
-        this.questService = questService;
-        this.questionService = questionService;
-        this.answerService = answerService;
-        this.userRepository = userRepository;
+    private final GameService gameService;
+
+    public PlayGame(GameService gameService) {
+        this.gameService = gameService;
     }
 
     @Override
     public String doGet(HttpServletRequest req) {
         HttpSession session = req.getSession();
-        User user = (User) session.getAttribute("user");
+        User user = (User) session.getAttribute(USER);
 
         if (user == null) {
-            throw new AppException("Необходимо авторизоваться");
+            throw new AppException(AUTH_ERROR);
         }
 
-        String questIdStr = req.getParameter(QUEST_ID);
-        String questionIdStr = req.getParameter(QUESTION_ID);
+        Long questId = Helpers.parseStringToLong(req.getParameter(QUEST_ID));
+        Long gameId = req.getParameter(GAME_ID) != null
+                ? Helpers.parseStringToLong(req.getParameter(GAME_ID))
+                : null;
 
-        Quest quest = questService.findById(questIdStr)
-                .orElseThrow(() -> new AppException(Value.QUEST_NOT_FOUND + questIdStr));
-        req.setAttribute(QUEST, quest);
-
-        if (questionIdStr == null || questionIdStr.isEmpty()) {
-            return getView();
-        }
-
-        Optional<Question> currentQuestion = questionService.findCurrentQuestion(questionIdStr, quest);
-        if (currentQuestion.isPresent()) {
-            req.setAttribute(QUESTION, currentQuestion.get());
-            List<Answer> answers = currentQuestion.get().getAnswers();
-            if (answers == null || answers.isEmpty()) {
-                req.setAttribute(NO_ANSWERS, true);
-                user.setGameNumber(user.getGameNumber() + 1);
-                userRepository.update(user);
-                session.setAttribute(USER, user);
-                System.out.println(user);
-            } else {
-                req.setAttribute(ANSWERS, answers);
-            }
+        Game game;
+        if (gameId == null) {
+            game = gameService.startNewGame(questId, user.getId());
         } else {
-            req.setAttribute(GAME_OVER, true);
+            game = gameService.getGameById(gameId).orElseThrow(() -> new AppException(GAME_NOT_FOUND));
         }
+
+        req.setAttribute(GAME, game);
+        req.setAttribute(STATE, game.getGameState().isCompleted());
+        req.setAttribute(QUEST, game.getGameState().getCurrentQuest());
+
         return getView();
     }
 
     @Override
     public String doPost(HttpServletRequest req) throws AppException {
-        String questIdStr = req.getParameter(QUEST_ID);
-        String answerIdStr = req.getParameter(SELECTED_ANSWER_ID);
+        HttpSession session = req.getSession();
+        User user = (User) session.getAttribute(USER);
 
-        if (questIdStr == null || answerIdStr == null) {
-            return getView() + "?" + QUEST_ID + "=" + questIdStr; // Return to the same page
-        }
+        Long gameId = Helpers.parseStringToLong(req.getParameter(GAME_ID));
+        Long answerId = Helpers.parseStringToLong(req.getParameter(SELECTED_ANSWER_ID));
 
-        long questId = Helpers.parseStringToLong(questIdStr);
-        long answerId = Helpers.parseStringToLong(answerIdStr);
+        Game updatedGame = gameService.advanceGame(gameId, answerId);
 
-        Optional<Answer> answer = answerService.findById(answerId);
-        if (answer.isEmpty()) {
-            return getView() + "?" + QUEST_ID + "=" + questId;
-        }
-        long nextQuestionId = questionService.findNextQuestionId(questId, answer.get());
-        return getView() + "?" + QUEST_ID + "=" + questId + "&" + QUESTION_ID + "=" + nextQuestionId;
+        req.setAttribute(GAME, updatedGame);
+        req.setAttribute(USER, user);
+
+        return getView() + "?" + GAME_ID + "=" + updatedGame.getId() + "&" + QUEST_ID + "=" + updatedGame.getGameState().getCurrentQuest().getId();
     }
 }

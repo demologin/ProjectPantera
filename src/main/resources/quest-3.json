@@ -430,25 +430,25 @@
       "text": "После всего пережитого вы наконец понимаете главное.",
       "answers": [
         {
-          "nextQuestionLabel": "810",
+          "nextQuestionLabel": "+810",
           "text": "Всегда носи полотенце"
         },
         {
-          "nextQuestionLabel": "810",
+          "nextQuestionLabel": "+810",
           "text": "Не паникуй"
         },
         {
-          "nextQuestionLabel": "810",
+          "nextQuestionLabel": "+810",
           "text": "Ответ — 42"
         },
         {
-          "nextQuestionLabel": "810",
+          "nextQuestionLabel": "+810",
           "text": "Всё вышеперечисленное"
         }
       ]
     },
     {
-      "label": "810",
+      "label": "+810",
       "text": "Поздравляем! Вы прошли квест, не сломали Вселенную и, возможно, даже стали немного мудрее.",
       "answers": null
     }

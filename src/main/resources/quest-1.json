@@ -12,7 +12,7 @@
           "text": "Принять вызов"
         },
         {
-          "nextQuestionLabel": "910",
+          "nextQuestionLabel": "-910",
           "text": "Отклонить вызов"
         }
       ]
@@ -26,7 +26,7 @@
           "text": "Подняться на мостик"
         },
         {
-          "nextQuestionLabel": "910",
+          "nextQuestionLabel": "-910",
           "text": "Отказаться подниматься на мостик"
         }
       ]
@@ -36,21 +36,21 @@
       "text": "Ты поднялся на мостик. Ты кто?",
       "answers": [
         {
-          "nextQuestionLabel": "810",
+          "nextQuestionLabel": "+810",
           "text": "Рассказать правду о себе"
         },
         {
-          "nextQuestionLabel": "911",
+          "nextQuestionLabel": "-911",
           "text": "Солгать о себе"
         }
       ]
     },
     {
-      "label": "810",
+      "label": "+810",
       "text": "Победа! Тебя вернули домой."
     },
     {
-      "label": "910",
+      "label": "-910",
       "text": "Поражение... Ты отклонил вызов"
     },
     {

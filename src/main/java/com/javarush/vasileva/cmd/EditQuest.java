@@ -37,7 +37,7 @@ public class EditQuest implements Command {
 
         String questIdStr = req.getParameter(QUEST_ID);
         if (questIdStr != null && !questIdStr.isEmpty()) {
-            Quest quest = questService.findById(questIdStr)
+            Quest quest = questService.getValidatedQuest(questIdStr)
                     .orElseThrow(() -> new AppException(QUEST_NOT_FOUND + questIdStr));
             req.setAttribute(EDIT, true);
             try {

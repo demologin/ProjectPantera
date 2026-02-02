@@ -32,8 +32,8 @@ public class UserService {
         return userRepository.getAll();
     }
 
-    public Optional<User> findById(String userIdStr) {
-        return getValidatedUser(userIdStr);
+    public Optional<User> findById(Long userId) {
+        return userRepository.findById(userId);
     }
 
     public void register(String login, String email, String password) {
@@ -51,12 +51,12 @@ public class UserService {
                 .filter(user -> user.getPassword().equals(password));
     }
 
-    private Optional<User> getValidatedUser(String userIdStr) {
+    public Optional<User> getValidatedUser(String userIdStr) {
         if (userIdStr == null || userIdStr.isEmpty()) {
             return Optional.empty();
         }
         Long questId = Helpers.parseStringToLong(userIdStr);
-        return userRepository.findById(questId);
+        return findById(questId);
     }
 
 }

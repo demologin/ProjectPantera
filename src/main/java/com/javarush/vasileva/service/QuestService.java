@@ -19,8 +19,8 @@ public class QuestService {
         return questRepository.getAll();
     }
 
-    public Optional<Quest> findById(String questIdStr) {
-        return getValidatedQuest(questIdStr);
+    public Optional<Quest> findById(Long questId) {
+        return questRepository.findById(questId);
     }
 
     public void create(Quest quest) {
@@ -35,11 +35,11 @@ public class QuestService {
         questRepository.delete(quest);
     }
 
-    private Optional<Quest> getValidatedQuest(String questIdStr) {
+    public Optional<Quest> getValidatedQuest(String questIdStr) {
         if (questIdStr == null || questIdStr.isEmpty()) {
             return Optional.empty();
         }
         Long questId = Helpers.parseStringToLong(questIdStr);
-        return questRepository.findById(questId);
+        return findById(questId);
     }
 }
