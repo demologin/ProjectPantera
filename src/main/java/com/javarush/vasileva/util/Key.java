@@ -15,6 +15,7 @@ public class Key {
     public static final String QUEST_JSON = "questJson";
     public static final String SELECTED_ANSWER_ID= "selectedAnswerId";
     public static final String STATE= "state";
+    public static final String WINNING= "winning";
 
     public static final String ERROR = "error";
 

@@ -32,11 +32,15 @@ public class Value {
               ]
             }""";
 
+    public static final String WIN = "+";
+    public static final String LOSS = "-";
+
     public static final String JSON_SAVE_ERROR = "Ошибка при сохранении квеста";
     public static final String QUEST_NOT_FOUND = "Квест не найден: id=";
     public static final String QUESTION_NOT_FOUND = "Вопрос не найден: label=";
     public static final String GAME_NOT_FOUND = "Игра не найдена";
     public static final String ANSWER_NOT_FOUND = "Ответ не найден";
+    public static final String STATS_NOT_FOUND = "Статистика не найдена";
     public static final String QUEST_SERIALIZATION_ERROR = "Ошибка сериализации квеста";
     public static final String EDIT_QUEST_AUTH_ERROR = "Редактировать квесты могут только пользователи с правами ADMIN";
     public static final String DELETE_QUEST_AUTH_ERROR = "Удалять квесты могут только пользователи с правами ADMIN";

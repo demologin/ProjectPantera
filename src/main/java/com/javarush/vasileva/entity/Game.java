@@ -1,6 +1,5 @@
 package com.javarush.vasileva.entity;
 
-import com.javarush.vasileva.game.GameState;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

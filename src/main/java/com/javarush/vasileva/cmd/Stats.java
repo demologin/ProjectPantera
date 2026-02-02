@@ -4,6 +4,7 @@ import com.javarush.vasileva.entity.User;
 import com.javarush.vasileva.entity.UserStats;
 import com.javarush.vasileva.exception.AppException;
 import com.javarush.vasileva.service.UserStatsService;
+import com.javarush.vasileva.util.Value;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
@@ -24,7 +25,7 @@ public class Stats implements Command {
             throw new AppException("Необходимо авторизоваться");
         }
 
-        UserStats stats = statsService.getStatsByUser(user);
+        UserStats stats = statsService.getUserStats(user.getId()).orElseThrow(() -> new AppException(Value.STATS_NOT_FOUND));
         req.setAttribute("stats", stats);
         return getView();
     }

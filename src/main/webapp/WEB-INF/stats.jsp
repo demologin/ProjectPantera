@@ -15,12 +15,14 @@
 <div class="container" style="height: 100vh; margin-top: 100px">
     <h2>Статистика игрока</h2>
 
-    <c:if test="${not empty requestScope.stats}">
+    <c:if test="${not empty sessionScope.stats}">
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">Игрок: ${requestScope.stats.user.login}</h5>
+                <h5 class="card-title">Игрок: ${sessionScope.user.login}</h5>
                 <p class="card-text">
-                    <strong>Пройдено квестов:</strong> ${requestScope.stats.completedQuests}<br>
+                    <strong>Пройдено квестов:</strong> ${sessionScope.stats.total}<br>
+                    <strong>Победы:</strong> ${sessionScope.stats.wins}<br>
+                    <strong>Поражения:</strong> ${sessionScope.stats.losses}<br>
                 </p>
             </div>
         </div>

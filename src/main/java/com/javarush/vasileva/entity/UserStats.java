@@ -10,6 +10,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class UserStats {
-    private User user;
-    private int completedQuests;
+    private long id;
+    private long userId;
+    private int total;
+    private int wins;
+    private int losses;
 }

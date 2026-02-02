@@ -43,6 +43,7 @@ public class PlayGame implements Command {
         req.setAttribute(GAME, game);
         req.setAttribute(STATE, game.getGameState().isCompleted());
         req.setAttribute(QUEST, game.getGameState().getCurrentQuest());
+        req.setAttribute(WINNING, game.getGameState().getCurrentQuestion().getLabel().contains(WIN));
 
         return getView();
     }

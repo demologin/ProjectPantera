@@ -1,7 +1,9 @@
 package com.javarush.vasileva.cmd;
 
 import com.javarush.vasileva.entity.User;
+import com.javarush.vasileva.entity.UserStats;
 import com.javarush.vasileva.service.UserService;
+import com.javarush.vasileva.service.UserStatsService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
@@ -14,9 +16,11 @@ import static com.javarush.vasileva.util.Value.*;
 @SuppressWarnings("unused")
 public class Login implements Command {
     private final UserService userService;
+    private final UserStatsService userStatsService;
 
-    public Login(UserService userService) {
+    public Login(UserService userService, UserStatsService userStatsService) {
         this.userService = userService;
+        this.userStatsService = userStatsService;
     }
 
     @Override
@@ -29,7 +33,10 @@ public class Login implements Command {
         Optional<User> optionalUser = userService.login(email, password);
         if (optionalUser.isPresent()) {
             HttpSession session = request.getSession();
+            UserStats stats = userStatsService.getUserStats(optionalUser.get().getId())
+                    .orElse(userStatsService.createUserStats(optionalUser.get().getId()));
             session.setAttribute(USER, optionalUser.get());
+            session.setAttribute("stats", stats);
         } else {
             request.getSession().setAttribute(ERROR, INVALID_DATA_ERROR);
             return getView();

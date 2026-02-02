@@ -1,25 +1,23 @@
 package com.javarush.vasileva.game;
 
-import com.javarush.vasileva.entity.Answer;
-import com.javarush.vasileva.entity.Quest;
-import com.javarush.vasileva.entity.Question;
-import com.javarush.vasileva.entity.User;
+import com.javarush.vasileva.entity.*;
 import com.javarush.vasileva.exception.AppException;
 import com.javarush.vasileva.service.AnswerService;
 import com.javarush.vasileva.service.QuestionService;
+import com.javarush.vasileva.service.UserStatsService;
 import com.javarush.vasileva.util.Value;
 
-
-import static com.javarush.vasileva.util.Value.ANSWER_NOT_FOUND;
-import static com.javarush.vasileva.util.Value.QUESTION_NOT_FOUND;
+import static com.javarush.vasileva.util.Value.*;
 
 public class GameEngine {
     private final QuestionService questionService;
     private final AnswerService answerService;
+    private final UserStatsService userStatsService;
 
-    public GameEngine(QuestionService questionService, AnswerService answerService) {
+    public GameEngine(QuestionService questionService, AnswerService answerService, UserStatsService userStatsService) {
         this.questionService = questionService;
         this.answerService = answerService;
+        this.userStatsService = userStatsService;
     }
 
     public GameState startGame(User user, Quest quest) {
@@ -36,6 +34,13 @@ public class GameEngine {
         Question nextQuestion = questionService.getByQuestionLabelAndQuestId(nextQuestionLabel, currentState.getCurrentQuest().getId())
                 .orElseThrow(() -> new AppException(Value.QUESTION_NOT_FOUND + nextQuestionLabel));
         boolean isFinalQuestion = questionService.isFinalQuestion(nextQuestion);
+
+        if (isFinalQuestion) {
+            UserStats stats = userStatsService.getUserStats(currentState.getUser().getId())
+                    .orElseThrow(() -> new AppException(STATS_NOT_FOUND));
+            userStatsService.updateUserStats(nextQuestion, stats);
+        }
+
         return new GameState(currentState.getCurrentQuest(), nextQuestion, currentState.getUser(), isFinalQuestion);
     }
 }

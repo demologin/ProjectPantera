@@ -32,7 +32,7 @@
                                             <form method="GET" action="play-game" style="display:inline;">
                                                 <input type="hidden" name="questId" value="${quest.id}">
                                                 <button type="submit" class="btn btn-sm btn-primary w-75 h-100">
-                                                    Посмотреть квест
+                                                    Начать квест
                                                 </button>
                                             </form>
                                         </div>

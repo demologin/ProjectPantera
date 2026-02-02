@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@include file="header.jsp" %>
 
 <link rel="stylesheet" type="text/css" href="<c:url value='/static/css/Bold-BS4-Full-Page-Image-Header.css'/>">
@@ -22,11 +23,12 @@
 
             <c:choose>
                 <c:when test="${requestScope.state}">
-                    <div class="alert alert-success text-center">
-                        <h2 class="mb-4">${requestScope.game.gameState.currentQuestion.text}</h2>
-                        <a href="<c:url value='/home'/>" class="btn btn-primary me-2">Главная</a>
-                        <a href="<c:url value='/play-game?questId=${requestScope.quest.id}'/>" class="btn btn-outline-primary">Начать заново</a>
-                    </div>
+                        <div class="alert ${requestScope.winning ? 'alert-success' : 'alert-danger'} text-center">
+                            <h2 class="mb-4">${requestScope.game.gameState.currentQuestion.text}</h2>
+                            <a href="<c:url value='/home'/>" class="btn btn-primary me-2">Главная</a>
+                            <a href="<c:url value='/play-game?questId=${requestScope.quest.id}'/>"
+                               class="btn btn-outline-primary">Начать заново</a>
+                        </div>
                 </c:when>
 
                 <c:otherwise>
@@ -43,7 +45,8 @@
                                 </label>
                                 <div class="col-md-8">
                                     <!-- Варианты ответов -->
-                                    <c:forEach var="answer" items="${requestScope.game.gameState.currentQuestion.answers}">
+                                    <c:forEach var="answer"
+                                               items="${requestScope.game.gameState.currentQuestion.answers}">
                                         <div class="form-check">
                                             <input class="form-check-input"
                                                    type="radio"

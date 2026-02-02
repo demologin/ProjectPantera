@@ -1,8 +1,5 @@
-package com.javarush.vasileva.game;
+package com.javarush.vasileva.entity;
 
-import com.javarush.vasileva.entity.Quest;
-import com.javarush.vasileva.entity.Question;
-import com.javarush.vasileva.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

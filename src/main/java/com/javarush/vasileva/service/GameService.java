@@ -5,7 +5,7 @@ import com.javarush.vasileva.entity.Quest;
 import com.javarush.vasileva.entity.User;
 import com.javarush.vasileva.exception.AppException;
 import com.javarush.vasileva.game.GameEngine;
-import com.javarush.vasileva.game.GameState;
+import com.javarush.vasileva.entity.GameState;
 import com.javarush.vasileva.repository.InMemoryGameRepository;
 
 import java.util.Optional;
