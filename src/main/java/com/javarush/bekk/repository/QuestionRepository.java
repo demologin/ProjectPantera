@@ -18,12 +18,13 @@ public class QuestionRepository extends BaseRepository<Question> {
 
     public QuestionRepository() {
         Answer answer = new Answer(1L, 1L, "Что-то", 2L);
-
+        Question question = new Question();
         map.put(1L, new Question(1L, "1. S — Single Responsibility Principle (Принцип единственной ответственности)"));
         map.put(2L, new Question(2L, "2. O — Open/Closed Principle (Принцип открытости/закрытости)"));
         map.put(3L, new Question(3L, "3. L — Liskov Substitution Principle (Принцип подстановки Барбары Лисков)"));
         map.put(4L, new Question(4L, "4. I — Interface Segregation Principle (Принцип разделения интерфейсов)"));
         map.put(5L, new Question(5L, "5. D — Dependency Inversion Principle (Принцип инверсии зависимостей)"));
+        question.getAnswers().add(answer);
     }
 
 
