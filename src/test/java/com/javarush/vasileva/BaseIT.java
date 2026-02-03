@@ -26,6 +26,9 @@ public class BaseIT {
     protected User testUser;
     protected User testGuest;
 
+    protected Game testGame;
+    protected GameState testGameState;
+
     protected Quest testQuest;
 
     protected Question testQuestion1;
@@ -114,6 +117,22 @@ public class BaseIT {
                 .startQuestionId(1L)
                 .questions(List.of(testQuestion1, testQuestion2, testQuestion3))
                 .build();
+
+        testGameState = GameState.builder()
+                .currentQuest(testQuest)
+                .currentQuestion(testQuestion1)
+                .user(testUser)
+                .isCompleted(false)
+                .build();
+
+        testGame = Game.builder()
+                .id(1L)
+                .questId(testQuest.getId())
+                .userId(testUser.getId())
+                .currentQuestionId(testQuestion1.getGeneratedId())
+                .gameState(testGameState)
+                .build();
+
 
     }
 }
