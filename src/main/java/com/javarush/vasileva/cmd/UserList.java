@@ -1,6 +1,5 @@
 package com.javarush.vasileva.cmd;
 
-import com.javarush.vasileva.entity.Role;
 import com.javarush.vasileva.entity.User;
 import com.javarush.vasileva.exception.AppException;
 import com.javarush.vasileva.service.AuthService;
@@ -37,8 +36,7 @@ public class UserList implements Command {
         Collection<User> users = userService.getAll();
         LOGGER.info("Retrieved {} users from database", users.size());
 
-        request.setAttribute("users", users);
-        request.getSession().setAttribute("ADMIN_ROLE", Role.ADMIN);
+        request.setAttribute(USERS, users);
         LOGGER.debug("Users and admin role set in request attributes");
 
         return getView();
@@ -55,7 +53,6 @@ public class UserList implements Command {
                 .orElseThrow(() -> new AppException(USER_NOT_FOUND + userIdStr));
         LOGGER.info("User found for deletion: id={}, login={}", user.getId(), user.getLogin());
 
-        req.setAttribute(USER, user);
         userService.delete(user);
         LOGGER.info("User with ID {} successfully deleted", user.getId());
 

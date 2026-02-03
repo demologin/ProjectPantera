@@ -3,6 +3,7 @@ package com.javarush.vasileva.util;
 public class Key {
     public static final String USER_ID = "id";
     public static final String USER = "user";
+    public static final String USERS = "users";
     public static final String LOGIN = "login";
     public static final String EMAIL = "email";
     public static final String PASSWORD = "password";
