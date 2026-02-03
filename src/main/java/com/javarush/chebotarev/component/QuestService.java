@@ -28,11 +28,13 @@ public class QuestService {
         }
     }
 
-    public void saveQuest(Quest quest) {
+    public String saveQuest(Quest quest) {
+        String filepath;
         File file;
         do {
             String filename = "quest_" + System.currentTimeMillis() + ".json";
             file = new File(userQuestsPath, filename);
+            filepath = userQuestsPath + File.separator + filename;
         } while (file.exists());
         ObjectMapper mapper = ObjectRepository.find(ObjectMapper.class);
         try {
@@ -40,26 +42,38 @@ public class QuestService {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+        return filepath;
     }
 
     public Quest loadQuest(QuestMetadata questMetadata, ServletContext servletContext) {
         Quest quest;
-        ObjectMapper mapper = ObjectRepository.find(ObjectMapper.class);
         if (questMetadata.isServerQuest()) {
             InputStream inputStream = servletContext.getResourceAsStream(questMetadata.getPath());
+            quest = loadQuest(inputStream);
             try {
-                quest = mapper.readValue(inputStream, Quest.class);
                 inputStream.close();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
         } else {
+            ObjectMapper mapper = ObjectRepository.find(ObjectMapper.class);
             File file = new File(questMetadata.getPath());
             try {
                 quest = mapper.readValue(file, Quest.class);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
+        }
+        return quest;
+    }
+
+    public Quest loadQuest(InputStream inputStream) {
+        Quest quest;
+        ObjectMapper mapper = ObjectRepository.find(ObjectMapper.class);
+        try {
+            quest = mapper.readValue(inputStream, Quest.class);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
         return quest;
     }
@@ -77,9 +91,11 @@ public class QuestService {
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-            QuestMetadata questMetadata = new QuestMetadata(quest.getTitle(),
+            QuestMetadata questMetadata = new QuestMetadata(
+                    quest.getTitle(),
                     path,
-                    true);
+                    true
+            );
             availableQuests.add(questMetadata);
         }
         File dir = new File(userQuestsPath);

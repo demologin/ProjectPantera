@@ -18,7 +18,7 @@ public abstract class Command {
 
     protected String getView() {
         String simpleName = this.getClass().getSimpleName();
-        return convertCamelCaseToKebabStyle(simpleName);
+        return "/" + convertCamelCaseToKebabStyle(simpleName);
     }
 
     private static String convertCamelCaseToKebabStyle(String string) {
