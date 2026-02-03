@@ -1,9 +1,6 @@
 package com.javarush.goncharov.repository;
 
-import com.javarush.goncharov.model.Message;
-import com.javarush.goncharov.model.Role;
-import com.javarush.goncharov.model.Topic;
-import com.javarush.goncharov.model.User;
+import com.javarush.goncharov.model.*;
 import lombok.Getter;
 
 import java.util.Map;
@@ -14,6 +11,9 @@ public class Storage {
     private static Storage instance;
     private final Map<Long, User> users = new ConcurrentHashMap<>();
     private final Map<Long, Message> messages = new ConcurrentHashMap<>();
+    private final Map<Long, Quest> quests = new ConcurrentHashMap<>();
+    private final Map<Long, Question> questions = new ConcurrentHashMap<>();
+    private final Map<Long, Answer> answers = new ConcurrentHashMap<>();
 
     private Storage() {
         users.put(1L, new User(1L, "Admin", "123", Role.ADMIN, "admin@test.ru"));

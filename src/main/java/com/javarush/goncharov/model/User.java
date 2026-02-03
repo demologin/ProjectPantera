@@ -5,6 +5,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
@@ -15,4 +18,5 @@ public class User{
     private String password;
     private Role role;
     private String email;
+    private final Collection<Quest> quests = new ArrayList<>();
 }

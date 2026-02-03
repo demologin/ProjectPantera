@@ -13,7 +13,7 @@
         <div class="mb-3">
             <label for="questTextareaDomId" class="form-label">Содержимое квеста</label>
             <textarea name="text" class="form-control" id="questTextareaDomId" rows="10"
-                      placeholder="<%@include file="./parts/quest-demo.jsp" %>"></textarea>
+                      placeholder="<%@include file="/WEB-INF/parts/quest-demo.jsp" %>"></textarea>
         </div>
 
         <div class=" form-group">
@@ -30,15 +30,15 @@
     </form>
 </div>
 
-<%--<script>--%>
-<%--    //это чисто для отладки фрагмент--%>
-<%--    document.addEventListener('DOMContentLoaded', function() {--%>
-<%--        document.getElementById('jruDemo').addEventListener('click', function(event) {--%>
-<%--            event.preventDefault(); // Предотвращаем отправку формы и заполняем форму примерными данными--%>
-<%--            document.getElementById('quest-name').value = 'Проверим твои знания арифметики';--%>
-<%--            document.getElementById('questTextareaDomId').value =`<%@include file="./parts/quest-math.txt"%>`;--%>
-<%--        });--%>
-<%--    });--%>
-<%--</script>--%>
+<script>
+    //это чисто для отладки фрагмент
+    document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('jruDemo').addEventListener('click', function(event) {
+            event.preventDefault(); // Предотвращаем отправку формы и заполняем форму примерными данными
+            document.getElementById('quest-name').value = 'Проверим твои знания арифметики';
+            document.getElementById('questTextareaDomId').value =`<%@include file="./parts/quest-math.txt"%>`;
+        });
+    });
+</script>
 <c:import url="parts/footer.jsp"/>
 
