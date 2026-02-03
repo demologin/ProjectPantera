@@ -58,5 +58,4 @@ public class UserService {
         Long questId = Helpers.parseStringToLong(userIdStr);
         return findById(questId);
     }
-
 }

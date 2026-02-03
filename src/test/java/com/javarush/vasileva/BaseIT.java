@@ -2,14 +2,15 @@ package com.javarush.vasileva;
 
 import com.javarush.vasileva.config.Config;
 import com.javarush.vasileva.config.Winter;
-import com.javarush.vasileva.entity.Role;
-import com.javarush.vasileva.entity.User;
+import com.javarush.vasileva.entity.*;
 import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import org.mockito.Mockito;
+
+import java.util.List;
 
 import static org.mockito.Mockito.when;
 
@@ -24,6 +25,15 @@ public class BaseIT {
     protected User testAdmin;
     protected User testUser;
     protected User testGuest;
+
+    protected Quest testQuest;
+
+    protected Question testQuestion1;
+    protected Question testQuestion2;
+    protected Question testQuestion3;
+
+    protected Answer testAnswer1;
+    protected Answer testAnswer2;
 
     public BaseIT() {
         config = Winter.find(Config.class);
@@ -61,7 +71,49 @@ public class BaseIT {
                 .password("testGuest")
                 .role(Role.GUEST)
                 .build();
+
+        testAnswer1 = Answer.builder()
+                .id(1L)
+                .questionId(1L)
+                .text("testAnswer1")
+                .nextQuestionLabel("+8")
+                .build();
+
+        testAnswer2 = Answer.builder()
+                .id(2L)
+                .questionId(1L)
+                .text("testAnswer2")
+                .nextQuestionLabel("-9")
+                .build();
+
+        testQuestion1 = Question.builder()
+                .generatedId(1L)
+                .questId(1L)
+                .label("1")
+                .text("testQuestion1")
+                .answers(List.of(testAnswer1, testAnswer2))
+                .build();
+
+        testQuestion2 = Question.builder()
+                .generatedId(2L)
+                .label("+8")
+                .text("testQuestion2")
+                .build();
+
+        testQuestion3 = Question.builder()
+                .generatedId(3L)
+                .label("-9")
+                .text("testQuestion3")
+                .build();
+
+        testQuest = Quest.builder()
+                .id(1L)
+                .title("testQuest1")
+                .description("testQuest1")
+                .text("testQuest1")
+                .startQuestionId(1L)
+                .questions(List.of(testQuestion1, testQuestion2, testQuestion3))
+                .build();
+
     }
-
-
 }

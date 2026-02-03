@@ -1,8 +1,9 @@
 package com.javarush.vasileva.cmd;
 
 import com.javarush.vasileva.entity.Quest;
+import com.javarush.vasileva.exception.AppException;
+import com.javarush.vasileva.service.AuthService;
 import com.javarush.vasileva.service.QuestService;
-import com.javarush.vasileva.util.Helpers;
 import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,9 +19,11 @@ public class Home implements Command {
     private static final Logger LOGGER = LoggerFactory.getLogger(Home.class.getName());
 
     private final QuestService questService;
+    private final AuthService authService;
 
-    public Home(QuestService questService) {
+    public Home(QuestService questService, AuthService authService) {
         this.questService = questService;
+        this.authService = authService;
     }
 
     @Override
@@ -36,14 +39,14 @@ public class Home implements Command {
     public String doDelete(HttpServletRequest req) {
         LOGGER.info("Received DELETE request for quest");
 
-        Helpers.checkAdminAuthorization(req, DELETE_QUEST_AUTH_ERROR);
+        authService.checkAdminAuthorization(req, DELETE_QUEST_AUTH_ERROR);
         LOGGER.debug("Admin authorization successful");
 
         String questIdStr = req.getParameter(QUEST_ID);
         LOGGER.debug("Attempting to delete quest with ID: {}", questIdStr);
 
         Quest quest = questService.getValidatedQuest(questIdStr)
-                .orElseThrow(() -> new IllegalArgumentException(QUEST_NOT_FOUND + questIdStr));
+                .orElseThrow(() -> new AppException(QUEST_NOT_FOUND + questIdStr));
         req.setAttribute(QUEST, quest);
         questService.delete(quest);
         LOGGER.info("Quest with ID {} successfully deleted", questIdStr);

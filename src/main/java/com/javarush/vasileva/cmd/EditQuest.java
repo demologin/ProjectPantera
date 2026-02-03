@@ -5,8 +5,8 @@ import com.javarush.vasileva.config.Winter;
 import com.javarush.vasileva.entity.Quest;
 import com.javarush.vasileva.exception.AppException;
 import com.javarush.vasileva.mapper.QuestMapper;
+import com.javarush.vasileva.service.AuthService;
 import com.javarush.vasileva.service.QuestService;
-import com.javarush.vasileva.util.Helpers;
 import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,12 +24,14 @@ public class EditQuest implements Command {
     private static final Logger LOGGER = LoggerFactory.getLogger(EditQuest.class.getName());
 
     private final QuestService questService;
+    private final AuthService authService;
     private final QuestMapper questMapper = Winter.find(QuestMapper.class);
     private final Config config;
 
     @SuppressWarnings("unused")
-    public EditQuest(QuestService questService, Config config) {
+    public EditQuest(QuestService questService, AuthService authService, Config config) {
         this.questService = questService;
+        this.authService = authService;
         this.config = config;
     }
 
@@ -37,7 +39,7 @@ public class EditQuest implements Command {
     public String doGet(HttpServletRequest req) {
         LOGGER.info("Received GET request to edit quests");
 
-        Helpers.checkAdminAuthorization(req, EDIT_QUEST_AUTH_ERROR);
+        authService.checkAdminAuthorization(req, EDIT_QUEST_AUTH_ERROR);
 
         List<Quest> quests = questService.getAll();
         req.setAttribute(QUESTS, quests);
