@@ -44,7 +44,7 @@
                     <li class="nav-item"><a class="nav-link active" href="<c:url value='/home'/>">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="<c:url value='/statistics'/>">Statistics</a></li>
                     <li class="nav-item"><a class="nav-link" href="<c:url value='/list-user'/>">Users</a></li>
-                    <li class="nav-item"><a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Create quest</a></li>
+                    <li class="nav-item"><a class="nav-link" href="<c:url value='/create-quest'/>">Create Quest</a></li>
                 </ul><a class="btn btn-primary ms-md-2" role="button" href="<c:url value='/login'/>">Login</a><a class="btn btn-primary ms-md-2" role="button" href="<c:url value='/signup'/>">Sign up</a>
             </div>
         </div>
