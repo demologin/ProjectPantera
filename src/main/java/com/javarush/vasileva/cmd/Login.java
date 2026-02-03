@@ -42,7 +42,7 @@ public class Login implements Command {
         if (email.isEmpty() || password.isEmpty()) {
             LOGGER.warn("Empty email or password provided");
             request.getSession().setAttribute(Key.ERROR, EMPTY_DATA_ERROR);
-
+            return getView();
         }
 
         Optional<User> optionalUser = userService.login(email, password);

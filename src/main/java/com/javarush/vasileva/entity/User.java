@@ -21,8 +21,6 @@ public class User {
 
     private Role role;
 
-    private int gameNumber;
-
     @SuppressWarnings("unused")
     public boolean isAdmin() {
         return role != null && role.equals(Role.ADMIN);
