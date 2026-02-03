@@ -1,0 +1,117 @@
+body {
+    background-color: #1a1a1a;
+    color: #e0e0e0;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    margin: 0;
+    overflow-x: hidden;
+}
+
+.container {
+    margin-top: 20px;
+    max-width: 600px;
+    width: 90%;
+    text-align: center;
+    background: #2d2d2d;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    position: relative;
+}
+
+.quest-title {
+    font-size: 2.5em;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: #ffd54f;
+    text-shadow: 0 0 15px rgba(255, 213, 79, 0.4), 2px 2px 4px #000;
+    margin-bottom: 30px;
+    text-align: center;
+    font-weight: 700;
+}
+
+.btn {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 8px;
+    background-color: #4a4a4a;
+    color: white;
+    font-size: 1.1em;
+    font-weight: 500;
+    cursor: pointer;
+    transition: transform 0.1s, background 0.3s;
+    text-decoration: none;
+}
+
+.btn:hover {
+    background-color: #5a5a5a;
+    transform: translateY(-2px);
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+.btn-continue { background-color: #2e7d32; }
+.btn-continue:hover { background-color: #388e3c; }
+
+.btn-create { background-color: #1565c0; }
+.btn-create:hover { background-color: #1976d2; }
+
+.btn-back {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    width: auto;
+    padding: 10px 20px;
+    font-size: 0.9em;
+    background-color: #c62828;
+    z-index: 100;
+}
+
+.candles-info {
+    color: #ffd54f;
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+h1, h2 {
+    color: #ffffff;
+    margin-top: 0;
+}
+
+.statistics {
+    margin-top: 30px;
+    padding-top: 10px;
+    font-size: 1em;
+    color: #b0b0b0;
+}
+
+.stats-grid {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.stats-grid p {
+    margin: 5px 0;
+}
+
+.stats-grid strong {
+    font-size: 1.2em;
+}
