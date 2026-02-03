@@ -3,6 +3,7 @@ package com.javarush.vasileva.cmd;
 import com.javarush.vasileva.entity.Role;
 import com.javarush.vasileva.entity.User;
 import com.javarush.vasileva.service.UserService;
+import com.javarush.vasileva.util.Key;
 import com.javarush.vasileva.util.Link;
 import com.javarush.vasileva.util.Helpers;
 import jakarta.servlet.http.HttpServletRequest;
@@ -46,19 +47,19 @@ public class EditUser implements Command {
         LOGGER.info("Received POST request to process user data");
 
         User user = User.builder()
-                .login(req.getParameter("login"))
-                .email(req.getParameter("email"))
-                .password(req.getParameter("password"))
-                .role(Role.valueOf(req.getParameter("role")))
+                .login(req.getParameter(Key.LOGIN))
+                .email(req.getParameter(Key.EMAIL))
+                .password(req.getParameter(Key.PASSWORD))
+                .role(Role.valueOf(req.getParameter(Key.ROLE)))
                 .build();
 
         LOGGER.debug("Constructed user object: login={}, email={}, role={}",
                 user.getLogin(), user.getEmail(), user.getRole());
 
-        if (req.getParameter("create") != null) {
+        if (req.getParameter(Key.CREATE) != null) {
             LOGGER.info("Creating new user with login: {}", user.getLogin());
             userService.create(user);
-        } else if (req.getParameter("update") != null) {
+        } else if (req.getParameter(Key.UPDATE) != null) {
             user.setId(Helpers.parseStringToLong(req.getParameter("id")));
             LOGGER.info("Updating user with id: {}, login: {}", user.getId(), user.getLogin());
             userService.update(user);

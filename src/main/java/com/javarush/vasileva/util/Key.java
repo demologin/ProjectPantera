@@ -6,6 +6,7 @@ public class Key {
     public static final String LOGIN = "login";
     public static final String EMAIL = "email";
     public static final String PASSWORD = "password";
+    public static final String ROLE = "role";
     public static final String QUESTS = "quests";
     public static final String QUEST_ID = "questId";
     public static final String QUEST = "quest";
@@ -17,6 +18,8 @@ public class Key {
     public static final String STATE = "state";
     public static final String STATS = "stats";
     public static final String WINNING = "winning";
+    public static final String CREATE = "create";
+    public static final String UPDATE = "update";
 
     public static final String ERROR = "error";
 
