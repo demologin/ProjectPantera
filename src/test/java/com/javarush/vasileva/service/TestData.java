@@ -1,6 +1,7 @@
 package com.javarush.vasileva.service;
 
 import com.javarush.vasileva.entity.*;
+import com.javarush.vasileva.util.Value;
 
 import java.util.List;
 
@@ -41,6 +42,10 @@ public final class TestData {
     public static final Long VALID_ANSWER_ID = 1L;
     public static final Long NON_EXISTENT_ANSWER_ID = 999L;
     public static final String VALID_ANSWER_TEXT = "Правильный ответ";
+
+    // STATS
+    public static final String WIN_LABEL = "Q1" + Value.WIN;
+    public static final String LOSS_LABEL = "Q2" + Value.LOSS;
 
     /*    ======================================= USER =================================== */
     public static User createValidUser() {
@@ -182,5 +187,37 @@ public final class TestData {
         Game game = createGame(VALID_QUEST_ID, VALID_USER_ID, 1L, createInitialGameState());
         game.setId(VALID_GAME_ID);
         return game;
+    }
+
+    /*    ======================================= STATS =================================== */
+
+    public static UserStats createDefaultUserStats() {
+        return UserStats.builder()
+                .userId(VALID_USER_ID)
+                .total(0)
+                .wins(0)
+                .losses(0)
+                .build();
+    }
+
+    public static UserStats createFilledUserStats() {
+        return UserStats.builder()
+                .userId(VALID_USER_ID)
+                .total(5)
+                .wins(3)
+                .losses(2)
+                .build();
+    }
+
+    public static Question createWinQuestion() {
+        return Question.builder()
+                .label(WIN_LABEL)
+                .build();
+    }
+
+    public static Question createLossQuestion() {
+        return Question.builder()
+                .label(LOSS_LABEL)
+                .build();
     }
 }
