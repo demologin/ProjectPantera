@@ -9,6 +9,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import org.mockito.Mockito;
+import org.slf4j.Logger;
 
 import java.util.List;
 
@@ -21,6 +22,7 @@ public class BaseIT {
     protected final Config config;
     protected final ServletConfig servletConfig;
     protected final ServletContext servletContext;
+    protected final Logger LOGGER;
 
     protected User testAdmin;
     protected User testUser;
@@ -30,6 +32,7 @@ public class BaseIT {
     protected GameState testGameState;
 
     protected Quest testQuest;
+    protected Quest testQuestWithoutId;
 
     protected Question testQuestion1;
     protected Question testQuestion2;
@@ -37,6 +40,9 @@ public class BaseIT {
 
     protected Answer testAnswer1;
     protected Answer testAnswer2;
+
+    protected String testJson;
+    protected String testJsonWithoutId;
 
     public BaseIT() {
         config = Winter.find(Config.class);
@@ -50,6 +56,8 @@ public class BaseIT {
         resp = Mockito.mock(HttpServletResponse.class);
         session = Mockito.mock(HttpSession.class);
         when(req.getSession()).thenReturn(session);
+
+        LOGGER = Mockito.mock(Logger.class);
 
         testAdmin = User.builder()
                 .id(1L)
@@ -111,9 +119,17 @@ public class BaseIT {
 
         testQuest = Quest.builder()
                 .id(1L)
-                .title("testQuest1")
-                .description("testQuest1")
-                .text("testQuest1")
+                .title("testQuest")
+                .description("testQuest")
+                .text("testQuest")
+                .startQuestionId(1L)
+                .questions(List.of(testQuestion1, testQuestion2, testQuestion3))
+                .build();
+
+        testQuestWithoutId = Quest.builder()
+                .title("testQuest")
+                .description("testQuest")
+                .text("testQuest")
                 .startQuestionId(1L)
                 .questions(List.of(testQuestion1, testQuestion2, testQuestion3))
                 .build();
@@ -133,6 +149,67 @@ public class BaseIT {
                 .gameState(testGameState)
                 .build();
 
+        testJson = """
+            {
+              "id": 1,
+              "title": "testQuest",
+              "description": "testQuest",
+              "text": "testQuest",
+              "questions": [
+                {
+                  "label": "1",
+                  "text": "testQuestion1",
+                  "answers": [
+                    {
+                      "nextQuestionLabel": "+8",
+                      "text": "testAnswer1"
+                    },
+                    {
+                      "nextQuestionLabel": "-9",
+                      "text": "testAnswer2"
+                    }
+                  ]
+                },
+                {
+                      "label": "+8",
+                      "text": "testQuestion2"
+                },
+                {
+                      "label": "-9",
+                      "text": "testQuestion2"
+                }
+              ]
+            }""";
 
+        testJsonWithoutId = """
+            {
+              "title": "testQuest",
+              "description": "testQuest",
+              "text": "testQuest",
+              "questions": [
+                {
+                  "label": "1",
+                  "text": "testQuestion1",
+                  "answers": [
+                    {
+                      "nextQuestionLabel": "+8",
+                      "text": "testAnswer1"
+                    },
+                    {
+                      "nextQuestionLabel": "-9",
+                      "text": "testAnswer2"
+                    }
+                  ]
+                },
+                {
+                      "label": "+8",
+                      "text": "testQuestion2"
+                },
+                {
+                      "label": "-9",
+                      "text": "testQuestion2"
+                }
+              ]
+            }""";
     }
 }

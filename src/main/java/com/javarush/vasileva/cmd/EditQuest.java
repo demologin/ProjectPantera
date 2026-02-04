@@ -56,9 +56,6 @@ public class EditQuest implements Command {
                 req.setAttribute(QUEST_JSON, questJson);
                 LOGGER.debug("Quest is mapped to JSON. ID: {}", quest.getId());
             } catch (IOException e) {
-                LOGGER.error(QUEST_SERIALIZATION_ERROR + ". ID: {}. Cause: {}",
-                        questIdStr, e.getMessage());
-                req.getSession().setAttribute(ERROR, QUEST_SERIALIZATION_ERROR);
                 return getView();
             }
         } else {
@@ -73,6 +70,13 @@ public class EditQuest implements Command {
     public String doPost(HttpServletRequest req) {
         LOGGER.info("Processing POST-request for saving quest. Параметры: {}", req.getParameterMap());
         String questJson = req.getParameter(QUEST_JSON);
+
+        if (questJson == null || questJson.isEmpty()) {
+            LOGGER.error(JSON_SAVE_ERROR + ". JSON parameter is missing or empty");
+            req.getSession().setAttribute(ERROR, JSON_SAVE_ERROR);
+            return getView();
+        }
+
         try {
             Quest quest = questMapper.fromJsonString(questJson);
             LOGGER.debug("Quest is successfully received from JSON. Title: {}", quest.getTitle());
