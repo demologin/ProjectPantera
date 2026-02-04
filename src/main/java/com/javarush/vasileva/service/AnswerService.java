@@ -25,5 +25,4 @@ public class AnswerService {
     public void create(Answer answer) {
         answerRepository.create(answer);
     }
-
 }

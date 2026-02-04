@@ -38,21 +38,21 @@ public class UserServiceTest {
     @Test
     @DisplayName("given user when create then repository create called")
     void givenUser_whenCreate_ThenRepositoryCreateCalled() {
-        userRepository.create(testUser);
+        userService.create(testUser);
         verify(userRepository, times(1)).create(testUser);
     }
 
     @Test
     @DisplayName("given user when update then repository update called")
     void givenUser_whenUpdate_ThenRepositoryUpdateCalled() {
-        userRepository.update(testUser);
+        userService.update(testUser);
         verify(userRepository, times(1)).update(testUser);
     }
 
     @Test
     @DisplayName("given user when delete then repository delete called")
     void givenUser_whenDelete_ThenRepositoryDeleteCalled() {
-        userRepository.delete(testUser);
+        userService.delete(testUser);
         verify(userRepository, times(1)).delete(testUser);
     }
 
