@@ -44,6 +44,8 @@ public class BaseIT {
     protected String testJson;
     protected String testJsonWithoutId;
 
+    protected UserStats testUserStats;
+
     public BaseIT() {
         config = Winter.find(Config.class);
         config.fillRepository();
@@ -211,5 +213,13 @@ public class BaseIT {
                 }
               ]
             }""";
+
+        testUserStats = UserStats.builder()
+                .id(1L)
+                .userId(testUser.getId())
+                .total(3)
+                .wins(2)
+                .losses(1)
+                .build();
     }
 }
