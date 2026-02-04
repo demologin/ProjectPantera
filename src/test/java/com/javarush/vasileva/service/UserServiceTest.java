@@ -15,6 +15,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
+import static com.javarush.vasileva.service.TestData.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
@@ -31,13 +32,7 @@ public class UserServiceTest {
 
     @BeforeEach
     public void setUp() {
-        testUser = User.builder()
-                .id(1L)
-                .login("testuser")
-                .email("test@gmail.com")
-                .password("password123")
-                .role(Role.USER)
-                .build();
+        testUser = createValidUser();
     }
 
     @Test
@@ -90,7 +85,7 @@ public class UserServiceTest {
     @Test
     @DisplayName("given user id not found when find by id then return empty")
     void givenUserIdNotFound_WhenFindById_ThenReturnEmpty() {
-        long absentUserId = -1L;
+        long absentUserId = NON_EXISTENT_USER_ID;
         when(userRepository.findById(absentUserId)).thenReturn(Optional.empty());
 
         Optional<User> result = userService.findById(absentUserId);
@@ -102,15 +97,12 @@ public class UserServiceTest {
     @Test
     @DisplayName("given login email password when register then repository create user with user role")
     void givenLoginEmailPassword_WhenRegister_ThenRepositoryCreateUser() {
-        String regName = "newuser";
-        String regEmail = "new@email.com";
-        String regPassword = "password123";
-        userService.register(regName, regEmail, regPassword);
+        userService.register(VALID_USER_LOGIN, VALID_USER_EMAIL, VALID_USER_PASSWORD);
 
         User expectedUser = User.builder()
-                .login(regName)
-                .email(regEmail)
-                .password(regPassword)
+                .login(VALID_USER_LOGIN)
+                .email(VALID_USER_EMAIL)
+                .password(VALID_USER_PASSWORD)
                 .role(Role.USER)
                 .build();
 
@@ -121,49 +113,43 @@ public class UserServiceTest {
     @Test
     @DisplayName("given valid email and password when login then return user")
     void givenValidEmailAndPassword_WhenLogin_ThenReturnUser() {
-        String validEmail = "test@gmail.com";
-        String validPassword = "password123";
-        when(userRepository.findByEmail(validEmail)).thenReturn(Optional.of(testUser));
+        when(userRepository.findByEmail(testUser.getEmail())).thenReturn(Optional.of(testUser));
 
-        Optional<User> result = userService.login(validEmail, validPassword);
+        Optional<User> result = userService.login(testUser.getEmail(), testUser.getPassword());
 
         assertTrue(result.isPresent());
         assertEquals(testUser.getId(), result.get().getId());
-        verify(userRepository, times(1)).findByEmail(validEmail);
+        verify(userRepository, times(1)).findByEmail(testUser.getEmail());
     }
 
     @Test
     @DisplayName("given wrong password when login then return empty")
     void givenWrongPassword_WhenLogin_ThenReturnEmpty() {
-        String validEmail = "test@gmail.com";
-        String invalidPassword = "password";
-        when(userRepository.findByEmail(validEmail)).thenReturn(Optional.of(testUser));
+        when(userRepository.findByEmail(VALID_USER_EMAIL)).thenReturn(Optional.of(testUser));
 
-        Optional<User> result = userService.login(validEmail, invalidPassword);
+        Optional<User> result = userService.login(VALID_USER_EMAIL, INVALID_USER_PASSWORD);
 
         assertFalse(result.isPresent());
-        verify(userRepository, times(1)).findByEmail(validEmail);
+        verify(userRepository, times(1)).findByEmail(VALID_USER_EMAIL);
     }
 
     @Test
     @DisplayName("given wrong email when login then return empty")
     void givenWrongLogin_WhenLogin_ThenReturnEmpty() {
-        String invalidEmail = "test2@gmail.com";
-        String validPassword = "password123";
-        when(userRepository.findByEmail(invalidEmail)).thenReturn(Optional.empty());
+        when(userRepository.findByEmail(INVALID_USER_EMAIL)).thenReturn(Optional.empty());
 
-        Optional<User> result = userService.login(invalidEmail, validPassword);
+        Optional<User> result = userService.login(INVALID_USER_EMAIL, VALID_USER_PASSWORD);
 
         assertFalse(result.isPresent());
-        verify(userRepository, times(1)).findByEmail(invalidEmail);
+        verify(userRepository, times(1)).findByEmail(INVALID_USER_EMAIL);
     }
 
     @Test
     @DisplayName("given valid user id string when get validated user then return user")
     void givenValidUserIdString_WhenGetValidatedUser_ThenReturnUser() {
-        when(userRepository.findById(1L)).thenReturn(Optional.of(testUser));
+        when(userRepository.findById(testUser.getId())).thenReturn(Optional.of(testUser));
 
-        Optional<User> result = userService.getValidatedUser("1");
+        Optional<User> result = userService.getValidatedUser(String.valueOf(testUser.getId()));
 
         assertTrue(result.isPresent());
         assertEquals(testUser.getId(), result.get().getId());
@@ -172,14 +158,14 @@ public class UserServiceTest {
     @Test
     @DisplayName("given empty user id string when get validated user then return empty")
     void givenEmptyUserIdString_whenGetValidatedUser_thenReturnEmpty() {
-        Optional<User> result = userService.getValidatedUser("");
+        Optional<User> result = userService.getValidatedUser(EMPTY_USER_ID_STR);
         assertFalse(result.isPresent());
     }
 
     @Test
     @DisplayName("given null user when get validated user then return empty")
     void givenNullUserIdString_whenGetValidatedUser_thenReturnEmpty() {
-        Optional<User> result = userService.getValidatedUser(null);
+        Optional<User> result = userService.getValidatedUser(NULL_USER_ID_STR);
         assertFalse(result.isPresent());
     }
 }
