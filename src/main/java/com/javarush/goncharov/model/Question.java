@@ -12,6 +12,7 @@ import lombok.*;
 public class Question {
     private Long id;
     private Long questId;
+    private String questName;
     private String text;
     private final Collection<Answer> answers = new ArrayList<>();
 }

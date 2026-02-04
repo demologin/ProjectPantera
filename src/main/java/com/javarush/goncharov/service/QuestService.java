@@ -1,8 +1,9 @@
 package com.javarush.goncharov.service;
 
 import com.javarush.goncharov.model.Quest;
+import com.javarush.goncharov.model.Question;
 import com.javarush.goncharov.model.User;
-import com.javarush.goncharov.repository.QuestRepository;
+import com.javarush.goncharov.repository.QuestionRepository;
 import com.javarush.goncharov.repository.Repository;
 import com.javarush.goncharov.repository.Storage;
 import com.javarush.goncharov.repository.UserRepository;
@@ -10,13 +11,14 @@ import com.javarush.goncharov.repository.UserRepository;
 import java.util.Collection;
 import java.util.Map;
 import java.util.Optional;
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
 
 
 public class QuestService {
     private final Storage storage = Storage.getInstance();
     private final UserService userService = new UserService(new UserRepository(storage));
-//    private final QuestService questService = new QuestService(new QuestRepository(storage));
-
+    private final QuestionService questionService = new QuestionService(new QuestionRepository(storage));
     private final Repository<Quest> questRepository;
 
     public QuestService(Repository<Quest> questRepository) {
@@ -32,6 +34,10 @@ public class QuestService {
     }
 
     public void create(String name, String text, Long idAuthor, String nameAuthor){
+        String patternQ = "(\\d+):\\s+(.*)";
+        String patternA = "\\d+<.*";
+        String patternL = "\\d+-.*";
+        String patternW = "\\d+\\+.*";
         Quest quest = Quest.builder()
                 .name(name)
                 .authorName(nameAuthor)
@@ -44,7 +50,25 @@ public class QuestService {
         Collection<Quest> quests = userFind.get().getQuests();
         quests.add(quest);
         questRepository.update(quest);
-        System.out.println(userFind.get().getQuests());
+        Pattern patternQuestion = Pattern.compile(patternQ);
+        Matcher matcherQuestion = patternQuestion.matcher(text);
+        Collection<Question> questionsQuest = quest.getQuestions();
+        while (matcherQuestion.find()) {
+            Integer idQuestionOnQuest = Integer.parseInt(matcherQuestion.group(1));
+            String textQuestion = matcherQuestion.group(2);
+            Question question = Question.builder()
+                    .questId(quest.getId())
+                    .questName(quest.getName())
+                    .text(textQuestion)
+                    .build();
+            questionService.post(question);
+            if (idQuestionOnQuest.equals(1)){
+                quest.setStartQuestionId(question.getId());
+            }
+            questionsQuest.add(question);
+        }
+        questRepository.update(quest);
+        System.out.println(questionService.getAll());
     }
 
     public void delete(Quest quest){
