@@ -43,7 +43,7 @@ public class QuestService {
         Optional<User> userFind = userService.get(idAuthor);
         Collection<Quest> quests = userFind.get().getQuests();
         quests.add(quest);
-        this.update(quest);
+        questRepository.update(quest);
         System.out.println(userFind.get().getQuests());
     }
 

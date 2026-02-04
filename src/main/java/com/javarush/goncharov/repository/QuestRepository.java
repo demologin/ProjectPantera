@@ -10,8 +10,8 @@ public class QuestRepository implements Repository<Quest>{
     private final Map<Long, Quest> map;
     public static final AtomicLong id = new AtomicLong();
 
-    public QuestRepository(Storage messageStorage) {
-        this.map = messageStorage.getQuests();
+    public QuestRepository(Storage questStorage) {
+        this.map = questStorage.getQuests();
     }
 
     @Override
