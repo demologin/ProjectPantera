@@ -37,7 +37,7 @@ public class FrontController extends HttpServlet {
     }
 
     private static String getJsp(String view) {
-        return "/WEB-INF/" + view + ".jsp";
+        return "WEB-INF/" + view + ".jsp";
     }
 
     @Override

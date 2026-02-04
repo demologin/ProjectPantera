@@ -12,12 +12,14 @@
 </head>
 <body class="bg-primary-subtle">
 <div class="masthead">
-    <div class="container-fluid h-75">
+    <div class="container-fluid h-75" >
         <div class="row h-100 justify-content-center align-items-center">
             <div class="col text-center">
                 <section>
-                    <div style="height: 500px;background: url('/images/background-main.png') center / cover;"></div>
-                    <div class="container position-relative" style="top: -200px">
+                    <div style="height: 400px;">
+                        <img src="images/background-main.png" alt="background" width="1340" height="980"/>
+                    </div>
+                    <div class="container position-relative" style="top: -300px">
                         <div class="row gy-2 gy-lg-0 row-cols-1 row-cols-md-2 row-cols-lg-3">
                             <c:forEach var="quest" items="${requestScope.quests}">
                                 <div class="col">

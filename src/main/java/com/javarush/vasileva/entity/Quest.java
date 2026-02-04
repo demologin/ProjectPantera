@@ -18,4 +18,5 @@ public class Quest {
     private String text;
     private Long startQuestionId;
     private List<Question> questions;
+    private String image;
 }

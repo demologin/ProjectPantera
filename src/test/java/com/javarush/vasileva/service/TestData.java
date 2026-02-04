@@ -47,6 +47,10 @@ public final class TestData {
     public static final String WIN_LABEL = "Q1" + Value.WIN;
     public static final String LOSS_LABEL = "Q2" + Value.LOSS;
 
+    // AUTH
+    public static final String UNAUTHORIZED_MESSAGE = "Доступ запрещён: требуется роль администратора";
+
+
     /*    ======================================= USER =================================== */
     public static User createValidUser() {
         return User.builder()
@@ -219,5 +223,29 @@ public final class TestData {
         return Question.builder()
                 .label(LOSS_LABEL)
                 .build();
+    }
+
+    /*    ======================================= STATS =================================== */
+
+    public static User createAdminUser() {
+        return User.builder()
+                .role(Role.ADMIN)
+                .build();
+    }
+
+    public static User createUserUser() {
+        return User.builder()
+                .role(Role.USER)
+                .build();
+    }
+
+    public static User createGuestUser() {
+        return User.builder()
+                .role(Role.GUEST)
+                .build();
+    }
+
+    public static User createNullUser() {
+        return null;
     }
 }

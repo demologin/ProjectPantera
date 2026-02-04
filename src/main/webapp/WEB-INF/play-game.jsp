@@ -11,10 +11,10 @@
     <title>${requestScope.quest.title}</title>
 </head>
 <body>
-<div class="container m-4" style="height: 100vh;">
-    <div class="row" style="margin-top: 100px;">
-        <div class="col col-lg-4">
-            <img src="images/background-main.png" width="400" height="400" alt="space">
+<div class="container d-flex justify-content-center" style="min-height: 100vh; padding: 1rem;">
+    <div class="row justify-content-center w-100" style="margin-top: 100px;">
+        <div class="col-12 col-lg-4">
+            <img src="images/${requestScope.quest.image}" width="400" height="400" alt="space">
         </div>
         <div class="col-md-6 col-lg-8 offset-lg-0">
             <h1>${requestScope.quest.title}</h1>
@@ -40,11 +40,10 @@
                             <legend>Текущий вопрос</legend>
 
                             <div class="form-group row mb-3">
-                                <label class="col-md-4 col-form-label">
+                                <label class="col-md-5 col-form-label">
                                     <b>${requestScope.game.gameState.currentQuestion.text}</b>
                                 </label>
-                                <div class="col-md-8">
-                                    <!-- Варианты ответов -->
+                                <div class="col-md-7">
                                     <c:forEach var="answer"
                                                items="${requestScope.game.gameState.currentQuestion.answers}">
                                         <div class="form-check">

@@ -6,6 +6,7 @@ public class Value {
               "title": "Название",
               "description": "Краткое описание",
               "text": "Текст",
+              "image": "background-main.png",
               "questions": [
                 {
                   "label": "1",
@@ -41,7 +42,6 @@ public class Value {
     public static final String GAME_NOT_FOUND = "Игра не найдена";
     public static final String ANSWER_NOT_FOUND = "Ответ не найден";
     public static final String STATS_NOT_FOUND = "Статистика не найдена";
-    public static final String QUEST_SERIALIZATION_ERROR = "Ошибка сериализации квеста";
     public static final String EDIT_QUEST_AUTH_ERROR = "Редактировать квесты могут только пользователи с правами ADMIN";
     public static final String DELETE_QUEST_AUTH_ERROR = "Удалять квесты могут только пользователи с правами ADMIN";
     public static final String USER_LIST_AUTH_ERROR = "Получить список пользователей могут только пользователи с правами ADMIN";
