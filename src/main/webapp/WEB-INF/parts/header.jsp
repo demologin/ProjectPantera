@@ -36,7 +36,7 @@
                             <ul class="navbar-nav ms-auto">
                                 <li class="nav-item"><a class="nav-link active" href=".">Home</a></li>
                                 <li class="nav-item"><a class="nav-link" href="#">Статистика</a></li>
-                                <li class="nav-item"><a class="nav-link" href="#">Квесты</a></li>
+                                <li class="nav-item"><a class="nav-link" href="list-quests">Квесты</a></li>
                                 <c:if test="${sessionScope.user.role=='ADMIN'}">
                                     <li class="nav-item"><a class="nav-link" href="list-users">Пользователи</a></li>
                                 </c:if>

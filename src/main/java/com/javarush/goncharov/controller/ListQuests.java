@@ -4,39 +4,30 @@ import com.javarush.goncharov.model.Quest;
 import com.javarush.goncharov.model.User;
 import com.javarush.goncharov.repository.QuestRepository;
 import com.javarush.goncharov.repository.Storage;
-import com.javarush.goncharov.repository.UserRepository;
 import com.javarush.goncharov.service.QuestService;
-import com.javarush.goncharov.service.UserService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import lombok.AllArgsConstructor;
 
 import java.io.IOException;
-import java.util.Optional;
+import java.util.Collection;
 
-@WebServlet("/create-quest")
-public class CreateGame extends HttpServlet {
+@WebServlet("/list-quests")
+public class ListQuests  extends HttpServlet {
+
     private final Storage storage = Storage.getInstance();
-    private final UserService userService = new UserService(new UserRepository(storage));
     private final QuestService questService = new QuestService(new QuestRepository(storage));
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("/WEB-INF/create-quest.jsp").forward(req, resp);
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        Collection<Quest> quests = questService.getAll().values();
         HttpSession session = req.getSession();
-        User userSession = (User) session.getAttribute("user");
-        Optional<User> userFind = userService.get(userSession.getId());
-        String name = req.getParameter("name");
-        String text = req.getParameter("text");
-        questService.create(name, text, userFind.get().getId(), userFind.get().getLogin());
-        resp.sendRedirect("/list-quests");
+        User user = (User) session.getAttribute("userSession");
+        req.setAttribute("quests", quests);
+        req.setAttribute("user", user);
+        req.getRequestDispatcher("/WEB-INF/home.jsp").forward(req, resp);
     }
 }

@@ -14,6 +14,7 @@ public class Storage {
     private final Map<Long, Quest> quests = new ConcurrentHashMap<>();
     private final Map<Long, Question> questions = new ConcurrentHashMap<>();
     private final Map<Long, Answer> answers = new ConcurrentHashMap<>();
+    private final Map<Long, Game> games = new ConcurrentHashMap<>();
 
     private Storage() {
         users.put(1L, new User(1L, "Admin", "123", Role.ADMIN, "admin@test.ru"));
