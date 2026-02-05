@@ -9,20 +9,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class User {
-
+public class User implements AbstractEntity {
     private Long id;
-
     private String login;
-
     private String password;
-
     private Role role;
-
     private Gender gender;
-
     private String imageId;
-
     public String getImage() { //TODO move to DTO
         if (imageId != null && !imageId.isBlank()) {
             return imageId;
