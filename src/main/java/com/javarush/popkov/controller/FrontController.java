@@ -1,11 +1,13 @@
 package com.javarush.popkov.controller;
 
 import com.javarush.popkov.cmd.Command;
+import com.javarush.popkov.config.Config;
 import com.javarush.popkov.config.Winter;
 import com.javarush.popkov.entity.Gender;
 import com.javarush.popkov.entity.Role;
 import com.javarush.popkov.util.Go;
 import jakarta.servlet.ServletConfig;
+import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
@@ -36,9 +38,13 @@ public class FrontController extends HttpServlet {
     }
 
     @Override
-    public void init(ServletConfig config) {
-        config.getServletContext().setAttribute("roles", Role.values());
-        config.getServletContext().setAttribute("genders", Gender.values());
+    public void init(ServletConfig servletConfig) {
+        Config config = Winter.find(Config.class);
+        config.fillEmptyRepository();
+
+        ServletContext servletContext = servletConfig.getServletContext();
+        servletContext.setAttribute("roles", Role.values());
+        servletContext.setAttribute("genders", Gender.values());
     }
 
     private static String getJsp(String view) {
