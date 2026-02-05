@@ -10,5 +10,6 @@ public class Answer {
     private Long id;
     private Long questionId;
     private String text;
+    private String questName;
     private Long nextQuestionId;
 }
