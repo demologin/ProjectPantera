@@ -16,10 +16,7 @@ import java.io.IOException;
 import java.util.Collection;
 
 @WebServlet("/list-quests")
-public class ListQuests  extends HttpServlet {
-
-    private final Storage storage = Storage.getInstance();
-    private final QuestService questService = new QuestService(new QuestRepository(storage));
+public class ListQuests extends DefaultServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

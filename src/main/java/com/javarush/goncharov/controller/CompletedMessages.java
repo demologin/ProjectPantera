@@ -20,9 +20,7 @@ import java.util.Collection;
 import java.util.Optional;
 
 @WebServlet("/completed-messages")
-public class CompletedMessages extends HttpServlet {
-    private final Storage messageStorage = Storage.getInstance();
-    private final MessageService messageService = new MessageService(new MessageRepository(messageStorage));
+public class CompletedMessages extends DefaultServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

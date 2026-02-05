@@ -8,10 +8,6 @@ import java.util.Map;
 import java.util.Optional;
 
 public class GameService {
-    private final Storage storage = Storage.getInstance();
-    private final UserService userService = new UserService(new UserRepository(storage));
-    private final QuestionService questionService = new QuestionService(new QuestionRepository(storage));
-    private final AnswerRepository answerRepository = new AnswerRepository(storage);
     private final Repository<Game> gameRepository;
 
     public GameService(Repository<Game> gameRepository) {

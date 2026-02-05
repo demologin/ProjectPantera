@@ -17,15 +17,7 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 
 @WebServlet("/contact")
-public class ContactUs extends HttpServlet {
-
-    private final Storage messageStorage = Storage.getInstance();
-    private final MessageService messageService = new MessageService(new MessageRepository(messageStorage));
-
-    public void init(ServletConfig config) throws ServletException {
-        ServletContext servletContext = config.getServletContext();
-        servletContext.setAttribute("topics", Topic.values());
-    }
+public class ContactUs extends DefaultServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

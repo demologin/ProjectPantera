@@ -16,10 +16,7 @@ import java.io.IOException;
 
 
 @WebServlet("/signup")
-public class SignUp extends HttpServlet {
-
-    private final Storage userStorage = Storage.getInstance();
-    private final UserService userService = new UserService(new UserRepository(userStorage));
+public class SignUp extends DefaultServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

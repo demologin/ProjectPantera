@@ -14,10 +14,7 @@ import java.io.IOException;
 import java.util.Optional;
 
 @WebServlet("/delete-user")
-public class DeleteUser extends HttpServlet {
-
-    private final Storage userStorage = Storage.getInstance();
-    private final UserService userService = new UserService(new UserRepository(userStorage));
+public class DeleteUser extends DefaultServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

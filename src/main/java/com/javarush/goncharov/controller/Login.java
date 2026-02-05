@@ -15,10 +15,7 @@ import java.io.IOException;
 import java.util.Optional;
 
 @WebServlet("/login")
-public class Login extends HttpServlet {
-
-    private final Storage userStorage = Storage.getInstance();
-    private final UserService userService = new UserService(new UserRepository(userStorage));
+public class Login extends DefaultServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

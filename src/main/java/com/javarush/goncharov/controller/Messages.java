@@ -1,17 +1,10 @@
 package com.javarush.goncharov.controller;
 
 import com.javarush.goncharov.model.Message;
-import com.javarush.goncharov.model.Role;
 import com.javarush.goncharov.model.Topic;
 import com.javarush.goncharov.model.User;
-import com.javarush.goncharov.repository.MessageRepository;
-import com.javarush.goncharov.repository.Storage;
-import com.javarush.goncharov.service.MessageService;
-import jakarta.servlet.ServletConfig;
-import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
@@ -21,15 +14,7 @@ import java.util.Collection;
 import java.util.Optional;
 
 @WebServlet("/messages")
-public class Messages extends HttpServlet {
-    private final Storage messageStorage = Storage.getInstance();
-    private final MessageService messageService = new MessageService(new MessageRepository(messageStorage));
-
-    @Override
-    public void init(ServletConfig config) throws ServletException {
-        ServletContext servletContext = config.getServletContext();
-        servletContext.setAttribute("topics", Topic.values());
-    }
+public class Messages extends DefaultServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

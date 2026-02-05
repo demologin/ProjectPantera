@@ -19,16 +19,8 @@ import java.io.IOException;
 import java.util.Optional;
 
 @WebServlet("/edit-user")
-public class EditUser extends HttpServlet {
+public class EditUser extends DefaultServlet {
     private String role;
-    private final Storage userStorage = Storage.getInstance();
-    private final UserService userService = new UserService(new UserRepository(userStorage));
-
-    @Override
-    public void init(ServletConfig config) throws ServletException {
-        ServletContext servletContext = config.getServletContext();
-        servletContext.setAttribute("roles", Role.values());
-    }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

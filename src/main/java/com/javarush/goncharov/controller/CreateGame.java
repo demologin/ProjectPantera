@@ -19,10 +19,7 @@ import java.io.IOException;
 import java.util.Optional;
 
 @WebServlet("/create-quest")
-public class CreateGame extends HttpServlet {
-    private final Storage storage = Storage.getInstance();
-    private final UserService userService = new UserService(new UserRepository(storage));
-    private final QuestService questService = new QuestService(new QuestRepository(storage));
+public class CreateGame extends DefaultServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

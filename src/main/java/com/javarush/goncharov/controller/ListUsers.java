@@ -15,10 +15,7 @@ import java.io.IOException;
 import java.util.Collection;
 
 @WebServlet("/list-users")
-public class ListUsers extends HttpServlet {
-
-    private final Storage userStorage = Storage.getInstance();
-    private final UserService userService = new UserService(new UserRepository(userStorage));
+public class ListUsers extends DefaultServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
