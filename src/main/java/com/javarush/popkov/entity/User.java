@@ -5,6 +5,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -16,9 +19,14 @@ public class User implements AbstractEntity {
     private Role role;
     private Gender gender;
     private String imageId;
+    private final Collection<Quest> quests = new ArrayList<>();
+    private final Collection<Game> games = new ArrayList<>();
     public String getImage() { //TODO move to DTO
         if (imageId != null && !imageId.isBlank()) {
-            return imageId;
+            int dotIndex = imageId.lastIndexOf('.');
+            return dotIndex > 0
+                    ? imageId.substring(0, dotIndex)
+                    : imageId;
         }
         if (gender == Gender.FEMALE) {
             return "female";

@@ -1,8 +1,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <c:import url="parts/header.jsp"/>
+<c:import url="parts/header.jsp"/>
+<body>
 <div class="container">
-    <form action="<c:url value='/create-quest'/>" method="post">
+    <form action="create-quest" method="post">
 
         <div class="mb-3">
             <label for="quest-name" class="form-label">Название квеста</label>
@@ -22,7 +24,7 @@
                         class="btn btn-success">Создать квест
                 </button>
                 <button id="jruDemo" name="create"
-                        class="btn btn-danger">Заполнить пример
+                        class="btn btn-danger">Хочу этот пример!
                 </button>
             </div>
         </div>
@@ -30,11 +32,12 @@
 </div>
 
 <script>
+    //это чисто для отладки фрагмент
     document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('jruDemo').addEventListener('click', function(event) {
             event.preventDefault();
-            document.getElementById('quest-name').value = 'JRU квест';
-            document.getElementById('questTextareaDomId').value =`<%@include file="./parts/quest-jru.txt"%>`;
+            document.getElementById('quest-name').value = 'Проверим твои знания арифметики';
+            document.getElementById('questTextareaDomId').value =`<%@include file="./parts/quest-math.txt"%>`;
         });
     });
 </script>
