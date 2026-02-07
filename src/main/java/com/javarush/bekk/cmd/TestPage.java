@@ -18,8 +18,10 @@ public class TestPage implements Command {
 
     @Override
     public String doPost(HttpServletRequest request) {
-        Question question = questionRepository.get(1L);
-        question.
-        return "";
+        HttpSession session = request.getSession();
+        //Object answer = session.getAttribute("answer");
+        Question question = questionRepository.get(2L);
+        session.setAttribute("question", question);
+        return getView();
     }
 }
