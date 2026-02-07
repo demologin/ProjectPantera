@@ -1,9 +1,10 @@
 package com.javarush.bekk.controller;
 
 import com.javarush.bekk.cmd.Command;
+import com.javarush.bekk.config.Config;
 import com.javarush.bekk.config.Winter;
-import com.javarush.bekk.entity.Role;
 import jakarta.servlet.ServletConfig;
+import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -12,7 +13,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-@WebServlet({"", "/home", "/list-user", "/edit-user", "/play-game", "/test-page"})
+@WebServlet({"", "/test-page"})
 public class FrontController extends HttpServlet {
 
     private final HttpResolver httpResolver = Winter.find(HttpResolver.class);
@@ -27,7 +28,11 @@ public class FrontController extends HttpServlet {
 
     @Override
     public void init(ServletConfig config) {
-        config.getServletContext().setAttribute("roles", Role.values());
+        Config config1 = Winter.find(Config.class);
+        config1.fillRepository();
+
+        ServletContext servletContext = config.getServletContext();
+        servletContext.setAttribute(Config.class.getName(), config1);
     }
 
     private static String getJsp(String view) {
@@ -40,4 +45,9 @@ public class FrontController extends HttpServlet {
         String redirect = command.doPost(req);
         resp.sendRedirect(redirect);
     }
+
+    /*@Override
+    public void init(ServletConfig config) {
+        config.getServletContext().setAttribute("roles", Role.values());
+    }*/
 }

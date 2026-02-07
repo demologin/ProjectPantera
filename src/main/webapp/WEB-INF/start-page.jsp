@@ -5,7 +5,7 @@
 </h1>
 
 <br/>
-<a href="test-page?id=${sessionScope.question.id}">Старт тестирования по SOLID</a>
+<a href="test-page">Старт тестирования по SOLID</a>
 <%--<a href="list-user">List Users</a>--%>
 <%--<a href="edit-user?id=${user.id}">${user.login}</a>--%>
 </body>
