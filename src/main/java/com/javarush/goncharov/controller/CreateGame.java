@@ -1,19 +1,11 @@
 package com.javarush.goncharov.controller;
 
-import com.javarush.goncharov.model.Quest;
 import com.javarush.goncharov.model.User;
-import com.javarush.goncharov.repository.QuestRepository;
-import com.javarush.goncharov.repository.Storage;
-import com.javarush.goncharov.repository.UserRepository;
-import com.javarush.goncharov.service.QuestService;
-import com.javarush.goncharov.service.UserService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import lombok.AllArgsConstructor;
 
 import java.io.IOException;
 import java.util.Optional;

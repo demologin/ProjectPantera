@@ -17,9 +17,15 @@ public class AppConfig {
     public AppConfig() {
         this.messageService = new MessageService(new MessageRepository(storage));
         this.userService = new UserService(new UserRepository(storage));
-        this.questService = new QuestService(new QuestRepository(storage));
         this.questionService = new QuestionService(new QuestionRepository(storage));
-        this.gameService = new GameService(new GameRepository(storage));
         this.answerRepository = new AnswerRepository(storage);
+        this.questService = new QuestService(this.answerRepository,
+                this.questionService,
+                this.userService,
+                new QuestRepository(storage));
+        this.gameService = new GameService(new GameRepository(storage),
+                this.questService,
+                this.questionService,
+                this.userService);
     }
 }

@@ -14,5 +14,6 @@ public class Question {
     private Long questId;
     private String questName;
     private String text;
+    private GameState gameState;
     private final Collection<Answer> answers = new ArrayList<>();
 }

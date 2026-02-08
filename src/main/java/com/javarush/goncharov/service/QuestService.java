@@ -14,13 +14,17 @@ import java.util.regex.Matcher;
 
 
 public class QuestService {
-    private final Storage storage = Storage.getInstance();
-    private final UserService userService = new UserService(new UserRepository(storage));
-    private final QuestionService questionService = new QuestionService(new QuestionRepository(storage));
-    private final AnswerRepository answerRepository = new AnswerRepository(storage);
+    private final AnswerRepository answerRepository;
+    private final QuestionService questionService;
+    private final UserService userService;
     private final Repository<Quest> questRepository;
 
-    public QuestService(Repository<Quest> questRepository) {
+    public QuestService(AnswerRepository answerRepository, QuestionService questionService,
+                        UserService userService,
+                        Repository<Quest> questRepository) {
+        this.answerRepository = answerRepository;
+        this.questionService = questionService;
+        this.userService = userService;
         this.questRepository = questRepository;
     }
 

@@ -4,19 +4,19 @@
 <body>
 
 
-<jsp:useBean id="userSession" scope="session" type="com.javarush.khmelov.entity.User"/>
-<jsp:useBean id="question" scope="request" type="com.javarush.khmelov.entity.Question"/>
-<jsp:useBean id="game" scope="request" type="com.javarush.khmelov.entity.Game"/>
+<%--<jsp:useBean id="userSession" scope="session" type="com.javarush.goncharov.model.User"/>--%>
+<jsp:useBean id="question" scope="request" type="com.javarush.goncharov.model.Question"/>
+<jsp:useBean id="game" scope="request" type="com.javarush.goncharov.model.Game"/>
 
 
 <div class="container py-4 py-xl-5">
     <div class="row gy-4 gy-md-0">
-        <div class="col-md-6">
-            <div class="p-xl-6 m-xl-9">
-                <img class="rounded img-fluid w-100 fit-cover" style="min-height: 400px;"
-                     src="images/${question.image}">
-            </div>
-        </div>
+<%--        <div class="col-md-6">--%>
+<%--            <div class="p-xl-6 m-xl-9">--%>
+<%--                <img class="rounded img-fluid w-100 fit-cover" style="min-height: 400px;"--%>
+<%--                     src="images/${question.image}">--%>
+<%--            </div>--%>
+<%--        </div>--%>
         <div class="col-md-6 d-md-flex align-items-md-center">
             <form action="play-game?id=${game.id}" method="post">
                 <h2 class="fw-bold">${question.text}</h2>

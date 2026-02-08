@@ -19,4 +19,5 @@ public class User{
     private Role role;
     private String email;
     private final Collection<Quest> quests = new ArrayList<>();
+    private final Collection<Game> games = new ArrayList<>();
 }

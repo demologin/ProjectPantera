@@ -1,6 +1,5 @@
 package com.javarush.goncharov.model;
 
-
 import lombok.*;
 
 import java.util.ArrayList;
