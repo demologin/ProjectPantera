@@ -4,7 +4,7 @@
 <h1><%= "Тестирование по по SOLID" %>
 </h1>
 
-<form action="test-page2" method="post">
+<form action="test-page3" method="post">
     <p>${sessionScope.question.text}</p>
     <ul>
         <c:forEach var="answer" items="${question.answers}">

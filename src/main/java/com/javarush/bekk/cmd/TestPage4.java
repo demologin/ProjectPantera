@@ -1,16 +1,13 @@
 package com.javarush.bekk.cmd;
 
-import com.javarush.bekk.entity.Answer;
 import com.javarush.bekk.entity.Question;
 import com.javarush.bekk.repository.QuestionRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
 
-import java.util.Collection;
-
 @AllArgsConstructor
-public class TestPage implements Command {
+public class TestPage4 implements Command {
 
     private final QuestionRepository questionRepository;
 
@@ -21,7 +18,7 @@ public class TestPage implements Command {
         HttpSession session = request.getSession();
         int answer = Integer.parseInt(request.getParameter("answer"));
         if (answer == 1){
-            Question question = questionRepository.get(1L);
+            Question question = questionRepository.get(4L);
             session.setAttribute("question", question);
             return getView();
         } else  {
