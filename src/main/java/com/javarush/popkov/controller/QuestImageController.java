@@ -11,9 +11,8 @@ import lombok.SneakyThrows;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-@WebServlet("/user-images/*")
-public class ImageController extends HttpServlet {
-
+@WebServlet("/quest-images/*")
+public class QuestImageController extends HttpServlet {
 
     private final ImageService imageService = Winter.find(ImageService.class);
 
@@ -21,9 +20,9 @@ public class ImageController extends HttpServlet {
     @SneakyThrows
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
         String requestURI = req.getRequestURI();
-        String target = req.getContextPath() + "/user-images/";
+        String target = req.getContextPath() + "/quest-images/";
         String nameImage = requestURI.replace(target, "");
-        Path path = imageService.getUserImagePath(nameImage);
+        Path path = imageService.getQuestImagePath(nameImage);
         Files.copy(path, resp.getOutputStream());
     }
 }

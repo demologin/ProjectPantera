@@ -32,7 +32,7 @@ public class Signup implements Command {
                 .build();
         userService.create(user);
         String imageId = "image-" + user.getId();
-        if (imageService.uploadImage(request, imageId)) {
+        if (imageService.uploadUserImage(request, imageId)) {
             user.setImageId(imageId);
             userService.update(user);
         }

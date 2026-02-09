@@ -11,7 +11,7 @@
               method="post" enctype="multipart/form-data"
               id="form${question.id}">
             <input name="text" class="w-100" type="text" value="${question.text}">
-            <img src="images/${question.image}" class="w-25" alt="${question.text}" height="10%">
+            <img src="<c:url value='/quest-images/${question.image}'/>" class="w-25" alt="${question.text}" height="10%">
             <input name="image" class="w-25" type="file">
             <button type="submit" class="btn btn-primary">Обновить</button>
             <input name="questionId" type="hidden" value="${question.id}">

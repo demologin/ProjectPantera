@@ -23,7 +23,7 @@ import java.io.IOException;
         Go.SIGNUP, Go.LOGIN, Go.LOGOUT,
         Go.LIST_USER, Go.PROFILE, Go.EDIT_USER,
         Go.STATISTICS,
-        Go.CREATE, Go.QUEST
+        Go.CREATE, Go.QUEST, Go.PLAY_GAME
 })
 public class FrontController extends HttpServlet {
 

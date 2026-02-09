@@ -17,7 +17,8 @@ import java.util.Objects;
 
 public class ImageService {
 
-    private static final String IMAGES_FOLDER = "images";
+    private static final String USER_IMAGES_FOLDER = "images";
+    private static final String QUEST_IMAGES_FOLDER = "quest-images";
     private static final String FALLBACK_FOLDER = "img";
     private static final String PART_NAME = "image";
     private static final String NO_IMAGE_PNG = "no-image.png";
@@ -31,20 +32,31 @@ public class ImageService {
                     ).toString()))
             .getParent();
 
-    private final Path imagesFolder = WEB_INF.resolve(IMAGES_FOLDER);
+    private final Path userImagesFolder = WEB_INF.resolve(USER_IMAGES_FOLDER);
+    private final Path questImagesFolder = WEB_INF.resolve(QUEST_IMAGES_FOLDER);
     private final Path fallbackFolder = WEB_INF.resolve(FALLBACK_FOLDER);
 
     @SneakyThrows
     public ImageService() {
-        Files.createDirectories(imagesFolder);
+        Files.createDirectories(userImagesFolder);
+        Files.createDirectories(questImagesFolder);
     }
 
+    @SneakyThrows
+    public Path getUserImagePath(String filename) {
+        return resolveImagePath(userImagesFolder, filename);
+    }
 
     @SneakyThrows
-    public Path getImagePath(String filename) {
+    public Path getQuestImagePath(String filename) {
+        return resolveImagePath(questImagesFolder, filename);
+    }
+
+    @SneakyThrows
+    private Path resolveImagePath(Path baseFolder, String filename) {
         return EXTENSIONS.stream()
                 .flatMap(ext -> List.of(
-                        imagesFolder.resolve(filename + ext),
+                        baseFolder.resolve(filename + ext),
                         fallbackFolder.resolve(filename + ext)
                 ).stream())
                 .filter(Files::exists)
@@ -53,24 +65,32 @@ public class ImageService {
                     Path fallback = fallbackFolder.resolve(NO_IMAGE_PNG);
                     return Files.exists(fallback)
                             ? fallback
-                            : imagesFolder.resolve(NO_IMAGE_PNG);
+                            : baseFolder.resolve(NO_IMAGE_PNG);
                 });
     }
 
-    public boolean uploadImage(HttpServletRequest req, String imageId) throws IOException, ServletException {
+    public boolean uploadUserImage(HttpServletRequest req, String imageId) throws IOException, ServletException {
+        return uploadImage(userImagesFolder, req, imageId);
+    }
+
+    public boolean uploadQuestImage(HttpServletRequest req, String imageId) throws IOException, ServletException {
+        return uploadImage(questImagesFolder, req, imageId);
+    }
+
+    private boolean uploadImage(Path targetFolder, HttpServletRequest req, String imageId) throws IOException, ServletException {
         Part data = req.getPart(PART_NAME);
         if (Objects.nonNull(data) && data.getInputStream().available() > 0) {
             String filename = data.getSubmittedFileName();
             String ext = filename.substring(filename.lastIndexOf("."));
-            deleteOldFiles(imageId);
+            deleteOldFiles(targetFolder, imageId);
             filename = imageId + ext;
-            uploadImageInternal(filename, data.getInputStream());
+            uploadImageInternal(targetFolder, filename, data.getInputStream());
             return true;
         }
         return false;
     }
 
-    private void deleteOldFiles(String filename) {
+    private void deleteOldFiles(Path imagesFolder, String filename) {
         EXTENSIONS.stream()
                 .map(ext -> imagesFolder.resolve(filename + ext))
                 .filter(Files::exists)
@@ -84,7 +104,7 @@ public class ImageService {
     }
 
     @SneakyThrows
-    private void uploadImageInternal(String name, InputStream data) {
+    private void uploadImageInternal(Path imagesFolder, String name, InputStream data) {
         try (data) {
             if (data.available() > 0) {
                 Files.copy(data, imagesFolder.resolve(name), StandardCopyOption.REPLACE_EXISTING);

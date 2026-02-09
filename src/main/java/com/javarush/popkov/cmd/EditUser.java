@@ -45,14 +45,14 @@ public class EditUser implements Command {
         if (req.getParameter("create") != null) {
             userService.create(user);
             String imageId = "image-" + user.getId();
-            if (imageService.uploadImage(req, imageId)) {
+            if (imageService.uploadUserImage(req, imageId)) {
                 user.setImageId(imageId);
                 userService.update(user);
             }
         } else if (req.getParameter("update") != null) {
             user.setId(Long.parseLong(req.getParameter("id")));
             String imageId = "image-" + user.getId();
-            if (imageService.uploadImage(req, imageId)) {
+            if (imageService.uploadUserImage(req, imageId)) {
                 user.setImageId(imageId);
             }
             userService.update(user);

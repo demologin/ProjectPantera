@@ -1,7 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <c:import url="parts/header.jsp"/>
-<c:import url="parts/header.jsp"/>
 <body>
 <div class="container">
     <form action="create-quest" method="post">
@@ -32,12 +31,11 @@
 </div>
 
 <script>
-    //это чисто для отладки фрагмент
     document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('jruDemo').addEventListener('click', function(event) {
             event.preventDefault();
-            document.getElementById('quest-name').value = 'Проверим твои знания арифметики';
-            document.getElementById('questTextareaDomId').value =`<%@include file="./parts/quest-math.txt"%>`;
+            document.getElementById('quest-name').value = 'Проверим твои умения отгадывать загадки';
+            document.getElementById('questTextareaDomId').value =`<%@include file="parts/quest.txt"%>`;
         });
     });
 </script>
