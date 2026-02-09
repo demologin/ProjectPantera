@@ -1,0 +1,71 @@
+package com.javarush.popkov.cmd;
+
+import com.javarush.popkov.entity.Gender;
+import com.javarush.popkov.entity.Role;
+import com.javarush.popkov.entity.User;
+import com.javarush.popkov.service.ImageService;
+import com.javarush.popkov.service.UserService;
+import com.javarush.popkov.util.Go;
+import com.javarush.popkov.util.Key;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.Part;
+import lombok.SneakyThrows;
+
+@SuppressWarnings("unused")
+public class EditUser implements Command {
+
+    private final UserService userService;
+    private final ImageService imageService;
+
+    public EditUser(UserService userService, ImageService imageService) {
+        this.userService = userService;
+        this.imageService = imageService;
+    }
+
+
+    public String doGet(HttpServletRequest req) {
+        String stringId = req.getParameter(Key.ID);
+        if (stringId != null) {
+            long id = Long.parseLong(stringId);
+            userService.get(id)
+                    .ifPresent(user -> req.setAttribute(Key.USER, user));
+        }
+        return getView();
+    }
+
+    @Override
+    @SneakyThrows
+    public String doPost(HttpServletRequest req) {
+        long id = Long.parseLong(req.getParameter(Key.ID));
+        User existingUser = userService.get(id).orElse(null);
+        String roleParam = req.getParameter("role");
+        String genderParam = req.getParameter("gender");
+        Role role = roleParam != null
+                ? Role.valueOf(roleParam)
+                : existingUser != null ? existingUser.getRole() : Role.USER;
+        Gender gender = genderParam != null
+                ? Gender.valueOf(genderParam)
+                : existingUser != null ? existingUser.getGender() : Gender.MALE;
+        User user = User.builder()
+                .login(req.getParameter("login"))
+                .password(req.getParameter("password"))
+                .role(role)
+                .gender(gender)
+                .build();
+        user.setId(id);
+        boolean isCreate = req.getParameter("create") != null;
+        if (isCreate) {
+            userService.create(user);
+        }
+        String imageId = "image-" + user.getId();
+        Part imagePart = req.getPart("image");
+        if (imagePart != null && imagePart.getInputStream().available() > 0) {
+            imageService.uploadImage(req, imageId);
+            user.setImageId(imageId);
+        }
+        userService.update(user);
+        return Go.EDIT_USER + "?id=" + user.getId();
+    }
+
+
+}
