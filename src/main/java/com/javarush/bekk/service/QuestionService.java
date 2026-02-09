@@ -15,4 +15,8 @@ public class QuestionService {
         questionRepository.create(question);
     }
 
+    public void getQuestion(Long id) {
+        questionRepository.get(id);
+    }
+
 }
