@@ -44,7 +44,7 @@ public class Quest implements Command {
             String text = req.getParameter(Key.TEXT);
             Optional<Question> question = questionService.update(questionId, text);
             if (question.isPresent()) {
-                imageService.uploadQuestImage(req, question.get().getImage());
+                imageService.uploadImage(req, question.get().getImage());
             }
             return "%s?id=%d#bookmark%d".formatted(Go.QUEST, id, questionId);
         } else {

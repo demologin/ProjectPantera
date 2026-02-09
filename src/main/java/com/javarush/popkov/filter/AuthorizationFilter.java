@@ -24,11 +24,16 @@ import java.util.Map;
         Go.CREATE, Go.QUEST})
 public class AuthorizationFilter extends HttpFilter {
 
-    Map<Role, List<String>> permissions = Map.of(
-            Role.GUEST, List.of(Go.HOME, Go.SIGNUP, Go.LOGIN),
-            Role.USER, List.of(Go.HOME, Go.SIGNUP, Go.LOGIN,
+    private final Map<Role, List<String>> permissions = Map.of(
+            Role.GUEST,
+            List.of(Go.HOME, Go.SIGNUP, Go.LOGIN),
+
+            Role.USER,
+            List.of(Go.HOME, Go.SIGNUP, Go.LOGIN,
                     Go.LOGOUT, Go.LIST_USER, Go.PROFILE, Go.EDIT_USER, Go.PLAY_GAME),
-            Role.ADMIN, List.of(Go.HOME, Go.SIGNUP, Go.LOGIN,
+
+            Role.ADMIN,
+            List.of(Go.HOME, Go.SIGNUP, Go.LOGIN,
                     Go.LOGOUT, Go.LIST_USER, Go.PROFILE, Go.EDIT_USER, Go.PLAY_GAME,
                     Go.CREATE, Go.QUEST)
     );
@@ -37,8 +42,16 @@ public class AuthorizationFilter extends HttpFilter {
     protected void doFilter(HttpServletRequest req, HttpServletResponse res, FilterChain chain)
             throws IOException, ServletException {
         String requestURI = req.getRequestURI();
-        requestURI = requestURI.equals("/") ? "/home" : requestURI;
-        String cmdUri = "/" + requestURI.split("[?#/]")[1];
+        String contextPath = req.getContextPath();
+        String path = requestURI.startsWith(contextPath)
+                ? requestURI.substring(contextPath.length())
+                : requestURI;
+        path = path.split("[?#]")[0];
+        if (isStaticResource(path)) {
+            chain.doFilter(req, res);
+            return;
+        }
+        String cmdUri = path.isBlank() || "/".equals(path) ? "/home" : path;
         HttpSession session = req.getSession();
         Role role = RequestHelpers.getUser(session)
                 .map(User::getRole)
@@ -49,7 +62,15 @@ public class AuthorizationFilter extends HttpFilter {
             String message = "Access denied";
             log.warn(message);
             RequestHelpers.createError(req, message);
-            res.sendRedirect(Go.LOGIN);
+            res.sendRedirect(req.getContextPath() + Go.LOGIN);
         }
+    }
+
+    private boolean isStaticResource(String path) {
+        return path.startsWith("/assets/")
+                || path.startsWith("/images/")
+                || path.startsWith("/user-images/")
+                || path.startsWith("/quest-images/")
+                || path.equals("/favicon.ico");
     }
 }

@@ -9,6 +9,7 @@ import com.javarush.popkov.util.Go;
 import com.javarush.popkov.util.Key;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import jakarta.servlet.http.Part;
 import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
 
@@ -32,7 +33,9 @@ public class Signup implements Command {
                 .build();
         userService.create(user);
         String imageId = "image-" + user.getId();
-        if (imageService.uploadUserImage(request, imageId)) {
+        Part imagePart = request.getPart("image");
+        if (imagePart != null && imagePart.getInputStream().available() > 0) {
+            imageService.uploadImage(request, imageId);
             user.setImageId(imageId);
             userService.update(user);
         }

@@ -23,7 +23,7 @@ public class ImageController extends HttpServlet {
         String requestURI = req.getRequestURI();
         String target = req.getContextPath() + "/user-images/";
         String nameImage = requestURI.replace(target, "");
-        Path path = imageService.getUserImagePath(nameImage);
+        Path path = imageService.getImagePath(nameImage);
         Files.copy(path, resp.getOutputStream());
     }
 }

@@ -8,6 +8,7 @@ import com.javarush.popkov.service.UserService;
 import com.javarush.popkov.util.Go;
 import com.javarush.popkov.util.Key;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.Part;
 import lombok.SneakyThrows;
 
 @SuppressWarnings("unused")
@@ -45,14 +46,18 @@ public class EditUser implements Command {
         if (req.getParameter("create") != null) {
             userService.create(user);
             String imageId = "image-" + user.getId();
-            if (imageService.uploadUserImage(req, imageId)) {
+            Part imagePart = req.getPart("image");
+            if (imagePart != null && imagePart.getInputStream().available() > 0) {
+                imageService.uploadImage(req, imageId);
                 user.setImageId(imageId);
                 userService.update(user);
             }
         } else if (req.getParameter("update") != null) {
             user.setId(Long.parseLong(req.getParameter("id")));
             String imageId = "image-" + user.getId();
-            if (imageService.uploadUserImage(req, imageId)) {
+            Part imagePart = req.getPart("image");
+            if (imagePart != null && imagePart.getInputStream().available() > 0) {
+                imageService.uploadImage(req, imageId);
                 user.setImageId(imageId);
             }
             userService.update(user);

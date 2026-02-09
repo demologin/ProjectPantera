@@ -2,7 +2,7 @@ package com.javarush.popkov.util;
 
 @SuppressWarnings("unused")
 public class Go {
-    public static final String INDEX = "";
+    public static final String INDEX = "/";
     public static final String HOME = "/home";
 
     public static final String SIGNUP = "/signup";

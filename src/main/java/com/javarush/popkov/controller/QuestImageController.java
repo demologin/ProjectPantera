@@ -22,7 +22,7 @@ public class QuestImageController extends HttpServlet {
         String requestURI = req.getRequestURI();
         String target = req.getContextPath() + "/quest-images/";
         String nameImage = requestURI.replace(target, "");
-        Path path = imageService.getQuestImagePath(nameImage);
+        Path path = imageService.getImagePath(nameImage);
         Files.copy(path, resp.getOutputStream());
     }
 }

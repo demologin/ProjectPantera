@@ -35,6 +35,13 @@ public class FrontController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String uri = req.getRequestURI();
+        String ctx = req.getContextPath();
+        String path = uri.startsWith(ctx) ? uri.substring(ctx.length()) : uri;
+        if (path.startsWith("/assets/") || path.startsWith("/images/")) {
+            req.getServletContext().getNamedDispatcher("default").forward(req, resp);
+            return;
+        }
         Command command = httpResolver.resolve(req);
         String view = command.doGet(req);
         String jsp = getJsp(view);
@@ -62,7 +69,7 @@ public class FrontController extends HttpServlet {
         try {
             Command command = httpResolver.resolve(req);
             String redirect = command.doPost(req);
-            resp.sendRedirect(redirect);
+            resp.sendRedirect(req.getContextPath() + redirect);
         } catch (AppException e) {
             log.warn("Error: {}", e.getMessage());
             RequestHelpers.createError(req, e.getMessage());
