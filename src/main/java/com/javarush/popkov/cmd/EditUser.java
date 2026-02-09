@@ -37,31 +37,33 @@ public class EditUser implements Command {
     @SneakyThrows
     public String doPost(HttpServletRequest req) {
         long id = Long.parseLong(req.getParameter(Key.ID));
+        User existingUser = userService.get(id).orElse(null);
+        String roleParam = req.getParameter("role");
+        String genderParam = req.getParameter("gender");
+        Role role = roleParam != null
+                ? Role.valueOf(roleParam)
+                : existingUser != null ? existingUser.getRole() : Role.USER;
+        Gender gender = genderParam != null
+                ? Gender.valueOf(genderParam)
+                : existingUser != null ? existingUser.getGender() : Gender.MALE;
         User user = User.builder()
                 .login(req.getParameter("login"))
                 .password(req.getParameter("password"))
-                .role(Role.valueOf(req.getParameter("role")))
-                .gender(Gender.valueOf(req.getParameter("gender")))
+                .role(role)
+                .gender(gender)
                 .build();
-        if (req.getParameter("create") != null) {
+        user.setId(id);
+        boolean isCreate = req.getParameter("create") != null;
+        if (isCreate) {
             userService.create(user);
-            String imageId = "image-" + user.getId();
-            Part imagePart = req.getPart("image");
-            if (imagePart != null && imagePart.getInputStream().available() > 0) {
-                imageService.uploadImage(req, imageId);
-                user.setImageId(imageId);
-                userService.update(user);
-            }
-        } else if (req.getParameter("update") != null) {
-            user.setId(Long.parseLong(req.getParameter("id")));
-            String imageId = "image-" + user.getId();
-            Part imagePart = req.getPart("image");
-            if (imagePart != null && imagePart.getInputStream().available() > 0) {
-                imageService.uploadImage(req, imageId);
-                user.setImageId(imageId);
-            }
-            userService.update(user);
         }
+        String imageId = "image-" + user.getId();
+        Part imagePart = req.getPart("image");
+        if (imagePart != null && imagePart.getInputStream().available() > 0) {
+            imageService.uploadImage(req, imageId);
+            user.setImageId(imageId);
+        }
+        userService.update(user);
         return Go.EDIT_USER + "?id=" + user.getId();
     }
 
