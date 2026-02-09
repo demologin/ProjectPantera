@@ -26,7 +26,7 @@ public class AuthorizationFilter extends HttpFilter {
 
     private final Map<Role, List<String>> permissions = Map.of(
             Role.GUEST,
-            List.of(Go.HOME, Go.SIGNUP, Go.LOGIN),
+            List.of(Go.HOME, Go.SIGNUP, Go.LOGIN, Go.PLAY_GAME),
 
             Role.USER,
             List.of(Go.HOME, Go.SIGNUP, Go.LOGIN,

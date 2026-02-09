@@ -17,7 +17,7 @@
       </div>
       <div class="col-md-6 d-md-flex align-items-md-center">
         <form action="play-game?id=${game.id}" method="post">
-          <h2 class="fw-bold">${question.text}</h2>
+          <h2 class="fw-bold"><span class="question-text-bg">${question.text}</span></h2>
           <p class="my-3">Выберите вариант ответа</p>
           <ul>
             <c:forEach var="answer" items="${question.answers}">

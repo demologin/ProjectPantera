@@ -10,7 +10,7 @@
               action="quest"
               method="post" enctype="multipart/form-data"
               id="form${question.id}">
-            <input name="text" class="w-100" type="text" value="${question.text}">
+            <input name="text" class="w-100 question-text-bg" type="text" value="${question.text}">
             <img src="<c:url value='/quest-images/${question.image}'/>" class="w-25" alt="${question.text}" height="10%">
             <input name="image" class="w-25" type="file">
             <button type="submit" class="btn btn-primary">Обновить</button>
