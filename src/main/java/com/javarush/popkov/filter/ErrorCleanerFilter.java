@@ -12,10 +12,7 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
-@WebFilter({Go.INDEX, Go.HOME, Go.SIGNUP,
-        Go.LOGIN, Go.LOGOUT, Go.LIST_USER,
-        Go.PROFILE, Go.EDIT_USER, Go.CREATE,
-        Go.QUEST, Go.PLAY_GAME})
+@WebFilter("/*")
 public class ErrorCleanerFilter extends HttpFilter {
 
     @Override
