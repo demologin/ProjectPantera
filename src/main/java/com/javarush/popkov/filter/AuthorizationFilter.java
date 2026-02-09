@@ -33,7 +33,8 @@ public class AuthorizationFilter extends HttpFilter {
             ),
             Role.USER, List.of(
                     Go.HOME, Go.INDEX, Go.LOGIN, Go.SIGNUP, Go.STATISTICS,
-                    Go.PROFILE, Go.LOGOUT, Go.EDIT_USER, Go.PLAY_GAME, Go.QUEST
+                    Go.PROFILE, Go.LOGOUT, Go.EDIT_USER, Go.PLAY_GAME, Go.QUEST,
+                    Go.LIST_USER
             ),
             Role.ADMIN, List.of(
                     Go.HOME, Go.INDEX, Go.LOGIN, Go.SIGNUP, Go.STATISTICS,

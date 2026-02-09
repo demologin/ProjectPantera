@@ -15,10 +15,17 @@ import java.util.Collection;
 public class Question implements AbstractEntity {
     private Long id;
     private Long questId;
+    private Long label;
     private String text;
     private GameState gameState;
     private final Collection<Answer> answers = new ArrayList<>();
     public String getImage() {
+        if (questId != null && label != null) {
+            return "quest-" + questId + "-question-" + label;
+        }
+        if (label != null) {
+            return "question-" + label;
+        }
         return "question-" + id;
     }
 }

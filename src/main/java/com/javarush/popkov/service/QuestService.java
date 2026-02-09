@@ -45,6 +45,13 @@ public class QuestService {
 
 
     public Optional<Quest> create(String name, String text, Long userId) {
+        boolean exists = questRepository
+                .find(Quest.builder().name(name).authorId(userId).build())
+                .findAny()
+                .isPresent();
+        if (exists) {
+            throw new AppException("Квест уже создан");
+        }
         Map<Long, Question> map = fillDraftMap(text);
         if (map.isEmpty()) {
             return Optional.empty();
@@ -107,9 +114,9 @@ public class QuestService {
 
     private Optional<Question> fillQuestion(Question currentQuestion, long key, String type, String partText) {
         currentQuestion = switch (type) {
-            case QUEST_SYMBOL -> Question.builder().text(partText).gameState(GameState.PLAY).build();
-            case WIN_SYMBOL -> Question.builder().text(partText).gameState(GameState.WIN).build();
-            case LOST_SYMBOL -> Question.builder().text(partText).gameState(GameState.LOST).build();
+            case QUEST_SYMBOL -> Question.builder().text(partText).gameState(GameState.PLAY).label(key).build();
+            case WIN_SYMBOL -> Question.builder().text(partText).gameState(GameState.WIN).label(key).build();
+            case LOST_SYMBOL -> Question.builder().text(partText).gameState(GameState.LOST).label(key).build();
             case LINK_SYMBOL -> {
                 Answer build = Answer.builder()
                         .nextQuestionId(key)

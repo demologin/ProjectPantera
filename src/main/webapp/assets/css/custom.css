@@ -122,3 +122,11 @@ legend,
     padding: 0.25rem 0.5rem;
     border-radius: 0.35rem;
 }
+
+.quest-text-bg {
+    display: inline-block;
+    background-color: rgba(33, 37, 41, 0.85);
+    color: #f1f3f5;
+    padding: 0.2rem 0.45rem;
+    border-radius: 0.35rem;
+}
