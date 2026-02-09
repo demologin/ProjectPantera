@@ -1,11 +1,13 @@
 package com.javarush.trukhanova.entity;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Getter
+@Data
+@NoArgsConstructor
 @AllArgsConstructor
 public class Answer {
-    private final String text;
-    private final int nextStepId;
+    private String text;
+    private int nextStepId;
 }

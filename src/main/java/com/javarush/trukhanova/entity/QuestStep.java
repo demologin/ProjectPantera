@@ -1,15 +1,17 @@
 package com.javarush.trukhanova.entity;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import java.util.List;
 
-@Getter
+@Data
+@NoArgsConstructor
 @AllArgsConstructor
 public class QuestStep {
-    private final int id;
-    private final String title;
-    private final String description;
-    private final String imagePath;
-    private final List<Answer> answers;
+    private int id;
+    private String title;
+    private String description;
+    private String imagePath;
+    private List<Answer> answers;
 }
