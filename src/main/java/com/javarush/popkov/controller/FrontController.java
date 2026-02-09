@@ -5,7 +5,9 @@ import com.javarush.popkov.config.Config;
 import com.javarush.popkov.config.Winter;
 import com.javarush.popkov.entity.Gender;
 import com.javarush.popkov.entity.Role;
+import com.javarush.popkov.exception.AppException;
 import com.javarush.popkov.util.Go;
+import com.javarush.popkov.util.RequestHelpers;
 import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
@@ -14,9 +16,11 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
 
+@Slf4j
 @MultipartConfig(fileSizeThreshold = 1 << 20)
 @WebServlet({
         Go.INDEX, Go.HOME,
@@ -51,10 +55,18 @@ public class FrontController extends HttpServlet {
         return "/WEB-INF/" + view + ".jsp";
     }
 
+
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        Command command = httpResolver.resolve(req);
-        String redirect = command.doPost(req);
-        resp.sendRedirect(req.getContextPath() + redirect);
+        try {
+            Command command = httpResolver.resolve(req);
+            String redirect = command.doPost(req);
+            resp.sendRedirect(redirect);
+        } catch (AppException e) {
+            log.warn("Error: {}", e.getMessage());
+            RequestHelpers.createError(req, e.getMessage());
+            resp.sendRedirect(req.getRequestURI());
+        }
     }
 }
