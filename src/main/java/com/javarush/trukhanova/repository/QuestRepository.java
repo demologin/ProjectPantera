@@ -1,8 +1,9 @@
 package com.javarush.trukhanova.repository;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.dataformat.yaml.YAMLMapper;
 import com.javarush.trukhanova.entity.QuestStep;
+import com.javarush.trukhanova.exception.QuestException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -11,33 +12,48 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class QuestRepository {
+public class QuestRepository implements Repository<QuestStep> {
     private static final Logger logger = LogManager.getLogger(QuestRepository.class);
     private final Map<Integer, QuestStep> steps = new HashMap<>();
 
+    // Список файлов, которые мы создали выше
+    private final List<String> dataFiles = List.of(
+            "prologue.yml",
+            "gameplay.yml",
+            "final.yml"
+    );
+
     public QuestRepository() {
-        loadData();
+        load();
     }
 
-    private void loadData() {
-        logger.info("Начало загрузки данных квеста из JSON");
-        ObjectMapper mapper = new ObjectMapper();
-        try (InputStream is = getClass().getClassLoader().getResourceAsStream("game_steps.json")) {
-            if (is == null) {
-                logger.error("Файл game_steps.json не найден в ресурсах!");
-                return;
+    @Override
+    public void load() {
+        YAMLMapper mapper = new YAMLMapper();
+        for (String fileName : dataFiles) {
+            try (InputStream is = getClass().getClassLoader().getResourceAsStream(fileName)) {
+                if (is == null) {
+                    throw new QuestException("Критическая ошибка: файл " + fileName + " не найден!");
+                }
+                List<QuestStep> loaded = mapper.readValue(is, new TypeReference<List<QuestStep>>() {});
+                for (QuestStep step : loaded) {
+                    steps.put(step.getId(), step);
+                }
+                logger.info("Загружено {} шагов из {}", loaded.size(), fileName);
+            } catch (Exception e) {
+                throw new QuestException("Ошибка при чтении YAML файла: " + fileName, e);
             }
-            List<QuestStep> stepList = mapper.readValue(is, new TypeReference<List<QuestStep>>() {});
-            for (QuestStep step : stepList) {
-                steps.put(step.getId(), step);
-            }
-            logger.info("Загрузка завершена успешно. Загружено шагов: {}", steps.size());
-        } catch (Exception e) {
-            logger.error("Произошла ошибка при парсинге JSON: ", e);
         }
+        logger.info("Итого в игре доступно {} локаций.", steps.size());
     }
 
-    public QuestStep getStep(int id) {
-        return steps.getOrDefault(id, steps.get(1));
+    @Override
+    public QuestStep getById(int id) {
+        QuestStep step = steps.get(id);
+        if (step == null) {
+            logger.warn("Попытка перехода на несуществующий ID: {}. Сбрасываем на старт.", id);
+            return steps.get(1);
+        }
+        return step;
     }
 }

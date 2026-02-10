@@ -1,24 +1,19 @@
 package com.javarush.trukhanova.service;
 
 import com.javarush.trukhanova.entity.QuestStep;
-import com.javarush.trukhanova.repository.QuestRepository;
-import lombok.Getter;
+import com.javarush.trukhanova.repository.Repository;
 
-public class GameService {
-    private final QuestRepository repository;
+public class GameService implements GameLogic {
 
-    @Getter
-    private int gamesPlayed = 0;
+    private final Repository<QuestStep> repository;
 
-    public GameService(QuestRepository repository) {
+    public GameService(Repository<QuestStep> repository) {
         this.repository = repository;
     }
 
+    @Override
     public QuestStep getNextStep(int id) {
-        if (id == 1) {
-            gamesPlayed++;
-        }
-        return repository.getStep(id);
+        return repository.getById(id);
     }
 
     public boolean isGameOver(QuestStep step) {
@@ -27,8 +22,8 @@ public class GameService {
         boolean noMoreAnswers = step.getAnswers() == null || step.getAnswers().isEmpty();
 
         String title = step.getTitle().toLowerCase();
-        boolean hasEndWord = title.contains("победа") || title.contains("смерть")
-                || title.contains("конец") || title.contains("плен");
+        boolean hasEndWord = title.contains("победа") || title.contains("конец")
+                || title.contains("плен") || title.contains("яд");
 
         return noMoreAnswers || hasEndWord;
     }
