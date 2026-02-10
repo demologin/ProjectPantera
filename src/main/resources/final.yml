@@ -1,0 +1,35 @@
+- id: 7
+  title: "ПОБЕДА"
+  imagePath: "static/images/win.jpg"
+  description: "Живительная влага наполнила вас силой. Вы нашли выход и сокровища. Экспедиция вошла в историю как самая успешная!"
+  answers:
+    - text: "Начать новую экспедицию"
+      nextStepId: 1
+- id: 11
+  title: "КОНЕЦ ПУТИ"
+  imagePath: "static/images/lost.jpg"
+  description: "Бревно оказалось скользким. Кайманы не упустили свой шанс. Игра окончена."
+  answers:
+    - text: "Попробовать снова"
+      nextStepId: 1
+- id: 12
+  title: "ЛОВУШКА"
+  imagePath: "static/images/lost.jpg"
+  description: "Как только вы ударили по двери, сработал древний механизм. Потолок начал опускаться... Игра окончена."
+  answers:
+    - text: "Попробовать снова"
+      nextStepId: 1
+- id: 13
+  title: "ЯД"
+  imagePath: "static/images/lost.jpg"
+  description: "В чаше оказался смертельный экстракт лиан. Вы засыпаете навсегда под сводами храма. Игра окончена."
+  answers:
+    - text: "Попробовать снова"
+      nextStepId: 1
+- id: 14
+  title: "ПЛЕН"
+  imagePath: "static/images/lost.jpg"
+  description: "Ваш ответ не понравился вождю (или у вас не было амулета). Вас оставляют в племени в качестве слуги. Игра окончена."
+  answers:
+    - text: "Попробовать снова"
+      nextStepId: 1
