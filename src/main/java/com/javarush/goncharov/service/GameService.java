@@ -1,11 +1,9 @@
 package com.javarush.goncharov.service;
 
-import com.javarush.goncharov.model.Game;
-import com.javarush.goncharov.model.Quest;
-import com.javarush.goncharov.model.Question;
-import com.javarush.goncharov.model.User;
+import com.javarush.goncharov.model.*;
 import com.javarush.goncharov.repository.*;
 
+import java.util.Comparator;
 import java.util.Map;
 import java.util.Optional;
 
@@ -13,16 +11,19 @@ public class GameService {
     private final GameRepository gameRepository;
     private final QuestService questService;
     private final QuestionService questionService;
+    private final AnswerRepository answerRepository;
     private final UserService userService;
 
     public GameService(GameRepository gameRepository,
                        QuestService questService,
                        QuestionService questionService,
-                       UserService userService) {
+                       UserService userService,
+                       AnswerRepository answerRepository) {
         this.gameRepository = gameRepository;
         this.questService = questService;
         this.questionService = questionService;
         this.userService = userService;
+        this.answerRepository = answerRepository;
     }
 
     public Optional<Game> get(Long id){
@@ -31,11 +32,17 @@ public class GameService {
 
     public Optional<Game> getGame(Long questId, Long userId) {
         if (gameRepository.getAll().containsKey(questId)){
-            Game game = gameRepository.getAll().get(questId);
-            if (game.getUserId().equals(userId)){
-                return Optional.of(game);
+//            Game game = gameRepository.getAll().get(questId);
+            Optional<Game> game = gameRepository.find(questId).max(Comparator.comparingLong(Game::getId));
+            if (game.isPresent() &&
+                    game.get().getUserId().equals(userId)){
+                return game;
             }
         }
+        return getNewGame(questId, userId);
+    }
+
+    private Optional<Game> getNewGame(Long questId, Long userId) {
         User user = userService.get(userId).get();
         Quest quest = questService.get(questId).get();
         Long startQuestionId = quest.getStartQuestionId();
@@ -72,5 +79,22 @@ public class GameService {
 
     public Map<Long, Game> getAll(){
         return gameRepository.getAll();
+    }
+
+    public Optional<Game> processOneStep(Long gameId, Long answerId) {
+        Game game = gameRepository.get(gameId).get();
+        if (game.getGameState() == GameState.PLAY) {
+            Answer answer = answerRepository.get(answerId).get();
+            Long nextQuestionId = answer != null
+                    ? answer.getNextQuestionId()
+                    : game.getCurrentQuestionId();
+            game.setCurrentQuestionId(nextQuestionId);
+            Question question = questionService.get(nextQuestionId).get();
+            game.setGameState(question.getGameState());
+            gameRepository.update(game);
+        } else {
+            game = getNewGame(game.getQuestId(), game.getUserId()).get();
+        }
+        return Optional.ofNullable(game);
     }
 }

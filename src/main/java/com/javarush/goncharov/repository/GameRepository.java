@@ -5,6 +5,7 @@ import com.javarush.goncharov.model.Game;
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicLong;
+import java.util.stream.Stream;
 
 public class GameRepository implements Repository<Game>{
     private final Map<Long, Game> map;
@@ -31,6 +32,12 @@ public class GameRepository implements Repository<Game>{
     @Override
     public Map<Long, Game> getAll() {
         return map;
+    }
+
+    public Stream<Game> find(Long pattern) {
+        return map.values()
+                .stream()
+                .filter(u -> u.getQuestId().equals(pattern));
     }
 
     @Override

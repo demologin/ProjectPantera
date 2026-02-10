@@ -42,7 +42,7 @@
                         </button>
                     </c:when>
                     <c:otherwise>
-                        <button id="submit" class="btn btn-warning">Новая игра</button>
+                        <button name="NewGame" value="NewGame" id="submit" class="btn btn-warning">Новая игра</button>
                     </c:otherwise>
                 </c:choose>
             </form>

@@ -1,10 +1,8 @@
 package com.javarush.goncharov.service;
 
-import com.javarush.goncharov.model.Answer;
-import com.javarush.goncharov.model.Quest;
-import com.javarush.goncharov.model.Question;
-import com.javarush.goncharov.model.User;
+import com.javarush.goncharov.model.*;
 import com.javarush.goncharov.repository.*;
+import org.eclipse.tags.shaded.org.apache.bcel.generic.ARETURN;
 
 import java.util.Collection;
 import java.util.Map;
@@ -61,14 +59,11 @@ public class QuestService {
             Long idQuestion = Long.parseLong(matcher.group(1));
             String symbolQuestion = matcher.group(2);
             String text = matcher.group(3);
-            if (symbolQuestion.equals(":") ||
-                    symbolQuestion.equals("+") ||
-                    symbolQuestion.equals("-")){
-                question = Question.builder()
-                        .questId(quest.getId())
-                        .questName(quest.getName())
-                        .text(text)
-                        .build();
+            Optional<Question> newQuestion = extracted(quest, symbolQuestion, text, question, idQuestion);
+            if (newQuestion.isPresent()){
+                question = newQuestion.get();
+                question.setQuestId(quest.getId());
+                question.setQuestName(quest.getName());
                 questionService.post(question);
                 question.setId(idQuestion);
                 questionService.update(question);
@@ -77,7 +72,26 @@ public class QuestService {
                     quest.setStartQuestionId(question.getId());
                 }
             }
-            if (symbolQuestion.equals("<")){
+        }
+        questRepository.update(quest);
+    }
+
+    private Optional<Question> extracted(Quest quest, String symbolQuestion, String text,
+                                         Question question, Long idQuestion) {
+        question = switch (symbolQuestion) {
+            case ":" -> Question.builder()
+                    .text(text)
+                    .gameState(GameState.PLAY)
+                    .build();
+            case "+" -> Question.builder()
+                    .text(text)
+                    .gameState(GameState.WIN)
+                    .build();
+            case "-" -> Question.builder()
+                    .text(text)
+                    .gameState(GameState.LOSE)
+                    .build();
+            case "<" -> {
                 Answer answer = Answer.builder()
                         .questionId(question.getId())
                         .nextQuestionId(idQuestion)
@@ -86,9 +100,11 @@ public class QuestService {
                         .build();
                 answerRepository.create(answer);
                 question.getAnswers().add(answer);
+                yield  null;
             }
-        }
-        questRepository.update(quest);
+            default -> throw new RuntimeException("incorrect parsing");
+        };
+        return Optional.ofNullable(question);
     }
 
     private static Matcher getMatcher(Quest quest) {

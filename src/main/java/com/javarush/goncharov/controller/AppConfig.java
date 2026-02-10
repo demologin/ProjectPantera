@@ -26,6 +26,7 @@ public class AppConfig {
         this.gameService = new GameService(new GameRepository(storage),
                 this.questService,
                 this.questionService,
-                this.userService);
+                this.userService,
+                this.answerRepository);
     }
 }
