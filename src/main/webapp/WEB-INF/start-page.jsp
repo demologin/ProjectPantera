@@ -5,4 +5,6 @@
 </h1>
 <br/>
 <a href="list-user">List Users</a>
+<a href="quest"> new quest</a>
+<a href="questRepository">all quests</a>
 </body>
