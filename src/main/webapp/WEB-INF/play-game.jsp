@@ -8,7 +8,12 @@
 <jsp:useBean id="question" scope="request" type="com.javarush.goncharov.model.Question"/>
 <jsp:useBean id="game" scope="request" type="com.javarush.goncharov.model.Game"/>
 
-
+<div id="alert-container"></div>
+<c:if test="${not empty sessionScope.alertMessage}">
+<div class="alert alert-${sessionScope.alertType}" role="alert"><span>${sessionScope.alertMessage}</span></div>
+    <c:remove var="alertMessage" scope="session"/>
+    <c:remove var="alertType" scope="session"/>
+</c:if>
 <div class="container py-4 py-xl-5">
     <div class="row gy-4 gy-md-0">
 <%--        <div class="col-md-6">--%>
@@ -37,7 +42,8 @@
 
                 <c:choose>
                     <c:when test="${not empty question.answers}">
-                        <button name="game" class="btn btn-primary btn-lg me-2" role="button" id="submit" class="btn btn-success">
+                        <button name="game" class="btn btn-primary btn-lg me-2" role="button" id="submit" class="btn btn-success"
+                                onclick="showAlert('${sessionScope.alertTitle}', '${sessionScope.alertType}')">
                             Отправить
                         </button>
                     </c:when>

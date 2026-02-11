@@ -17,13 +17,16 @@ public class PlayGame extends DefaultServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
+        Long questId = 0L;
         User userSession = (User) session.getAttribute("user");
-        Long questId = Long.parseLong(req.getParameter("questId"));
-//        Long userId = Long.parseLong(req.getParameter("userId"));
+        if (req.getParameter("questId") != null){
+            questId = Long.parseLong(req.getParameter("questId"));
+        } else {
+            questId = (Long)session.getAttribute("questId");
+        }
         Optional<User> user = userService.get(userSession.getId());
         if (user.isPresent()) {
             Optional<Game> game = gameService.getGame(questId, userSession.getId());
-            System.out.println(game);
             if (game.isPresent()) {
                 showOneQuestion(req, game.get());
                 req.getRequestDispatcher("/WEB-INF/play-game.jsp").forward(req, resp);
@@ -42,6 +45,7 @@ public class PlayGame extends DefaultServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        HttpSession session = req.getSession();
         Long gameId = Long.parseLong(req.getParameter("id"));
         Long answerId = 0L;
         String answerIdStr = req.getParameter("answer");
@@ -51,7 +55,12 @@ public class PlayGame extends DefaultServlet {
         Optional<Game> game = gameService.processOneStep(gameId, answerId);
         if (game.isPresent()) {
             if (answerId == 0 && req.getParameter("game") != null) {
-                String message = "Нужно выбрать какой-то ответ";
+                session.setAttribute("alertType", "danger");
+                session.setAttribute("alertMessage",
+                        "Нужно выбрать какой-то ответ!");
+                session.setAttribute("questId", game.get().getQuestId());
+                resp.sendRedirect("/play-game");
+                return;
             }
             Game currentGame = game.get();
             resp.sendRedirect("/play-game?questId=%d&id=%d".formatted(game.get().getQuestId(), game.get().getId()));

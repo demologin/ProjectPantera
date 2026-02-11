@@ -81,12 +81,15 @@ public class GameService {
     }
 
     public Optional<Game> processOneStep(Long gameId, Long answerId) {
+        Long nextQuestionId = 0L;
         Game game = gameRepository.get(gameId).get();
         if (game.getGameState() == GameState.PLAY) {
-            Answer answer = answerRepository.get(answerId).get();
-            Long nextQuestionId = answer != null
-                    ? answer.getNextQuestionId()
-                    : game.getCurrentQuestionId();
+            if (answerRepository.get(answerId).isPresent()){
+                Answer answer = answerRepository.get(answerId).get();
+                nextQuestionId = answer.getNextQuestionId();
+            } else {
+                nextQuestionId = game.getCurrentQuestionId();
+            }
             game.setCurrentQuestionId(nextQuestionId);
             Question question = questionService.get(nextQuestionId).get();
             game.setGameState(question.getGameState());
