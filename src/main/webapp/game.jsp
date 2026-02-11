@@ -4,7 +4,7 @@
 <head>
     <title>${step.title}</title>
     <style>
-        /* Глобальный сброс: паддинги больше не ломают ширину */
+        /* Глобальный сброс */
         *, *:before, *:after {
             box-sizing: border-box;
         }
@@ -23,21 +23,70 @@
 
         .container {
             max-width: 800px;
-            width: 95%; /* Чуть больше гибкости для мобильных */
+            width: 95%;
             background: #1e1e1e;
             padding: 30px 40px;
             border-radius: 15px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
             border: 1px solid #333;
-            margin: auto; /* Центрирует контейнер по вертикали и горизонтали */
-
-            /* Резиновая высота */
+            margin: auto;
             display: flex;
             flex-direction: column;
             height: auto;
             min-height: min-content;
         }
 
+        #timer-container {
+            position: -webkit-sticky;
+            position: sticky;
+            top: 0;
+            z-index: 999;
+            background-color: #1e1e1e;
+            padding: 10px 0;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #333;
+        }
+
+        #timer-info {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9em;
+            margin-bottom: 8px;
+            color: #4ca1af;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .progress-bar-bg {
+            width: 100%;
+            height: 10px;
+            background: #121212;
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.5);
+        }
+
+        #progress-line {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, #4ca1af, #e74c3c);
+            border-radius: 5px;
+            transition: width 1s linear;
+        }
+
+        .timer-low {
+            color: #ff4d4d !important;
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+
+        /* Панель игрока */
         .stats-panel {
             text-align: right;
             color: #888;
@@ -47,7 +96,6 @@
             letter-spacing: 1px;
             border-bottom: 1px solid #333;
             padding-bottom: 10px;
-            flex-shrink: 0; /* Чтобы панель не сжималась */
         }
 
         .stats-panel strong {
@@ -65,7 +113,6 @@
             font-size: 1.1em;
             margin: 20px 0;
             color: #ccc;
-            text-align: left; /* Убрал justify, чтобы не было дыр в тексте */
         }
 
         .quest-image-container {
@@ -76,11 +123,10 @@
             overflow: hidden;
             border: 2px solid #333;
             background: #000;
-            flex-shrink: 0;
         }
 
         .quest-image {
-            width: 100%; /* Картинка всегда на всю ширину рамки */
+            width: 100%;
             height: auto;
             display: block;
             transition: transform 0.5s ease;
@@ -94,15 +140,14 @@
             display: flex;
             flex-direction: column;
             gap: 15px;
-            margin-top: auto; /* Прижимает блок ответов к низу, если контента мало */
+            margin-top: auto;
             padding-top: 20px;
-            padding-bottom: 10px;
         }
 
         .answer-item {
             opacity: 0;
             transform: translateY(10px);
-            width: 100%;
+            transition: opacity 0.5s ease, transform 0.5s ease;
         }
 
         .btn-choice {
@@ -130,10 +175,6 @@
             background: linear-gradient(135deg, #8e2e2e, #c0392b);
         }
 
-        .btn-restart:hover {
-            background: linear-gradient(135deg, #a93232, #e74c3c);
-        }
-
         hr {
             border: 0;
             border-top: 1px solid #333;
@@ -144,6 +185,18 @@
 <body>
 
 <div class="container">
+    <c:if test="${not empty step.answers}">
+        <div id="timer-container">
+            <div id="timer-info">
+                <span>Время на принятие решения</span>
+                <span><span id="seconds">20</span> сек.</span>
+            </div>
+            <div class="progress-bar-bg">
+                <div id="progress-line"></div>
+            </div>
+        </div>
+    </c:if>
+
     <div class="stats-panel">
         Игрок: <strong>${sessionScope.player.name}</strong> |
         Экспедиций: <strong>${sessionScope.player.gamesPlayed}</strong>
@@ -169,13 +222,12 @@
         <c:choose>
             <c:when test="${empty step.answers}">
                 <div style="text-align: center;">
-                    <h2 style="color: #e74c3c; letter-spacing: 2px;">ФИНАЛ</h2>
+                    <h2 style="color: #e74c3c; letter-spacing: 2px; margin-bottom: 20px;">ФИНАЛ</h2>
                     <div class="answer-item" style="opacity: 1; transform: none;">
                         <a href="index.jsp" class="btn-choice btn-restart">ПОКИНУТЬ ДЖУНГЛИ</a>
                     </div>
                 </div>
             </c:when>
-
             <c:otherwise>
                 <c:forEach var="answer" items="${step.answers}">
                     <div class="answer-item">
@@ -191,8 +243,36 @@
 
 <script>
     document.addEventListener("DOMContentLoaded", function() {
-        const items = document.querySelectorAll('.answer-item');
 
+        const secondsText = document.getElementById('seconds');
+        const progressLine = document.getElementById('progress-line');
+        const timerInfo = document.getElementById('timer-info');
+
+        if (secondsText) {
+            let timeLeft = 20;
+            const totalTime = 20;
+
+            const timerId = setInterval(() => {
+                timeLeft--;
+                if (secondsText) secondsText.innerText = timeLeft;
+
+                let widthPercent = (timeLeft / totalTime) * 100;
+                if (progressLine) progressLine.style.width = widthPercent + "%";
+
+                if (timeLeft <= 5) {
+                    if (timerInfo) timerInfo.classList.add('timer-low');
+                    if (progressLine) progressLine.style.background = "#ff4d4d";
+                }
+
+                if (timeLeft <= 0) {
+                    clearInterval(timerId);
+
+                    window.location.href = "logic?id=99";
+                }
+            }, 1000);
+        }
+
+        const items = document.querySelectorAll('.answer-item');
         items.forEach((item, index) => {
             setTimeout(() => {
                 item.style.opacity = '1';
@@ -203,7 +283,6 @@
         const links = document.querySelectorAll('.btn-choice');
         links.forEach(link => {
             link.addEventListener('click', function() {
-                // Добавляем эффект нажатия
                 this.style.transform = 'scale(0.98)';
                 document.querySelector('.container').style.opacity = '0.8';
             });

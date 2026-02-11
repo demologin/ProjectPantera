@@ -16,7 +16,6 @@ public class QuestRepository implements Repository<QuestStep> {
     private static final Logger logger = LogManager.getLogger(QuestRepository.class);
     private final Map<Integer, QuestStep> steps = new HashMap<>();
 
-    // Список файлов, которые мы создали выше
     private final List<String> dataFiles = List.of(
             "prologue.yml",
             "gameplay.yml",
