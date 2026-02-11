@@ -22,6 +22,7 @@ public class ConfigAppInitializer implements ServletContextListener {
         servletContext.setAttribute("questionService", appConfig.getQuestionService());
         servletContext.setAttribute("gameService", appConfig.getGameService());
         servletContext.setAttribute("answerRepository", appConfig.getAnswerRepository());
+        servletContext.setAttribute("statisticService", appConfig.getStatisticService());
         servletContext.setAttribute("topics", Topic.values());
         servletContext.setAttribute("roles", Role.values());
     }

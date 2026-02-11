@@ -13,6 +13,7 @@ public class AppConfig {
     private final QuestionService questionService;
     private final GameService gameService;
     private final AnswerRepository answerRepository;
+    private final StatisticService statisticService;
 
     public AppConfig() {
         this.messageService = new MessageService(new MessageRepository(storage));
@@ -28,5 +29,7 @@ public class AppConfig {
                 this.questionService,
                 this.userService,
                 this.answerRepository);
+        this.statisticService = new StatisticService(new GameRepository(storage),
+                new UserRepository(storage));
     }
 }

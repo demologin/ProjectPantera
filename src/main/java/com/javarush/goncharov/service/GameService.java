@@ -32,8 +32,7 @@ public class GameService {
 
     public Optional<Game> getGame(Long questId, Long userId) {
         if (gameRepository.getAll().containsKey(questId)){
-//            Game game = gameRepository.getAll().get(questId);
-            Optional<Game> game = gameRepository.find(questId).max(Comparator.comparingLong(Game::getId));
+            Optional<Game> game = gameRepository.findByQuestId(questId).max(Comparator.comparingLong(Game::getId));
             if (game.isPresent() &&
                     game.get().getUserId().equals(userId)){
                 return game;

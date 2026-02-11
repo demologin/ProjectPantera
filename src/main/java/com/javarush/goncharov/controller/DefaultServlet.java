@@ -16,6 +16,7 @@ public class DefaultServlet extends HttpServlet {
     protected QuestionService questionService;
     protected GameService gameService;
     protected AnswerRepository answerRepository;
+    protected StatisticService statisticService;
     protected Topic topics;
 
     @Override
@@ -32,5 +33,6 @@ public class DefaultServlet extends HttpServlet {
         questionService = (QuestionService) servletContext.getAttribute("questionService");
         gameService = (GameService) servletContext.getAttribute("gameService");
         answerRepository = (AnswerRepository) servletContext.getAttribute("answerRepository");
+        statisticService = (StatisticService) servletContext.getAttribute("statisticService");
     }
 }

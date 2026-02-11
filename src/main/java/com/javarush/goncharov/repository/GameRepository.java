@@ -34,10 +34,16 @@ public class GameRepository implements Repository<Game>{
         return map;
     }
 
-    public Stream<Game> find(Long pattern) {
+    public Stream<Game> findByQuestId(Long pattern) {
         return map.values()
                 .stream()
                 .filter(u -> u.getQuestId().equals(pattern));
+    }
+
+    public Stream<Game> findByUserId(Long pattern) {
+        return map.values()
+                .stream()
+                .filter(u -> u.getUserId().equals(pattern));
     }
 
     @Override
