@@ -3,7 +3,9 @@ package com.javarush.goncharov.controller;
 import com.javarush.goncharov.repository.*;
 import com.javarush.goncharov.service.*;
 import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Getter
 public class AppConfig {
     private final Storage storage = Storage.getInstance();
@@ -16,20 +18,28 @@ public class AppConfig {
     private final StatisticService statisticService;
 
     public AppConfig() {
-        this.messageService = new MessageService(new MessageRepository(storage));
-        this.userService = new UserService(new UserRepository(storage));
-        this.questionService = new QuestionService(new QuestionRepository(storage));
-        this.answerRepository = new AnswerRepository(storage);
-        this.questService = new QuestService(this.answerRepository,
-                this.questionService,
-                this.userService,
+        log.info("Init MessageService..");
+        messageService = new MessageService(new MessageRepository(storage));
+        log.info("Init UserService..");
+        userService = new UserService(new UserRepository(storage));
+        log.info("Init QuestionService..");
+        questionService = new QuestionService(new QuestionRepository(storage));
+        log.info("Init QuestionService..");
+        answerRepository = new AnswerRepository(storage);
+        log.info("Init QuestService..");
+        questService = new QuestService(answerRepository,
+                questionService,
+                userService,
                 new QuestRepository(storage));
-        this.gameService = new GameService(new GameRepository(storage),
-                this.questService,
-                this.questionService,
-                this.userService,
-                this.answerRepository);
-        this.statisticService = new StatisticService(new GameRepository(storage),
+        log.info("Init GameService..");
+        gameService = new GameService(new GameRepository(storage),
+                questService,
+                questionService,
+                userService,
+                answerRepository);
+        log.info("Init StatisticService..");
+        statisticService = new StatisticService(new GameRepository(storage),
                 new UserRepository(storage));
+        
     }
 }
