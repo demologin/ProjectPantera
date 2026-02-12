@@ -1,0 +1,38 @@
+TITLE: Alien Challenge
+
+[START]
+TEXT: Ты потерял память. Принять вызов НЛО?
+CHOICE: Принять вызов -> ACCEPT_CHALLENGE
+CHOICE: Отклонить вызов -> DECLINE_CHALLENGE
+
+
+[DECLINE_CHALLENGE]
+TEXT: Ты отклонил вызов.
+END: Поражение
+
+
+[ACCEPT_CHALLENGE]
+TEXT: Ты принял вызов. Поднимаешься на мостик к капитану?
+CHOICE: Подняться на мостик -> GO_TO_BRIDGE
+CHOICE: Отказаться подниматься на мостик -> REFUSE_BRIDGE
+
+
+[REFUSE_BRIDGE]
+TEXT: Ты не пошел на переговоры.
+END: Поражение
+
+
+[GO_TO_BRIDGE]
+TEXT: Ты поднялся на мостик. Ты кто?
+CHOICE: Рассказать правду о себе -> TELL_TRUTH
+CHOICE: Солгать о себе -> LIE_ABOUT_SELF
+
+
+[TELL_TRUTH]
+TEXT: Тебя вернули домой.
+END: Победа
+
+
+[LIE_ABOUT_SELF]
+TEXT: Твоя ложь разоблачили.
+END: Поражение
