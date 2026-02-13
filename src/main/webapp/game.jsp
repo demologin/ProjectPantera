@@ -4,7 +4,7 @@
 <head>
     <title>${step.title}</title>
     <style>
-        /* Глобальный сброс */
+
         *, *:before, *:after {
             box-sizing: border-box;
         }
@@ -19,6 +19,34 @@
             display: flex;
             justify-content: center;
             min-height: 100vh;
+        }
+
+        .stats-panel {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 15px;
+            color: #888;
+            margin-bottom: 20px;
+            font-size: 0.85em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-bottom: 1px solid #333;
+            padding-bottom: 15px;
+        }
+
+        .player-info {
+            text-align: right;
+        }
+
+        .player-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 2px solid #4ca1af;
+            background: #121212;
+            object-fit: cover;
+            box-shadow: 0 0 10px rgba(76, 161, 175, 0.3);
         }
 
         .container {
@@ -198,8 +226,15 @@
     </c:if>
 
     <div class="stats-panel">
-        Игрок: <strong>${sessionScope.player.name}</strong> |
-        Экспедиций: <strong>${sessionScope.player.gamesPlayed}</strong>
+        <div class="player-info">
+            <div>Игрок: <strong>${sessionScope.player.name}</strong></div>
+            <div>Экспедиций: <strong>${sessionScope.player.gamesPlayed}</strong></div>
+        </div>
+        <c:if test="${not empty sessionScope.player.avatarPath}">
+            <img src="${pageContext.request.contextPath}/${sessionScope.player.avatarPath}"
+                 class="player-avatar"
+                 alt="Avatar">
+        </c:if>
     </div>
 
     <h1>${step.title}</h1>

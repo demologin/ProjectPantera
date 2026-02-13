@@ -3,7 +3,8 @@ package com.javarush.trukhanova.repository;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.dataformat.yaml.YAMLMapper;
 import com.javarush.trukhanova.entity.QuestStep;
-import com.javarush.trukhanova.exception.QuestException;
+import com.javarush.trukhanova.exception.RepositoryException;
+import com.javarush.trukhanova.exception.StepNotFoundException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -28,30 +29,37 @@ public class QuestRepository implements Repository<QuestStep> {
 
     @Override
     public void load() {
+        logger.info("Начало загрузки конфигурационных файлов квеста...");
         YAMLMapper mapper = new YAMLMapper();
+
         for (String fileName : dataFiles) {
             try (InputStream is = getClass().getClassLoader().getResourceAsStream(fileName)) {
                 if (is == null) {
-                    throw new QuestException("Критическая ошибка: файл " + fileName + " не найден!");
+                    logger.fatal("Файл ресурсов не найден: {}", fileName);
+                    throw new RepositoryException("Критическая ошибка: файл " + fileName + " не найден!", null);
                 }
-                List<QuestStep> loaded = mapper.readValue(is, new TypeReference<List<QuestStep>>() {});
+
+                List<QuestStep> loaded = mapper.readValue(is, new TypeReference<>() {});
                 for (QuestStep step : loaded) {
                     steps.put(step.getId(), step);
                 }
-                logger.info("Загружено {} шагов из {}", loaded.size(), fileName);
+
+                logger.info("Успешно загружено шагов: {} из файла: {}", loaded.size(), fileName);
+
             } catch (Exception e) {
-                throw new QuestException("Ошибка при чтении YAML файла: " + fileName, e);
+                logger.error("Ошибка парсинга файла {}: {}", fileName, e.getMessage());
+                throw new RepositoryException("Ошибка при чтении или парсинге YAML файла: " + fileName, e);
             }
         }
-        logger.info("Итого в игре доступно {} локаций.", steps.size());
+        logger.info("Загрузка всех данных завершена. Общее количество шагов в базе: {}", steps.size());
     }
 
     @Override
     public QuestStep getById(int id) {
         QuestStep step = steps.get(id);
         if (step == null) {
-            logger.warn("Попытка перехода на несуществующий ID: {}. Сбрасываем на старт.", id);
-            return steps.get(1);
+            logger.warn("Запрошен несуществующий шаг с ID: {}", id);
+            throw new StepNotFoundException("Попытка перехода на несуществующий ID: " + id);
         }
         return step;
     }

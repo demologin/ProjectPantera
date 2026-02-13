@@ -7,6 +7,7 @@
       nextStepId: 2
     - text: "Искать обходной путь вдоль реки"
       nextStepId: 3
+
 - id: 2
   title: "Древний Тотем"
   imagePath: "static/images/totem.png"
@@ -14,8 +15,8 @@
   answers:
     - text: "Осмотреть тайник под идолом"
       nextStepId: 4
-    - text: "Не трогать чужие реликвии и идти дальше"
-      nextStepId: 8
+    - text: "Не трогать реликвии и идти дальше"
+      nextStepId: 10
 - id: 3
   title: "Коварная Река"
   imagePath: "static/images/river.jpg"
