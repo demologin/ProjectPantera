@@ -22,6 +22,9 @@
                             <use xlink:href="#chevron-right"></use>
                         </svg>
                     </a>
+                    <a href="delete-quest?id=${quest.id}" class="btn-with-image">
+                        <img src="/images/trash2-icon" alt="Удалить" width="30" height="30">
+                    </a>
                 </c:if>
             </div>
         </c:forEach>
