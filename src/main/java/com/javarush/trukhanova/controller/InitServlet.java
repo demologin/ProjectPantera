@@ -14,7 +14,7 @@ public class InitServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws IOException { // Убрали ServletException, так как он тут не нужен
+            throws IOException {
 
         String playerName = request.getParameter("playerName");
         String selectedAvatar = request.getParameter("avatar");
@@ -22,16 +22,22 @@ public class InitServlet extends HttpServlet {
         if (playerName == null || playerName.isBlank()) {
             playerName = "Неизвестный герой";
         }
-
         if (selectedAvatar == null || selectedAvatar.isEmpty()) {
             selectedAvatar = "static/images/avatars/1.png";
         }
 
-        Player player = new Player(playerName, selectedAvatar);
-
         HttpSession session = request.getSession();
-        session.setAttribute("player", player);
 
-        response.sendRedirect("logic?id=1");
+        Player player = (Player) session.getAttribute("player");
+
+        if (player == null) {
+            player = new Player(playerName, selectedAvatar);
+            session.setAttribute("player", player);
+        } else {
+            player.setName(playerName);
+            player.setAvatarPath(selectedAvatar);
+        }
+
+        response.sendRedirect(request.getContextPath() + "/logic?id=1");
     }
 }

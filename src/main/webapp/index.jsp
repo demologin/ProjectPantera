@@ -23,10 +23,11 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
             text-align: center;
             border: 1px solid #333;
-            margin: 20px 0;
         }
-        h1 { color: #ffffff; margin-bottom: 20px; }
-
+        h1 {
+            color: #ffffff;
+            margin-bottom: 20px;
+        }
         input[type="text"] {
             width: 100%;
             padding: 15px;
@@ -39,8 +40,9 @@
             box-sizing: border-box;
             outline: none;
         }
-        input[type="text"]:focus { border-color: #27ae60; }
-
+        input[type="text"]:focus {
+            border-color: #27ae60;
+        }
         .avatar-label {
             display: block;
             margin-bottom: 10px;
@@ -58,9 +60,13 @@
             padding: 15px;
             border-radius: 10px;
         }
-        .avatar-item { cursor: pointer; position: relative; }
-        .avatar-item input { display: none; }
-
+        .avatar-item {
+            cursor: pointer;
+            position: relative;
+        }
+        .avatar-item input {
+            display: none;
+        }
         .avatar-img {
             width: 100%;
             aspect-ratio: 1 / 1;
@@ -70,48 +76,45 @@
             background: #222;
             object-fit: cover;
         }
-
         .avatar-item input:checked + .avatar-img {
             border-color: #27ae60;
             box-shadow: 0 0 15px rgba(39, 174, 96, 0.4);
             transform: scale(1.1);
         }
-        .avatar-item:hover .avatar-img { border-color: #555; }
-
         .btn-start {
             display: block;
             background: linear-gradient(135deg, #27ae60, #2ecc71);
             color: white;
             padding: 15px;
             border-radius: 8px;
-            text-decoration: none;
             font-weight: bold;
             border: none;
             cursor: pointer;
             width: 100%;
             font-size: 1em;
-            transition: opacity 0.3s;
+            transition: 0.3s;
         }
-        .btn-start:hover { opacity: 0.9; }
+        .btn-start:hover {
+            filter: brightness(1.1);
+        }
     </style>
 </head>
 <body>
 <div class="container">
     <h1>Начало экспедиции</h1>
-
-    <form action="init" method="POST">
-        <input type="text" name="playerName" placeholder="Введите ваше имя..." required>
+    <form action="${pageContext.request.contextPath}/init" method="POST">
+        <label for="playerName" class="avatar-label">Имя исследователя</label>
+        <input type="text" id="playerName" name="playerName" placeholder="Введите ваше имя..." required>
 
         <span class="avatar-label">Выберите облик героя</span>
         <div class="avatar-grid">
             <c:forEach var="i" begin="1" end="9">
                 <label class="avatar-item">
                     <input type="radio" name="avatar" value="static/images/avatars/${i}.png" ${i == 1 ? 'checked' : ''}>
-                    <img src="static/images/avatars/${i}.png" class="avatar-img" alt="Аватар ${i}">
+                    <img src="${pageContext.request.contextPath}/static/images/avatars/${i}.png" class="avatar-img" alt="Аватар ${i}">
                 </label>
             </c:forEach>
         </div>
-
         <button type="submit" class="btn-start">ВОЙТИ В ДЖУНГЛИ</button>
     </form>
 </div>

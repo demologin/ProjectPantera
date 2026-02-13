@@ -16,15 +16,16 @@ public class GameService implements GameLogic {
         return repository.getById(id);
     }
 
+    @Override
     public boolean isGameOver(QuestStep step) {
-        if (step == null) return true;
-
-        boolean noMoreAnswers = step.getAnswers() == null || step.getAnswers().isEmpty();
+        if (step == null || step.getTitle() == null) {
+            return step != null && (step.getAnswers() == null || step.getAnswers().isEmpty());
+        }
 
         String title = step.getTitle().toLowerCase();
-        boolean hasEndWord = title.contains("победа") || title.contains("конец")
-                || title.contains("плен") || title.contains("яд");
-
-        return noMoreAnswers || hasEndWord;
+        return title.contains("победа") ||
+                title.contains("поражение") ||
+                step.getAnswers() == null ||
+                step.getAnswers().isEmpty();
     }
 }

@@ -42,26 +42,27 @@ public class LogicServlet extends HttpServlet {
             String idParam = request.getParameter("id");
             int stepId = (idParam == null) ? 1 : Integer.parseInt(idParam);
 
-            logger.info("Игрок (Сессия: {}) перешел на шаг ID: {}", sessionId, stepId);
-
-            Player player = (Player) session.getAttribute("player");
-
-            if (player != null && stepId == 7) {
-                player.incrementGamesPlayed();
-                logger.info("Игрок {} достиг финала. Побед: {}", player.getName(), player.getGamesPlayed());
-            }
-
             QuestStep currentStep = gameService.getNextStep(stepId);
+            request.setAttribute("step", currentStep);
 
-            if (currentStep.getAnswers() != null && !currentStep.getAnswers().isEmpty()) {
-                TimerManager.getInstance().startTimer(sessionId, RESPONSE_TIME_LIMIT, () -> {
-                    logger.warn("Время вышло для сессии: {}", sessionId);
-                    session.setAttribute("isTimeOut", true);
-                });
+            if (gameService.isGameOver(currentStep)) {
+                Player player = (Player) session.getAttribute("player");
+                if (player != null) {
+                    player.incrementGamesPlayed();
+                    request.setAttribute("player", player);
+                    logger.info("Игрок {} завершил игру. Всего игр: {}", player.getName(), player.getGamesPlayed());
+                }
+                request.getRequestDispatcher("/final.jsp").forward(request, response);
+                return;
             }
 
-            request.setAttribute("step", currentStep);
+            TimerManager.getInstance().startTimer(sessionId, RESPONSE_TIME_LIMIT, () -> {
+                logger.warn("Время вышло для сессии: {}", sessionId);
+                session.setAttribute("isTimeOut", true);
+            });
+
             request.getRequestDispatcher("/game.jsp").forward(request, response);
+
 
         } catch (StepNotFoundException e) {
             logger.error("Шаг не найден: {}", e.getMessage());
