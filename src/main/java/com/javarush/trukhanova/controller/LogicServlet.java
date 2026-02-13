@@ -5,6 +5,7 @@ import com.javarush.trukhanova.entity.QuestStep;
 import com.javarush.trukhanova.exception.StepNotFoundException;
 import com.javarush.trukhanova.service.GameLogic;
 import com.javarush.trukhanova.service.TimerManager;
+import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -20,7 +21,7 @@ public class LogicServlet extends HttpServlet {
     private static final int RESPONSE_TIME_LIMIT = 20;
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         String sessionId = session.getId();
 
@@ -45,7 +46,7 @@ public class LogicServlet extends HttpServlet {
                     player.incrementGamesPlayed();
                     request.setAttribute("player", player);
                 }
-                request.getRequestDispatcher("/final.jsp").forward(request, response);
+                request.getRequestDispatcher("/WEB-INF/jsp/final.jsp").forward(request, response);
                 return;
             }
 
@@ -54,7 +55,7 @@ public class LogicServlet extends HttpServlet {
                 session.setAttribute("isTimeOut", true);
             });
 
-            request.getRequestDispatcher("/game.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/jsp/game.jsp").forward(request, response);
 
         } catch (StepNotFoundException e) {
             response.sendRedirect("logic?id=1");
