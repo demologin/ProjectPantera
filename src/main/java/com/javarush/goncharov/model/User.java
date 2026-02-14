@@ -1,9 +1,7 @@
 package com.javarush.goncharov.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import lombok.experimental.FieldDefaults;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -12,12 +10,13 @@ import java.util.Collection;
 @AllArgsConstructor
 @Data
 @Builder
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class User{
-    private Long id;
-    private String login;
-    private String password;
-    private Role role;
-    private String email;
-    private final Collection<Quest> quests = new ArrayList<>();
-    private final Collection<Game> games = new ArrayList<>();
+    Long id;
+    String login;
+    String password;
+    Role role;
+    String email;
+    final Collection<Quest> quests = new ArrayList<>();
+    final Collection<Game> games = new ArrayList<>();
 }

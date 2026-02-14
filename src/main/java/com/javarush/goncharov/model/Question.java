@@ -4,16 +4,18 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import lombok.*;
+import lombok.experimental.FieldDefaults;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 @Builder
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class Question {
-    private Long id;
-    private Long questId;
-    private String questName;
-    private String text;
-    private GameState gameState;
-    private final Collection<Answer> answers = new ArrayList<>();
+    Long id;
+    Long questId;
+    String questName;
+    String text;
+    GameState gameState;
+    final Collection<Answer> answers = new ArrayList<>();
 }

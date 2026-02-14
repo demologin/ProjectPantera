@@ -2,12 +2,15 @@ package com.javarush.goncharov.service;
 
 import com.javarush.goncharov.model.Question;
 import com.javarush.goncharov.repository.Repository;
+import lombok.AccessLevel;
+import lombok.experimental.FieldDefaults;
 
 import java.util.Map;
 import java.util.Optional;
 
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class QuestionService {
-    private final Repository<Question> questionRepository;
+    final Repository<Question> questionRepository;
 
     public QuestionService(Repository<Question> questionRepository) {
         this.questionRepository = questionRepository;

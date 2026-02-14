@@ -1,20 +1,19 @@
 package com.javarush.goncharov.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import lombok.experimental.FieldDefaults;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Data
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class Game {
-    private Long id;
-    private Long questId;
-    private String questName;
-    private Long userId;
-    private String userName;
-    private Long currentQuestionId;
-    private GameState gameState;
+    Long id;
+    Long questId;
+    String questName;
+    Long userId;
+    String userName;
+    Long currentQuestionId;
+    GameState gameState;
 }

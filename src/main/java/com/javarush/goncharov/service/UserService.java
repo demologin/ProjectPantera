@@ -3,12 +3,15 @@ package com.javarush.goncharov.service;
 
 import com.javarush.goncharov.model.User;
 import com.javarush.goncharov.repository.Repository;
+import lombok.AccessLevel;
+import lombok.experimental.FieldDefaults;
 
 import java.util.Map;
 import java.util.Optional;
 
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class UserService {
-    private final Repository<User> userRepository;
+    final Repository<User> userRepository;
 
     public UserService(Repository<User> userRepository) {
         this.userRepository = userRepository;

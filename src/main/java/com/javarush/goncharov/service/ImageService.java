@@ -1,6 +1,8 @@
 package com.javarush.goncharov.service;
 
+import lombok.AccessLevel;
 import lombok.SneakyThrows;
+import lombok.experimental.FieldDefaults;
 
 import java.net.URL;
 import java.nio.file.Files;
@@ -9,12 +11,13 @@ import java.nio.file.Paths;
 import java.util.List;
 import java.util.Objects;
 
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class ImageService {
 
-    private static final String IMAGES_FOLDER = "images";
-    private static final String PART_NAME = "image";
-    private static final String NO_IMAGE_PNG = "no-image.png";
-    private static final List<String> EXTENSIONS = List.of(
+    static final String IMAGES_FOLDER = "images";
+    static final String PART_NAME = "image";
+    static final String NO_IMAGE_PNG = "no-image.png";
+    static final List<String> EXTENSIONS = List.of(
             ".jpg", ".jpeg", ".png", ".bmp", ".gif", ".webp"
     );
 

@@ -6,13 +6,16 @@ import com.javarush.goncharov.model.Statistic;
 import com.javarush.goncharov.model.User;
 import com.javarush.goncharov.repository.GameRepository;
 import com.javarush.goncharov.repository.UserRepository;
+import lombok.AccessLevel;
+import lombok.experimental.FieldDefaults;
 
 import java.util.Collection;
 import java.util.List;
 
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class StatisticService {
-    private final GameRepository gameRepository;
-    private final UserRepository userRepository;
+    final GameRepository gameRepository;
+    final UserRepository userRepository;
 
     public StatisticService(GameRepository gameRepository, UserRepository userRepository) {
         this.gameRepository = gameRepository;

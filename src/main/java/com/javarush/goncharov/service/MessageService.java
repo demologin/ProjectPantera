@@ -2,12 +2,15 @@ package com.javarush.goncharov.service;
 
 import com.javarush.goncharov.model.Message;
 import com.javarush.goncharov.repository.Repository;
+import lombok.AccessLevel;
+import lombok.experimental.FieldDefaults;
 
 import java.util.Map;
 import java.util.Optional;
 
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class MessageService {
-    private final Repository<Message> messageRepository;
+    final Repository<Message> messageRepository;
 
     public MessageService(Repository<Message> messageRepository) {
         this.messageRepository = messageRepository;

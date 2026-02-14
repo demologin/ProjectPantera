@@ -2,6 +2,8 @@ package com.javarush.goncharov.service;
 
 import com.javarush.goncharov.model.*;
 import com.javarush.goncharov.repository.*;
+import lombok.AccessLevel;
+import lombok.experimental.FieldDefaults;
 import org.eclipse.tags.shaded.org.apache.bcel.generic.ARETURN;
 
 import java.util.Collection;
@@ -10,12 +12,12 @@ import java.util.Optional;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 
-
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class QuestService {
-    private final AnswerRepository answerRepository;
-    private final QuestionService questionService;
-    private final UserService userService;
-    private final Repository<Quest> questRepository;
+    final AnswerRepository answerRepository;
+    final QuestionService questionService;
+    final UserService userService;
+    final Repository<Quest> questRepository;
 
     public QuestService(AnswerRepository answerRepository, QuestionService questionService,
                         UserService userService,
@@ -49,7 +51,6 @@ public class QuestService {
         quests.add(quest);
         getQuestions(quest);
         questRepository.update(quest);
-        System.out.println(questionService.getAll());
     }
 
     private void getQuestions(Quest quest) {

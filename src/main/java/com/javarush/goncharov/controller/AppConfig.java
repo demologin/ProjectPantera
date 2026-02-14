@@ -2,20 +2,23 @@ package com.javarush.goncharov.controller;
 
 import com.javarush.goncharov.repository.*;
 import com.javarush.goncharov.service.*;
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Getter
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class AppConfig {
-    private final Storage storage = Storage.getInstance();
-    private final UserService userService;
-    private final MessageService messageService;
-    private final QuestService questService;
-    private final QuestionService questionService;
-    private final GameService gameService;
-    private final AnswerRepository answerRepository;
-    private final StatisticService statisticService;
+    final Storage storage = Storage.getInstance();
+    final UserService userService;
+    final MessageService messageService;
+    final QuestService questService;
+    final QuestionService questionService;
+    final GameService gameService;
+    final AnswerRepository answerRepository;
+    final StatisticService statisticService;
 
     public AppConfig() {
         log.info("Init MessageService..");

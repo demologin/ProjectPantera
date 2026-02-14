@@ -2,17 +2,20 @@ package com.javarush.goncharov.service;
 
 import com.javarush.goncharov.model.*;
 import com.javarush.goncharov.repository.*;
+import lombok.AccessLevel;
+import lombok.experimental.FieldDefaults;
 
 import java.util.Comparator;
 import java.util.Map;
 import java.util.Optional;
 
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class GameService {
-    private final GameRepository gameRepository;
-    private final QuestService questService;
-    private final QuestionService questionService;
-    private final AnswerRepository answerRepository;
-    private final UserService userService;
+    final GameRepository gameRepository;
+    final QuestService questService;
+    final QuestionService questionService;
+    final AnswerRepository answerRepository;
+    final UserService userService;
 
     public GameService(GameRepository gameRepository,
                        QuestService questService,

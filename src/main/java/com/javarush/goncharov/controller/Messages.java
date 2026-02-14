@@ -35,7 +35,6 @@ public class Messages extends DefaultServlet {
         Long idMessage = Long.parseLong(req.getParameter("id"));
         Optional<Message> message = messageService.get(idMessage);
         String rememberMe = req.getParameter("rememberMe");
-//        HttpSession session = req.getSession();
         if (rememberMe != null && (rememberMe.equals("on") || rememberMe.equals("off"))) {
             message.ifPresent(value -> value.setCompleted(true));
         }

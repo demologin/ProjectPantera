@@ -1,15 +1,17 @@
 package com.javarush.goncharov.model;
 
 import lombok.*;
+import lombok.experimental.FieldDefaults;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 @Builder
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class Answer {
-    private Long id;
-    private Long questionId;
-    private String text;
-    private String questName;
-    private Long nextQuestionId;
+    Long id;
+    Long questionId;
+    String text;
+    String questName;
+    Long nextQuestionId;
 }
