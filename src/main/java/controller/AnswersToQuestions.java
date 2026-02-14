@@ -38,6 +38,7 @@ public class AnswersToQuestions extends HttpServlet {
         HttpSession session = request.getSession();
         String name = session.getAttribute("name").toString();
 
+
         String n = request.getParameter("n");
         Answer answer = repositoryService.getAnswerById(n);
 

@@ -2,9 +2,10 @@ package controller;
 
 import entity.Answer;
 import entity.Question;
+
 import repository.Repository;
 import services.RepositoryService;
-
+import javax.servlet.http.Cookie;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,6 +16,10 @@ import java.io.IOException;
 
 @WebServlet(name = "greeting", value = "/greeting")
 public class Greeting extends HttpServlet {
+    String error;
+    String name="admin";
+     String password="1234";
+
 
     Repository repository;
     RepositoryService repositoryService;
@@ -33,25 +38,58 @@ public class Greeting extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        redirectionRequest(req, resp);
+
+
+        if (error.equals("Error")) {
+            req.setAttribute("error", "1");
+            req.setAttribute("password", "");
+            req.setAttribute("name", "");
+            req.getServletContext().getRequestDispatcher("/usersing.jsp").forward(req, resp);
+        }
+        if (error.equals("notError")) {
+
+
+            req.setAttribute("error", "0");
+            redirectionRequest(req, resp);
+        }
+
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws  IOException {
         req.setCharacterEncoding("UTF-8");
 
         resp.setCharacterEncoding("UTF-8");
         resp.setContentType("text/html; charset=UTF-8");
 
-        String name = req.getParameter("yourname");
+         String fullname = req.getParameter("yourname");
+         String name = fullname.substring(0, fullname.indexOf(";"));
+
+        String chek =fullname.substring(fullname.indexOf(";") + 1, fullname.lastIndexOf("/"));
+        String password =fullname.substring(fullname.indexOf("/") + 1, fullname.lastIndexOf("e"));
+
+
 
         HttpSession session = req.getSession();
         session.setAttribute("count", 0);
         session.setAttribute("name", name);
+        session.setAttribute("someChek", chek);
+        session.setAttribute("password", password);
 
-        redirectionRequest(req, resp);
+             if (name.equals(this.name) && password.equals(this.password)) {
+
+                 this.error = "notError";
+
+
+             } else this.error = "Error";
+
+        Cookie cookie = new Cookie("someChek", chek);
+        cookie.setMaxAge(60 * 60 * 24); // 24 часа
+
+        resp.addCookie(cookie);
+
+
     }
-
     private void redirectionRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Answer answer1 = repositoryService.getAnswerById(question.getAnswersId().get(0));
         Answer answer2 = repositoryService.getAnswerById(question.getAnswersId().get(1));
@@ -65,3 +103,4 @@ public class Greeting extends HttpServlet {
         req.getServletContext().getRequestDispatcher("/qa.jsp").forward(req, resp);
     }
 }
+

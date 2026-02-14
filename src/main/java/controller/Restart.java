@@ -19,7 +19,9 @@ public class Restart extends HttpServlet {
         session.setAttribute("count", count + 1);
 
         String name = req.getParameter("name");
+        String chek = req.getParameter("someChek");
         req.setAttribute("name", name);
+        req.setAttribute("someChek", chek);
         req.getServletContext().getRequestDispatcher("/indexRestart.jsp").forward(req, resp);
     }
 }

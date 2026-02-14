@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
-          integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+
     <link href="/css/MyCSS.css" rel="stylesheet">
     <title>Приключения мотоциклиста</title>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -56,7 +56,7 @@
 
   </body>
 <div class="text-center">
-  <img src="..." class="img-fluid" alt="...">
+  <img class="mb-4" src="../assets/honda.svg" alt="" width="72" height="57">
 </div>
 
 </div>
@@ -74,11 +74,7 @@
 <br/>
     <div class="container">
         <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-            <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
-                <input type="search" class="form-control form-control-light text-bg-light" id="idName" name="yourname"
-                       placeholder="Введите имя..."
-                       aria-label="Search">
-            </form>
+
             <div class="text-end">
                 <button type="button" onclick="usersing()" class="btn btn-outline-primary me-2">Поехали!</button>
             </div>
@@ -87,6 +83,7 @@
 </div>
 
 <script>
+
     function usersing() {
         const url = "usersing";
         $.ajax({
@@ -98,17 +95,7 @@
             }
         });
     }
-    function stop() {
-            const url = "stop";
-            $.ajax({
-                method: "GET",
-                url: url,
-                dataType: "html",
-                success: function () {
-                    document.location.href = "stop";
-                }
-            });
-        }
+
 
 </script>
 
