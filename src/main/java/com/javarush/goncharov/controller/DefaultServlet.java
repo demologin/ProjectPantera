@@ -6,18 +6,21 @@ import com.javarush.goncharov.service.*;
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.experimental.FieldDefaults;
 
 @Getter
+@FieldDefaults(level = AccessLevel.PROTECTED)
 public class DefaultServlet extends HttpServlet {
-    protected UserService userService;
-    protected MessageService messageService;
-    protected QuestService questService;
-    protected QuestionService questionService;
-    protected GameService gameService;
-    protected AnswerRepository answerRepository;
-    protected StatisticService statisticService;
-    protected Topic topics;
+    UserService userService;
+    MessageService messageService;
+    QuestService questService;
+    QuestionService questionService;
+    GameService gameService;
+    AnswerRepository answerRepository;
+    StatisticService statisticService;
+    Topic topics;
 
     @Override
     public void init() throws ServletException {

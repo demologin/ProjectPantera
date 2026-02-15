@@ -1,6 +1,10 @@
 package com.javarush.goncharov.repository;
 
 import com.javarush.goncharov.model.Message;
+import com.javarush.goncharov.model.Quest;
+import com.javarush.goncharov.model.Question;
+import com.javarush.goncharov.model.User;
+import org.eclipse.tags.shaded.org.apache.xpath.operations.Bool;
 
 import java.util.Map;
 import java.util.Optional;
@@ -34,25 +38,27 @@ public class MessageRepository implements Repository<Message>{
     }
 
     @Override
-    public void create(Message message) {
+    public Optional<Message> create(Message message) {
         if (!map.containsKey(message.getId())) {
             message.setId(id.incrementAndGet());
         }
         map.put(message.getId(), message);
+        return Optional.of(message);
     }
 
     @Override
-    public void delete(Message message) {
+    public Boolean delete(Message message) {
+        int sizeBeforeDelete = map.size();
         map.remove(message.getId());
+        int sizeAfterDelete = map.size();
+        return sizeBeforeDelete > sizeAfterDelete ? Boolean.TRUE : Boolean.FALSE;
     }
 
     @Override
-    public void update(Message message) {
-        if (map.containsKey(message.getId())){
-//            message.setId(id.incrementAndGet());
-            message.setName(message.getName());
-            message.setEmail(message.getEmail());
-            message.setMessage(message.getMessage());
-        }
+    public Optional<Message> update(Message message) {
+        message.setName(message.getName());
+        message.setEmail(message.getEmail());
+        message.setMessage(message.getMessage());
+        return Optional.of(message);
     }
 }

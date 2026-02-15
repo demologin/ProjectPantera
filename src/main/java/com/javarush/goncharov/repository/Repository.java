@@ -1,5 +1,7 @@
 package com.javarush.goncharov.repository;
 
+import com.javarush.goncharov.model.User;
+
 import java.util.Map;
 import java.util.Optional;
 
@@ -11,9 +13,9 @@ public interface Repository<T> {
 
     Map<Long, T> getAll();
 
-    void create(T entity);
+    Optional<T> create(T entity);
 
-    void update(T entity);
+    Optional<T> update(T entity);
 
-    void delete(T entity);
+    Boolean delete(T entity);
 }

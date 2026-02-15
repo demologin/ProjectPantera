@@ -2,6 +2,7 @@ package com.javarush.goncharov.controller;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -14,6 +15,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class LogoutTest extends BaseTest {
     @Test
+    @Tag("http-client")
     @DisplayName("When open logout page then body contains se tag")
     void whenOpenLogoutPageThenBodyContainsSeTag() throws IOException, InterruptedException {
         createSession();
@@ -25,7 +27,7 @@ class LogoutTest extends BaseTest {
                 request,
                 HttpResponse.BodyHandlers.ofString()
         );
-        Assertions.assertEquals(HttpURLConnection.HTTP_OK, response.statusCode());
-        Assertions.assertTrue(response.body().contains("</body>"));
+        assertEquals(HttpURLConnection.HTTP_OK, response.statusCode());
+        assertTrue(response.body().contains("</body>"));
     }
 }

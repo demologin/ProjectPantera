@@ -1,21 +1,18 @@
 package com.javarush.goncharov.controller;
 
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import java.io.IOException;
-import java.net.CookieManager;
-import java.net.CookiePolicy;
 import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
+import static org.junit.jupiter.api.Assertions.*;
 
 class ProfileTest extends BaseTest{
     @Test
+    @Tag("http-client")
     @DisplayName("When open profile page then body contains se tag")
     void whenOpenProfilePageThenBodyContainsSeTag() throws IOException, InterruptedException {
         createSession();
@@ -27,7 +24,7 @@ class ProfileTest extends BaseTest{
                 request,
                 HttpResponse.BodyHandlers.ofString()
         );
-        Assertions.assertEquals(HttpURLConnection.HTTP_OK, response.statusCode());
-        Assertions.assertTrue(response.body().contains("</body>"));
+        assertEquals(HttpURLConnection.HTTP_OK, response.statusCode());
+        assertTrue(response.body().contains("</body>"));
     }
 }

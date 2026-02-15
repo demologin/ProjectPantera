@@ -35,25 +35,28 @@ public class UserRepository implements Repository<User>{
     }
 
     @Override
-    public void create(User user) {
+    public Optional<User> create(User user) {
         if (!map.containsKey(user.getId())) {
             user.setId(id.incrementAndGet());
         }
         map.put(user.getId(), user);
+        return Optional.of(user);
     }
 
     @Override
-    public void delete(User user) {
+    public Boolean delete(User user) {
+        int sizeBeforeDelete = map.size();
         map.remove(user.getId());
+        int sizeAfterDelete = map.size();
+        return sizeBeforeDelete > sizeAfterDelete ? Boolean.TRUE : Boolean.FALSE;
     }
 
     @Override
-    public void update(User user) {
-        if (map.containsKey(user.getId())){
-            map.get(user.getId()).setLogin(user.getLogin());
-            map.get(user.getId()).setPassword(user.getPassword());
-            map.get(user.getId()).setRole(user.getRole());
-            map.get(user.getId()).setEmail(user.getEmail());
-        }
+    public Optional<User> update(User user) {
+        map.get(user.getId()).setLogin(user.getLogin());
+        map.get(user.getId()).setPassword(user.getPassword());
+        map.get(user.getId()).setRole(user.getRole());
+        map.get(user.getId()).setEmail(user.getEmail());
+        return Optional.of(user);
     }
 }

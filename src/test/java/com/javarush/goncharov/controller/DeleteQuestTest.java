@@ -6,8 +6,11 @@ import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.AccessLevel;
+import lombok.experimental.FieldDefaults;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -22,52 +25,50 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.*;
 
+@FieldDefaults(level = AccessLevel.PRIVATE)
 @ExtendWith(MockitoExtension.class)
 class DeleteQuestTest extends BaseTest {
     @Mock
-    private HttpServletRequest request;
-
+    HttpServletRequest request;
     @Mock
-    private HttpServletResponse response;
-
+    HttpServletResponse response;
     @Mock
-    private RequestDispatcher requestDispatcher;
-
+    RequestDispatcher requestDispatcher;
     @Mock
-    private QuestService questService;
-
+    Quest quest;
+    @Mock
+    QuestService questService;
     @InjectMocks
-    private DeleteQuest servlet;
+    DeleteQuest servlet;
 
-    private static final Long TEST_QUEST_ID = 123L;
-    private static final String JSP_PATH = "/WEB-INF/delete-quest.jsp";
+    static final Long TEST_QUEST_ID = 123L;
+    static final String JSP_PATH = "/WEB-INF/delete-quest.jsp";
 
     @Test
     @DisplayName("Should set quest attribute and forward to JSP when quest exists")
-    void shouldSetQuestAttributeAndForwardToJspWhenQuestExists() throws ServletException, IOException, InterruptedException {
-        Quest expectedQuest = new Quest();
-        expectedQuest.setId(TEST_QUEST_ID);
-        expectedQuest.setName("Test Quest");
+    void shouldSetQuestAttributeAndForwardToJspWhenQuestExists() throws ServletException, IOException {
+        quest.setId(TEST_QUEST_ID);
+        quest.setName("Test Quest");
 
         when(request.getParameter("id")).thenReturn(String.valueOf(TEST_QUEST_ID));
-        when(questService.get(TEST_QUEST_ID)).thenReturn(Optional.of(expectedQuest));
+        when(questService.get(TEST_QUEST_ID)).thenReturn(Optional.of(quest));
         when(request.getRequestDispatcher(JSP_PATH)).thenReturn(requestDispatcher);
 
         servlet.doGet(request, response);
 
-        verify(request).setAttribute("quest", expectedQuest);
+        verify(request).setAttribute("quest", quest);
         verify(request).getRequestDispatcher(JSP_PATH);
         verify(requestDispatcher).forward(request, response);
         verifyNoMoreInteractions(response);
     }
 
     @Test
-    @DisplayName("When open delete quest users page then body contains se tag")
-    void whenOpenDeleteQuestPageThenBodyContainsSeTag() throws IOException, InterruptedException {
-        createSession();
+    @Tag("http-client")
+    @DisplayName("When open delete quest page then body contains close tag")
+    void whenOpenDeleteQuestPageThenBodyContainsSeTagIT() throws IOException, InterruptedException {
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(ROOT + "/delete-quest" + "?id=" + TEST_QUEST_ID))
                 .GET()
@@ -76,7 +77,7 @@ class DeleteQuestTest extends BaseTest {
                 request,
                 HttpResponse.BodyHandlers.ofString()
         );
-        Assertions.assertEquals(HttpURLConnection.HTTP_OK, response.statusCode());
-        Assertions.assertTrue(response.body().contains("</body>"));
+        assertEquals(HttpURLConnection.HTTP_OK, response.statusCode());
+        assertTrue(response.body().contains("</body>"));
     }
 }

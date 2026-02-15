@@ -25,22 +25,19 @@ public class UserService {
         return userRepository.findBy(login, password);
     }
 
-    public void post(User user){
-        if (userRepository.findBy(user.getLogin(), user.getPassword())
-                .stream()
-                .findAny()
-                .isEmpty()){
-            user.setId(2L);
-            userRepository.create(user);
-        }
+    public Optional<User> post(User user){
+        user.setId(0L);
+        userRepository.create(user);
+        return Optional.of(user);
     }
 
-    public void delete(User user){
-        userRepository.delete(user);
+    public Boolean delete(User user){
+        return userRepository.delete(user);
     }
 
-    public void update(User user){
+    public Optional<User> update(User user){
         userRepository.update(user);
+        return Optional.of(user);
     }
 
     public Map<Long, User> getAll(){

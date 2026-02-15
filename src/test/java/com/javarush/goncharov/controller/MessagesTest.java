@@ -2,6 +2,7 @@ package com.javarush.goncharov.controller;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -10,8 +11,11 @@ import java.net.URI;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 class MessagesTest extends BaseTest {
     @Test
+    @Tag("http-client")
     @DisplayName("When open message page then body contains close tag")
     void whenOpenMessagePageThenBodyContainsCloseTag() throws IOException, InterruptedException {
         HttpRequest indexReq = HttpRequest.newBuilder()
@@ -22,7 +26,7 @@ class MessagesTest extends BaseTest {
                 indexReq,
                 HttpResponse.BodyHandlers.ofString()
         );
-        Assertions.assertEquals(HttpURLConnection.HTTP_OK, indexResponse.statusCode());
-        Assertions.assertTrue(indexResponse.body().contains("</body>"));
+        assertEquals(HttpURLConnection.HTTP_OK, indexResponse.statusCode());
+        assertTrue(indexResponse.body().contains("</body>"));
     }
 }

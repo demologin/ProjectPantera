@@ -3,14 +3,8 @@ package com.javarush.goncharov.controller;
 
 import com.javarush.goncharov.model.Role;
 import com.javarush.goncharov.model.User;
-import com.javarush.goncharov.repository.Storage;
-import com.javarush.goncharov.repository.UserRepository;
-import com.javarush.goncharov.service.UserService;
-import jakarta.servlet.ServletConfig;
-import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
@@ -36,7 +30,7 @@ public class EditUser extends DefaultServlet {
         Long idUser = Long.parseLong(req.getParameter("id"));
         Optional<User> userFind = userService.get(idUser);
         if (req.getParameter("action").equals("cancel")) {
-            if (userSession.getLogin().equals(userFind.get().getLogin())){
+            if (userSession.getLogin().equals(userFind.get().getLogin())) {
                 resp.sendRedirect("/profile");
                 return;
             } else if (userSession.getRole().name().equals("ADMIN")) {
@@ -44,7 +38,7 @@ public class EditUser extends DefaultServlet {
                 return;
             }
         }
-        if (userFind.isPresent() && req.getParameter("role") == null){
+        if (userFind.isPresent() && req.getParameter("role") == null) {
             role = userFind.get().getRole().toString();
         } else {
             role = req.getParameter("role");

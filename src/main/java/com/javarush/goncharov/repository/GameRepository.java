@@ -1,6 +1,8 @@
 package com.javarush.goncharov.repository;
 
 import com.javarush.goncharov.model.Game;
+import com.javarush.goncharov.model.Quest;
+import com.javarush.goncharov.model.User;
 
 import java.util.Map;
 import java.util.Optional;
@@ -47,18 +49,23 @@ public class GameRepository implements Repository<Game>{
     }
 
     @Override
-    public void create(Game game) {
+    public Optional<Game> create(Game game) {
         game.setId(id.incrementAndGet());
         update(game);
+        return Optional.of(game);
     }
 
     @Override
-    public void delete(Game game) {
+    public Boolean delete(Game game) {
+        int sizeBeforeDelete = map.size();
         map.remove(game.getId());
+        int sizeAfterDelete = map.size();
+        return sizeBeforeDelete > sizeAfterDelete ? Boolean.TRUE : Boolean.FALSE;
     }
 
     @Override
-    public void update(Game game) {
+    public Optional<Game> update(Game game) {
         map.put(game.getId(), game);
+        return Optional.of(game);
     }
 }

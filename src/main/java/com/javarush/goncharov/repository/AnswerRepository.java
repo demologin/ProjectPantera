@@ -1,8 +1,11 @@
 package com.javarush.goncharov.repository;
 
 import com.javarush.goncharov.model.Answer;
+import com.javarush.goncharov.model.Quest;
+import com.javarush.goncharov.model.User;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
+import org.eclipse.tags.shaded.org.apache.xpath.operations.Bool;
 
 import java.util.Map;
 import java.util.Optional;
@@ -36,19 +39,24 @@ public class AnswerRepository implements Repository<Answer>{
     }
 
     @Override
-    public void create(Answer answer) {
+    public Optional<Answer> create(Answer answer) {
         answer.setId(id.incrementAndGet());
         update(answer);
+        return Optional.of(answer);
     }
 
     @Override
-    public void delete(Answer answer) {
+    public Boolean delete(Answer answer) {
+        int sizeBeforeDelete = map.size();
         map.remove(answer.getId());
+        int sizeAfterDelete = map.size();
+        return sizeBeforeDelete > sizeAfterDelete ? Boolean.TRUE : Boolean.FALSE;
     }
 
     @Override
-    public void update(Answer answer) {
+    public Optional<Answer> update(Answer answer) {
         map.put(answer.getId(), answer);
+        return Optional.of(answer);
     }
 }
 

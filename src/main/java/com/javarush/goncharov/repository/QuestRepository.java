@@ -1,6 +1,7 @@
 package com.javarush.goncharov.repository;
 
 import com.javarush.goncharov.model.Quest;
+import com.javarush.goncharov.model.User;
 
 import java.util.Map;
 import java.util.Optional;
@@ -34,18 +35,23 @@ public class QuestRepository implements Repository<Quest>{
     }
 
     @Override
-    public void create(Quest message) {
-        message.setId(id.incrementAndGet());
-        update(message);
+    public Optional<Quest> create(Quest quest) {
+        quest.setId(id.incrementAndGet());
+        update(quest);
+        return Optional.of(quest);
     }
 
     @Override
-    public void delete(Quest message) {
-        map.remove(message.getId());
+    public Boolean delete(Quest quest) {
+        int sizeBeforeDelete = map.size();
+        map.remove(quest.getId());
+        int sizeAfterDelete = map.size();
+        return sizeBeforeDelete > sizeAfterDelete ? Boolean.TRUE : Boolean.FALSE;
     }
 
     @Override
-    public void update(Quest message) {
-        map.put(message.getId(), message);
+    public Optional<Quest> update(Quest quest) {
+        map.put(quest.getId(), quest);
+        return Optional.of(quest);
     }
 }
