@@ -1,0 +1,59 @@
+- id: 4
+  title: "Золотой Амулет"
+  imagePath: "static/images/amulet.jpg"
+  description: "Вы нашли древний амулет в форме солнца! Он удивительно тяжелый и теплый на ощупь. С этим артефактом вы чувствуете себя увереннее."
+  answers:
+    - text: "Спрятать амулет и идти к горам"
+      nextStepId: 8
+    - text: "Бросить его (плохое предчувствие)"
+      nextStepId: 10
+
+- id: 8
+  title: "Племя Ягуара"
+  imagePath: "static/images/village.jpg"
+  description: "Вас окружают воины в масках. Вождь указывает на ваше снаряжение. Кажется, он что-то ищет."
+  answers:
+    - text: "Показать амулет солнца"
+      nextStepId: 9
+    - text: "Попробовать договориться жестами"
+      nextStepId: 14
+
+- id: 10
+  title: "Тернистый путь"
+  imagePath: "static/images/village.jpg"
+  description: "Вы выходите к деревне племени Ягуара. У вас нет священного амулета, и воины смотрят на вас как на обычного нарушителя границ."
+  answers:
+    - text: "Попытаться пройти мимо"
+      nextStepId: 14
+    - text: "Убежать обратно в лес"
+      nextStepId: 11
+
+- id: 9
+  title: "Загадка Духов"
+  imagePath: "static/images/riddle.jpg"
+  description: "Вождь кивает, увидев амулет, но требует испытания ума: 'Что всегда бежит, но не имеет ног?'"
+  answers:
+    - text: "Ответить: Время"
+      nextStepId: 14
+    - text: "Ответить: Река"
+      nextStepId: 5
+    - text: "Ответить: Ветер"
+      nextStepId: 14
+- id: 5
+  title: "Храм Солнца"
+  imagePath: "static/images/temple.jpg"
+  description: "Вы достигли цели! Перед вами огромная пирамида. На массивных дверях — углубление точно под ваш амулет."
+  answers:
+    - text: "Вставить амулет в замок"
+      nextStepId: 6
+    - text: "Попробовать выбить дверь"
+      nextStepId: 12
+- id: 6
+  title: "Тронный Зал"
+  imagePath: "static/images/throne.jpg"
+  description: "Залы полны золота, но путь к выходу преграждает призрачный страж. Он предлагает испить из одной из двух чаш."
+  answers:
+    - text: "Выпить из золотого кубка"
+      nextStepId: 7
+    - text: "Выпить из чаши из кости"
+      nextStepId: 13
