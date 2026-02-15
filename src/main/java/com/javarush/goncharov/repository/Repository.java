@@ -1,7 +1,5 @@
 package com.javarush.goncharov.repository;
 
-import com.javarush.goncharov.model.User;
-
 import java.util.Map;
 import java.util.Optional;
 

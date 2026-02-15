@@ -32,7 +32,7 @@ class UserServiceTest {
     User user2;
     Map<Long, User> getAllMap;
 
-    final Long TEST_USER_USER = 2L;
+    final Long TEST_USER_ID = 2L;
 
     @BeforeEach
     void setup() {
@@ -44,12 +44,12 @@ class UserServiceTest {
     @Test
     @DisplayName("Create user")
     void createUser() {
-        User createdUser = User.builder().id(TEST_USER_USER).login("Dima").password("123").build();
+        User createdUser = User.builder().id(TEST_USER_ID).login("Dima").password("123").build();
         when(repository.create(user1)).thenReturn(Optional.of(createdUser));
 
         userService.post(user1);
 
-        assertEquals(TEST_USER_USER, createdUser.getId());
+        assertEquals(TEST_USER_ID, createdUser.getId());
         verify(repository).create(user1);
     }
 
@@ -96,22 +96,3 @@ class UserServiceTest {
         assertEquals(1111L, getUser.getId());
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -20,7 +20,7 @@ public class Messages extends DefaultServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Collection<Message> messages = messageService.getAll().values();
         HttpSession session = req.getSession();
-        User user = (User) session.getAttribute("userSession");
+        User user = (User) session.getAttribute("user");
         req.setAttribute("messages", messages);
         req.setAttribute("user", user);
         req.getRequestDispatcher("/WEB-INF/messages.jsp").forward(req, resp);

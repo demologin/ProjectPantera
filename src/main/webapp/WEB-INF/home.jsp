@@ -8,7 +8,6 @@
         <c:forEach var="quest" items="${requestScope.quests}">
             <div class="feature col">
                 <h3 class="fs-2">${quest.name}</h3>
-<%--                <a href="play-game?userId=${sessionScope.user.id}&questId=${quest.id}" class="icon-link d-inline-flex align-items-center">--%>
                 <a href="play-game?questId=${quest.id}" class="icon-link d-inline-flex align-items-center">
                     Играть
                     <svg class="bi" width="1em" height="1em">

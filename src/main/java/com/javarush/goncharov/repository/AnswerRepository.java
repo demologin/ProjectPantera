@@ -1,11 +1,6 @@
 package com.javarush.goncharov.repository;
 
 import com.javarush.goncharov.model.Answer;
-import com.javarush.goncharov.model.Quest;
-import com.javarush.goncharov.model.User;
-import lombok.AccessLevel;
-import lombok.experimental.FieldDefaults;
-import org.eclipse.tags.shaded.org.apache.xpath.operations.Bool;
 
 import java.util.Map;
 import java.util.Optional;

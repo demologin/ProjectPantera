@@ -17,8 +17,6 @@
                         <div class="card-body text-center d-flex flex-column align-items-center p-0"><img
                                 class="rounded-circle mb-3 fit-cover" width="130" height="130" src="/images/kwa"
                                 loading="eager">
-                                <%--                            <h5 class="fw-bold text-primary card-title mb-0"><strong><a--%>
-                                <%--                                    href="edit-user?id=${user.id}">${user.login}</a> <br></strong></h5>--%>
                             <h5 class="fw-bold text-primary card-title mb-0"><strong>${user.login} <br></strong></h5>
                         </div>
                         <div class="col text-center">

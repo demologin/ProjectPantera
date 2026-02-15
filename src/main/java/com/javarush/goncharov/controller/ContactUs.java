@@ -27,10 +27,6 @@ public class ContactUs extends DefaultServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
-        //Тут я думаю слишком поздно делаю проверку на пустые значения в заполняемых полях
-        //Валидация формы должна производиться на фронте, на заполненность полей и запросы с пустыми
-        //Полями сюда долетать не должны, но пока так
-        //Не разбирался пока как сделать проверки на стороне формы
         if (req.getParameter("name").isEmpty() ||
                 req.getParameter("email").isEmpty() ||
                 req.getParameter("message").isEmpty()){

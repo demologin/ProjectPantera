@@ -22,7 +22,7 @@ public class ListQuests extends DefaultServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Collection<Quest> quests = questService.getAll().values();
         HttpSession session = req.getSession();
-        User user = (User) session.getAttribute("userSession");
+        User user = (User) session.getAttribute("user");
         req.setAttribute("quests", quests);
         req.setAttribute("user", user);
         req.getRequestDispatcher("/WEB-INF/home.jsp").forward(req, resp);
