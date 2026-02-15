@@ -1,4 +1,4 @@
-package com.javarush.khmelov.cmd;
+package com.javarush.buslovskii.cmd;
 
 import jakarta.servlet.http.HttpServletRequest;
 

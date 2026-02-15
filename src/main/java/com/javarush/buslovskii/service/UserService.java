@@ -1,7 +1,7 @@
-package com.javarush.khmelov.service;
+package com.javarush.buslovskii.service;
 
-import com.javarush.khmelov.entity.User;
-import com.javarush.khmelov.repository.UserRepository;
+import com.javarush.buslovskii.entity.User;
+import com.javarush.buslovskii.repository.UserRepository;
 
 import java.util.Collection;
 import java.util.Optional;
