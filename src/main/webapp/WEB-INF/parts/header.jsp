@@ -17,9 +17,9 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
-                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    <a class="nav-link active" aria-current="page" href=".">Home</a>
                     <a class="nav-link" href="#">Статистика</a>
-                    <a class="nav-link" href="#">Пользователи</a>
+                    <a class="nav-link" href="list-user">Пользователи</a>
                     <a class="nav-link" href="#">Создать квест</a>
                     <button type="button" class="btn btn-outline-warning" "btn btn-primary rounded-1">Login</button>
                     <button type="button" class="btn btn-outline-warning">Singup</button>
