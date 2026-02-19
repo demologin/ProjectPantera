@@ -16,9 +16,8 @@ public class DemoJdbc {
     public static final String SQL_REMOVE_USERS = "DELETE FROM users WHERE id>3";
 
     public static void main(String[] args) throws SQLException {
-        Cnn cnn = new Cnn();
         try (
-                Connection connection = cnn.getConnection();
+                Connection connection = Cnn.get();
                 Statement statement = connection.createStatement();
                 ResultSet resultSet = statement.executeQuery(SQL_READ_ALL + " ");
         ) {
