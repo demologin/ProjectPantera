@@ -1,0 +1,262 @@
+/* ==============================
+   Общие стили
+   ============================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Courier New', Courier, monospace;
+    background-color: #0a0a1a;
+    color: #e0e0f0;
+    min-height: 100vh;
+
+    /* Звёздный фон через градиент и точки */
+    background-image:
+        radial-gradient(white 1px, transparent 1px),
+        radial-gradient(white 1px, transparent 1px);
+    background-size: 100px 100px, 70px 70px;
+    background-position: 0 0, 35px 35px;
+}
+
+/* ==============================
+   Шапка
+   ============================== */
+
+header {
+    background: rgba(10, 10, 40, 0.9);
+    border-bottom: 1px solid #3a3a6a;
+    padding: 15px 30px;
+    text-align: center;
+}
+
+header h1 {
+    color: #7eb8f7;
+    font-size: 1.4rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}
+
+header .player-info {
+    color: #a0a0c0;
+    font-size: 0.85rem;
+    margin-top: 5px;
+}
+
+header .player-info span {
+    color: #7eb8f7;
+}
+
+/* ==============================
+   Основной контейнер
+   ============================== */
+
+.container {
+    max-width: 780px;
+    margin: 50px auto;
+    padding: 0 20px;
+}
+
+/* ==============================
+   Карточка (основной блок)
+   ============================== */
+
+.card {
+    background: rgba(15, 15, 40, 0.92);
+    border: 1px solid #2a2a5a;
+    border-radius: 12px;
+    padding: 40px;
+    box-shadow: 0 0 30px rgba(100, 150, 255, 0.1);
+}
+
+.card-title {
+    color: #7eb8f7;
+    font-size: 1.1rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #2a2a5a;
+}
+
+/* ==============================
+   Текст квеста
+   ============================== */
+
+.quest-text {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: #c8c8e8;
+    margin-bottom: 35px;
+}
+
+/* ==============================
+   Кнопки вариантов ответа
+   ============================== */
+
+.options {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.option-btn {
+    background: rgba(40, 40, 80, 0.8);
+    border: 1px solid #3a3a7a;
+    border-radius: 8px;
+    color: #b0c8f0;
+    cursor: pointer;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.95rem;
+    padding: 14px 20px;
+    text-align: left;
+    transition: all 0.2s ease;
+    width: 100%;
+}
+
+.option-btn:hover {
+    background: rgba(60, 60, 120, 0.9);
+    border-color: #7eb8f7;
+    color: #ffffff;
+    transform: translateX(5px);
+}
+
+/* ==============================
+   Финальные экраны (победа / поражение)
+   ============================== */
+
+.result-win {
+    border-color: #2a6a3a;
+    box-shadow: 0 0 30px rgba(50, 200, 100, 0.1);
+}
+
+.result-win .card-title {
+    color: #5dcf7f;
+}
+
+.result-lose {
+    border-color: #6a2a2a;
+    box-shadow: 0 0 30px rgba(200, 50, 50, 0.1);
+}
+
+.result-lose .card-title {
+    color: #cf5d5d;
+}
+
+.result-icon {
+    font-size: 3rem;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* ==============================
+   Статистика
+   ============================== */
+
+.stats {
+    margin: 25px 0;
+    padding: 15px 20px;
+    background: rgba(30, 30, 60, 0.6);
+    border-radius: 8px;
+    border: 1px solid #2a2a5a;
+}
+
+.stats p {
+    color: #a0a0c0;
+    font-size: 0.9rem;
+    margin: 5px 0;
+}
+
+.stats span {
+    color: #7eb8f7;
+}
+
+/* ==============================
+   Кнопка "Играть снова"
+   ============================== */
+
+.btn-primary {
+    background: rgba(40, 80, 160, 0.8);
+    border: 1px solid #4a6aa0;
+    border-radius: 8px;
+    color: #d0e4ff;
+    cursor: pointer;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1rem;
+    letter-spacing: 1px;
+    margin-top: 15px;
+    padding: 14px 30px;
+    transition: all 0.2s ease;
+    width: 100%;
+}
+
+.btn-primary:hover {
+    background: rgba(60, 100, 200, 0.9);
+    border-color: #7eb8f7;
+    color: #ffffff;
+}
+
+/* ==============================
+   Стартовая страница
+   ============================== */
+
+.intro-text {
+    color: #a0a0c0;
+    font-size: 0.95rem;
+    line-height: 1.8;
+    margin-bottom: 25px;
+}
+
+.intro-text p {
+    margin-bottom: 12px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    color: #7eb8f7;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+}
+
+.form-group input {
+    background: rgba(30, 30, 60, 0.8);
+    border: 1px solid #3a3a7a;
+    border-radius: 6px;
+    color: #e0e0f0;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1rem;
+    padding: 12px 15px;
+    width: 100%;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.form-group input:focus {
+    border-color: #7eb8f7;
+}
+
+.error-message {
+    color: #cf5d5d;
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+}
+
+/* ==============================
+   Страница ошибки
+   ============================== */
+
+.error-code {
+    color: #cf5d5d;
+    font-size: 4rem;
+    text-align: center;
+    margin-bottom: 10px;
+}
