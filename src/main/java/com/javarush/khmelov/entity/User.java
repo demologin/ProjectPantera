@@ -13,7 +13,23 @@ import java.util.Collection;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "users")
-public class User implements AbstractEntity{
+@ToString(exclude = {"quests", "games"})
+
+@NamedQueries({
+        @NamedQuery(
+                name = User.GET_ALL,
+                query = "select u from User u"
+        ),
+        @NamedQuery(
+                name = User.BETWEEN_START_AND_END,
+                query = "select u from User u where u.id between :startId and :endId"
+        )
+})
+public class User implements AbstractEntity {
+
+    public static final String BETWEEN_START_AND_END = "User.between startId And endId";
+
+    public static final String GET_ALL = "User.getAll";
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
