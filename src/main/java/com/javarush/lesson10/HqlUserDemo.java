@@ -1,14 +1,13 @@
 package com.javarush.lesson10;
 
 import com.javarush.khmelov.entity.User;
-import com.javarush.lesson09.SessionCreator;
+import com.javarush.khmelov.config.SessionCreator;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
 import java.util.List;
-import java.util.stream.Stream;
 
 @RequiredArgsConstructor
 public class HqlUserDemo {

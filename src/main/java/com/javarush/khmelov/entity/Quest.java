@@ -1,28 +1,33 @@
 package com.javarush.khmelov.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import jakarta.persistence.*;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
-@Data
+@Entity
+@Getter
+@Setter
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 public class Quest implements AbstractEntity {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;
 
     private String text;
 
+    @Column(name = "users_id")
     private Long authorId;
 
     private Long startQuestionId;
 
+    @Transient
     private final Collection<Question> questions = new ArrayList<>();
 
 }

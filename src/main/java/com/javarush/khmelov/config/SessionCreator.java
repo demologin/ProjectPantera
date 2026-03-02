@@ -1,13 +1,11 @@
-package com.javarush.lesson09;
+package com.javarush.khmelov.config;
 
 import com.javarush.khmelov.entity.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.boot.model.naming.CamelCaseToUnderscoresNamingStrategy;
 import org.hibernate.cfg.Configuration;
-
-import java.sql.SQLException;
-import java.util.Properties;
 
 public class SessionCreator implements AutoCloseable {
 
@@ -19,6 +17,7 @@ public class SessionCreator implements AutoCloseable {
         //configuration.configure("hibernate.cfg.xml");
         //Properties properties = configuration.getProperties();
         configuration.addAnnotatedClass(User.class);
+        configuration.setPhysicalNamingStrategy(new CamelCaseToUnderscoresNamingStrategy());
         sessionFactory = configuration.buildSessionFactory();
     }
 

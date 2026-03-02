@@ -2,9 +2,11 @@ package com.javarush.khmelov.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.Hibernate;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Objects;
 
 @Entity
 @Getter
@@ -14,7 +16,6 @@ import java.util.Collection;
 @AllArgsConstructor
 @Table(name = "users")
 @ToString(exclude = {"quests", "games"})
-
 @NamedQueries({
         @NamedQuery(
                 name = User.GET_ALL,
@@ -52,5 +53,17 @@ public class User implements AbstractEntity {
         return "user-" + id;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        Class<?> entityClass = Hibernate.getClass(o);
+        if (o == null || this.getClass() != entityClass) return false;
 
+        User user = (User) o;
+        return getId()!=null && Objects.equals(getId(), user.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return this.getClass().hashCode();
+    }
 }

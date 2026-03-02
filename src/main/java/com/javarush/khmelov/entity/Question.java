@@ -1,26 +1,31 @@
 package com.javarush.khmelov.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import jakarta.persistence.*;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
-@Data
+@Entity
+@Getter
+@Setter
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 public class Question implements AbstractEntity {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private Long questId;
 
     private String text;
 
+    @Enumerated(EnumType.STRING)
     private GameState gameState;
 
+    @Transient
     private final Collection<Answer> answers = new ArrayList<>();
 
     public String getImage() {

@@ -2,8 +2,7 @@ package com.javarush.lesson10;
 
 import com.javarush.khmelov.entity.Role;
 import com.javarush.khmelov.entity.User;
-import com.javarush.lesson08.UserDao;
-import com.javarush.lesson09.SessionCreator;
+import com.javarush.khmelov.config.SessionCreator;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;

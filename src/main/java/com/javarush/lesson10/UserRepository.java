@@ -2,7 +2,7 @@ package com.javarush.lesson10;
 
 import com.javarush.khmelov.entity.User;
 import com.javarush.khmelov.repository.Repository;
-import com.javarush.lesson09.SessionCreator;
+import com.javarush.khmelov.config.SessionCreator;
 import jakarta.persistence.Transient;
 import jakarta.persistence.criteria.Predicate;
 import org.hibernate.Session;

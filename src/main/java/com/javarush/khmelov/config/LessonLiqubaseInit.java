@@ -1,4 +1,4 @@
-package com.javarush.lesson06;
+package com.javarush.khmelov.config;
 
 import liquibase.Scope;
 import liquibase.command.CommandScope;
