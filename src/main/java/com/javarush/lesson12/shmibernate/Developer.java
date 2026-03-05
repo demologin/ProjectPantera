@@ -19,6 +19,7 @@ public class Developer implements AbstractEntity {
     Long id;
     String name;
     String email;
+    String password;
     Long phone;
     Role role;
 }

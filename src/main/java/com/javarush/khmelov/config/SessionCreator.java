@@ -1,6 +1,7 @@
 package com.javarush.khmelov.config;
 
 import com.javarush.khmelov.entity.User;
+import com.javarush.lesson12.hibernate.Person;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -16,6 +17,7 @@ public class SessionCreator implements AutoCloseable {
         configuration.configure();
         //configuration.configure("hibernate.cfg.xml");
         //Properties properties = configuration.getProperties();
+        configuration.addAnnotatedClass(Person.class);
         configuration.addAnnotatedClass(User.class);
         configuration.setPhysicalNamingStrategy(new CamelCaseToUnderscoresNamingStrategy());
         sessionFactory = configuration.buildSessionFactory();

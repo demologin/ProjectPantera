@@ -9,6 +9,7 @@ public class Client {
         Developer developer = Developer.builder()
                 .name("test")
                 .email("test@test.com")
+                .password("qwerty")
                 .phone(123456789L)
                 .role(Role.ADMIN)
                 .build();
