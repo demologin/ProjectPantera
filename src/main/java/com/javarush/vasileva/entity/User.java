@@ -12,7 +12,16 @@ import lombok.NoArgsConstructor;
 @Builder
 @Entity
 @Table(name = "users")
+@NamedQueries({
+        @NamedQuery(
+                name = User.USER_GET_ALL,
+                query = "select u from User u"
+        )
+})
 public class User {
+
+    public static final String USER_GET_ALL = "User.getAll";
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

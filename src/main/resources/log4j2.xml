@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Configuration status="DEBUG">
+<Configuration status="INFO">
+    <Properties>
+        <Property name="SPRING"
+                  value="%style{%d{ISO8601}}{black} %highlight{%-5level }[%style{%t}{bright,blue}] %style{%C{1.}}{bright,yellow}.%M(%F:%L): %msg%n%throwable"/>
+    </Properties>
     <Appenders>
         <RollingFile
                 name="RollingFile"
                 fileName="${sys:catalina.base}/logs/project-pantera.log"
                 filePattern="${sys:catalina.base}/logs/project-pantera.%d{yyyy-MM-dd}.log">
-            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss,SSS} %-5level %logger{1}: %msg%n"/>
+<!--            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss,SSS} %-5level %logger{1}: %msg%n"/>-->
+            <PatternLayout pattern="${sys:SPRING}"/>
             <Policies>
                 <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
             </Policies>
@@ -17,7 +22,8 @@
             </DefaultRolloverStrategy>
         </RollingFile>
         <Console name="Console" target="SYSTEM_OUT">
-            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss,SSS} %-5level %logger{1}: %msg%n"/>
+<!--            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss,SSS} %-5level %logger{1}: %msg%n"/>-->
+            <PatternLayout pattern="${sys:SPRING}"/>
         </Console>
     </Appenders>
     <Loggers>

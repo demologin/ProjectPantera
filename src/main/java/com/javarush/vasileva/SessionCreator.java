@@ -34,7 +34,6 @@ public class SessionCreator implements AutoCloseable {
              Session session = sessionCreator.getSession()) {
             Transaction transaction = session.beginTransaction();
             try {
-                session.persist(new User("Alice", "alice@gmail.com", "123", Role.USER));
                 User user = session.find(User.class, 1);
                 System.out.println(user);
                 transaction.commit();
