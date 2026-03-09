@@ -34,8 +34,8 @@ public class LoginIT extends BaseIT {
                 .thenReturn(Optional.of(testAdmin));
 
         UserStats stats = new UserStats();
-        stats.setUserId(testAdmin.getId());
-        when(userStatsService.getUserStats(testAdmin.getId())).thenReturn(Optional.of(stats));
+        stats.setUser(testAdmin);
+        when(userStatsService.getUserStats(testAdmin)).thenReturn(Optional.of(stats));
 
         String redirect = login.doPost(req);
 
@@ -45,7 +45,7 @@ public class LoginIT extends BaseIT {
         verify(session).setAttribute(Key.STATS, stats);
 
         verify(userService).login(testAdmin.getEmail(), testAdmin.getPassword());
-        verify(userStatsService).getUserStats(testAdmin.getId());
+        verify(userStatsService).getUserStats(testAdmin);
     }
 
     @Test
@@ -92,10 +92,10 @@ public class LoginIT extends BaseIT {
                 .thenReturn(Optional.of(testAdmin));
 
         UserStats stats = new UserStats();
-        stats.setUserId(testAdmin.getId());
-        when(userStatsService.getUserStats(testAdmin.getId()))
+        stats.setUser(testAdmin);
+        when(userStatsService.getUserStats(testAdmin))
                 .thenReturn(Optional.empty());
-        when(userStatsService.createUserStats(testAdmin.getId()))
+        when(userStatsService.createUserStats(testAdmin))
                 .thenReturn(stats);
 
         String redirect = login.doPost(req);
@@ -103,7 +103,7 @@ public class LoginIT extends BaseIT {
         assertEquals(Link.HOME, redirect);
         verify(session).setAttribute(Key.USER, testAdmin);
         verify(session).setAttribute(Key.STATS, stats);
-        verify(userStatsService).createUserStats(testAdmin.getId());
+        verify(userStatsService).createUserStats(testAdmin);
 
     }
 

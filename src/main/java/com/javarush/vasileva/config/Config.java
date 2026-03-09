@@ -54,17 +54,20 @@ public class Config {
         if (questions == null || questions.isEmpty()) {
             throw new AppException(JSON_SAVE_ERROR);
         }
+
         for (Question question : questions) {
-            question.setQuestId(quest.getId());
-            questionService.create(question);
+
+            question.setQuest(quest);
             List<Answer> answers = question.getAnswers();
             if (answers == null) {
+                questionService.create(question);
                 continue;
             }
             for (Answer answer : answers) {
-                answer.setQuestionId(question.getGeneratedId());
+                answer.setQuestion(question);
                 answerService.create(answer);
             }
+            questionService.create(question);
         }
         long startQuestionId = quest.getQuestions().get(0).getGeneratedId();
         quest.setStartQuestionId(startQuestionId);

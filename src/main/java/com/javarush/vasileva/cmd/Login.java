@@ -51,8 +51,8 @@ public class Login implements Command {
             LOGGER.info("User authenticated successfully: {}", user.getEmail());
 
             HttpSession session = request.getSession();
-            UserStats stats = userStatsService.getUserStats(user.getId())
-                    .orElse(userStatsService.createUserStats(user.getId()));
+            UserStats stats = userStatsService.getUserStats(user)
+                    .orElse(userStatsService.createUserStats(user));
 
             session.setAttribute(USER, optionalUser.get());
             session.setAttribute(Key.STATS, stats);

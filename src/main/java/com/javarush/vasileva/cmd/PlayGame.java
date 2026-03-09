@@ -36,6 +36,8 @@ public class PlayGame implements Command {
         }
         LOGGER.debug("Authenticated user: id={}, login={}", user.getId(), user.getLogin());
 
+        LOGGER.debug("Raw questId parameter: '{}'", req.getParameter(QUEST_ID));
+
         Long questId = Helpers.parseStringToLong(req.getParameter(QUEST_ID));
         Long gameId = req.getParameter(GAME_ID) != null
                 ? Helpers.parseStringToLong(req.getParameter(GAME_ID))

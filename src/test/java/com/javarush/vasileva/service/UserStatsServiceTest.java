@@ -29,39 +29,39 @@ public class UserStatsServiceTest {
     @DisplayName("when createUserStats() then delegate stats creation to repository")
     void testCreateUserStats() {
         UserStats expectedStats = createDefaultUserStats();
-        when(userStatsRepository.createUserStats(VALID_USER_ID))
+        when(userStatsRepository.createUserStats(createValidUser()))
                 .thenReturn(expectedStats);
 
-        UserStats result = userStatsService.createUserStats(VALID_USER_ID);
+        UserStats result = userStatsService.createUserStats(createValidUser());
 
         assertEquals(expectedStats, result);
-        verify(userStatsRepository).createUserStats(VALID_USER_ID);
+        verify(userStatsRepository).createUserStats(createValidUser());
     }
 
     @Test
     @DisplayName("when getUserStats() then return user stats if it exists")
     void whenGetUserStats_thenExisting() {
         UserStats expectedStats = createFilledUserStats();
-        when(userStatsRepository.getUserStats(VALID_USER_ID))
+        when(userStatsRepository.getUserStats(createValidUser()))
                 .thenReturn(Optional.of(expectedStats));
 
-        Optional<UserStats> result = userStatsService.getUserStats(VALID_USER_ID);
+        Optional<UserStats> result = userStatsService.getUserStats(createValidUser());
 
         assertTrue(result.isPresent());
         assertEquals(expectedStats, result.get());
-        verify(userStatsRepository).getUserStats(VALID_USER_ID);
+        verify(userStatsRepository).getUserStats(createValidUser());
     }
 
     @Test
     @DisplayName("when getUserStats() then return empty Optional if stats is not found")
     void whenGetUserStats_ThenNonExisting() {
-        when(userStatsRepository.getUserStats(NON_EXISTENT_USER_ID))
+        when(userStatsRepository.getUserStats(createNullUser()))
                 .thenReturn(Optional.empty());
 
-        Optional<UserStats> result = userStatsService.getUserStats(NON_EXISTENT_USER_ID);
+        Optional<UserStats> result = userStatsService.getUserStats(createNullUser());
 
         assertFalse(result.isPresent());
-        verify(userStatsRepository).getUserStats(NON_EXISTENT_USER_ID);
+        verify(userStatsRepository).getUserStats(createNullUser());
     }
 
     @Test

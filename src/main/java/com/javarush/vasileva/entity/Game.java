@@ -1,18 +1,32 @@
 package com.javarush.vasileva.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import jakarta.persistence.*;
+import lombok.*;
 
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+
+@Entity
+@Table(name = "game")
 public class Game {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Long questId;
-    private Long userId;
+
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "quest_id", nullable = false)
+    private Quest quest;
+
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
+
     private Long currentQuestionId;
+
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "game_state_id", nullable = false)
     private GameState gameState;
 }

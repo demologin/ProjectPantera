@@ -1,6 +1,7 @@
 package com.javarush.vasileva.cmd;
 
 import com.javarush.vasileva.BaseIT;
+import com.javarush.vasileva.entity.User;
 import com.javarush.vasileva.exception.AppException;
 import com.javarush.vasileva.service.UserStatsService;
 import com.javarush.vasileva.util.Key;
@@ -24,7 +25,7 @@ public class StatsIT extends BaseIT {
     @DisplayName("when user is authenticated then load stats and return view")
     void whenUserAuthenticated_ThenLoadStatsAndReturnView() {
         when(session.getAttribute(Key.USER)).thenReturn(testUser);
-        when(statsService.getUserStats(testUser.getId())).thenReturn(Optional.of(testUserStats));
+        when(statsService.getUserStats(testUser)).thenReturn(Optional.of(testUserStats));
 
         String view = stats.doGet(req);
 
@@ -32,7 +33,7 @@ public class StatsIT extends BaseIT {
 
         verify(req).getSession();
         verify(session).getAttribute(Key.USER);
-        verify(statsService).getUserStats(testUser.getId());
+        verify(statsService).getUserStats(testUser);
         verify(req).setAttribute(eq(Key.STATS), eq(testUserStats));
     }
 
@@ -46,14 +47,14 @@ public class StatsIT extends BaseIT {
         assertEquals(Value.AUTH_ERROR, exception.getMessage());
         verify(req).getSession();
         verify(session).getAttribute(Key.USER);
-        verify(statsService, never()).getUserStats(anyLong());
+        verify(statsService, never()).getUserStats(any(User.class));
     }
 
     @Test
     @DisplayName("when stats not found then throw AppException")
     void whenStatsNotFound_ThenThrowAppException() {
         when(session.getAttribute(Key.USER)).thenReturn(testUser);
-        when(statsService.getUserStats(testUser.getId())).thenReturn(Optional.empty());
+        when(statsService.getUserStats(testUser)).thenReturn(Optional.empty());
 
         AppException exception = assertThrows(AppException.class, () -> stats.doGet(req));
 
@@ -61,7 +62,7 @@ public class StatsIT extends BaseIT {
 
         verify(req).getSession();
         verify(session).getAttribute(Key.USER);
-        verify(statsService).getUserStats(testUser.getId());
+        verify(statsService).getUserStats(testUser);
         verify(req, never()).setAttribute(eq(Key.STATS), any());
     }
 

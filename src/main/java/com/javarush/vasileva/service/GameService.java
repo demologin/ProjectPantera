@@ -33,8 +33,8 @@ public class GameService {
         Quest quest = questService.findById(questId).orElseThrow(() -> new AppException(QUEST_NOT_FOUND));
         GameState initialState = gameEngine.startGame(user, quest);
         Game game = Game.builder()
-                .questId(questId)
-                .userId(userId)
+                .quest(quest)
+                .user(user)
                 .currentQuestionId(initialState.getCurrentQuestion().getGeneratedId())
                 .gameState(initialState)
                 .build();
@@ -46,6 +46,7 @@ public class GameService {
         GameState nextState = gameEngine.advanceGame(game.getGameState(), answerId);
         game.setCurrentQuestionId(nextState.getCurrentQuestion().getGeneratedId());
         game.setGameState(nextState);
+        System.out.println(game.getGameState());
         return gameRepository.save(game);
     }
 

@@ -25,7 +25,13 @@ public class GameEngine {
                 .orElseThrow(() -> new AppException(QUESTION_NOT_FOUND));
         boolean isFinalQuestion = questionService.isFinalQuestion(startQuestion);
 
-        return new GameState(quest, startQuestion, user, isFinalQuestion);
+        return GameState.builder()
+                .currentQuest(quest)
+                .currentQuestion(startQuestion)
+                .user(user)
+                .isCompleted(isFinalQuestion)
+                .build();
+//        return new GameState(quest, startQuestion, user, isFinalQuestion);
     }
 
     public GameState advanceGame(GameState currentState, Long answerId) {
@@ -36,11 +42,18 @@ public class GameEngine {
         boolean isFinalQuestion = questionService.isFinalQuestion(nextQuestion);
 
         if (isFinalQuestion) {
-            UserStats stats = userStatsService.getUserStats(currentState.getUser().getId())
+            UserStats stats = userStatsService.getUserStats(currentState.getUser())
                     .orElseThrow(() -> new AppException(STATS_NOT_FOUND));
             userStatsService.updateUserStats(nextQuestion, stats);
         }
 
-        return new GameState(currentState.getCurrentQuest(), nextQuestion, currentState.getUser(), isFinalQuestion);
+        return GameState.builder()
+                .currentQuest(currentState.getCurrentQuest())
+                .currentQuestion(nextQuestion)
+                .user(currentState.getUser())
+                .isCompleted(isFinalQuestion)
+                .build();
+
+//        return new GameState(currentState.getCurrentQuest(), nextQuestion, currentState.getUser(), isFinalQuestion);
     }
 }

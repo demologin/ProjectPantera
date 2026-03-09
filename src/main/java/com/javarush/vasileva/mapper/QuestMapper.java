@@ -14,6 +14,7 @@ public class QuestMapper {
     }
 
     public Quest readFromJson(String filePath) throws IOException {
+
         InputStream inputStream = getClass().getResourceAsStream(filePath);
         if (inputStream == null) {
             throw new IOException("Ресурс не найден: " + filePath);

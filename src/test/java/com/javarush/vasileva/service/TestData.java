@@ -90,10 +90,11 @@ public final class TestData {
     /*    ======================================= QUESTION =================================== */
 
     public static Question createQuestionWithAnswers() {
+        Quest quest = createValidQuest();
         Question question = Question.builder()
                 .generatedId(VALID_QUESTION_ID)
                 .label(VALID_LABEL)
-                .questId(VALID_QUEST_ID)
+                .quest(quest)
                 .text("Какой цвет неба?")
                 .build();
         List<Answer> answers = List.of(
@@ -104,20 +105,22 @@ public final class TestData {
     }
 
     public static Question createFinalQuestion() {
+        Quest quest = createValidQuest();
         return Question.builder()
                 .generatedId(2L)
                 .label("END")
-                .questId(VALID_QUEST_ID)
+                .quest(quest)
                 .text("Это финальный вопрос.")
                 .answers(null)
                 .build();
     }
 
     public static Question createSimpleQuestion() {
+        Quest quest = createValidQuest();
         return Question.builder()
                 .generatedId(3L)
                 .label("Q3")
-                .questId(VALID_QUEST_ID)
+                .quest(quest)
                 .text("Простой вопрос.")
                 .build();
     }
@@ -178,17 +181,19 @@ public final class TestData {
                 .build();
     }
 
-    public static Game createGame(Long questId, Long userId, Long currentQuestionId, GameState state) {
+    public static Game createGame(Long currentQuestionId, GameState state) {
+        Quest quest = createValidQuest();
+        User testUser = createValidUser();
         return Game.builder()
-                .questId(questId)
-                .userId(userId)
+                .quest(quest)
+                .user(testUser)
                 .currentQuestionId(currentQuestionId)
                 .gameState(state)
                 .build();
     }
 
     public static Game createSavedGame() {
-        Game game = createGame(VALID_QUEST_ID, VALID_USER_ID, 1L, createInitialGameState());
+        Game game = createGame(1L, createInitialGameState());
         game.setId(VALID_GAME_ID);
         return game;
     }
@@ -196,8 +201,9 @@ public final class TestData {
     /*    ======================================= STATS =================================== */
 
     public static UserStats createDefaultUserStats() {
+        User testUser = createValidUser();
         return UserStats.builder()
-                .userId(VALID_USER_ID)
+                .user(testUser)
                 .total(0)
                 .wins(0)
                 .losses(0)
@@ -205,8 +211,9 @@ public final class TestData {
     }
 
     public static UserStats createFilledUserStats() {
+        User testUser = createValidUser();
         return UserStats.builder()
-                .userId(VALID_USER_ID)
+                .user(testUser)
                 .total(5)
                 .wins(3)
                 .losses(2)

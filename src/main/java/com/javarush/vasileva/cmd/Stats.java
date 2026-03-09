@@ -38,7 +38,7 @@ public class Stats implements Command {
 
         LOGGER.debug("Authenticated user: id={}, login={}", user.getId(), user.getLogin());
 
-        UserStats stats = statsService.getUserStats(user.getId()).orElseThrow(() -> new AppException(Value.STATS_NOT_FOUND));
+        UserStats stats = statsService.getUserStats(user).orElseThrow(() -> new AppException(Value.STATS_NOT_FOUND));
         req.setAttribute(Key.STATS, stats);
         LOGGER.info("Statistics loaded successfully for user ID: {}", user.getId());
 

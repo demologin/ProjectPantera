@@ -53,6 +53,7 @@ public class EditQuest implements Command {
             req.setAttribute(EDIT, true);
             try {
                 String questJson = questMapper.toJsonString(quest);
+                System.out.println("json" + questJson);
                 req.setAttribute(QUEST_JSON, questJson);
                 LOGGER.debug("Quest is mapped to JSON. ID: {}", quest.getId());
             } catch (IOException e) {

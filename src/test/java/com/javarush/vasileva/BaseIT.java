@@ -11,6 +11,7 @@ import jakarta.servlet.http.HttpSession;
 import org.mockito.Mockito;
 import org.slf4j.Logger;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.mockito.Mockito.when;
@@ -85,47 +86,12 @@ public class BaseIT {
                 .role(Role.GUEST)
                 .build();
 
-        testAnswer1 = Answer.builder()
-                .id(1L)
-                .questionId(1L)
-                .text("testAnswer1")
-                .nextQuestionLabel("+8")
-                .build();
-
-        testAnswer2 = Answer.builder()
-                .id(2L)
-                .questionId(1L)
-                .text("testAnswer2")
-                .nextQuestionLabel("-9")
-                .build();
-
-        testQuestion1 = Question.builder()
-                .generatedId(1L)
-                .questId(1L)
-                .label("1")
-                .text("testQuestion1")
-                .answers(List.of(testAnswer1, testAnswer2))
-                .build();
-
-        testQuestion2 = Question.builder()
-                .generatedId(2L)
-                .label("+8")
-                .text("testQuestion2")
-                .build();
-
-        testQuestion3 = Question.builder()
-                .generatedId(3L)
-                .label("-9")
-                .text("testQuestion3")
-                .build();
-
         testQuest = Quest.builder()
                 .id(1L)
                 .title("testQuest")
                 .description("testQuest")
                 .text("testQuest")
                 .startQuestionId(1L)
-                .questions(List.of(testQuestion1, testQuestion2, testQuestion3))
                 .build();
 
         testQuestWithoutId = Quest.builder()
@@ -133,8 +99,49 @@ public class BaseIT {
                 .description("testQuest")
                 .text("testQuest")
                 .startQuestionId(1L)
-                .questions(List.of(testQuestion1, testQuestion2, testQuestion3))
                 .build();
+
+        testQuestion1 = Question.builder()
+                .generatedId(1L)
+                .quest(testQuest)
+                .label("1")
+                .text("testQuestion1")
+                .answers(new ArrayList<>())
+                .build();
+
+        testQuestion2 = Question.builder()
+                .generatedId(2L)
+                .quest(testQuest)
+                .label("+8")
+                .text("testQuestion2")
+                .build();
+
+        testQuestion3 = Question.builder()
+                .generatedId(3L)
+                .quest(testQuest)
+                .label("-9")
+                .text("testQuestion3")
+                .build();
+
+        testAnswer1 = Answer.builder()
+                .id(1L)
+                .question(testQuestion1)
+                .text("testAnswer1")
+                .nextQuestionLabel("+8")
+                .build();
+
+        testAnswer2 = Answer.builder()
+                .id(2L)
+                .question(testQuestion1)
+                .text("testAnswer2")
+                .nextQuestionLabel("-9")
+                .build();
+
+        testQuestion1.getAnswers().add(testAnswer1);
+        testQuestion1.getAnswers().add(testAnswer2);
+
+        testQuest.setQuestions(List.of(testQuestion1, testQuestion2, testQuestion3));
+        testQuestWithoutId.setQuestions(List.of(testQuestion1, testQuestion2, testQuestion3));
 
         testGameState = GameState.builder()
                 .currentQuest(testQuest)
@@ -145,8 +152,8 @@ public class BaseIT {
 
         testGame = Game.builder()
                 .id(1L)
-                .questId(testQuest.getId())
-                .userId(testUser.getId())
+                .quest(testQuest)
+                .user(testUser)
                 .currentQuestionId(testQuestion1.getGeneratedId())
                 .gameState(testGameState)
                 .build();
@@ -216,7 +223,7 @@ public class BaseIT {
 
         testUserStats = UserStats.builder()
                 .id(1L)
-                .userId(testUser.getId())
+                .user(testUser)
                 .total(3)
                 .wins(2)
                 .losses(1)

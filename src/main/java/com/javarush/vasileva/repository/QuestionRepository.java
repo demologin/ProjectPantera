@@ -28,7 +28,7 @@ public class QuestionRepository implements Repository<Question> {
     public Optional<Question> getByQuestionLabelAndQuestId(String questionLabel, long questId) {
         return questions.values().stream()
                 .filter(question -> question.getLabel().equals(questionLabel))
-                .filter(question -> question.getQuestId() == questId)
+                .filter(question -> question.getQuest().getId() == questId)
                 .findFirst();
     }
 

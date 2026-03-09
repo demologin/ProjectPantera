@@ -1,6 +1,7 @@
 package com.javarush.vasileva.service;
 
 import com.javarush.vasileva.entity.Question;
+import com.javarush.vasileva.entity.User;
 import com.javarush.vasileva.entity.UserStats;
 import com.javarush.vasileva.repository.UserStatsRepository;
 
@@ -16,19 +17,26 @@ public class UserStatsService {
         this.userStatsRepository = userStatsRepository;
     }
 
-    public UserStats createUserStats(long userId) {
-        return userStatsRepository.createUserStats(userId);
+    //    public UserStats createUserStats(long userId) {
+//        return userStatsRepository.createUserStats(userId);
+//    }
+    public UserStats createUserStats(User user) {
+        return userStatsRepository.createUserStats(user);
     }
 
-    public Optional<UserStats> getUserStats(long userId) {
-        return userStatsRepository.getUserStats(userId);
+//    public Optional<UserStats> getUserStats(long userId) {
+//        return userStatsRepository.getUserStats(userId);
+//    }
+
+    public Optional<UserStats> getUserStats(User user) {
+        return userStatsRepository.getUserStats(user);
     }
 
     public void updateUserStats(Question question, UserStats userStats) {
         userStats.setTotal(userStats.getTotal() + 1);
         if (question.getLabel().contains(WIN)) {
             userStats.setWins(userStats.getWins() + 1);
-        }  else if (question.getLabel().contains(LOSS)) {
+        } else if (question.getLabel().contains(LOSS)) {
             userStats.setLosses(userStats.getLosses() + 1);
         }
         userStatsRepository.updateUserStats(userStats);
