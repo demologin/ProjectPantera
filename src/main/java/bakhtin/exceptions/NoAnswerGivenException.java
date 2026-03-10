@@ -1,4 +1,4 @@
-package bakhtin.exсeptions;
+package bakhtin.exceptions;
 
 public class NoAnswerGivenException extends QuestException {
 

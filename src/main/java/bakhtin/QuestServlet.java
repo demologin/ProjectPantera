@@ -2,10 +2,10 @@ package bakhtin;
 
 import bakhtin.Quest.Question;
 import bakhtin.Quest.Question.Answer;
-import bakhtin.exсeptions.IllegalActionException;
-import bakhtin.exсeptions.NoActiveQuestException;
-import bakhtin.exсeptions.NoAnswerGivenException;
-import bakhtin.exсeptions.NoQuestionException;
+import bakhtin.exceptions.IllegalActionException;
+import bakhtin.exceptions.NoActiveQuestException;
+import bakhtin.exceptions.NoAnswerGivenException;
+import bakhtin.exceptions.NoQuestionException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -13,6 +13,9 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
+import org.apache.commons.lang3.StringUtils;
+
+import static bakhtin.SessionConstants.*;
 
 @WebServlet("/quest")
 public class QuestServlet extends HttpServlet {
@@ -21,66 +24,63 @@ public class QuestServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
 
-        String actionStr = req.getParameter("action");
-        Actions action = getAction(actionStr);
+        String actionStr = req.getParameter(SessionConstants.ACTION_PARAM);
+        Action action = Action.parse(actionStr);
 
         HttpSession session = req.getSession();
 
-        if (action == Actions.ANSWER) {
-            Object attr = session.getAttribute("currentQuestion");
-            if (!(attr instanceof Question question)) {
-                throw new NoQuestionException("Question not found in session");
-            }
-            String answerId = req.getParameter("answerId");
-            Long id;
+        switch (action) {
+            case ANSWER -> doAnswer(req, resp, session);
+            case RESTART -> doRestart(req, resp, session);
+            case EXIT -> doExit(req, resp, session);
+            default -> throw new IllegalActionException("Invalid action: " + actionStr);
+        }
+    }
 
-            if (answerId != null && !answerId.isEmpty() && answerId.matches("\\d+")) {
-                id = Long.parseLong(answerId);
-            } else {
-                throw new NoAnswerGivenException("Answer ID not found in session");
-            }
+    private void doExit(HttpServletRequest req, HttpServletResponse resp,
+            HttpSession session) throws ServletException, IOException {
+        session.invalidate();
+        req.getRequestDispatcher("/WEB-INF/hello.jsp").forward(req, resp);
+    }
 
-            Question nextQuestion = getNextQuestion(question, id);
-
-            if (nextQuestion.isTerminal()) {
-                if (nextQuestion.isWin()) {
-                    req.setAttribute("win", "true");
-                } else {
-                    req.setAttribute("win", "false");
-                }
-
-                // Увеличиваем счетчик сыгранных игр
-                int gamesPlayed = (int) session.getAttribute("gamesPlayed");
-                session.setAttribute("gamesPlayed", gamesPlayed + 1);
-                req.setAttribute("gamesPlayed", gamesPlayed + 1);
-            }
-
-            req.setAttribute("currentQuestion", nextQuestion);
-            session.setAttribute("currentQuestion", nextQuestion);
-            req.getRequestDispatcher("/WEB-INF/quest.jsp").forward(req, resp);
-
-        } else if (action == Actions.RESTART) {
-            restart(req, resp, session);
-
-        } else if (action == Actions.EXIT) {
-            session.invalidate();
-            req.getRequestDispatcher("/WEB-INF/hello.jsp").forward(req, resp);
+    private void doAnswer(HttpServletRequest req, HttpServletResponse resp, HttpSession session)
+            throws ServletException, IOException {
+        Object attr = session.getAttribute(CURRENT_QUESTION_ATTR);
+        if (!(attr instanceof Question question)) {
+            throw new NoQuestionException("Question not found in session");
+        }
+        String answerId = req.getParameter(ANSWER_ID_PARAM);
+        long id;
+        if (StringUtils.isNotEmpty(answerId)) {
+            id = Long.parseLong(answerId);
         } else {
-            throw new IllegalActionException("Invalid action: " + actionStr);
+            throw new NoAnswerGivenException("Answer ID not found in session");
         }
+
+        Question nextQuestion = getNextQuestion(question, id);
+
+        if (nextQuestion.isFinish()) {
+            doFinish(req, session, nextQuestion);
+        }
+
+        session.setAttribute(CURRENT_QUESTION_ATTR, nextQuestion);
+        req.setAttribute(CURRENT_QUESTION_REQUEST_ATTR, nextQuestion);
+        req.getRequestDispatcher("/WEB-INF/quest.jsp").forward(req, resp);
     }
 
-    protected Actions getAction(String actionStr) {
-        Actions action = null;
-        if (actionStr != null) {
-            try {
-                action = Actions.valueOf(actionStr.toUpperCase());
-            } catch (IllegalArgumentException e) {
-                throw new IllegalActionException("Action not found for: " + actionStr);
-            }
+    private void doFinish(HttpServletRequest req, HttpSession session,
+            Question nextQuestion) {
+        if (nextQuestion.isWin()) {
+            req.setAttribute(WIN_ATTR, "true");
+        } else {
+            req.setAttribute(WIN_ATTR, "false");
         }
-        return action;
+
+        // Увеличиваем счетчик сыгранных игр
+        int gamesPlayed = (int) session.getAttribute(GAMES_PLAYED_ATTR);
+        session.setAttribute(GAMES_PLAYED_ATTR, gamesPlayed + 1);
     }
+
 
     protected Question getNextQuestion(Question question, Long answerId) {
         Answer answer = question.getAnswer(answerId);
@@ -96,20 +96,22 @@ public class QuestServlet extends HttpServlet {
         return nextQuestion;
     }
 
-    protected void restart(HttpServletRequest req, HttpServletResponse resp, HttpSession session)
+    protected void doRestart(HttpServletRequest req, HttpServletResponse resp, HttpSession session)
             throws ServletException, IOException {
-        session.removeAttribute("currentQuestion");
-        session.removeAttribute("answerID");
+        req.removeAttribute(CURRENT_QUESTION_REQUEST_ATTR);
+        req.removeAttribute(ANSWER_ID_PARAM);
 
-        Quest quest = (Quest) session.getAttribute("quest");
+        Object objQuest = session.getAttribute(QUEST_ATTR);
 
-        if (quest == null) {
+        if (objQuest == null) {
             throw new NoQuestionException("Quest not found in session");
         }
 
+        Quest quest = (Quest) objQuest;
+
         Question startQuestion = quest.getStartQuestion();
-        session.setAttribute("currentQuestion", startQuestion);
-        req.setAttribute("currentQuestion", startQuestion);
+        session.setAttribute(CURRENT_QUESTION_ATTR, startQuestion);
+        req.setAttribute(CURRENT_QUESTION_REQUEST_ATTR, startQuestion);
 
         req.getRequestDispatcher("/WEB-INF/quest.jsp").forward(req, resp);
     }
@@ -117,41 +119,26 @@ public class QuestServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-
-        if (req.getSession().getAttribute("firstGetProcessed") == null) {
-            req.getSession().setAttribute("firstGetProcessed", true);
-
-            // Инициализация счетчика игр
-            if (req.getSession().getAttribute("gamesPlayed") == null) {
-                req.getSession().setAttribute("gamesPlayed", 0);
-            }
-
-            Quest newQuest = getStartQuest();
-
-            req.setAttribute("quest", newQuest);
-
-            Question startQuestion = newQuest.getStartQuestion();
-            HttpSession session = req.getSession();
-            session.setAttribute("quest", newQuest);
-            session.setAttribute("currentQuestion", startQuestion);
-        }
-
         HttpSession session = req.getSession();
-        Quest.Question currentQuestion = (Quest.Question) session.getAttribute("currentQuestion");
 
-        if (currentQuestion == null) {
-            Quest quest = (Quest) session.getAttribute("quest");
-            if (quest == null) {
-                throw new NoActiveQuestException("Quest not found in session");
-            }
-            currentQuestion = quest.getStartQuestion();
+        if (session.getAttribute(FIRST_GET_PROCESSED_ATTR) == null) {
+            prepareSession(session, req);
+        }
+        req.getRequestDispatcher("/WEB-INF/quest.jsp").forward(req, resp);
+    }
+
+    private void prepareSession(HttpSession session, HttpServletRequest request) {
+        session.setAttribute(FIRST_GET_PROCESSED_ATTR, true);
+
+        if (session.getAttribute(GAMES_PLAYED_ATTR) == null) {
+            session.setAttribute(GAMES_PLAYED_ATTR, 0);
         }
 
-        session.setAttribute("currentQuestion", currentQuestion);
+    Quest newQuest = getStartQuest();
 
-        req.setAttribute("currentQuestion", currentQuestion);
-        req.setAttribute("gamesPlayed", session.getAttribute("gamesPlayed"));
-        req.getRequestDispatcher("/WEB-INF/quest.jsp").forward(req, resp);
+        session.setAttribute(QUEST_ATTR, newQuest);
+        session.setAttribute(CURRENT_QUESTION_ATTR, newQuest.getStartQuestion());
+        request.setAttribute(CURRENT_QUESTION_REQUEST_ATTR, newQuest.getStartQuestion());
     }
 
     protected Quest getStartQuest() {

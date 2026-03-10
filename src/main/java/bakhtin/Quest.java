@@ -83,7 +83,7 @@ public class Quest implements Serializable {
     public static class Question implements Serializable {
 
         private static final long serialVersionUID = 1L;
-        private boolean terminal;
+        private boolean finish;
         private boolean win;
         private static final AtomicLong idGenerator = new AtomicLong(0);
         String question;
@@ -97,7 +97,7 @@ public class Quest implements Serializable {
         public Question(boolean win, String question) {
             this.win = win;
             this.question = question;
-            terminal = true;
+            finish = true;
             id = idGenerator.incrementAndGet();
         }
 
@@ -107,7 +107,7 @@ public class Quest implements Serializable {
             for (Answer answer : answers) {
                 this.answers.put(answer.id, answer);
             }
-            terminal = false;
+            finish = false;
         }
 
         public Answer getAnswer(Long answerId) {

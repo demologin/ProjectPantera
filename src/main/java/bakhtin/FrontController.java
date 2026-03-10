@@ -10,10 +10,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Главный контроллер для папки bakhtin
- * Перенаправляет на страницу с примерами
- */
 @WebServlet({"/bakhtin", "/bakhtin/", "/bakhtin/home", ""})
 public class FrontController extends HttpServlet {
 

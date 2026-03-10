@@ -23,7 +23,7 @@ class QuestTest {
     @Test
     void testQuestTerminalQuestion() {
         Question question = Question.builder().question("TestQuestion").win(true).build();
-        assertTrue(question.isTerminal());
+        assertTrue(question.isFinish());
         assertTrue(question.isWin());
     }
 

@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib tagdir="/WEB-INF/tags" prefix="my" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,14 +9,15 @@
           rel="stylesheet">
 </head>
 <body class="bg-light">
-<c:if test="${not empty errorMessage}">
+<my:constants/>
+<c:if test="${not empty requestScope[ERROR_MESSAGE_ATTR]}">
     <script>
-      alert('${errorMessage}');
+      alert('${requestScope[ERROR_MESSAGE_ATTR]}');
     </script>
 </c:if>
-<c:if test="${not empty win}">
+<c:if test="${not empty requestScope[WIN_ATTR]}">
     <script>
-      alert('${win}');
+      alert('${requestScope[WIN_ATTR]}');
     </script>
 </c:if>
 

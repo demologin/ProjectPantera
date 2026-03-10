@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib tagdir="/WEB-INF/tags" prefix="my" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,6 +18,7 @@
     </style>
 </head>
 <body>
+<my:constants/>
 <div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -24,7 +26,7 @@
             <!-- Статистика игр -->
             <div class="card mb-3">
                 <div class="card-body text-center">
-                    <h6 class="mb-0">📊 Сыграно игр: <strong>${gamesPlayed}</strong></h6>
+                    <h6 class="mb-0">📊 Сыграно игр: <strong>${requestScope[GAMES_PLAYED_ATTR]}</strong></h6>
                 </div>
             </div>
 
@@ -33,29 +35,29 @@
                 <div class="card-body">
 
                     <!-- Результат игры (победа/поражение) -->
-                    <c:if test="${not empty win}">
-                        <div class="alert ${win == 'true' ? 'alert-success' : 'alert-danger'} mb-4">
+                    <c:if test="${not empty requestScope[WIN_ATTR]}">
+                        <div class="alert ${requestScope[WIN_ATTR] == 'true' ? 'alert-success' : 'alert-danger'} mb-4">
                             <h5 class="alert-heading">
-                                <c:if test="${win == 'true'}">🎉 Победа!</c:if>
-                                <c:if test="${win == 'false'}">💀 Поражение</c:if>
+                                <c:if test="${requestScope[WIN_ATTR] == 'true'}">🎉 Победа!</c:if>
+                                <c:if test="${requestScope[WIN_ATTR] == 'false'}">💀 Поражение</c:if>
                             </h5>
-                            <p>${currentQuestion.question}</p>
+                            <p>${requestScope[CURRENT_QUESTION_ATTR].question}</p>
                         </div>
                     </c:if>
 
                     <!-- Активный вопрос -->
-                    <c:if test="${empty win}">
-                    <h4 class="card-title mb-4">${currentQuestion.question}</h4>
+                    <c:if test="${empty requestScope[WIN_ATTR]}">
+                    <h4 class="card-title mb-4">${requestScope[CURRENT_QUESTION_ATTR].question}</h4>
                     </c:if>
 
                     <!-- Варианты ответов -->
-                    <c:if test="${empty win}">
+                    <c:if test="${empty requestScope[WIN_ATTR]}">
                         <form action="quest" method="post">
-                            <input type="hidden" name="action" value="answer">
+                            <input type="hidden" name="${requestScope[ACTION_PARAM]}" value="answer">
 
-                            <c:forEach var="entry" items="${currentQuestion.answers}">
+                            <c:forEach var="entry" items="${requestScope[CURRENT_QUESTION_ATTR].answers}">
                                 <button type="submit"
-                                        name="answerId"
+                                        name="${requestScope[ANSWER_ID_PARAM]}"
                                         value="${entry.value.id}"
                                         class="btn btn-outline-primary answer-btn">
                                     ${entry.value.text}
@@ -68,13 +70,13 @@
                     <div class="row mt-4">
                         <div class="col-md-6">
                             <form action="quest" method="post">
-                                <input type="hidden" name="action" value="restart">
+                                <input type="hidden" name="${requestScope[ACTION_PARAM]}" value="restart">
                                 <button type="submit" class="btn btn-warning w-100">🔄 Заново</button>
                             </form>
                         </div>
                         <div class="col-md-6">
                             <form action="quest" method="post">
-                                <input type="hidden" name="action" value="exit">
+                                <input type="hidden" name="${requestScope[ACTION_PARAM]}" value="exit">
                                 <button type="submit" class="btn btn-secondary w-100">🚪 Выйти</button>
                             </form>
                         </div>

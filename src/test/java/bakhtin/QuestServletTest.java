@@ -2,9 +2,9 @@ package bakhtin;
 
 import bakhtin.Quest.Question;
 import bakhtin.Quest.Question.Answer;
-import bakhtin.exсeptions.IllegalActionException;
-import bakhtin.exсeptions.NoAnswerGivenException;
-import bakhtin.exсeptions.NoQuestionException;
+import bakhtin.exceptions.IllegalActionException;
+import bakhtin.exceptions.NoAnswerGivenException;
+import bakhtin.exceptions.NoQuestionException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -26,7 +26,7 @@ class QuestServletTest {
     void getNextQuestion_validNoAnswerGivenException() {
         Question currentQuestion = Question.builder().question("currentTestQuestion").build();
         QuestServlet questServlet = new QuestServlet();
-        Long id = Long.MIN_VALUE;
+        Long id = -1L;
         Assertions.assertThrows(NoAnswerGivenException.class, () -> {
             Question expected = questServlet.getNextQuestion(currentQuestion, id);
         });
@@ -48,8 +48,8 @@ class QuestServletTest {
     void getAction_validAnswer() {
         QuestServlet questServlet = new QuestServlet();
         Question nextQuestion = Question.builder().question("testQuestion").build();
-        var actual = questServlet.getAction("restart");
-        Assertions.assertEquals(Actions.RESTART, actual);
+        var actual = Action.parse("restart");
+        Assertions.assertEquals(Action.RESTART, actual);
     }
 
     @Test
@@ -57,7 +57,7 @@ class QuestServletTest {
         QuestServlet questServlet = new QuestServlet();
 
         Assertions.assertThrows(IllegalActionException.class, () -> {
-            questServlet.getAction("***");
+            Action.parse("***");
         });
     }
 }
