@@ -9,8 +9,7 @@ public class Client {
         Developer developer = Developer.builder()
                 .name("test")
                 .email("test@test.com")
-                .password("qwerty")
-                .phone(123456789L)
+                .phone("123456789")
                 .role(Role.ADMIN)
                 .build();
         devRepo.create(developer);

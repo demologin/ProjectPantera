@@ -12,12 +12,14 @@ import java.util.Collection;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString(exclude = "answers")
 public class Question implements AbstractEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "quest_id")
     private Long questId;
 
     private String text;
@@ -25,7 +27,7 @@ public class Question implements AbstractEntity {
     @Enumerated(EnumType.STRING)
     private GameState gameState;
 
-    @Transient
+    @OneToMany(mappedBy = "questionId")
     private final Collection<Answer> answers = new ArrayList<>();
 
     public String getImage() {

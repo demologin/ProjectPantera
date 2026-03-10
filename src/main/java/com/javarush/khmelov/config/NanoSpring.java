@@ -74,7 +74,9 @@ public class NanoSpring {
     }
 
     private static int getStartClassName(String s) {
-        return s.indexOf(NanoSpring.CLASSES) + NanoSpring.CLASSES.length()+1;
+        return s.contains(CLASSES)
+                ? s.indexOf(NanoSpring.CLASSES) + NanoSpring.CLASSES.length() + 1
+                : 1;
     }
 
     private static Class<?> findImpl(Class<?> aClass, Type type) {

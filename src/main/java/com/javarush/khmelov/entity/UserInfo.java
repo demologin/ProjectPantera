@@ -9,15 +9,18 @@ import lombok.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Answer implements AbstractEntity {
+@ToString(exclude = "user")
+public class UserInfo {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    Long id;
 
-    @Column(name = "question_id")
-    private Long questionId;
+    String address;
 
-    private String text;
+    String phone;
 
-    private Long nextQuestionId;
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    User user;
 }

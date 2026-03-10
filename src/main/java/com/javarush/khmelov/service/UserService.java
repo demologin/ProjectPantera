@@ -2,18 +2,16 @@ package com.javarush.khmelov.service;
 
 import com.javarush.khmelov.entity.User;
 import com.javarush.khmelov.exception.AppException;
-import com.javarush.khmelov.repository.UserRepository;
+import com.javarush.khmelov.repository.Repository;
+import lombok.AllArgsConstructor;
 
 import java.util.Collection;
 import java.util.Optional;
 
+@AllArgsConstructor
 public class UserService {
 
-    private final UserRepository userRepository;
-
-    public UserService(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
+    private final Repository<User> userRepository;
 
     public void create(User user) {
         User loginPattern = User.builder().login(user.getLogin()).build();

@@ -1,7 +1,7 @@
 package com.javarush.khmelov.repository;
 
-import com.javarush.khmelov.entity.User;
 import com.javarush.khmelov.config.SessionCreator;
+import com.javarush.khmelov.entity.User;
 
 public class UserRepository extends BaseRepository<User> {
 

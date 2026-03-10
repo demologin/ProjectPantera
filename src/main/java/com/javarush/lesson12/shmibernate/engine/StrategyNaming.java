@@ -19,7 +19,7 @@ public class StrategyNaming {
                 : convertToSnakeStyle(field.getName());
     }
 
-    String getTableName(Class<?> type) {
+    static String getTableName(Class<?> type) {
         return type.isAnnotationPresent(Table.class)
                 ? type.getAnnotation(Table.class).name()
                 : convertToSnakeStyle(type.getSimpleName());

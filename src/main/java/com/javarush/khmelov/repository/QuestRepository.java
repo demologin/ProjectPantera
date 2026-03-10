@@ -1,7 +1,7 @@
 package com.javarush.khmelov.repository;
 
-import com.javarush.khmelov.entity.Quest;
 import com.javarush.khmelov.config.SessionCreator;
+import com.javarush.khmelov.entity.Quest;
 
 public class QuestRepository extends BaseRepository<Quest> {
 

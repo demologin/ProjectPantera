@@ -2,10 +2,7 @@ package com.javarush.khmelov.service;
 
 import com.javarush.khmelov.entity.*;
 import com.javarush.khmelov.exception.AppException;
-import com.javarush.khmelov.repository.AnswerRepository;
-import com.javarush.khmelov.repository.QuestRepository;
-import com.javarush.khmelov.repository.QuestionRepository;
-import com.javarush.khmelov.repository.UserRepository;
+import com.javarush.khmelov.repository.*;
 
 import java.util.Collection;
 import java.util.Map;
@@ -22,10 +19,10 @@ public class QuestService {
     public static final String LINK_SYMBOL = "<";
     public static final String DIGITS = "\\d+";
 
-    private final UserRepository userRepository ;
-    private final QuestRepository questRepository;
-    private final QuestionRepository questionRepository;
-    private final AnswerRepository answerRepository;
+    private final Repository<User> userRepository;
+    private final Repository<Quest> questRepository;
+    private final Repository<Question> questionRepository;
+    private final Repository<Answer> answerRepository;
 
     public QuestService(UserRepository userRepository, QuestRepository questRepository, QuestionRepository questionRepository, AnswerRepository answerRepository) {
         this.userRepository = userRepository;
@@ -49,14 +46,14 @@ public class QuestService {
         if (map.isEmpty()) {
             return Optional.empty();
         }
+        User user = userRepository.get(userId);
         Quest quest = Quest.builder()
-                .authorId(userId)
+                .author(user)
                 .name(name)
                 .text(text)
                 .startQuestionId(0L)
                 .build();
         questRepository.create(quest);
-        User user = userRepository.get(userId);
         Collection<Quest> quests = user.getQuests();
         quests.add(quest);
         questRepository.update(quest);
@@ -68,6 +65,7 @@ public class QuestService {
         Long startKey = findStartQuestionLabel(text);
         Long startId = map.get(startKey).getId();
         quest.setStartQuestionId(startId);
+        questRepository.update(quest); //TODO remove after full hibernate
 
         updateLinksAndId(map, quest);
         map.values().stream()

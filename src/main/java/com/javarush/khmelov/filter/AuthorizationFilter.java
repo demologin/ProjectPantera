@@ -45,7 +45,9 @@ public class AuthorizationFilter extends HttpFilter {
     @Override
     protected void doFilter(HttpServletRequest req, HttpServletResponse res, FilterChain chain)
             throws IOException, ServletException {
-        String requestURI = req.getRequestURI();
+        String requestURI = req
+                .getRequestURI()
+                .replace(req.getContextPath(), "");
         requestURI = requestURI.equals("/") ? "/home" : requestURI;
         String cmdUri = "/" + requestURI.split("[?#/]")[1];
         HttpSession session = req.getSession();
@@ -58,7 +60,7 @@ public class AuthorizationFilter extends HttpFilter {
             String message = "Access denied";
             log.warn(message);
             RequestHelpers.createError(req, message);
-            res.sendRedirect(Go.LOGIN);
+            res.sendRedirect(req.getContextPath()+Go.LOGIN);
         }
     }
 }

@@ -7,7 +7,6 @@
         objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
 
     <changeSet id="17-39-49-add-role" author="akhmelev">
-
         <createTable tableName="role">
             <column name="value" type="VARCHAR(128)">
                 <constraints nullable="false"

@@ -32,8 +32,8 @@ public class ImageService {
         Path startPath = Paths.get(Objects.requireNonNull(url).toURI());
         String webInf = "WEB-INF";
         Path webPath = startPath.getParent().endsWith(webInf)
-                ? startPath.getParent()        //run in tomcat (webapp/WEB-INF)
-                : startPath.resolve(webInf);   //embedded tomcat (resources/WEB-INF)
+                ? startPath.getParent()         //run in tomcat (webapp/WEB-INF)
+                : startPath.resolve(startPath); //embedded tomcat (resources)
         imagesFolder = webPath.resolve(IMAGES_FOLDER);
         Files.createDirectories(imagesFolder);
     }

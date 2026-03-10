@@ -17,9 +17,10 @@ import lombok.*;
 public class Developer implements AbstractEntity {
     @Id
     Long id;
+
     String name;
     String email;
-    String password;
-    Long phone;
+    String phone;
+
     Role role;
 }

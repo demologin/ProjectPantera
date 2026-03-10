@@ -53,7 +53,7 @@ public class UniversalRepository<T extends AbstractEntity> implements Repository
     public Collection<T> getAll() {
         String sql = dialect.getGetAllSql(tableName, fields);
         System.out.println(sql);
-        try (Connection connection = CnnPool.getConnection();
+        try (Connection connection = CnnPool.get();
              PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             ResultSet resultSet = preparedStatement.executeQuery();
             return readRows(resultSet).toList();
@@ -67,7 +67,7 @@ public class UniversalRepository<T extends AbstractEntity> implements Repository
                 .filter(f -> containsValue(f, entity))
                 .toList();
         String findSql = dialect.getFindSql(tableName, fields, whereField);
-        try (Connection connection = CnnPool.getConnection();
+        try (Connection connection = CnnPool.get();
              PreparedStatement preparedStatement = connection.prepareStatement(findSql)) {
             fill(entity, preparedStatement, whereField);
             System.out.println(preparedStatement);
@@ -81,7 +81,7 @@ public class UniversalRepository<T extends AbstractEntity> implements Repository
     public T get(long id) {
         String sql = dialect.getGetByIdSql(tableName, fields);
         System.out.println(sql);
-        try (Connection connection = CnnPool.getConnection();
+        try (Connection connection = CnnPool.get();
              PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             T entity = type.getConstructor().newInstance();
             entity.setId(id);
@@ -96,7 +96,7 @@ public class UniversalRepository<T extends AbstractEntity> implements Repository
     public void create(T entity) {
         String sql = dialect.getCreateSql(tableName, fields);
         System.out.println(sql);
-        try (Connection connection = CnnPool.getConnection();
+        try (Connection connection = CnnPool.get();
              PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             fill(entity, preparedStatement);
             preparedStatement.executeUpdate();
@@ -115,7 +115,7 @@ public class UniversalRepository<T extends AbstractEntity> implements Repository
     public void update(T entity) {
         String sql = dialect.getUpdateSql(tableName, fields);
         System.out.println(sql);
-        try (Connection connection = CnnPool.getConnection();
+        try (Connection connection = CnnPool.get();
              PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             fill(entity, preparedStatement);
             setId(entity, preparedStatement, fields.size());
@@ -128,7 +128,7 @@ public class UniversalRepository<T extends AbstractEntity> implements Repository
     @Override
     public void delete(T entity) {
         String sql = dialect.getDeleteSql(tableName, fields);
-        try (Connection connection = CnnPool.getConnection();
+        try (Connection connection = CnnPool.get();
              PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             setId(entity, preparedStatement, 1);
             preparedStatement.executeUpdate();
@@ -139,7 +139,7 @@ public class UniversalRepository<T extends AbstractEntity> implements Repository
     private void createTableIfNotExists() {
         String sql = dialect.getCreateTableSql(tableName, fields);
         System.out.println(sql);
-        try (Connection connection = CnnPool.getConnection();
+        try (Connection connection = CnnPool.get();
              Statement statement = connection.createStatement()) {
             statement.executeUpdate(sql);
         }

@@ -16,21 +16,7 @@ import java.util.Objects;
 @AllArgsConstructor
 @Table(name = "users")
 @ToString(exclude = {"quests", "games"})
-@NamedQueries({
-        @NamedQuery(
-                name = User.GET_ALL,
-                query = "select u from User u"
-        ),
-        @NamedQuery(
-                name = User.BETWEEN_START_AND_END,
-                query = "select u from User u where u.id between :startId and :endId"
-        )
-})
 public class User implements AbstractEntity {
-
-    public static final String BETWEEN_START_AND_END = "User.between startId And endId";
-
-    public static final String GET_ALL = "User.getAll";
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -43,27 +29,53 @@ public class User implements AbstractEntity {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    @Transient
+    @OneToOne(mappedBy = "user")
+    UserInfo userInfo;
+
+    @OneToMany(mappedBy = "author")
     private final Collection<Quest> quests = new ArrayList<>();
 
-    @Transient
+    @ManyToMany
+    @JoinTable(
+            name = "game",
+            joinColumns = @JoinColumn(
+            name = "quest_id",
+            referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "users_id",
+                    referencedColumnName = "id")
+    )
+    Collection<Quest> questsInGame = new ArrayList<>();
+
+
+    public void addQuest(Quest quest) {
+        quest.setAuthor(this);
+        quests.add(quest);
+    }
+
+    @OneToMany
+    @JoinColumn(name = "users_id")
     private final Collection<Game> games = new ArrayList<>();
+
+    public void addGames(Game game) {
+        game.setUserId(this.getId());
+        games.add(game);
+    }
 
     public String getImage() { //TODO move to DTO
         return "user-" + id;
     }
 
+
     @Override
     public boolean equals(Object o) {
-        Class<?> entityClass = Hibernate.getClass(o);
-        if (o == null || this.getClass() != entityClass) return false;
-
+        if (this == o) return true;
+        if (o == null || getClass() != Hibernate.getClass(o)) return false;
         User user = (User) o;
-        return getId()!=null && Objects.equals(getId(), user.getId());
+        return Objects.equals(id, user.id);
     }
 
     @Override
     public int hashCode() {
-        return this.getClass().hashCode();
+        return 42;
     }
 }

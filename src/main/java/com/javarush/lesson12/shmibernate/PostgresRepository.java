@@ -13,12 +13,11 @@ import java.util.Map;
 public class PostgresRepository {
 
     private static final Map<Object, Object> repositories = new HashMap<>();
-    public static final PostgresDialect DIALECT = new PostgresDialect();
 
     public <T extends AbstractEntity> Repository<T> get(Class<T> type) {
         //noinspection unchecked
         return (Repository<T>) repositories
-                .computeIfAbsent(type, t -> new UniversalRepository<>(type, DIALECT));
+                .computeIfAbsent(type, t -> new UniversalRepository<>(type, new PostgresDialect()));
     }
 
 

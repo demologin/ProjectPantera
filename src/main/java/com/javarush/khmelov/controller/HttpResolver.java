@@ -8,7 +8,9 @@ public class HttpResolver {
 
     public Command resolve(HttpServletRequest request) {
         try {
-            String requestURI = request.getRequestURI();
+            String requestURI = request
+                    .getRequestURI()
+                    .replace(request.getContextPath(), "");
             requestURI = requestURI.equals("/") ? "/home" : requestURI;
             String kebabName = requestURI.split("[?#/]")[1];
             String simpleName = convertKebabStyleToCamelCase(kebabName);

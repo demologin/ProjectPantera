@@ -6,14 +6,14 @@ import java.sql.SQLException;
 
 public class Cnn {
 
-    public static final String DB_URL = "db.url";
-    public static final String DB_USERNAME = "db.username";
-    public static final String DB_PASSWORD = "db.password";
-    public static final String DB_DRIVER = "db.driver";
+    public static final String DB_URI_KEY = "hibernate.connection.url";
+    public static final String DB_USER = "hibernate.connection.username";
+    public static final String DB_PASSWORD = "hibernate.connection.password";
+    public static final String DB_DRIVER = "hibernate.connection.driver_class";
 
     static {
         try {
-            Class.forName(Configuration.getString(DB_DRIVER));
+            Class.forName(Configuration.getProperty(DB_DRIVER));
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -21,9 +21,10 @@ public class Cnn {
 
     public static Connection get() throws SQLException {
         return DriverManager.getConnection(
-                Configuration.getString(DB_URL),
-                Configuration.getString(DB_USERNAME),
-                Configuration.getString(DB_PASSWORD)
+                Configuration.getProperty(DB_URI_KEY),
+                Configuration.getProperty(DB_USER),
+                Configuration.getProperty(DB_PASSWORD)
         );
     }
+
 }

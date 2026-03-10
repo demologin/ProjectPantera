@@ -1,27 +1,25 @@
 package com.javarush.lesson10;
 
+import com.javarush.khmelov.config.SessionCreator;
 import com.javarush.khmelov.entity.Role;
 import com.javarush.khmelov.entity.User;
-import com.javarush.khmelov.config.SessionCreator;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-class UserRepositoryTest {
+class UserRepoFullTest {
 
-    private UserRepository userDao;
     private SessionCreator sessionCreator;
-
-    @BeforeEach
-    public void setUp() {
-        sessionCreator = new SessionCreator();
-        userDao = new UserRepository(sessionCreator);
-    }
+    private UserRepoFull userRepo;
 
     public static Stream<Arguments> getSamplePatternForSearch() {
         //several users with different nullable fields (need skipped)
@@ -46,21 +44,22 @@ class UserRepositoryTest {
     @MethodSource("getSamplePatternForSearch")
     @DisplayName("Check find by not null fields")
     public void find(User user, int count) {
-        long actualCount = userDao.find(user).count();
+        long actualCount = userRepo.find(user).count();
         assertEquals(count, actualCount);
     }
 
-    @Test
-    @DisplayName("When get all count=3")
-    void getAll() {
-        long count = userDao.getAll().size();
-        assertTrue(count > 0);
+
+    @BeforeEach
+    void setUp() {
+        sessionCreator = new SessionCreator();
+        userRepo = new UserRepoFull(sessionCreator);
     }
+
 
     @Test
     @DisplayName("When find by id then get user id=1 role=ADMIN")
     void get() {
-        User user = userDao.get(1L);
+        User user = userRepo.get(1L);
         assertEquals(1L, user.getId());
         assertEquals(Role.ADMIN, user.getRole());
     }
@@ -73,20 +72,20 @@ class UserRepositoryTest {
                 .password("password_test")
                 .role(Role.GUEST)
                 .build();
-        userDao.create(tempUser);
+        userRepo.create(tempUser);
         System.out.println("CREATE " + tempUser);
 
         tempUser.setPassword("password_test_update");
-        userDao.update(tempUser);
+        userRepo.update(tempUser);
         System.out.println("UPDATE " + tempUser);
 
-        userDao.delete(tempUser);
+        userRepo.delete(tempUser);
         System.out.println("DELETE " + tempUser);
         assertTrue(tempUser.getId() > 0);
     }
 
     @AfterEach
-    public  void destroy() {
-       sessionCreator.close();
+    void tearDown() {
+        sessionCreator.close();
     }
 }

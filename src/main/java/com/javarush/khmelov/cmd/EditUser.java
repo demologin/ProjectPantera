@@ -4,6 +4,7 @@ import com.javarush.khmelov.entity.Role;
 import com.javarush.khmelov.entity.User;
 import com.javarush.khmelov.service.ImageService;
 import com.javarush.khmelov.service.UserService;
+import com.javarush.khmelov.util.Go;
 import com.javarush.khmelov.util.Key;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
@@ -40,6 +41,6 @@ public class EditUser implements Command {
                 .build();
         userService.update(user);
         imageService.uploadImage(req, user.getImage());
-        return getView() + "?id=" + user.getId();
+        return Go.EDIT_USER + "?id=" + user.getId();
     }
 }

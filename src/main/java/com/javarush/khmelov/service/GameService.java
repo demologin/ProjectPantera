@@ -1,26 +1,20 @@
 package com.javarush.khmelov.service;
 
 import com.javarush.khmelov.entity.*;
-import com.javarush.khmelov.repository.*;
+import com.javarush.khmelov.repository.Repository;
+import lombok.AllArgsConstructor;
 
 import java.util.Comparator;
 import java.util.Optional;
 
+@AllArgsConstructor
 public class GameService {
 
     private final Repository<User> userRepository;
-    private final GameRepository gameRepository;
-    private final QuestRepository questRepository;
-    private final QuestionRepository questionRepository;
-    private final AnswerRepository answerRepository;
-
-    public GameService(Repository<User> userRepository, GameRepository gameRepository, QuestRepository questRepository, QuestionRepository questionRepository, AnswerRepository answerRepository) {
-        this.userRepository = userRepository;
-        this.gameRepository = gameRepository;
-        this.questRepository = questRepository;
-        this.questionRepository = questionRepository;
-        this.answerRepository = answerRepository;
-    }
+    private final Repository<Game> gameRepository;
+    private final Repository<Quest> questRepository;
+    private final Repository<Question> questionRepository;
+    private final Repository<Answer> answerRepository;
 
     public Optional<Game> getGame(Long questId, Long userId) {
         Game gamePattern = Game.builder().questId(questId).build();
