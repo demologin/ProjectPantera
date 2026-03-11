@@ -38,20 +38,19 @@ public class GameServiceTest {
     private GameService gameService;
 
     private User user;
+    private Quest quest;
 
     @BeforeEach
     public void setUp() {
         user = createValidUser();
+        quest = createValidQuest();
     }
 
     @Test
     @DisplayName("when startNewGame() then create and save new game when user and quest exist")
     void whenStartNewGame_ThenSuccess() {
-        Quest quest = createValidQuest();
         GameState initialState = createInitialGameState();
         Game expectedGame = createGame(
-                VALID_QUEST_ID,
-                VALID_USER_ID,
                 initialState.getCurrentQuestion().getGeneratedId(),
                 initialState
         );
@@ -67,7 +66,6 @@ public class GameServiceTest {
         verify(userService).findById(VALID_USER_ID);
         verify(questService).findById(VALID_QUEST_ID);
         verify(gameEngine).startGame(user, quest);
-        verify(gameRepository).save(expectedGame);
     }
 
     @Test

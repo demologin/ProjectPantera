@@ -1,6 +1,7 @@
 package com.javarush.vasileva.service;
 
 import com.javarush.vasileva.entity.Question;
+import com.javarush.vasileva.entity.User;
 import com.javarush.vasileva.entity.UserStats;
 import com.javarush.vasileva.repository.UserStatsRepository;
 import org.junit.jupiter.api.DisplayName;
@@ -28,28 +29,30 @@ public class UserStatsServiceTest {
     @Test
     @DisplayName("when createUserStats() then delegate stats creation to repository")
     void testCreateUserStats() {
+        User user = createValidUser();
         UserStats expectedStats = createDefaultUserStats();
-        when(userStatsRepository.createUserStats(createValidUser()))
+        when(userStatsRepository.createUserStats(eq(user)))
                 .thenReturn(expectedStats);
 
-        UserStats result = userStatsService.createUserStats(createValidUser());
+        UserStats result = userStatsService.createUserStats(user);
 
         assertEquals(expectedStats, result);
-        verify(userStatsRepository).createUserStats(createValidUser());
+        verify(userStatsRepository).createUserStats(eq(user));
     }
 
     @Test
     @DisplayName("when getUserStats() then return user stats if it exists")
     void whenGetUserStats_thenExisting() {
+        User user = createValidUser();
         UserStats expectedStats = createFilledUserStats();
-        when(userStatsRepository.getUserStats(createValidUser()))
+        when(userStatsRepository.getUserStats(eq(user)))
                 .thenReturn(Optional.of(expectedStats));
 
-        Optional<UserStats> result = userStatsService.getUserStats(createValidUser());
+        Optional<UserStats> result = userStatsService.getUserStats(user);
 
         assertTrue(result.isPresent());
         assertEquals(expectedStats, result.get());
-        verify(userStatsRepository).getUserStats(createValidUser());
+        verify(userStatsRepository).getUserStats(eq(user));
     }
 
     @Test
