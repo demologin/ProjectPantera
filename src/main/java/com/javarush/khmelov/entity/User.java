@@ -15,7 +15,7 @@ import java.util.Objects;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "users")
-@ToString(exclude = {"quests", "games"})
+@ToString(exclude = {"quests", "games", "questsInGame"})
 public class User implements AbstractEntity {
 
     @Id

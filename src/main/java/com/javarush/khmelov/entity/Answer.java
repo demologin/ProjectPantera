@@ -2,6 +2,7 @@ package com.javarush.khmelov.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.BatchSize;
 
 @Entity
 @Getter
@@ -9,6 +10,7 @@ import lombok.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@BatchSize(size = 2)
 public class Answer implements AbstractEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
