@@ -1,8 +1,9 @@
 package com.javarush.lesson11;
 
-import com.javarush.khmelov.config.SessionCreator;
+import com.javarush.khmelov.config.NanoSpring;
 import com.javarush.khmelov.entity.Role;
 import com.javarush.khmelov.entity.User;
+import com.javarush.khmelov.config.SessionCreator;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.stat.SessionStatistics;
@@ -10,11 +11,11 @@ import org.hibernate.stat.SessionStatistics;
 public class HibernateContext {
 
     public static void main(String[] args) {
-        SessionCreator sessionCreator = new SessionCreator();
+        SessionCreator sessionCreator = NanoSpring.find(SessionCreator.class);
         Session session = sessionCreator.getSession();
         Transaction tx = session.beginTransaction();
 
-        try (session) {
+        try (sessionCreator; session) {
             show(session);
             User user1 = session.find(User.class, 1);
             show(session);

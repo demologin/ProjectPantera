@@ -1,5 +1,6 @@
 package com.javarush.lesson13;
 
+import com.javarush.khmelov.config.ApplicationProperties;
 import com.javarush.khmelov.config.Config;
 import com.javarush.khmelov.config.LiqubaseInit;
 import com.javarush.khmelov.config.SessionCreator;
@@ -21,7 +22,7 @@ import java.util.Collection;
 public class AssociationDemo {
 
     public static void main(String[] args) {
-        SessionCreator sessionCreator = new SessionCreator();
+        SessionCreator sessionCreator = new SessionCreator(new ApplicationProperties());
         Session session = sessionCreator.getSession();
         Transaction tx = session.beginTransaction();
         try (session; sessionCreator) {
@@ -65,14 +66,16 @@ public class AssociationDemo {
             AnswerRepository answerRepository = new AnswerRepository(sessionCreator);
             UserService userService = new UserService(userRepository);
             QuestService questService = new QuestService(userRepository, questRepository, questionRepository, answerRepository);
-            Config config = new Config(userService, questService, new LiqubaseInit());
+            ApplicationProperties applicationProperties = new ApplicationProperties();
+            LiqubaseInit liqubaseInit = new LiqubaseInit(applicationProperties);
+            Config config = new Config(userService, questService, liqubaseInit);
             config.fillEmptyRepository();
         }
     }
 
     private static SessionCreator magicSessionCreator() {
         //stupid Transactional Mode
-        return new SessionCreator() {
+        return new SessionCreator(new ApplicationProperties()) {
             private Session magicSession;
             private Session session;
 

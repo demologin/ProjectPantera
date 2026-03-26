@@ -14,7 +14,7 @@ public class Config {
     private final LiqubaseInit liqubaseInit;
 
     public void fillEmptyRepository() {
-        liqubaseInit.init();
+        liqubaseInit.start();
         if (questService.getAll().isEmpty()) {
             User admin = userService.get(1L).orElseThrow();
             addDemoQuests(admin);

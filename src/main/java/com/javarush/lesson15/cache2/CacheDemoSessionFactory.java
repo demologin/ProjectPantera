@@ -58,11 +58,11 @@ enum CacheDemoSessionFactory {
 
         configure.setPhysicalNamingStrategy(new CamelCaseToUnderscoresNamingStrategy());
         configure.addAnnotatedClass(User.class);
-        configure.addAnnotatedClass(UserInfo.class);
         configure.addAnnotatedClass(Quest.class);
         configure.addAnnotatedClass(Question.class);
         configure.addAnnotatedClass(Answer.class);
         configure.addAnnotatedClass(Game.class);
+        configure.addAnnotatedClass(UserInfo.class);
         sessionFactory = configure.buildSessionFactory();
     }
 }

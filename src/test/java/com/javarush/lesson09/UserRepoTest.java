@@ -1,5 +1,6 @@
 package com.javarush.lesson09;
 
+import com.javarush.khmelov.config.NanoSpring;
 import com.javarush.khmelov.config.SessionCreator;
 import com.javarush.khmelov.entity.Role;
 import com.javarush.khmelov.entity.User;
@@ -8,8 +9,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 class UserRepoTest {
 
@@ -18,7 +18,7 @@ class UserRepoTest {
 
     @BeforeEach
     void setUp() {
-        sessionCreator = new SessionCreator();
+        sessionCreator = NanoSpring.find(SessionCreator.class);;
         userRepo = new UserRepo(sessionCreator);
     }
 

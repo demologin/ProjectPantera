@@ -1,9 +1,9 @@
 package com.javarush.khmelov.repository;
 
-import com.javarush.khmelov.config.SessionCreator;
 import com.javarush.khmelov.entity.AbstractEntity;
 import com.javarush.khmelov.exception.AppException;
-import jakarta.persistence.Transient;
+import com.javarush.khmelov.config.SessionCreator;
+import jakarta.persistence.*;
 import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
 import lombok.AllArgsConstructor;
@@ -17,6 +17,7 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Stream;
 
 @AllArgsConstructor
@@ -60,7 +61,7 @@ public class BaseRepository<Entity extends AbstractEntity> implements Repository
                 if (field.trySetAccessible()) {
                     String name = field.getName();
                     Object value = field.get(pattern);
-                    if (!(value == null) && !field.isAnnotationPresent(Transient.class)){
+                    if (isPredacate(field, value)) {
                         Predicate predicate = criteriaBuilder.equal(root.get(name), value);
                         predicates.add(predicate);
                     }
@@ -74,6 +75,15 @@ public class BaseRepository<Entity extends AbstractEntity> implements Repository
         } catch (IllegalAccessException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    private static boolean isPredacate(Field field, Object value) {
+        return Objects.nonNull(value)
+               && !field.isAnnotationPresent(Transient.class)
+               && !field.isAnnotationPresent(OneToMany.class)
+               && !field.isAnnotationPresent(ManyToOne.class)
+               && !field.isAnnotationPresent(OneToOne.class)
+               && !field.isAnnotationPresent(ManyToMany.class);
     }
 
     @Override

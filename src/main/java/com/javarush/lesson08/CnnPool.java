@@ -3,6 +3,8 @@ package com.javarush.lesson08;
 import com.javarush.lesson07.Cnn;
 import lombok.SneakyThrows;
 
+import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 import java.sql.Connection;
 import java.sql.SQLException;

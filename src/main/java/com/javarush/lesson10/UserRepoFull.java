@@ -1,9 +1,9 @@
 package com.javarush.lesson10;
 
-import com.javarush.khmelov.config.SessionCreator;
 import com.javarush.khmelov.entity.User;
 import com.javarush.khmelov.exception.AppException;
 import com.javarush.khmelov.repository.Repository;
+import com.javarush.khmelov.config.SessionCreator;
 import jakarta.persistence.Transient;
 import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;

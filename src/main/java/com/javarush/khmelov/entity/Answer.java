@@ -3,6 +3,7 @@ package com.javarush.khmelov.entity;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.BatchSize;
+import org.hibernate.annotations.Cache;
 
 @Entity
 @Getter
