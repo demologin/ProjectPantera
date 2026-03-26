@@ -1,9 +1,9 @@
 package com.javarush.lesson11;
 
 import com.javarush.khmelov.config.NanoSpring;
+import com.javarush.khmelov.config.SessionCreator;
 import com.javarush.khmelov.entity.Role;
 import com.javarush.khmelov.entity.User;
-import com.javarush.khmelov.config.SessionCreator;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.stat.SessionStatistics;

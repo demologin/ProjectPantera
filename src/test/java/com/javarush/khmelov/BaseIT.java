@@ -13,7 +13,7 @@ import jakarta.servlet.http.HttpSession;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class BaseIT {
+public class BaseIT extends ContainerIT {
     protected final HttpServletRequest request;
     protected final HttpServletResponse response;
     protected final HttpSession session;

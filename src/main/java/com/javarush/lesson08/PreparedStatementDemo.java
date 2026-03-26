@@ -1,7 +1,5 @@
 package com.javarush.lesson08;
 
-import com.javarush.lesson07.Cnn;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

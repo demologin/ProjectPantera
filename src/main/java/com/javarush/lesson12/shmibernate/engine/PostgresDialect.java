@@ -189,7 +189,7 @@ public class PostgresDialect implements Dialect {
         if (field.isAnnotationPresent(Column.class)) {
             Column column = field.getAnnotation(Column.class);
             constraint = !column.nullable() ? NOT_NULL : SPACE +
-                    (column.unique() ? UNIQUE : SPACE);
+                                                         (column.unique() ? UNIQUE : SPACE);
         }
         String lineFormat = "\t%-20s %-24s %s";
         return lineFormat.formatted(fieldName, typeField, constraint);

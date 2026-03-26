@@ -3,12 +3,14 @@ package com.javarush.khmelov.service;
 import com.javarush.khmelov.entity.User;
 import com.javarush.khmelov.exception.AppException;
 import com.javarush.khmelov.repository.Repository;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 
 import java.util.Collection;
 import java.util.Optional;
 
 @AllArgsConstructor
+@Transactional
 public class UserService {
 
     private final Repository<User> userRepository;

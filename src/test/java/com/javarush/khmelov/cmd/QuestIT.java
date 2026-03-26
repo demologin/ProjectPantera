@@ -17,8 +17,8 @@ class QuestIT extends BaseIT {
         Mockito.when(request.getParameter(Key.ID)).thenReturn("1");
         String jsp = quest.doGet(request);
         Assertions.assertEquals("quest", jsp);
-    }    
-    
+    }
+
     @Test
     void whenAnonymousPostQuest_thenRedirectBackward() {
         Mockito.when(request.getParameter(Key.ID)).thenReturn("1");

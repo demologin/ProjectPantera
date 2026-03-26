@@ -1,9 +1,9 @@
 package com.javarush.lesson10;
 
 import com.javarush.khmelov.config.NanoSpring;
+import com.javarush.khmelov.config.SessionCreator;
 import com.javarush.khmelov.entity.Role;
 import com.javarush.khmelov.entity.User;
-import com.javarush.khmelov.config.SessionCreator;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -52,7 +52,8 @@ class UserRepoFullTest {
 
     @BeforeEach
     void setUp() {
-        sessionCreator = NanoSpring.find(SessionCreator.class);;
+        sessionCreator = NanoSpring.find(SessionCreator.class);
+        ;
         userRepo = new UserRepoFull(sessionCreator);
     }
 
@@ -85,8 +86,4 @@ class UserRepoFullTest {
         assertTrue(tempUser.getId() > 0);
     }
 
-    @AfterEach
-    void tearDown() {
-        sessionCreator.close();
-    }
 }

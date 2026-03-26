@@ -3,13 +3,10 @@ package com.javarush.khmelov;
 import com.javarush.khmelov.config.ApplicationProperties;
 import com.javarush.khmelov.config.Config;
 import com.javarush.khmelov.config.NanoSpring;
-import com.javarush.khmelov.config.SessionCreator;
-import org.junit.jupiter.api.Test;
 import org.testcontainers.containers.JdbcDatabaseContainer;
 import org.testcontainers.containers.PostgreSQLContainer;
 
 import static com.javarush.khmelov.config.ApplicationProperties.*;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class ContainerIT {
 
@@ -30,19 +27,4 @@ public class ContainerIT {
         Config config = NanoSpring.find(Config.class);
         config.fillEmptyRepository(); // need transactional
     }
-
-    public ContainerIT() {
-        init();
-    }
-
-    public static void init() {
-        System.out.println("init started");
-    }
-
-    @Test
-    void testSessionCreator() {
-        SessionCreator sessionCreator = NanoSpring.find(SessionCreator.class);
-        assertNotNull(sessionCreator);
-    }
-
 }

@@ -1,14 +1,12 @@
 package com.javarush.khmelov.repository;
 
-import com.javarush.khmelov.entity.AbstractEntity;
-import com.javarush.khmelov.exception.AppException;
 import com.javarush.khmelov.config.SessionCreator;
+import com.javarush.khmelov.entity.AbstractEntity;
 import jakarta.persistence.*;
 import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
 import lombok.AllArgsConstructor;
 import org.hibernate.Session;
-import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.hibernate.query.criteria.HibernateCriteriaBuilder;
 import org.hibernate.query.criteria.JpaCriteriaQuery;
@@ -30,17 +28,7 @@ public class BaseRepository<Entity extends AbstractEntity> implements Repository
     @Override
     public Collection<Entity> getAll() {
         Session session = sessionCreator.getSession();
-        try (session) {
-            Transaction tx = session.beginTransaction();
-            try {
-                List<Entity> list = session.createQuery("SELECT e FROM %s e".formatted(entityClass.getName()), entityClass).list();
-                tx.commit();
-                return list;
-            } catch (Exception e) {
-                tx.rollback();
-                throw new AppException(e);
-            }
-        }
+        return session.createQuery("SELECT e FROM %s e".formatted(entityClass.getName()), entityClass).list();
     }
 
 
@@ -50,8 +38,8 @@ public class BaseRepository<Entity extends AbstractEntity> implements Repository
      * cq.select(root).where(predicates);
      * result <- session.createQuery(cq).list(); */
     public Stream<Entity> find(Entity pattern) {
-        Session session = sessionCreator.getSession();
-        try (session) {
+        try {
+            Session session = sessionCreator.getSession();
             HibernateCriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
             JpaCriteriaQuery<Entity> criteriaQuery = criteriaBuilder.createQuery(entityClass);
             Root<Entity> root = criteriaQuery.from(entityClass);
@@ -89,61 +77,24 @@ public class BaseRepository<Entity extends AbstractEntity> implements Repository
     @Override
     public Entity get(long id) {
         Session session = sessionCreator.getSession();
-        try (session) {
-            Transaction tx = session.beginTransaction();
-            try {
-                Entity entity = session.find(entityClass, id);
-                tx.commit();
-                return entity;
-            } catch (Exception e) {
-                tx.rollback();
-                throw new AppException("not found Entity with id " + id, e);
-            }
-        }
+        return session.find(entityClass, id);
     }
 
     @Override
     public void create(Entity entity) {
         Session session = sessionCreator.getSession();
-        try (session) {
-            Transaction tx = session.beginTransaction();
-            try {
-                session.persist(entity);
-                tx.commit();
-            } catch (Exception e) {
-                tx.rollback();
-                throw new AppException("error while creating entity", e);
-            }
-        }
+        session.persist(entity);
     }
 
     @Override
     public void update(Entity entity) {
         Session session = sessionCreator.getSession();
-        try (session) {
-            Transaction tx = session.beginTransaction();
-            try {
-                session.merge(entity);
-                tx.commit();
-            } catch (Exception e) {
-                tx.rollback();
-                throw new AppException("error while creating entity", e);
-            }
-        }
+        session.merge(entity);
     }
 
     @Override
     public void delete(Entity entity) {
         Session session = sessionCreator.getSession();
-        try (session) {
-            Transaction tx = session.beginTransaction();
-            try {
-                session.remove(entity);
-                tx.commit();
-            } catch (Exception e) {
-                tx.rollback();
-                throw new AppException("error while creating entity", e);
-            }
-        }
+        session.remove(entity);
     }
 }

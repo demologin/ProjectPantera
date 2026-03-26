@@ -4,9 +4,11 @@ import com.javarush.khmelov.entity.Role;
 import com.javarush.khmelov.entity.User;
 import com.javarush.khmelov.service.QuestService;
 import com.javarush.khmelov.service.UserService;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
+@Transactional
 public class Config {
 
     private final UserService userService;

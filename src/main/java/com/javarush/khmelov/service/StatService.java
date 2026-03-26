@@ -5,6 +5,7 @@ import com.javarush.khmelov.entity.GameState;
 import com.javarush.khmelov.entity.User;
 import com.javarush.khmelov.entity.UserStatistics;
 import com.javarush.khmelov.repository.Repository;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 
 import java.util.Collection;
@@ -16,6 +17,7 @@ public class StatService {
     private final Repository<User> userRepository;
     private final Repository<Game> gameRepository;
 
+    @Transactional
     public Collection<UserStatistics> getUserStatistics() {
         return userRepository.getAll()
                 .stream()
@@ -23,6 +25,7 @@ public class StatService {
                 .toList();
     }
 
+    @Transactional
     public UserStatistics getTotalUserStatistics() {
         UserStatistics all = UserStatistics.builder().login("ALL").build();
         for (UserStatistics userStatistic : getUserStatistics()) {

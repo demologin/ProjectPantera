@@ -2,6 +2,7 @@ package com.javarush.khmelov.service;
 
 import com.javarush.khmelov.entity.Question;
 import com.javarush.khmelov.repository.Repository;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
 
@@ -18,6 +19,7 @@ public class QuestionService {
     }
 
     @SneakyThrows
+    @Transactional
     public Optional<Question> update(Long questionId, String text) {
         Question question = questionRepository.get(questionId);
         question.setText(text);

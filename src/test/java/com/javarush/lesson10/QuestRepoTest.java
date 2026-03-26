@@ -1,8 +1,8 @@
 package com.javarush.lesson10;
 
 import com.javarush.khmelov.config.NanoSpring;
-import com.javarush.khmelov.entity.Quest;
 import com.javarush.khmelov.config.SessionCreator;
+import com.javarush.khmelov.entity.Quest;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
@@ -20,15 +20,10 @@ class QuestRepoTest {
 
     @BeforeEach
     void setUp() {
-        sessionCreator = NanoSpring.find(SessionCreator.class);;
+        sessionCreator = NanoSpring.find(SessionCreator.class);
+        ;
         session = sessionCreator.getSession();
         questRepo = new QuestRepo(sessionCreator);
-    }
-
-    @AfterEach
-    void tearDown() throws IOException {
-        session.close();
-        sessionCreator.close();
     }
 
     @Test

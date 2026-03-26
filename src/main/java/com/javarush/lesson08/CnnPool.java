@@ -3,8 +3,6 @@ package com.javarush.lesson08;
 import com.javarush.lesson07.Cnn;
 import lombok.SneakyThrows;
 
-import java.lang.reflect.InvocationHandler;
-import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -21,7 +19,7 @@ public class CnnPool {
     private static final BlockingQueue<Connection> proxies = new LinkedBlockingQueue<>(SIZE);
 
     @SneakyThrows
-    private static void init(){
+    private static void init() {
         for (int i = 0; i < SIZE; i++) {
             Connection connection = Cnn.get();
             realConnection.add(connection);
@@ -44,7 +42,7 @@ public class CnnPool {
     }
 
     @SneakyThrows
-    public static Connection get(){
+    public static Connection get() {
         if (realConnection.isEmpty()) {
             init();
         }

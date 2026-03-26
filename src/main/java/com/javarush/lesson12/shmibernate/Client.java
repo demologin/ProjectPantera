@@ -17,7 +17,7 @@ public class Client {
         developer.setName("update");
         devRepo.update(developer);
         System.out.printf("%nupdate Developer: %s%n%n", developer);
-        developer=devRepo.get(developer.getId());
+        developer = devRepo.get(developer.getId());
         System.out.printf("%nget Developer: %s%n%n", developer);
         devRepo.delete(developer);
         System.out.printf("%nget Developer: %s%n%n", developer);

@@ -9,7 +9,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class UserRepoTest {
 
@@ -18,10 +19,9 @@ class UserRepoTest {
 
     @BeforeEach
     void setUp() {
-        sessionCreator = NanoSpring.find(SessionCreator.class);;
+        sessionCreator = NanoSpring.find(SessionCreator.class);
         userRepo = new UserRepo(sessionCreator);
     }
-
 
 
     @Test
@@ -52,8 +52,4 @@ class UserRepoTest {
         assertTrue(tempUser.getId() > 0);
     }
 
-    @AfterEach
-    void tearDown() {
-        sessionCreator.close();
-    }
 }

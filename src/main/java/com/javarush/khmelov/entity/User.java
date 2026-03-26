@@ -3,8 +3,6 @@ package com.javarush.khmelov.entity;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.Hibernate;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -41,8 +39,8 @@ public class User implements AbstractEntity {
     @JoinTable(
             name = "game",
             joinColumns = @JoinColumn(
-            name = "quest_id",
-            referencedColumnName = "id"),
+                    name = "quest_id",
+                    referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "users_id",
                     referencedColumnName = "id")
     )

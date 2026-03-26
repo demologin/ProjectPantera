@@ -60,7 +60,7 @@ public class AuthorizationFilter extends HttpFilter {
             String message = "Access denied";
             log.warn(message);
             RequestHelpers.createError(req, message);
-            res.sendRedirect(req.getContextPath()+Go.LOGIN);
+            res.sendRedirect(req.getContextPath() + Go.LOGIN);
         }
     }
 }

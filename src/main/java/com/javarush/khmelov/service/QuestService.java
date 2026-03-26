@@ -3,6 +3,7 @@ package com.javarush.khmelov.service;
 import com.javarush.khmelov.entity.*;
 import com.javarush.khmelov.exception.AppException;
 import com.javarush.khmelov.repository.*;
+import jakarta.transaction.Transactional;
 
 import java.util.Collection;
 import java.util.Map;
@@ -11,6 +12,7 @@ import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+@Transactional
 public class QuestService {
 
     public static final String QUEST_SYMBOL = ":";

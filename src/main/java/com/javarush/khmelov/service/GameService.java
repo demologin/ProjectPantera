@@ -2,6 +2,7 @@ package com.javarush.khmelov.service;
 
 import com.javarush.khmelov.entity.*;
 import com.javarush.khmelov.repository.Repository;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 
 import java.util.Comparator;
@@ -16,6 +17,7 @@ public class GameService {
     private final Repository<Question> questionRepository;
     private final Repository<Answer> answerRepository;
 
+    @Transactional
     public Optional<Game> getGame(Long questId, Long userId) {
         Game gamePattern = Game.builder().questId(questId).build();
         gamePattern.setUserId(userId);
@@ -31,6 +33,7 @@ public class GameService {
         }
     }
 
+    @Transactional
     private Game getNewGame(Long userId, Long questId) {
         Quest quest = questRepository.get(questId);
         Long startQuestionId = quest.getStartQuestionId();
@@ -46,6 +49,7 @@ public class GameService {
         return newGame;
     }
 
+    @Transactional
     public Optional<Game> processOneStep(Long gameId, Long answerId) {
         Game game = gameRepository.get(gameId);
         if (game.getGameState() == GameState.PLAY) {

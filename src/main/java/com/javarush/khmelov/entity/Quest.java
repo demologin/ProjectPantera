@@ -2,14 +2,11 @@ package com.javarush.khmelov.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.annotations.BatchSize;
-import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.FetchProfile;
 
 import java.util.ArrayList;
 import java.util.Collection;
-
 
 
 @FetchProfile(name = Quest.LAZY_QUESTIONS_AND_JOIN_AUTHOR_FETCH,

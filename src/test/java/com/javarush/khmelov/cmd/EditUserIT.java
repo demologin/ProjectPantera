@@ -33,8 +33,8 @@ class EditUserIT extends BaseIT {
         Mockito.when(request.getParameter(Key.LOGIN)).thenReturn("TestName");
         Mockito.when(request.getParameter(Key.PASSWORD)).thenReturn("TestPassword");
         Mockito.when(request.getParameter(Key.ROLE)).thenReturn(Role.GUEST.toString());
-        Mockito.when(request.getParameter(Key.ID)).thenReturn("1");
+        Mockito.when(request.getParameter(Key.ID)).thenReturn("3");
         String page = editUser.doPost(request);
-        assertTrue(page.endsWith("?id=1"));
+        assertTrue(page.endsWith("?id=3"));
     }
 }

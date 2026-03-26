@@ -14,8 +14,11 @@ public interface Dialect {
     String getFindSql(String tableName, List<Field> fields, List<Field> whereFields);
 
     String getGetByIdSql(String tableName, List<Field> fields);
+
     String getCreateSql(String tableName, List<Field> fields);
+
     String getDeleteSql(String tableName, List<Field> fields);
+
     String getUpdateSql(String tableName, List<Field> fields);
 
     <T extends AbstractEntity> void read(T entity, Field field, String valueString);
