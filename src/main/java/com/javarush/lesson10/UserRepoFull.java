@@ -4,7 +4,7 @@ import com.javarush.khmelov.config.SessionCreator;
 import com.javarush.khmelov.entity.User;
 import com.javarush.khmelov.exception.AppException;
 import com.javarush.khmelov.repository.Repository;
-import jakarta.persistence.Transient;
+import jakarta.persistence.*;
 import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
 import lombok.AllArgsConstructor;
@@ -59,7 +59,13 @@ public class UserRepoFull implements Repository<User> {
                 if (field.trySetAccessible()) {
                     String name = field.getName();
                     Object value = field.get(pattern);
-                    if (!(value == null) && !field.isAnnotationPresent(Transient.class)) {
+                    if (!(value == null)
+                        && !field.isAnnotationPresent(Transient.class)
+                        && !field.isAnnotationPresent(OneToMany.class)
+                        && !field.isAnnotationPresent(ManyToOne.class)
+                        && !field.isAnnotationPresent(OneToOne.class)
+                        && !field.isAnnotationPresent(ManyToMany.class)
+                    ) {
                         Predicate predicate = criteriaBuilder.equal(root.get(name), value);
                         predicates.add(predicate);
                     }
