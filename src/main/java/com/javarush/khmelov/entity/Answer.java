@@ -11,6 +11,8 @@ import org.hibernate.annotations.BatchSize;
 @NoArgsConstructor
 @AllArgsConstructor
 @BatchSize(size = 2)
+@ToString
+@Cacheable
 public class Answer implements AbstractEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

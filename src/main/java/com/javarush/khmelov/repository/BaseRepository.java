@@ -57,7 +57,6 @@ public class BaseRepository<Entity extends AbstractEntity> implements Repository
             Field[] fields = pattern.getClass().getDeclaredFields();
             List<Predicate> predicates = new ArrayList<>();
             for (Field field : fields) {
-
                 if (field.trySetAccessible()) {
                     String name = field.getName();
                     Object value = field.get(pattern);

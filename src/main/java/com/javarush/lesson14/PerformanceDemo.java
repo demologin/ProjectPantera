@@ -4,6 +4,7 @@ import com.javarush.khmelov.config.SessionCreator;
 import com.javarush.khmelov.entity.Quest;
 import com.javarush.khmelov.entity.Question;
 import com.javarush.khmelov.entity.User;
+import com.javarush.lesson13.AssociationDemo;
 import jakarta.persistence.Subgraph;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -20,7 +21,7 @@ import java.util.List;
 public class PerformanceDemo {
 
     static {
-        //AssociationDemo.init(); //ON THE STATEMENT if DB not found
+        AssociationDemo.init(); //ON THE STATEMENT if DB not found
     }
 
     private SessionCreator sessionCreator;

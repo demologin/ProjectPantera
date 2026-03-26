@@ -39,7 +39,7 @@ public class AssociationDemo {
             System.out.println("One to Many, Answer size=" + oneQuestion.getAnswers().size());
 
             System.out.println("=".repeat(100));
-            System.out.println("One to One, UserInfo=" + user.getUserInfo());
+            //System.out.println("One to One, UserInfo=" + user.getUserInfo());
 
             System.out.println("=".repeat(100));
             System.out.println("Many to Many, User play Quests (In Game)=" + user.getQuestsInGame());
@@ -52,6 +52,10 @@ public class AssociationDemo {
     }
 
     static {
+        AssociationDemo.init();
+    }
+
+    public static void init() {
         //stupid init (like tomcat without NanoSpring)
         SessionCreator sessionCreator = magicSessionCreator();
         try (sessionCreator) {
@@ -89,7 +93,7 @@ public class AssociationDemo {
                                 if (!method.getName().equals("close")) {
                                     return method.invoke(session, args);
                                 } else {
-                                    System.out.println("Skip Method Close" + method.getName() + " not implemented");
+                                    System.out.println("Skip Method: " + method.getName());
                                     return null;
                                 }
                             });
