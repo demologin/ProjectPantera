@@ -3,7 +3,7 @@ package com.javarush.lesson18;
 import com.javarush.khmelov.config.NanoSpring;
 import com.javarush.khmelov.config.SessionCreator;
 import com.javarush.khmelov.entity.Game;
-import com.javarush.khmelov.entity.GameState;
+import com.javarush.khmelov.dto.GameState;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
