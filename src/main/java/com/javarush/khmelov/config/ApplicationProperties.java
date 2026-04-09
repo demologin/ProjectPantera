@@ -28,6 +28,7 @@ public class ApplicationProperties extends Properties {
             throw new RuntimeException(e);
         }
         scanEnvironmentData();
+        System.out.println(this);
     }
 
 
