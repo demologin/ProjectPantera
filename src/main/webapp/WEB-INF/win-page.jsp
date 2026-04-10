@@ -3,9 +3,6 @@
 <body>
 <%--<h1><%= "Тестирование по моим заметкам!" %>--%>
 </h1>
-
 <br/>
-<a href="test-page">Старт тестирования по SOLID</a>
-<%--<a href="list-user">List Users</a>--%>
-<%--<a href="edit-user?id=${user.id}">${user.login}</a>--%>
+<a href="start-page">Тест успешно пройден. Начать заново.</a>
 </body>
