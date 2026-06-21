@@ -1,0 +1,39 @@
+.panther {
+    min-height: 80vh;
+    background-image: url("../images/panther.jpg");
+    background-size: cover;
+    background-position: right center;
+}
+:root {
+    --pantera-bg: #1d2226;
+}
+
+.quest-page {
+    min-height: 80vh;
+    background-color: var(--pantera-bg);
+}
+
+.quest-step {
+    min-height: 80vh;
+    padding-top: 6vh;
+    padding-bottom: 120px;
+    background-color: var(--pantera-bg);
+}
+
+.quest-text {
+    color: #d4d8dc;
+    font-size: 1.2rem;
+    line-height: 1.9;
+    max-width: 900px;
+    margin: 0 auto 3rem auto;
+}
+
+.story-box {
+    max-width: 750px;
+    margin: 0 auto 3rem auto;
+    padding: 30px 40px;
+    background: rgba(0,0,0,0.15);
+    border-radius: 8px;
+}
+
+
