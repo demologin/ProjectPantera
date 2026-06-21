@@ -1,0 +1,16 @@
+id: 1
+title: Broken Quest
+firstStepId: 1
+
+steps:
+  - id: 1
+    text: Start
+    result: CONTINUE
+    choices:
+      - id: 1
+        text: Go
+        nextStepId: 2
+
+  - id: abc
+    text: End
+    result: WIN

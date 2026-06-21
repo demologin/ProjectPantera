@@ -1,0 +1,128 @@
+.panther {
+    min-height: 80vh;
+    background-image: url("../images/panther.jpg");
+    background-size: cover;
+    background-position: right center;
+}
+:root {
+    --pantera-bg: #1d2226;
+}
+
+.quest-page {
+    min-height: 80vh;
+    background-color: var(--pantera-bg);
+}
+
+.quest-step {
+    min-height: 80vh;
+    padding-top: 6vh;
+    padding-bottom: 120px;
+    background-color: var(--pantera-bg);
+}
+
+.quest-text {
+    color: #d4d8dc;
+    font-size: 1.2rem;
+    line-height: 1.9;
+    max-width: 900px;
+    margin: 0 auto 3rem auto;
+}
+
+.story-box {
+    max-width: 750px;
+    margin: 0 auto 3rem auto;
+    padding: 30px 40px;
+    background: rgba(0,0,0,0.15);
+    border-radius: 8px;
+}
+
+.quest-card {
+    min-height: 100%;
+}
+
+.quest-card .card-body {
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem;
+}
+
+.quest-card .card-title {
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.quest-card-text {
+    color: rgba(255, 255, 255, 0.86);
+    line-height: 1.6;
+    flex-grow: 1;
+}
+
+.quest-status {
+    white-space: nowrap;
+    font-size: 0.65rem;
+}
+
+.quest-actions {
+    margin-top: auto;
+    padding-top: 1.5rem;
+}
+
+.quest-actions .btn {
+    min-width: 200px;
+    height: 48px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.quest-secondary-btn {
+    color: rgba(255, 255, 255, 0.75);
+    border-color: rgba(255, 255, 255, 0.35);
+}
+
+.quest-secondary-btn:hover {
+    color: #1a1a1a;
+    background-color: #f0f1f2;
+    border-color: #f0f1f2;
+}
+
+.hero-box {
+    max-width: 600px;
+
+    /* было 12vh */
+    padding-top: 8vh;
+
+    margin-left: -100px;
+}
+
+.hero-title {
+    color: rgba(255,255,255,0.92);
+
+    /* было 3rem */
+    font-size: 2.4rem;
+
+    font-style: italic;
+    font-weight: 300;
+    letter-spacing: 1px;
+    line-height: 1.2;
+
+    margin-bottom: 2rem;
+}
+
+.hero-text {
+    color: rgba(255,255,255,0.72);
+    font-size: 1.15rem;
+    line-height: 1.9;
+    margin-bottom: 1.2rem;
+
+    font-style: italic;
+    font-weight: 600;
+}
+
+.hero-final {
+    margin-top: 2rem;
+    color: rgba(255,255,255,0.9);
+
+    font-style: italic;
+    font-weight: 400;
+}
