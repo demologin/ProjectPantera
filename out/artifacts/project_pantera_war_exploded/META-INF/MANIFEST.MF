@@ -1,9 +1,0 @@
-Manifest-Version: 1.0
-Created-By: IntelliJ IDEA
-Built-By: katrinaleinik
-Build-Jdk: Homebrew OpenJDK 21.0.9 - aarch64
-Implementation-Title: ProjectPantera
-Implementation-Version: 1.0-SNAPSHOT
-Implementation-Vendor-Id: com.javarush.aleinik
-Main-Class: ${start-class}
-

@@ -3,6 +3,10 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 
+out/
+*.class
+.idea/artifacts/
+
 ### IntelliJ IDEA ###
 .idea
 
