@@ -6,65 +6,85 @@ import com.javarush.aleinik.model.Quest;
 import com.javarush.aleinik.model.QuestStep;
 import com.javarush.aleinik.model.enums.QuestStepResult;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class TestUtil {
-    public static Choice choice1 = Choice.builder()
-            .id(1L)
-            .text("Attack")
-            .nextStepId(2L)
-            .build();
+public final class TestUtil {
 
-    public static Choice choice2 = Choice.builder()
-            .id(2L)
-            .text("Feed")
-            .nextStepId(3L)
-            .build();
-
-    public static QuestStep firstStep = QuestStep.builder()
-            .id(1L)
-            .text("Panther")
-            .result(QuestStepResult.CONTINUE)
-            .choices(List.of(choice1, choice2))
-            .build();
-
-    public static QuestStep loseStep = QuestStep.builder()
-            .id(2L)
-            .text("Lose")
-            .result(QuestStepResult.LOSE)
-            .choices(List.of())
-            .build();
-
-    public static QuestStep winStep = QuestStep.builder()
-            .id(3L)
-            .text("Win")
-            .result(QuestStepResult.WIN)
-            .choices(List.of())
-            .build();
-
-
-    private TestUtil(){}
+    private TestUtil() {
+    }
 
     public static QuestDefinition createQuestDefinition() {
+        Choice attackChoice = Choice.builder()
+                .choiceId(1L)
+                .text("Attack")
+                .nextStepId(2L)
+                .build();
+
+        Choice feedChoice = Choice.builder()
+                .choiceId(2L)
+                .text("Feed")
+                .nextStepId(3L)
+                .build();
+
+        QuestStep firstStep = QuestStep.builder()
+                .stepId(1L)
+                .text("Panther")
+                .result(QuestStepResult.CONTINUE)
+                .choices(
+                        new ArrayList<>(
+                                List.of(
+                                        attackChoice,
+                                        feedChoice
+                                )
+                        )
+                )
+                .build();
+
+        QuestStep loseStep = QuestStep.builder()
+                .stepId(2L)
+                .text("Lose")
+                .result(QuestStepResult.LOSE)
+                .choices(new ArrayList<>())
+                .build();
+
+        QuestStep winStep = QuestStep.builder()
+                .stepId(3L)
+                .text("Win")
+                .result(QuestStepResult.WIN)
+                .choices(new ArrayList<>())
+                .build();
 
         return QuestDefinition.builder()
                 .id(1L)
                 .title("Pantera")
                 .description("Test quest")
                 .firstStepId(1L)
-                .steps(List.of(firstStep, loseStep, winStep))
+                .steps(
+                        List.of(
+                                firstStep,
+                                loseStep,
+                                winStep
+                        )
+                )
                 .build();
     }
 
-    public static Quest createSavedQuest(){
-        return Quest
-                .builder()
+    public static Quest createSavedQuest() {
+        return Quest.builder()
                 .id(1L)
                 .title("Title")
-                .description("description")
+                .description("Description")
                 .firstStepId(1L)
                 .build();
     }
 
-
+    public static QuestStep createStep(Long stepId) {
+        return QuestStep.builder()
+                .stepId(stepId)
+                .text("Win")
+                .result(QuestStepResult.WIN)
+                .choices(new ArrayList<>())
+                .build();
+    }
 }

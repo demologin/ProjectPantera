@@ -1,3 +1,5 @@
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import com.javarush.aleinik.data.definition.QuestDefinition;
 import com.javarush.aleinik.data.loader.QuestDataLoader;
 import com.javarush.aleinik.exception.InvalidResourceNameException;
@@ -10,7 +12,11 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 class QuestDataLoaderTest {
-    private final QuestDataLoader loader = new QuestDataLoader();
+    private final ObjectMapper yamlMapper =
+            new ObjectMapper(new YAMLFactory());
+
+    private final QuestDataLoader loader =
+            new QuestDataLoader(yamlMapper);
 
     @Test
     void shouldLoadPanteraQuestFromYaml() {

@@ -1,41 +1,164 @@
-import com.javarush.aleinik.model.Quest;
+import com.javarush.aleinik.cache.service.QuestStepCacheService;
+import com.javarush.aleinik.exception.QuestStepCacheException;
+import com.javarush.aleinik.exception.QuestStepNotFoundException;
 import com.javarush.aleinik.model.QuestStep;
 import com.javarush.aleinik.repository.QuestStepRepository;
 import com.javarush.aleinik.service.QuestStepService;
-import lombok.val;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import testutil.TestUtil;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-public class QuestStepServiceTest {
+class QuestStepServiceTest {
 
-
-    QuestStep EXPECTED_STEP = TestUtil.winStep;
-
+    private static final Long QUEST_ID = 1L;
+    private static final Long STEP_ID = 3L;
 
     @Mock
-    QuestStepRepository questStepRepository;
+    private QuestStepRepository questStepRepository;
+
+    @Mock
+    private QuestStepCacheService cacheService;
 
     @InjectMocks
-    QuestStepService questStepService;
+    private QuestStepService questStepService;
 
     @Test
-    void shouldGetQuestStepById(){
-        when(questStepRepository
-                .findStepByQuestId(EXPECTED_STEP.getQuestId(), EXPECTED_STEP.getId()))
-                .thenReturn(EXPECTED_STEP);
+    void shouldReturnStepFromCache() {
+        QuestStep expectedStep = TestUtil.createStep(STEP_ID);
 
-        val actual = questStepService.getQuestStepById(EXPECTED_STEP.getQuestId(), EXPECTED_STEP.getId());
+        when(
+                cacheService.getQuestStepById(
+                        QUEST_ID,
+                        STEP_ID
+                )
+        ).thenReturn(expectedStep);
 
-        assertEquals(EXPECTED_STEP, actual);
-        verify(questStepRepository).findStepByQuestId(EXPECTED_STEP.getQuestId(), EXPECTED_STEP.getId());
+        QuestStep actual =
+                questStepService.getQuestStepById(
+                        QUEST_ID,
+                        STEP_ID
+                );
 
+        assertSame(expectedStep, actual);
+
+        verify(cacheService).getQuestStepById(
+                QUEST_ID,
+                STEP_ID
+        );
+
+        verifyNoInteractions(questStepRepository);
     }
+
+    @Test
+    void shouldLoadAllStepsAndWarmCacheOnCacheMiss() {
+        QuestStep expectedStep = TestUtil.createStep(STEP_ID);
+        List<QuestStep> steps = List.of(expectedStep);
+
+        when(
+                cacheService.getQuestStepById(
+                        QUEST_ID,
+                        STEP_ID
+                )
+        ).thenReturn(null);
+
+        when(
+                questStepRepository
+                        .findAllByQuestIdWithChoices(
+                                QUEST_ID
+                        )
+        ).thenReturn(steps);
+
+        QuestStep actual =
+                questStepService.getQuestStepById(
+                        QUEST_ID,
+                        STEP_ID
+                );
+
+        assertSame(expectedStep, actual);
+
+        verify(
+                questStepRepository
+        ).findAllByQuestIdWithChoices(QUEST_ID);
+
+        verify(cacheService).cacheAll(steps);
+    }
+
+    @Test
+    void shouldFallBackToMySqlWhenRedisFails() {
+        QuestStep expectedStep = TestUtil.createStep(STEP_ID);
+        List<QuestStep> steps = List.of(expectedStep);
+
+        when(
+                cacheService.getQuestStepById(
+                        QUEST_ID,
+                        STEP_ID
+                )
+        ).thenThrow(
+                new QuestStepCacheException(
+                        "Redis unavailable",
+                        new RuntimeException()
+                )
+        );
+
+        when(
+                questStepRepository
+                        .findAllByQuestIdWithChoices(
+                                QUEST_ID
+                        )
+        ).thenReturn(steps);
+
+        doThrow(
+                new QuestStepCacheException(
+                        "Redis unavailable",
+                        new RuntimeException()
+                )
+        ).when(cacheService).cacheAll(steps);
+
+        QuestStep actual =
+                questStepService.getQuestStepById(
+                        QUEST_ID,
+                        STEP_ID
+                );
+
+        assertSame(expectedStep, actual);
+
+        verify(
+                questStepRepository
+        ).findAllByQuestIdWithChoices(QUEST_ID);
+    }
+
+    @Test
+    void shouldThrowExceptionWhenStepDoesNotExist() {
+        when(
+                cacheService.getQuestStepById(
+                        QUEST_ID,
+                        STEP_ID
+                )
+        ).thenReturn(null);
+
+        when(
+                questStepRepository
+                        .findAllByQuestIdWithChoices(
+                                QUEST_ID
+                        )
+        ).thenReturn(List.of());
+
+        assertThrows(
+                QuestStepNotFoundException.class,
+                () -> questStepService.getQuestStepById(
+                        QUEST_ID,
+                        STEP_ID
+                )
+        );
+    }
+
 }

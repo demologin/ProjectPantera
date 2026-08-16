@@ -1,4 +1,4 @@
-package com.javarush.aleinik.repository.impl;
+package com.javarush.aleinik.repository.in_memory_repo_impl;
 
 import com.javarush.aleinik.model.QuestStep;
 import com.javarush.aleinik.repository.QuestStepRepository;
@@ -28,7 +28,7 @@ public class InMemoryQuestStepRepository implements QuestStepRepository {
     @Override
     public QuestStep save(QuestStep entity) {
         stepsByQuestId
-                .computeIfAbsent(entity.getQuestId(), k -> new ConcurrentHashMap<>())
+                .computeIfAbsent(entity.getQuest().getId(), k -> new ConcurrentHashMap<>())
                 .put(entity.getId(), entity);
         return entity;
     }
@@ -42,6 +42,11 @@ public class InMemoryQuestStepRepository implements QuestStepRepository {
         Map<Long, QuestStep> steps = stepsByQuestId.get(questId);
         if (steps == null) return null;
         return steps.get(stepId);
+    }
+
+    @Override
+    public List<QuestStep> findAllByQuestIdWithChoices(Long questId) {
+        return List.of();
     }
 
 }

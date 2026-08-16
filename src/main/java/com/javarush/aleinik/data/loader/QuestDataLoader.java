@@ -10,19 +10,27 @@ import java.io.IOException;
 import java.net.URL;
 
 public class QuestDataLoader {
-    private static final ObjectMapper YAML_MAPPER = new ObjectMapper(new YAMLFactory());
+
+    private final ObjectMapper yamlMapper;
+
+    public QuestDataLoader(ObjectMapper yamlMapper) {
+        this.yamlMapper = yamlMapper;
+    }
 
     public QuestDefinition load(String fileName) {
         URL questUrl = ResourcePathResolver.getQuestUrl(fileName);
+
         try {
-            QuestDefinition quest =
-                    YAML_MAPPER.readValue(questUrl, QuestDefinition.class);
-            return quest;
+            return yamlMapper.readValue(
+                    questUrl,
+                    QuestDefinition.class
+            );
 
         } catch (IOException exception) {
-            throw new QuestMappingException("Failed to map quest to QuestDefinition",
-                    exception);
+            throw new QuestMappingException(
+                    "Failed to map quest to QuestDefinition",
+                    exception
+            );
         }
-
     }
 }

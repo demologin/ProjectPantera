@@ -1,4 +1,4 @@
-package com.javarush.aleinik.repository.impl;
+package com.javarush.aleinik.repository.in_memory_repo_impl;
 
 import com.javarush.aleinik.model.Quest;
 import com.javarush.aleinik.repository.QuestRepository;
